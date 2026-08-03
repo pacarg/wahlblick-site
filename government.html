@@ -201,7 +201,7 @@
       intro: "Nach einer Wahl erreicht selten eine einzelne Partei die absolute Mehrheit — deshalb bilden mehrere Parteien gemeinsam eine Regierung. Diese Bündnisse bekommen Spitznamen, meist nach den Farben der beteiligten Parteien.",
       heading: "Gängige Koalitionsformen",
       sub: "Namen, die in der deutschen Politik auf Bundes- und/oder Landesebene verwendet werden.",
-      note: "Diese Übersicht beschreibt allgemein gebräuchliche Koalitionsmuster und ihre Namen — sie behauptet nicht, welche Koalition aktuell auf Bundesebene regiert. Quellen: Wikipedia (Ampelkoalition) und bundestagwahlumfrage.de.",
+      note: "Diese Übersicht beschreibt allgemein gebräuchliche Koalitionsmuster und ihre Namen — sie behauptet nicht, welche Koalition aktuell auf Bundesebene regiert. Aktuelle Zusammensetzung und Arbeit des Parlaments: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Weitere Quellen: Wikipedia (Ampelkoalition) und bundestagwahlumfrage.de.",
       minorityHeading: "Minderheitsregierung",
       minorityText: "Nicht immer kommt eine Koalition mit Mehrheit zustande. Eine Minderheitsregierung regiert ohne eigene Mehrheit im Parlament und muss sich für jedes Gesetz wechselnde Unterstützung suchen — seltener, aber ebenfalls Teil der deutschen Verfassungspraxis.",
       coalitions: [
@@ -219,7 +219,7 @@
       intro: "Después de una elección, es poco frecuente que un solo partido consiga la mayoría absoluta — por eso varios partidos suelen gobernar juntos en coalición. Estas alianzas reciben apodos, casi siempre basados en los colores de los partidos involucrados.",
       heading: "Tipos de coalición más comunes",
       sub: "Nombres usados en la política alemana, a nivel federal y/o estatal.",
-      note: "Este resumen describe patrones de coalición y sus nombres de uso común — no afirma cuál coalición gobierna actualmente a nivel federal. Fuentes: Wikipedia (Ampelkoalition) y bundestagwahlumfrage.de.",
+      note: "Este resumen describe patrones de coalición y sus nombres de uso común — no afirma cuál coalición gobierna actualmente a nivel federal. Composición y trabajo actual del parlamento: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Otras fuentes: Wikipedia (Ampelkoalition) y bundestagwahlumfrage.de.",
       minorityHeading: "Gobierno en minoría",
       minorityText: "No siempre se forma una coalición con mayoría. Un gobierno en minoría gobierna sin mayoría propia en el parlamento y necesita buscar apoyos distintos para cada ley — es menos frecuente, pero también forma parte de la práctica constitucional alemana.",
       coalitions: [
@@ -237,7 +237,7 @@
       intro: "After an election, it's rare for a single party to win an absolute majority — so several parties usually govern together in a coalition. These alliances get nicknames, almost always based on the colors of the parties involved.",
       heading: "Common coalition types",
       sub: "Names used in German politics at the federal and/or state level.",
-      note: "This overview describes commonly used coalition patterns and their names — it does not claim which coalition currently governs at the federal level. Sources: Wikipedia (Ampelkoalition) and bundestagwahlumfrage.de.",
+      note: "This overview describes commonly used coalition patterns and their names — it does not claim which coalition currently governs at the federal level. Current parliament composition and work: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Other sources: Wikipedia (Ampelkoalition) and bundestagwahlumfrage.de.",
       minorityHeading: "Minority government",
       minorityText: "A majority coalition doesn't always come together. A minority government governs without its own majority in parliament and has to seek shifting support for each individual law — less common, but still part of German constitutional practice.",
       coalitions: [
@@ -267,7 +267,7 @@
     document.querySelector("[data-foot-back]").textContent = c.backLabel;
     document.querySelector("[data-heading]").textContent = c.heading;
     document.querySelector("[data-sub]").textContent = c.sub;
-    document.querySelector("[data-note]").textContent = c.note;
+    document.querySelector("[data-note]").innerHTML = c.note;
     document.querySelector("[data-minority-heading]").textContent = c.minorityHeading;
     document.querySelector("[data-minority-text]").textContent = c.minorityText;
     document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;

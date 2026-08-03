@@ -112,6 +112,9 @@
     border-radius: 999px;
     padding: 3px 10px;
   }
+  .cat-card .entries { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); padding-top: 10px; }
+  .cat-card .entries li { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 3px 0; }
+  .cat-card .entries .val { font-weight: 700; color: var(--text); white-space: nowrap; }
 
   .note {
     margin-top: 8px;
@@ -214,7 +217,16 @@
         { title: "Sprache und Integration", text: "Integrationskurse, kostenlose oder geförderte Deutschkurse, und Volkshochschulen (VHS)." },
         { title: "Familie und Bildung", text: "Kindergeld, Jugendamt, Schulanmeldung und Kita-Plätze." },
         { title: "Spanischsprachige Community", text: "Kulturvereine, Gemeinden und Treffpunkte für spanischsprachige Menschen." },
-        { title: "Notfälle und wichtige Nummern", text: "Polizei, Feuerwehr, Rettungsdienst und Krisen-Hotlines." }
+        { title: "Notfälle und wichtige Nummern", text: "Polizei, Feuerwehr, Rettungsdienst und Krisen-Hotlines — bundesweit gültig, kostenlos erreichbar.", entries: [
+          { name: "Polizei", value: "110" },
+          { name: "Feuerwehr / Rettungsdienst", value: "112" },
+          { name: "Ärztlicher Bereitschaftsdienst", value: "116 117" },
+          { name: "Nummer gegen Kummer (Kinder & Jugendliche)", value: "116 111" },
+          { name: "Kinder-Notruf", value: "0800 111 0 333" },
+          { name: "Telefonseelsorge", value: "0800 111 0 111" },
+          { name: "Hilfetelefon Gewalt gegen Frauen", value: "116 016" },
+          { name: "Giftnotruf (Beispiel: Berlin — je nach Region eigene Zentrale)", value: "030 19240" }
+        ] }
       ],
       categoriesGroup2: [
         { title: "Bürgerbeteiligung", text: "Petitionsplattformen (z. B. e-Petitionen des Bundestags) und kommunale Bürgerhaushalte." },
@@ -241,7 +253,16 @@
         { title: "Idioma e integración", text: "Integrationskurse, alemán gratuito o subsidiado, y Volkshochschulen (VHS)." },
         { title: "Familia y educación", text: "Kindergeld, Jugendamt, inscripción escolar y Kita (jardín de infantes)." },
         { title: "Comunidad hispanohablante", text: "Asociaciones culturales, iglesias, y espacios de encuentro para hispanohablantes." },
-        { title: "Emergencias y números útiles", text: "Policía, bomberos, ambulancia, y líneas de ayuda en crisis." }
+        { title: "Emergencias y números útiles", text: "Policía, bomberos, ambulancia y líneas de ayuda en crisis — válidos en toda Alemania, gratuitos.", entries: [
+          { name: "Policía", value: "110" },
+          { name: "Bomberos / Ambulancia", value: "112" },
+          { name: "Guardia médica (no urgencias)", value: "116 117" },
+          { name: "Línea de ayuda para niños y jóvenes", value: "116 111" },
+          { name: "Emergencia infantil", value: "0800 111 0 333" },
+          { name: "Línea de contención emocional (Telefonseelsorge)", value: "0800 111 0 111" },
+          { name: "Línea contra la violencia hacia la mujer", value: "116 016" },
+          { name: "Centro de toxicología (ej. Berlín — cada región tiene el suyo)", value: "030 19240" }
+        ] }
       ],
       categoriesGroup2: [
         { title: "Participación ciudadana", text: "Plataformas de peticiones (e-Petitionen del Bundestag) y presupuestos participativos municipales (Bürgerhaushalt)." },
@@ -268,7 +289,16 @@
         { title: "Language and integration", text: "Integration courses (Integrationskurse), free or subsidized German classes, and adult education centers (Volkshochschule)." },
         { title: "Family and education", text: "Child benefits (Kindergeld), the Jugendamt (youth welfare office), school enrollment, and daycare (Kita) places." },
         { title: "Spanish-speaking community", text: "Cultural associations, churches, and meeting spaces for Spanish speakers." },
-        { title: "Emergencies and useful numbers", text: "Police, fire department, ambulance, and crisis helplines." }
+        { title: "Emergencies and useful numbers", text: "Police, fire department, ambulance, and crisis helplines — valid nationwide, free to call.", entries: [
+          { name: "Police", value: "110" },
+          { name: "Fire department / Ambulance", value: "112" },
+          { name: "Non-emergency medical on-call service", value: "116 117" },
+          { name: "Helpline for children & teenagers", value: "116 111" },
+          { name: "Children's emergency line", value: "0800 111 0 333" },
+          { name: "Crisis / emotional support line (Telefonseelsorge)", value: "0800 111 0 111" },
+          { name: "Helpline against violence towards women", value: "116 016" },
+          { name: "Poison control (e.g. Berlin — each region has its own center)", value: "030 19240" }
+        ] }
       ],
       categoriesGroup2: [
         { title: "Civic participation", text: "Petition platforms (e.g., the Bundestag's e-Petitionen) and municipal participatory budgets (Bürgerhaushalt)." },
@@ -313,7 +343,15 @@
       list.forEach(function (cat) {
         var card = document.createElement("div");
         card.className = "cat-card";
-        card.innerHTML = "<h3>" + cat.title + "</h3><p>" + cat.text + "</p><span class=\"status\">" + status + "</span>";
+        var html = "<h3>" + cat.title + "</h3><p>" + cat.text + "</p>";
+        if (cat.entries && cat.entries.length) {
+          html += "<ul class=\"entries\">" + cat.entries.map(function (e) {
+            return "<li><span>" + e.name + "</span><span class=\"val\">" + e.value + "</span></li>";
+          }).join("") + "</ul>";
+        } else {
+          html += "<span class=\"status\">" + status + "</span>";
+        }
+        card.innerHTML = html;
         wrap.appendChild(card);
       });
     }
