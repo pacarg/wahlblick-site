@@ -1142,7 +1142,9 @@
     }
   };
 
-  var currentLang = "de";
+  var LANG_STORAGE_KEY = "wahlblickLang";
+  var currentLang = localStorage.getItem(LANG_STORAGE_KEY) || "de";
+  if (!I18N[currentLang]) currentLang = "de";
   function tr(key) { return I18N[currentLang][key]; }
   function fmt(str, vals) {
     return str.replace(/\{(\w+)\}/g, function (m, k) { return vals[k]; });
@@ -1493,6 +1495,9 @@
   }
 
   function applyStaticTexts() {
+    document.querySelectorAll(".lang-switch button").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
+    });
     document.getElementById("stripText").textContent = tr("stripText");
     document.getElementById("stripLink").textContent = tr("stripLink");
     document.getElementById("navQuellen").textContent = tr("navQuellen");
@@ -1530,9 +1535,7 @@
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {
     btn.addEventListener("click", function () {
       currentLang = btn.getAttribute("data-lang");
-      document.querySelectorAll(".lang-switch button").forEach(function (b) {
-        b.classList.toggle("active", b === btn);
-      });
+      localStorage.setItem(LANG_STORAGE_KEY, currentLang);
       applyStaticTexts();
       renderLegend();
     });

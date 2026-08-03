@@ -216,17 +216,28 @@
 <script>
   var TITLES = { de: "Haftungsausschluss", es: "Descargo de responsabilidad", en: "Disclaimer" };
   var BACK_LABELS = { de: "← Zur Wahlkarte", es: "← Volver al mapa", en: "← Back to the map" };
+  var LANG_STORAGE_KEY = "wahlblickLang";
+
+  function setLang(lang) {
+    document.querySelectorAll(".lang-switch button").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-lang") === lang);
+    });
+    document.querySelectorAll(".lang-block").forEach(function (block) {
+      block.classList.toggle("active", block.getAttribute("data-lang-block") === lang);
+    });
+    document.querySelector("[data-title]").textContent = TITLES[lang];
+    document.querySelector("[data-back]").textContent = BACK_LABELS[lang];
+  }
+
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var lang = btn.getAttribute("data-lang");
-      document.querySelectorAll(".lang-switch button").forEach(function (b) {
-        b.classList.toggle("active", b === btn);
-      });
-      document.querySelectorAll(".lang-block").forEach(function (block) {
-        block.classList.toggle("active", block.getAttribute("data-lang-block") === lang);
-      });
-      document.querySelector("[data-title]").textContent = TITLES[lang];
-      document.querySelector("[data-back]").textContent = BACK_LABELS[lang];
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
+      setLang(lang);
     });
   });
+
+  var initialLang = localStorage.getItem(LANG_STORAGE_KEY) || "de";
+  if (!TITLES[initialLang]) initialLang = "de";
+  if (initialLang !== "de") setLang(initialLang);
 </script>

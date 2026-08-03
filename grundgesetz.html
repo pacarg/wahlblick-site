@@ -358,14 +358,23 @@
     });
   }
 
+  var LANG_STORAGE_KEY = "wahlblickLang";
+
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {
     btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
       document.querySelectorAll(".lang-switch button").forEach(function (b) {
         b.classList.toggle("active", b === btn);
       });
-      render(btn.getAttribute("data-lang"));
+      render(lang);
     });
   });
 
-  render("de");
+  var initialLang = localStorage.getItem(LANG_STORAGE_KEY) || "de";
+  if (!CONTENT[initialLang]) initialLang = "de";
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-lang") === initialLang);
+  });
+  render(initialLang);
 </script>
