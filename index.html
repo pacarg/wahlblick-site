@@ -494,6 +494,7 @@
   <div class="mobile-menu" id="mobileMenu" hidden>
     <a href="#quellen" id="mobileNavQuellen">Quellen</a>
     <a href="grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
+    <a href="directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
   </div>
 </header>
 
@@ -506,6 +507,7 @@
     <div class="bar-right">
       <nav class="content-nav" aria-label="Weitere Inhalte">
         <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
+        <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
       </nav>
       <div class="year-wrap">
         <select id="yearSelect" aria-label="Wahljahr">
@@ -572,6 +574,8 @@
     <a href="impressum.html">Impressum</a>
     <a href="disclaimer.html" id="footDisclaimerLink">Haftungsausschluss</a>
     <a href="grundgesetz.html" id="footGrundgesetzLink">Grundgesetz</a>
+    <a href="directory.html" id="footDirectoryLink">Adressverzeichnis</a>
+    <a href="guide.html" id="footGuideLink">Nutzungshinweise</a>
   </div>
   <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
 </footer>
@@ -1013,6 +1017,8 @@
       footMethod: "Methodik",
       footDisclaimerLink: "Haftungsausschluss",
       footGrundgesetzLink: "Grundgesetz",
+      footDirectoryLink: "Adressverzeichnis",
+      footGuideLink: "Nutzungshinweise",
       footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.",
       neu: "neu",
       keineAngabe: "k. A.",
@@ -1052,6 +1058,8 @@
       footMethod: "Metodología",
       footDisclaimerLink: "Descargo de responsabilidad",
       footGrundgesetzLink: "Ley Fundamental",
+      footDirectoryLink: "Directorio",
+      footGuideLink: "Guía de uso",
       footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin y se muestran con link a la fuente original. Versión prototipo — todavía no están cargados todos los estados federados ni todos los años electorales.",
       neu: "nuevo",
       keineAngabe: "s/d",
@@ -1091,6 +1099,8 @@
       footMethod: "Methodology",
       footDisclaimerLink: "Disclaimer",
       footGrundgesetzLink: "Basic Law",
+      footDirectoryLink: "Directory",
+      footGuideLink: "User Guide",
       footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin and are shown with a link to the original source. Prototype version — not all states and election years are loaded yet.",
       neu: "new",
       keineAngabe: "n/a",
@@ -1443,6 +1453,7 @@
     document.getElementById("navQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
+    document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
     landSearch.placeholder = tr("searchPh");
     document.getElementById("mapHint").textContent = tr("mapHint");
     bundestagNoteEl.textContent = tr("bundestagNote");
@@ -1452,6 +1463,9 @@
     document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
     document.getElementById("footGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("navGrundgesetzLink").textContent = tr("footGrundgesetzLink");
+    document.getElementById("footDirectoryLink").textContent = tr("footDirectoryLink");
+    document.getElementById("navDirectoryLink").textContent = tr("footDirectoryLink");
+    document.getElementById("footGuideLink").textContent = tr("footGuideLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
