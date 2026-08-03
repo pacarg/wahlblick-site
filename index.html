@@ -425,6 +425,11 @@
 
   .rank-winner-tag { font-style: normal; font-weight: 400; font-size: 11px; color: var(--text-muted); }
 
+  .party-filter-clear {
+    border: none; background: none; color: var(--accent); cursor: pointer;
+    font-size: 11.5px; font-weight: 600; text-decoration: underline; padding: 0; margin-left: 4px;
+  }
+
   .compare-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
   .compare-note { font-size: 11.5px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
 
@@ -1234,6 +1239,9 @@
       compareTitle: "Ländervergleich",
       partySelectPlaceholder: "— Partei-Ansicht —",
       partyViewSubtitle: "{party} in den 16 Ländern",
+      partyViewSubtitleFiltered: "{party} in {count} von 16 ausgewählten Ländern",
+      partyViewClearFilter: "Alle anzeigen",
+      partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
@@ -1289,6 +1297,9 @@
       compareTitle: "Comparación entre estados",
       partySelectPlaceholder: "— Vista por partido —",
       partyViewSubtitle: "{party} en los 16 estados federados",
+      partyViewSubtitleFiltered: "{party} en {count} de 16 estados seleccionados",
+      partyViewClearFilter: "Ver todos",
+      partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
@@ -1344,6 +1355,9 @@
       compareTitle: "State comparison",
       partySelectPlaceholder: "— Party view —",
       partyViewSubtitle: "{party} across the 16 federal states",
+      partyViewSubtitleFiltered: "{party} across {count} of 16 selected states",
+      partyViewClearFilter: "Show all",
+      partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
       eyebrowLandtag: "State election · most recent per state",
@@ -1394,7 +1408,7 @@
   }
   function stateName(id) { return I18N[currentLang].stateNames[id]; }
 
-  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null };
+  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null, partyViewFilter: [] };
 
   var svg = document.getElementById("germany");
   var landGroup = document.getElementById("landGroup");
@@ -1516,7 +1530,7 @@
 
   function refreshPartySelect() {
     var keys = availablePartyKeys();
-    if (state.partyView && keys.indexOf(state.partyView) === -1) state.partyView = null;
+    if (state.partyView && keys.indexOf(state.partyView) === -1) { state.partyView = null; state.partyViewFilter = []; }
     partySelectEl.innerHTML = "";
     var placeholder = document.createElement("option");
     placeholder.value = "";
@@ -1534,12 +1548,13 @@
 
   partySelectEl.addEventListener("change", function () {
     state.partyView = partySelectEl.value || null;
+    if (!state.partyView) state.partyViewFilter = [];
     if (state.partyView) {
       state.compareMode = false;
       state.compareSelection = [];
       compareToggleEl.setAttribute("aria-pressed", "false");
     }
-    document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
+    updateMapHint();
     paintMap();
     renderLegend();
     updateResultsView();
@@ -1576,7 +1591,9 @@
   }
 
   function isMarked(id) {
-    return state.compareMode ? state.compareSelection.indexOf(id) !== -1 : state.selected === id;
+    if (state.compareMode) return state.compareSelection.indexOf(id) !== -1;
+    if (state.partyView) return state.partyViewFilter.indexOf(id) !== -1;
+    return state.selected === id;
   }
 
   function paintMap() {
@@ -1722,15 +1739,29 @@
 
   function selectLand(id) {
     if (state.compareMode) { toggleCompareLand(id); return; }
-    if (state.partyView) {
-      state.partyView = null;
-      partySelectEl.value = "";
-      renderLegend();
-    }
+    if (state.partyView) { togglePartyViewFilter(id); return; }
     state.selected = id;
     tooltip.classList.remove("visible");
     paintMap();
     showResults(id);
+    var el = landGroup.querySelector('[data-id="' + id + '"]');
+    if (el) landGroup.appendChild(el);
+    spawnPing(id);
+  }
+
+  function updateMapHint() {
+    var hintEl = document.getElementById("mapHint");
+    if (state.compareMode) hintEl.textContent = tr("compareHintActive");
+    else if (state.partyView) hintEl.textContent = tr("partyViewHintActive");
+    else hintEl.textContent = tr("mapHint");
+  }
+
+  function togglePartyViewFilter(id) {
+    var idx = state.partyViewFilter.indexOf(id);
+    if (idx !== -1) { state.partyViewFilter.splice(idx, 1); } else { state.partyViewFilter.push(id); }
+    tooltip.classList.remove("visible");
+    paintMap();
+    renderPartyView();
     var el = landGroup.querySelector('[data-id="' + id + '"]');
     if (el) landGroup.appendChild(el);
     spawnPing(id);
@@ -1817,7 +1848,9 @@
     var key = state.partyView;
     var meta = PARTIES[key];
     var yearData = currentYearData();
-    var rows = Object.keys(yearData).map(function (id) {
+    var filterActive = state.partyViewFilter.length > 0;
+    var idsToShow = (filterActive ? state.partyViewFilter : Object.keys(yearData)).filter(function (id) { return !!yearData[id]; });
+    var rows = idsToShow.map(function (id) {
       var d = yearData[id];
       return { id: id, r: partyResultFor(d, key), winner: d.winner === key };
     });
@@ -1842,7 +1875,21 @@
         '<span class="rank-pct" style="color:' + meta.color + '">' + fmtPct(row.r.pct) + '</span>' + deltaHtml + '</li>';
     }).join('');
 
-    wrap.innerHTML = '<p class="stat-line">' + fmt(tr("partyViewSubtitle"), { party: meta.name }) + '</p><ol class="rank-list">' + items + '</ol>';
+    var subtitleText = filterActive
+      ? fmt(tr("partyViewSubtitleFiltered"), { party: meta.name, count: rows.length })
+      : fmt(tr("partyViewSubtitle"), { party: meta.name });
+    var clearHtml = filterActive ? ' <button type="button" class="party-filter-clear" id="partyFilterClear">' + tr("partyViewClearFilter") + '</button>' : '';
+
+    wrap.innerHTML = '<p class="stat-line">' + subtitleText + clearHtml + '</p><ol class="rank-list">' + items + '</ol>';
+
+    var clearBtn = document.getElementById("partyFilterClear");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        state.partyViewFilter = [];
+        paintMap();
+        renderPartyView();
+      });
+    }
   }
 
   function showEmptyState() {
@@ -1915,10 +1962,11 @@
       state.compareSelection = [];
     } else {
       state.partyView = null;
+      state.partyViewFilter = [];
       partySelectEl.value = "";
     }
     compareToggleEl.setAttribute("aria-pressed", state.compareMode ? "true" : "false");
-    document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
+    updateMapHint();
     paintMap();
     renderLegend();
     updateResultsView();
@@ -1985,7 +2033,7 @@
     document.getElementById("navGermanyLabel").textContent = tr("navGermanyLabel");
     document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
     landSearch.placeholder = tr("searchPh");
-    document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
+    updateMapHint();
     document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
     var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
     if (partyPlaceholderOpt) partyPlaceholderOpt.textContent = tr("partySelectPlaceholder");
