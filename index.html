@@ -401,6 +401,30 @@
   .compare-toggle:hover { color: var(--text); background: var(--surface); }
   .compare-toggle[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
 
+  select#partySelect {
+    flex: none;
+    appearance: none;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 5px 26px 5px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 13px) center, calc(100% - 8px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .scale-legend { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-muted); }
+  .scale-legend-label { font-weight: 700; color: var(--text); white-space: nowrap; }
+  .scale-legend-bar { width: 90px; height: 8px; border-radius: 4px; flex: none; }
+  .scale-legend-max { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .rank-winner-tag { font-style: normal; font-weight: 400; font-size: 11px; color: var(--text-muted); }
+
   .compare-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
   .compare-note { font-size: 11.5px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
 
@@ -701,6 +725,9 @@
       </div>
       <div class="map-head-actions">
         <span class="hint" id="mapHint">Hover oder Klick für Details</span>
+        <select id="partySelect" aria-label="Partei-Ansicht">
+          <option value="" data-placeholder>— Partei-Ansicht —</option>
+        </select>
         <button type="button" class="compare-toggle" id="compareToggle" aria-pressed="false">Vergleichen</button>
       </div>
     </div>
@@ -731,6 +758,7 @@
         <p class="source-line" id="sourceNote"></p>
       </div>
       <div id="resultsCompare" style="display:none;"></div>
+      <div id="resultsPartyView" style="display:none;"></div>
     </div>
   </section>
 
@@ -780,6 +808,31 @@
     var g = parseInt(hex.slice(3, 5), 16);
     var b = parseInt(hex.slice(5, 7), 16);
     return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  }
+
+  function mixColor(hex, t) {
+    var c = { r: parseInt(hex.slice(1, 3), 16), g: parseInt(hex.slice(3, 5), 16), b: parseInt(hex.slice(5, 7), 16) };
+    var toHex = function (n) { return Math.round(n).toString(16).padStart(2, "0"); };
+    var mix = function (channel) { return 255 + (channel - 255) * t; };
+    return "#" + toHex(mix(c.r)) + toHex(mix(c.g)) + toHex(mix(c.b));
+  }
+
+  function computePartyMax(yearData, key) {
+    var max = 0;
+    Object.keys(yearData).forEach(function (id) {
+      var d = yearData[id];
+      for (var i = 0; i < d.results.length; i++) {
+        if (d.results[i].p === key && d.results[i].pct > max) max = d.results[i].pct;
+      }
+    });
+    return max || 1;
+  }
+
+  function partyResultFor(d, key) {
+    for (var i = 0; i < d.results.length; i++) {
+      if (d.results[i].p === key) return d.results[i];
+    }
+    return null;
   }
 
   var LANDTAG_DATA = {
@@ -1179,6 +1232,8 @@
       compareRemove: "Entfernen",
       compareTurnoutLabel: "Wahlbeteiligung",
       compareTitle: "Ländervergleich",
+      partySelectPlaceholder: "— Partei-Ansicht —",
+      partyViewSubtitle: "{party} in den 16 Ländern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
@@ -1232,6 +1287,8 @@
       compareRemove: "Quitar",
       compareTurnoutLabel: "Participación",
       compareTitle: "Comparación entre estados",
+      partySelectPlaceholder: "— Vista por partido —",
+      partyViewSubtitle: "{party} en los 16 estados federados",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
@@ -1285,6 +1342,8 @@
       compareRemove: "Remove",
       compareTurnoutLabel: "Turnout",
       compareTitle: "State comparison",
+      partySelectPlaceholder: "— Party view —",
+      partyViewSubtitle: "{party} across the 16 federal states",
       eyebrowBundestag: "Federal election {year} · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
       eyebrowLandtag: "State election · most recent per state",
@@ -1335,7 +1394,7 @@
   }
   function stateName(id) { return I18N[currentLang].stateNames[id]; }
 
-  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [] };
+  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null };
 
   var svg = document.getElementById("germany");
   var landGroup = document.getElementById("landGroup");
@@ -1351,6 +1410,8 @@
   var resultsEmpty = document.getElementById("resultsEmpty");
   var resultsFilled = document.getElementById("resultsFilled");
   var landNameEl = document.getElementById("landName");
+  var partySelectEl = document.getElementById("partySelect");
+  var compareToggleEl = document.getElementById("compareToggle");
 
   PATHS.forEach(function (p) {
     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -1444,6 +1505,46 @@
     if (landSelectEl.value) selectLand(landSelectEl.value);
   });
 
+  function availablePartyKeys() {
+    var yearData = currentYearData();
+    var set = {};
+    Object.keys(yearData).forEach(function (id) {
+      yearData[id].results.forEach(function (r) { set[r.p] = true; });
+    });
+    return Object.keys(PARTIES).filter(function (k) { return set[k]; });
+  }
+
+  function refreshPartySelect() {
+    var keys = availablePartyKeys();
+    if (state.partyView && keys.indexOf(state.partyView) === -1) state.partyView = null;
+    partySelectEl.innerHTML = "";
+    var placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.setAttribute("data-placeholder", "");
+    placeholder.textContent = tr("partySelectPlaceholder");
+    partySelectEl.appendChild(placeholder);
+    keys.forEach(function (k) {
+      var opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = PARTIES[k].name;
+      partySelectEl.appendChild(opt);
+    });
+    partySelectEl.value = state.partyView || "";
+  }
+
+  partySelectEl.addEventListener("change", function () {
+    state.partyView = partySelectEl.value || null;
+    if (state.partyView) {
+      state.compareMode = false;
+      state.compareSelection = [];
+      compareToggleEl.setAttribute("aria-pressed", "false");
+    }
+    document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
+    paintMap();
+    renderLegend();
+    updateResultsView();
+  });
+
   function refreshLandTabLabels() {
     Array.prototype.forEach.call(landTabsEl.children, function (btn) {
       btn.textContent = stateName(btn.getAttribute("data-id"));
@@ -1482,23 +1583,35 @@
     var yearData = currentYearData();
     var dimmed = false;
     svg.classList.toggle("dimmed", dimmed);
+    var partyMax = state.partyView ? computePartyMax(yearData, state.partyView) : 0;
+    function fillFor(id) {
+      var d = yearData[id];
+      if (!d) return { hex: NEUTRAL_HEX, css: "" };
+      if (state.partyView) {
+        var r = partyResultFor(d, state.partyView);
+        if (!r) return { hex: NEUTRAL_HEX, css: "var(--p-neutral)" };
+        var t = Math.max(0.1, r.pct / partyMax);
+        var hex = mixColor(PARTIES[state.partyView].hex, t);
+        return { hex: hex, css: hex };
+      }
+      return { hex: PARTIES[d.winner].hex, css: PARTIES[d.winner].color };
+    }
     Array.prototype.forEach.call(landGroup.children, function (el) {
       var id = el.getAttribute("data-id");
       var d = yearData[id];
       el.classList.toggle("no-data", !d);
       el.classList.toggle("selected", isMarked(id));
-      el.style.fill = (d && !dimmed) ? PARTIES[d.winner].color : "";
+      el.style.fill = fillFor(id).css;
     });
     Array.prototype.forEach.call(landTabsEl.children, function (btn) {
       var id = btn.getAttribute("data-id");
       btn.classList.toggle("active", isMarked(id));
       btn.classList.toggle("has-data", !!yearData[id] && !dimmed);
     });
-    landSelectEl.value = state.compareMode ? "" : (state.selected || "");
+    landSelectEl.value = (state.compareMode || state.partyView) ? "" : (state.selected || "");
     Array.prototype.forEach.call(labelLayer.children, function (t) {
       var id = t.getAttribute("data-id");
-      var d = yearData[id];
-      var bgHex = (d && !dimmed) ? PARTIES[d.winner].hex : NEUTRAL_HEX;
+      var bgHex = fillFor(id).hex;
       var onLight = relativeLuminance(bgHex) > 0.55;
       t.classList.toggle("on-light", onLight);
       t.classList.toggle("on-dark", !onLight);
@@ -1508,6 +1621,17 @@
 
   function renderLegend() {
     var yearData = currentYearData();
+    if (state.partyView) {
+      var meta = PARTIES[state.partyView];
+      var max = computePartyMax(yearData, state.partyView);
+      legend.innerHTML =
+        '<div class="scale-legend">' +
+          '<span class="scale-legend-label">' + meta.name + '</span>' +
+          '<div class="scale-legend-bar" style="background:linear-gradient(to right,' + mixColor(meta.hex, 0.1) + ',' + meta.hex + ')"></div>' +
+          '<span class="scale-legend-max">' + fmtPct(max) + '</span>' +
+        '</div>';
+      return;
+    }
     var used = {};
     Object.keys(yearData).forEach(function (id) { used[yearData[id].winner] = true; });
     legend.innerHTML = "";
@@ -1598,6 +1722,11 @@
 
   function selectLand(id) {
     if (state.compareMode) { toggleCompareLand(id); return; }
+    if (state.partyView) {
+      state.partyView = null;
+      partySelectEl.value = "";
+      renderLegend();
+    }
     state.selected = id;
     tooltip.classList.remove("visible");
     paintMap();
@@ -1684,6 +1813,38 @@
     });
   }
 
+  function renderPartyView() {
+    var key = state.partyView;
+    var meta = PARTIES[key];
+    var yearData = currentYearData();
+    var rows = Object.keys(yearData).map(function (id) {
+      var d = yearData[id];
+      return { id: id, r: partyResultFor(d, key), winner: d.winner === key };
+    });
+    rows.sort(function (a, b) { return (b.r ? b.r.pct : -1) - (a.r ? a.r.pct : -1); });
+
+    var wrap = document.getElementById("resultsPartyView");
+    var items = rows.map(function (row, i) {
+      var d = yearData[row.id];
+      var dateTag = state.view === "landtag" ? ' <em class="rank-winner-tag">' + fmtDate(d.date) + '</em>' : "";
+      if (!row.r) {
+        return '<li class="rank-row"><span class="rank-num">' + (i + 1) + '</span><span class="dot" style="background:var(--p-neutral)"></span>' +
+          '<span class="rank-name">' + stateName(row.id) + dateTag + '</span><span class="rank-pct" style="color:var(--text-muted)">–</span></li>';
+      }
+      var hasDelta = row.r.delta !== undefined;
+      var isNumericDelta = typeof row.r.delta === "number";
+      var deltaClass = !isNumericDelta ? "flat" : (row.r.delta > 0 ? "up" : "down");
+      var arrow = !isNumericDelta ? "" : (row.r.delta > 0 ? "▲ " : "▼ ");
+      var deltaHtml = hasDelta ? '<span class="rank-delta ' + deltaClass + '">' + arrow + fmtDelta(row.r.delta) + '</span>' : "";
+      var winnerTag = row.winner ? ' <em class="rank-winner-tag">— ' + tr("legendWinnerSuffix") + '</em>' : "";
+      return '<li class="rank-row"><span class="rank-num">' + (i + 1) + '</span><span class="dot" style="background:' + meta.color + '"></span>' +
+        '<span class="rank-name">' + stateName(row.id) + winnerTag + dateTag + '</span>' +
+        '<span class="rank-pct" style="color:' + meta.color + '">' + fmtPct(row.r.pct) + '</span>' + deltaHtml + '</li>';
+    }).join('');
+
+    wrap.innerHTML = '<p class="stat-line">' + fmt(tr("partyViewSubtitle"), { party: meta.name }) + '</p><ol class="rank-list">' + items + '</ol>';
+  }
+
   function showEmptyState() {
     landNameEl.textContent = tr("emptyTitle");
     resultsEmpty.innerHTML = tr("emptyBody");
@@ -1693,14 +1854,24 @@
 
   function updateResultsView() {
     var resultsCompareEl = document.getElementById("resultsCompare");
-    if (state.compareMode) {
+    var resultsPartyEl = document.getElementById("resultsPartyView");
+    if (state.partyView) {
       resultsEmpty.style.display = "none";
       resultsFilled.style.display = "none";
+      resultsCompareEl.style.display = "none";
+      resultsPartyEl.style.display = "block";
+      landNameEl.textContent = PARTIES[state.partyView].name;
+      renderPartyView();
+    } else if (state.compareMode) {
+      resultsEmpty.style.display = "none";
+      resultsFilled.style.display = "none";
+      resultsPartyEl.style.display = "none";
       resultsCompareEl.style.display = "block";
       landNameEl.textContent = tr("compareTitle");
       renderCompare();
     } else {
       resultsCompareEl.style.display = "none";
+      resultsPartyEl.style.display = "none";
       if (state.selected) { showResults(state.selected); } else { showEmptyState(); }
     }
   }
@@ -1738,17 +1909,24 @@
   document.querySelectorAll(".view-pills button").forEach(function (btn) {
     btn.addEventListener("click", function () { setView(btn.getAttribute("data-view")); });
   });
-  document.getElementById("compareToggle").addEventListener("click", function () {
+  compareToggleEl.addEventListener("click", function () {
     state.compareMode = !state.compareMode;
-    if (!state.compareMode) state.compareSelection = [];
-    this.setAttribute("aria-pressed", state.compareMode ? "true" : "false");
+    if (!state.compareMode) {
+      state.compareSelection = [];
+    } else {
+      state.partyView = null;
+      partySelectEl.value = "";
+    }
+    compareToggleEl.setAttribute("aria-pressed", state.compareMode ? "true" : "false");
     document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
     paintMap();
+    renderLegend();
     updateResultsView();
   });
   document.getElementById("yearSelect").addEventListener("change", function (e) {
     state.year = e.target.value;
     mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
+    refreshPartySelect();
     paintMap();
     renderLegend();
     updateResultsView();
@@ -1784,6 +1962,7 @@
       mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
       bundestagNoteEl.classList.add("visible");
     }
+    refreshPartySelect();
     paintMap();
     renderLegend();
     updateResultsView();
@@ -1808,6 +1987,8 @@
     landSearch.placeholder = tr("searchPh");
     document.getElementById("mapHint").textContent = state.compareMode ? tr("compareHintActive") : tr("mapHint");
     document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
+    var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
+    if (partyPlaceholderOpt) partyPlaceholderOpt.textContent = tr("partySelectPlaceholder");
     bundestagNoteEl.textContent = tr("bundestagNote");
     document.getElementById("globalFootnote").textContent = tr("footnote");
     document.getElementById("footAbout").textContent = tr("footAbout");
@@ -1897,6 +2078,7 @@
     if (e.key === "Escape" && !germanyPanel.hidden) closeGermanyDropdown();
   });
 
+  refreshPartySelect();
   paintMap();
   renderLegend();
   applyStaticTexts();
