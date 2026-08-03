@@ -203,13 +203,13 @@
 
 <footer>
   <div class="foot-links">
-    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="index.html" data-foot-back>← Zur Wahlkarte</a>
     <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutzerklärung</a>
-    <a href="grundgesetz.html">Grundgesetz</a>
-    <a href="about.html">Über Wahlblick</a>
-    <a href="directory.html">Adressverzeichnis</a>
-    <a href="guide.html">Nutzungshinweise</a>
+    <a href="datenschutz.html" data-foot-datenschutz>Datenschutzerklärung</a>
+    <a href="grundgesetz.html" data-foot-grundgesetz>Grundgesetz</a>
+    <a href="about.html" data-foot-about>Über Wahlblick</a>
+    <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
+    <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
   </div>
 </footer>
@@ -217,6 +217,11 @@
 <script>
   var TITLES = { de: "Haftungsausschluss", es: "Descargo de responsabilidad", en: "Disclaimer" };
   var BACK_LABELS = { de: "← Zur Wahlkarte", es: "← Volver al mapa", en: "← Back to the map" };
+  var FOOT_DATENSCHUTZ = { de: "Datenschutzerklärung", es: "Política de privacidad", en: "Privacy Policy" };
+  var FOOT_GRUNDGESETZ = { de: "Grundgesetz", es: "Ley Fundamental", en: "Basic Law" };
+  var FOOT_ABOUT = { de: "Über Wahlblick", es: "Sobre Wahlblick", en: "About Wahlblick" };
+  var FOOT_DIRECTORY = { de: "Adressverzeichnis", es: "Directorio", en: "Directory" };
+  var FOOT_GUIDE = { de: "Nutzungshinweise", es: "Guía de uso", en: "User Guide" };
   var LANG_STORAGE_KEY = "wahlblickLang";
 
   function setLang(lang) {
@@ -228,6 +233,12 @@
     });
     document.querySelector("[data-title]").textContent = TITLES[lang];
     document.querySelector("[data-back]").textContent = BACK_LABELS[lang];
+    document.querySelector("[data-foot-back]").textContent = BACK_LABELS[lang];
+    document.querySelector("[data-foot-datenschutz]").textContent = FOOT_DATENSCHUTZ[lang];
+    document.querySelector("[data-foot-grundgesetz]").textContent = FOOT_GRUNDGESETZ[lang];
+    document.querySelector("[data-foot-about]").textContent = FOOT_ABOUT[lang];
+    document.querySelector("[data-foot-directory]").textContent = FOOT_DIRECTORY[lang];
+    document.querySelector("[data-foot-guide]").textContent = FOOT_GUIDE[lang];
   }
 
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {

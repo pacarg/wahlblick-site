@@ -179,13 +179,13 @@
 
 <footer>
   <div class="foot-links">
-    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="index.html" data-foot-back>← Zur Wahlkarte</a>
     <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutzerklärung</a>
-    <a href="disclaimer.html">Haftungsausschluss</a>
-    <a href="grundgesetz.html">Grundgesetz</a>
-    <a href="about.html">Über Wahlblick</a>
-    <a href="directory.html">Adressverzeichnis</a>
+    <a href="datenschutz.html" data-foot-datenschutz>Datenschutzerklärung</a>
+    <a href="disclaimer.html" data-foot-disclaimer>Haftungsausschluss</a>
+    <a href="grundgesetz.html" data-foot-grundgesetz>Grundgesetz</a>
+    <a href="about.html" data-foot-about>Über Wahlblick</a>
+    <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
   </div>
 </footer>
 
@@ -244,11 +244,24 @@
     }
   };
 
+  var FOOT = {
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory" }
+  };
+
   function render(lang) {
     var c = CONTENT[lang];
+    var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
     document.querySelector("[data-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;
+    document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
+    document.querySelector("[data-foot-grundgesetz]").textContent = f.grundgesetz;
+    document.querySelector("[data-foot-about]").textContent = f.about;
+    document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-h-map]").textContent = c.hMap;
     document.querySelector("[data-map-p1]").textContent = c.mapP1;
     document.querySelector("[data-map-p2]").textContent = c.mapP2;

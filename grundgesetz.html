@@ -184,13 +184,13 @@
 
 <footer>
   <div class="foot-links">
-    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="index.html" data-foot-back>← Zur Wahlkarte</a>
     <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutzerklärung</a>
-    <a href="disclaimer.html">Haftungsausschluss</a>
-    <a href="about.html">Über Wahlblick</a>
-    <a href="directory.html">Adressverzeichnis</a>
-    <a href="guide.html">Nutzungshinweise</a>
+    <a href="datenschutz.html" data-foot-datenschutz>Datenschutzerklärung</a>
+    <a href="disclaimer.html" data-foot-disclaimer>Haftungsausschluss</a>
+    <a href="about.html" data-foot-about>Über Wahlblick</a>
+    <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
+    <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="https://www.gesetze-im-internet.de/gg/" target="_blank" rel="noopener">gesetze-im-internet.de/gg</a>
   </div>
 </footer>
@@ -328,12 +328,25 @@
     }
   };
 
+  var FOOT = {
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", directory: "Directory", guide: "User Guide" }
+  };
+
   function render(lang) {
     var c = CONTENT[lang];
+    var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;
+    document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
+    document.querySelector("[data-foot-about]").textContent = f.about;
+    document.querySelector("[data-foot-directory]").textContent = f.directory;
+    document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-art-heading]").textContent = c.artHeading;
     document.querySelector("[data-art-sub]").textContent = c.artSub;
     document.querySelector("[data-struct-heading]").textContent = c.structHeading;
