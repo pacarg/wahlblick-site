@@ -210,6 +210,7 @@
     <a href="about.html" data-foot-about>Über Wahlblick</a>
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
+    <a href="holidays.html" data-foot-holidays>Feiertage</a>
     <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
   </div>
 </footer>
@@ -222,6 +223,7 @@
   var FOOT_ABOUT = { de: "Über Wahlblick", es: "Sobre Wahlblick", en: "About Wahlblick" };
   var FOOT_DIRECTORY = { de: "Adressverzeichnis", es: "Directorio", en: "Directory" };
   var FOOT_GUIDE = { de: "Nutzungshinweise", es: "Guía de uso", en: "User Guide" };
+  var FOOT_HOLIDAYS = { de: "Feiertage", es: "Feriados", en: "Holidays" };
   var LANG_STORAGE_KEY = "wahlblickLang";
 
   function setLang(lang) {
@@ -239,6 +241,7 @@
     document.querySelector("[data-foot-about]").textContent = FOOT_ABOUT[lang];
     document.querySelector("[data-foot-directory]").textContent = FOOT_DIRECTORY[lang];
     document.querySelector("[data-foot-guide]").textContent = FOOT_GUIDE[lang];
+    document.querySelector("[data-foot-holidays]").textContent = FOOT_HOLIDAYS[lang];
   }
 
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {

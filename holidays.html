@@ -1,0 +1,344 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feiertage in Deutschland — Wahlblick</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wahlblick">
+<meta property="og:title" content="Feiertage in Deutschland — Wahlblick">
+<meta property="og:image" content="https://wahlblick.de/og-image.png">
+<meta property="og:url" content="https://wahlblick.de/holidays.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wahlblick.de/og-image.png">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8f9;
+    --border: #e3e6ea;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #004494;
+    --accent-ink: #ffffff;
+    --strip-bg: #12161c;
+    --strip-text: #c7cdd6;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .official-strip {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    font-size: 12px;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .site-header { background: var(--bg); border-bottom: 1px solid var(--border); }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; flex: none; text-decoration: none; }
+  .brand .badge {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex: none;
+  }
+  .brand .flag-bar {
+    width: 7px; height: 34px;
+    border-radius: 2px;
+    flex: none;
+    background: linear-gradient(to bottom, #000 0% 33.33%, #dd0000 33.33% 66.66%, #ffce00 66.66% 100%);
+  }
+  .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+
+  .header-right { display: flex; align-items: center; gap: 16px; flex: none; }
+  .back-link { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .back-link:hover { color: var(--accent); }
+
+  .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; }
+  .lang-switch button {
+    border: none; background: none; color: var(--text-muted);
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 5px 7px; cursor: pointer; border-radius: var(--radius);
+  }
+  .lang-switch button:hover { color: var(--text); background: var(--surface); }
+  .lang-switch button.active { color: var(--accent); }
+  .lang-switch .sep { color: var(--border); font-size: 12px; }
+
+  main { max-width: 820px; margin: 0 auto; padding: 32px 24px 56px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .intro { font-size: 14.5px; line-height: 1.65; color: var(--text-muted); margin: 0 0 28px; }
+
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .panel h2 { font-size: 16px; margin: 0 0 4px; }
+  .panel .panel-sub { font-size: 12.5px; color: var(--text-muted); margin: 0 0 18px; }
+
+  .section-row { display: flex; gap: 14px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .section-row:first-of-type { border-top: none; padding-top: 0; }
+  .section-row .range { flex: none; width: 92px; font-size: 12px; font-weight: 700; color: var(--text-muted); }
+  .section-row .body h3 { font-size: 13.5px; margin: 0 0 3px; }
+  .section-row .body p { font-size: 13px; line-height: 1.55; margin: 0; color: var(--text-muted); }
+
+  .official-link {
+    margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  footer {
+    max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer .foot-links { display: flex; gap: 16px; flex-wrap: wrap; row-gap: 8px; }
+  footer a { color: var(--text-muted); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .official-strip { flex-wrap: wrap; padding: 6px 16px; font-size: 11px; }
+    .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
+    .brand .wordmark { font-size: 16px; }
+    main { padding: 24px 16px 40px; }
+    .panel { padding: 20px; }
+    .section-row { flex-direction: column; gap: 2px; }
+    .section-row .range { width: auto; }
+    footer { padding: 16px 16px 32px; }
+  }
+</style>
+
+<div class="official-strip">
+  <span>Unabhängiges Datenprojekt, keine amtliche Quelle</span>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="badge">W</span>
+      <span class="flag-bar" aria-hidden="true"></span>
+      <span class="wordmark">Wahlblick</span>
+    </a>
+    <div class="header-right">
+      <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
+        <button type="button" data-lang="de" class="active">DE</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="es">ES</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="back-link" href="index.html" data-back>← Zur Wahlkarte</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 data-title></h1>
+  <p class="intro" data-intro></p>
+
+  <div class="panel">
+    <h2 data-nat-heading></h2>
+    <p class="panel-sub" data-nat-sub></p>
+    <div data-national></div>
+  </div>
+
+  <div class="panel">
+    <h2 data-reg-heading></h2>
+    <p class="panel-sub" data-reg-sub></p>
+    <div data-regional></div>
+    <p class="official-link" data-note></p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html" data-foot-back>← Zur Wahlkarte</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html" data-foot-datenschutz>Datenschutzerklärung</a>
+    <a href="disclaimer.html" data-foot-disclaimer>Haftungsausschluss</a>
+    <a href="grundgesetz.html" data-foot-grundgesetz>Grundgesetz</a>
+    <a href="about.html" data-foot-about>Über Wahlblick</a>
+    <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
+    <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
+  </div>
+</footer>
+
+<script>
+  var CONTENT = {
+    de: {
+      title: "Feiertage in Deutschland",
+      backLabel: "← Zur Wahlkarte",
+      intro: "In Deutschland gelten neun gesetzliche Feiertage bundesweit — der Rest hängt vom Bundesland ab. Genau diese Unterschiede zwischen den Ländern sind das Kernthema von Wahlblick, deshalb gehören sie hierher. Daten für 2026.",
+      natHeading: "Bundesweite Feiertage",
+      natSub: "Gelten in allen 16 Bundesländern.",
+      regHeading: "Feiertage nach Bundesland",
+      regSub: "Zusätzliche Feiertage, die nur in bestimmten Bundesländern gelten.",
+      note: "Quelle: Angaben der gesetzlichen Feiertagskalender, geprüft gegen mehrere unabhängige Übersichten. Rechtsgrundlage ist jeweils das Feiertagsgesetz des einzelnen Bundeslandes — im Zweifel gilt die amtliche Bekanntmachung des jeweiligen Landes.",
+      national: [
+        { date: "1. Jan.", title: "Neujahr", text: "Beginn des Kalenderjahres." },
+        { date: "3. Apr.", title: "Karfreitag", text: "Christlicher Gedenktag der Kreuzigung Jesu — beweglich, immer der Freitag vor Ostern." },
+        { date: "6. Apr.", title: "Ostermontag", text: "Tag nach Ostersonntag." },
+        { date: "1. Mai", title: "Tag der Arbeit", text: "International auch als Maifeiertag bekannt." },
+        { date: "14. Mai", title: "Christi Himmelfahrt", text: "39 Tage nach Ostern — beweglich." },
+        { date: "25. Mai", title: "Pfingstmontag", text: "50 Tage nach Ostern — beweglich." },
+        { date: "3. Okt.", title: "Tag der Deutschen Einheit", text: "Nationalfeiertag, erinnert an die Wiedervereinigung 1990." },
+        { date: "25. Dez.", title: "1. Weihnachtsfeiertag", text: "" },
+        { date: "26. Dez.", title: "2. Weihnachtsfeiertag", text: "" }
+      ],
+      regional: [
+        { date: "6. Jan.", title: "Heilige Drei Könige", text: "Baden-Württemberg, Bayern, Sachsen-Anhalt." },
+        { date: "8. März", title: "Internationaler Frauentag", text: "Berlin, Mecklenburg-Vorpommern." },
+        { date: "4. Juni", title: "Fronleichnam", text: "Baden-Württemberg, Bayern, Hessen, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland." },
+        { date: "15. Aug.", title: "Mariä Himmelfahrt", text: "Saarland (landesweit); in Bayern nur in Gemeinden mit überwiegend katholischer Bevölkerung." },
+        { date: "20. Sept.", title: "Weltkindertag", text: "Thüringen." },
+        { date: "31. Okt.", title: "Reformationstag", text: "Brandenburg, Bremen, Hamburg, Mecklenburg-Vorpommern, Niedersachsen, Sachsen, Sachsen-Anhalt, Schleswig-Holstein, Thüringen." },
+        { date: "1. Nov.", title: "Allerheiligen", text: "Baden-Württemberg, Bayern, Nordrhein-Westfalen, Rheinland-Pfalz, Saarland." }
+      ]
+    },
+    es: {
+      title: "Feriados en Alemania",
+      backLabel: "← Volver al mapa",
+      intro: "En Alemania hay nueve feriados nacionales que rigen en todo el país — el resto depende del estado federado. Justamente esas diferencias entre Länder son el eje central de Wahlblick, por eso tienen su lugar acá. Datos para 2026.",
+      natHeading: "Feriados nacionales",
+      natSub: "Rigen en los 16 estados federados.",
+      regHeading: "Feriados por estado federado",
+      regSub: "Feriados adicionales que solo rigen en determinados estados.",
+      note: "Fuente: calendarios oficiales de feriados, verificados contra varias fuentes independientes. La base legal es la ley de feriados (Feiertagsgesetz) de cada estado — en caso de duda, prevalece el anuncio oficial del estado correspondiente.",
+      national: [
+        { date: "1 ene.", title: "Año Nuevo", text: "Comienzo del año calendario." },
+        { date: "3 abr.", title: "Viernes Santo", text: "Conmemoración cristiana de la crucifixión de Jesús — móvil, siempre el viernes antes de Pascua." },
+        { date: "6 abr.", title: "Lunes de Pascua", text: "Día siguiente al domingo de Pascua." },
+        { date: "1 may.", title: "Día del Trabajo", text: "También conocido internacionalmente como 1° de mayo." },
+        { date: "14 may.", title: "Ascensión", text: "39 días después de Pascua — móvil." },
+        { date: "25 may.", title: "Lunes de Pentecostés", text: "50 días después de Pascua — móvil." },
+        { date: "3 oct.", title: "Día de la Unidad Alemana", text: "Feriado nacional, conmemora la reunificación de 1990." },
+        { date: "25 dic.", title: "Navidad (1er día)", text: "" },
+        { date: "26 dic.", title: "Navidad (2do día)", text: "" }
+      ],
+      regional: [
+        { date: "6 ene.", title: "Reyes Magos", text: "Baden-Wurtemberg, Baviera, Sajonia-Anhalt." },
+        { date: "8 mar.", title: "Día Internacional de la Mujer", text: "Berlín, Mecklemburgo-Pomerania Occidental." },
+        { date: "4 jun.", title: "Corpus Christi", text: "Baden-Wurtemberg, Baviera, Hesse, Renania del Norte-Westfalia, Renania-Palatinado, Sarre." },
+        { date: "15 ago.", title: "Asunción de María", text: "Sarre (en todo el estado); en Baviera solo en municipios de mayoría católica." },
+        { date: "20 sept.", title: "Día Mundial de la Infancia", text: "Turingia." },
+        { date: "31 oct.", title: "Día de la Reforma", text: "Brandeburgo, Bremen, Hamburgo, Mecklemburgo-Pomerania Occidental, Baja Sajonia, Sajonia, Sajonia-Anhalt, Schleswig-Holstein, Turingia." },
+        { date: "1 nov.", title: "Día de Todos los Santos", text: "Baden-Wurtemberg, Baviera, Renania del Norte-Westfalia, Renania-Palatinado, Sarre." }
+      ]
+    },
+    en: {
+      title: "Public holidays in Germany",
+      backLabel: "← Back to the map",
+      intro: "Germany has nine nationwide public holidays — the rest depend on the federal state. Those exact differences between Länder are the whole point of Wahlblick, which is why they belong here too. Data for 2026.",
+      natHeading: "Nationwide holidays",
+      natSub: "Observed in all 16 federal states.",
+      regHeading: "Holidays by federal state",
+      regSub: "Additional holidays observed only in certain states.",
+      note: "Source: official public holiday calendars, cross-checked against several independent overviews. The legal basis is each state's own Feiertagsgesetz (holiday law) — in case of doubt, the state's official announcement prevails.",
+      national: [
+        { date: "Jan 1", title: "New Year's Day", text: "Start of the calendar year." },
+        { date: "Apr 3", title: "Good Friday", text: "Christian commemoration of the crucifixion of Jesus — movable, always the Friday before Easter." },
+        { date: "Apr 6", title: "Easter Monday", text: "The day after Easter Sunday." },
+        { date: "May 1", title: "Labour Day", text: "Also known internationally as May Day." },
+        { date: "May 14", title: "Ascension Day", text: "39 days after Easter — movable." },
+        { date: "May 25", title: "Whit Monday", text: "50 days after Easter — movable." },
+        { date: "Oct 3", title: "German Unity Day", text: "National holiday, commemorating reunification in 1990." },
+        { date: "Dec 25", title: "Christmas Day", text: "" },
+        { date: "Dec 26", title: "Boxing Day", text: "" }
+      ],
+      regional: [
+        { date: "Jan 6", title: "Epiphany", text: "Baden-Württemberg, Bavaria, Saxony-Anhalt." },
+        { date: "Mar 8", title: "International Women's Day", text: "Berlin, Mecklenburg-Western Pomerania." },
+        { date: "Jun 4", title: "Corpus Christi", text: "Baden-Württemberg, Bavaria, Hesse, North Rhine-Westphalia, Rhineland-Palatinate, Saarland." },
+        { date: "Aug 15", title: "Assumption of Mary", text: "Saarland (statewide); in Bavaria only in municipalities with a majority Catholic population." },
+        { date: "Sep 20", title: "World Children's Day", text: "Thuringia." },
+        { date: "Oct 31", title: "Reformation Day", text: "Brandenburg, Bremen, Hamburg, Mecklenburg-Western Pomerania, Lower Saxony, Saxony, Saxony-Anhalt, Schleswig-Holstein, Thuringia." },
+        { date: "Nov 1", title: "All Saints' Day", text: "Baden-Württemberg, Bavaria, North Rhine-Westphalia, Rhineland-Palatinate, Saarland." }
+      ]
+    }
+  };
+
+  var FOOT = {
+    de: { impressum: "Impressum", datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise" },
+    es: { impressum: "Impressum", datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso" },
+    en: { impressum: "Impressum", datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide" }
+  };
+
+  function render(lang) {
+    var c = CONTENT[lang];
+    document.title = c.title + " — Wahlblick";
+    document.querySelector("[data-title]").textContent = c.title;
+    document.querySelector("[data-intro]").textContent = c.intro;
+    document.querySelector("[data-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-back]").textContent = c.backLabel;
+    document.querySelector("[data-nat-heading]").textContent = c.natHeading;
+    document.querySelector("[data-nat-sub]").textContent = c.natSub;
+    document.querySelector("[data-reg-heading]").textContent = c.regHeading;
+    document.querySelector("[data-reg-sub]").textContent = c.regSub;
+    document.querySelector("[data-note]").textContent = c.note;
+
+    var f = FOOT[lang];
+    document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;
+    document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
+    document.querySelector("[data-foot-grundgesetz]").textContent = f.grundgesetz;
+    document.querySelector("[data-foot-about]").textContent = f.about;
+    document.querySelector("[data-foot-directory]").textContent = f.directory;
+    document.querySelector("[data-foot-guide]").textContent = f.guide;
+
+    function renderList(selector, list) {
+      var wrap = document.querySelector(selector);
+      wrap.innerHTML = "";
+      list.forEach(function (item) {
+        var el = document.createElement("div");
+        el.className = "section-row";
+        el.innerHTML = "<div class=\"range\">" + item.date + "</div><div class=\"body\"><h3>" + item.title + "</h3><p>" + item.text + "</p></div>";
+        wrap.appendChild(el);
+      });
+    }
+    renderList("[data-national]", c.national);
+    renderList("[data-regional]", c.regional);
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      localStorage.setItem("wahlblickLang", lang);
+      document.querySelectorAll(".lang-switch button").forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+      });
+      render(lang);
+    });
+  });
+
+  var initialLang = localStorage.getItem("wahlblickLang") || "de";
+  if (!CONTENT[initialLang]) initialLang = "de";
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-lang") === initialLang);
+  });
+  render(initialLang);
+</script>

@@ -188,6 +188,7 @@
     <a href="grundgesetz.html" data-foot-grundgesetz>Grundgesetz</a>
     <a href="about.html" data-foot-about>Über Wahlblick</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
+    <a href="holidays.html" data-foot-holidays>Feiertage</a>
   </div>
 </footer>
 
@@ -279,9 +280,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", guide: "Nutzungshinweise" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", guide: "Guía de uso" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", guide: "User Guide" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", guide: "Nutzungshinweise", holidays: "Feiertage" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", guide: "Guía de uso", holidays: "Feriados" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", guide: "User Guide", holidays: "Holidays" }
   };
 
   function render(lang) {
@@ -297,6 +298,7 @@
     document.querySelector("[data-foot-grundgesetz]").textContent = f.grundgesetz;
     document.querySelector("[data-foot-about]").textContent = f.about;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
+    document.querySelector("[data-foot-holidays]").textContent = f.holidays;
     document.querySelector("[data-group1-heading]").textContent = c.group1Heading;
     document.querySelector("[data-group2-heading]").textContent = c.group2Heading;
     document.querySelector("[data-note]").textContent = c.note;
