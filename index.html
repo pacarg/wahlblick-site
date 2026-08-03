@@ -485,6 +485,7 @@
     <a href="#" id="footAbout">Über Wahlblick</a>
     <a href="#" id="footMethod">Methodik</a>
     <a href="impressum.html">Impressum</a>
+    <a href="disclaimer.html" id="footDisclaimerLink">Haftungsausschluss</a>
   </div>
   <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
 </footer>
@@ -923,6 +924,7 @@
       footnote: "Prototyp: Bundestagswahl 2025 und Landtagswahlen — jeweils für alle 16 Länder. Quellen: Bundeswahlleiterin und die amtlichen Landeswahlbehörden.",
       footAbout: "Über Wahlblick",
       footMethod: "Methodik",
+      footDisclaimerLink: "Haftungsausschluss",
       footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.",
       neu: "neu",
       keineAngabe: "k. A.",
@@ -959,6 +961,7 @@
       footnote: "Prototipo: elección federal 2025 y elecciones estatales — ambas para los 16 estados federados. Fuentes: Bundeswahlleiterin y las autoridades electorales oficiales de cada estado.",
       footAbout: "Sobre Wahlblick",
       footMethod: "Metodología",
+      footDisclaimerLink: "Descargo de responsabilidad",
       footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin y se muestran con link a la fuente original. Versión prototipo — todavía no están cargados todos los estados federados ni todos los años electorales.",
       neu: "nuevo",
       keineAngabe: "s/d",
@@ -995,6 +998,7 @@
       footnote: "Prototype: 2025 federal election and state elections — both for all 16 federal states. Sources: Bundeswahlleiterin and each state's official election authority.",
       footAbout: "About Wahlblick",
       footMethod: "Methodology",
+      footDisclaimerLink: "Disclaimer",
       footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin and are shown with a link to the original source. Prototype version — not all states and election years are loaded yet.",
       neu: "new",
       keineAngabe: "n/a",
@@ -1347,6 +1351,7 @@
     document.getElementById("globalFootnote").textContent = tr("footnote");
     document.getElementById("footAbout").textContent = tr("footAbout");
     document.getElementById("footMethod").textContent = tr("footMethod");
+    document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");

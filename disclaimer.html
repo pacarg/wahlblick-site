@@ -1,0 +1,217 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disclaimer — Wahlblick</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8f9;
+    --border: #e3e6ea;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #004494;
+    --accent-ink: #ffffff;
+    --strip-bg: #12161c;
+    --strip-text: #c7cdd6;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .official-strip {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    font-size: 12px;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+  .official-strip a { color: #fff; text-decoration: underline; text-underline-offset: 2px; }
+
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; flex: none; text-decoration: none; }
+  .brand .badge {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex: none;
+  }
+  .brand .flag-bar {
+    width: 7px; height: 34px;
+    border-radius: 2px;
+    flex: none;
+    background: linear-gradient(to bottom, #000 0% 33.33%, #dd0000 33.33% 66.66%, #ffce00 66.66% 100%);
+  }
+  .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+
+  .header-right { display: flex; align-items: center; gap: 16px; flex: none; }
+  .back-link { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .back-link:hover { color: var(--accent); }
+
+  .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; }
+  .lang-switch button {
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 5px 7px;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .lang-switch button:hover { color: var(--text); background: var(--surface); }
+  .lang-switch button.active { color: var(--accent); }
+  .lang-switch .sep { color: var(--border); font-size: 12px; }
+
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+  }
+  h1 { font-size: 22px; margin: 0 0 24px; }
+
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+  }
+  .panel h2 { font-size: 15px; margin: 24px 0 8px; }
+  .panel h2:first-child { margin-top: 0; }
+  .panel p { margin: 0 0 4px; font-size: 14.5px; line-height: 1.6; }
+
+  .lang-block { display: none; }
+  .lang-block.active { display: block; }
+
+  footer {
+    max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer .foot-links { display: flex; gap: 16px; }
+  footer a { color: var(--text-muted); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .official-strip { flex-wrap: wrap; padding: 6px 16px; font-size: 11px; }
+    .header-inner { padding: 12px 16px; }
+    .brand .wordmark { font-size: 16px; }
+    main { padding: 24px 16px 40px; }
+    .panel { padding: 20px; }
+    footer { padding: 16px 16px 32px; }
+  }
+</style>
+
+<div class="official-strip">
+  <span>Unabhängiges Datenprojekt, keine amtliche Quelle</span>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="badge">W</span>
+      <span class="flag-bar" aria-hidden="true"></span>
+      <span class="wordmark">Wahlblick</span>
+    </a>
+    <div class="header-right">
+      <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
+        <button type="button" data-lang="de" class="active">DE</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="es">ES</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="back-link" href="index.html" data-back>← Zur Wahlkarte</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 data-title>Haftungsausschluss</h1>
+  <div class="panel">
+
+    <div class="lang-block active" data-lang-block="de">
+      <h2>Haftung für Inhalte</h2>
+      <p>Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Wahldaten können wir jedoch keine Gewähr übernehmen. Wahlblick ist ein unabhängiges, privates Datenprojekt und steht in keiner Verbindung zur Bundeswahlleiterin, dem Deutschen Bundestag oder den jeweiligen Landeswahlleitungen. Verbindlich sind ausschließlich die offiziellen Ergebnisse der zuständigen Wahlbehörden, auf die bei jedem Datensatz verlinkt wird.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Diese Website enthält Links zu externen Websites Dritter, insbesondere zu den offiziellen Quellen der Wahlergebnisse, auf deren Inhalte wir keinen Einfluss haben. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Für die Inhalte der verlinkten Seiten ist ausschließlich deren jeweiliger Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen werden entsprechende Links umgehend entfernt.</p>
+
+      <h2>Urheberrecht</h2>
+      <p>Die durch die Betreiber dieser Website erstellten Inhalte, etwa Texte, Layout und Kartendarstellung, unterliegen dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet. Jede Vervielfältigung, Bearbeitung oder Verbreitung außerhalb der Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung.</p>
+    </div>
+
+    <div class="lang-block" data-lang-block="es">
+      <h2>Responsabilidad por el contenido</h2>
+      <p>Los contenidos de este sitio fueron elaborados con el mayor cuidado posible. Sin embargo, no podemos garantizar la exactitud, integridad ni actualidad de los datos electorales presentados. Wahlblick es un proyecto de datos independiente y privado, sin ninguna vinculación con la Bundeswahlleiterin (autoridad electoral federal alemana), el Bundestag ni las autoridades electorales estatales. Los únicos resultados vinculantes son los oficiales de las autoridades electorales correspondientes, enlazados en cada conjunto de datos.</p>
+
+      <h2>Responsabilidad por los enlaces</h2>
+      <p>Este sitio contiene enlaces a sitios externos de terceros, en particular a las fuentes oficiales de los resultados electorales, sobre cuyo contenido no tenemos ningún control. Al momento de crear el enlace no se detectaron infracciones legales. La responsabilidad por el contenido de las páginas enlazadas corresponde exclusivamente a sus respectivos operadores. Ante el conocimiento de una infracción concreta, el enlace correspondiente será eliminado de inmediato.</p>
+
+      <h2>Derechos de autor</h2>
+      <p>Los contenidos creados por los responsables de este sitio, como textos, diseño y representación del mapa, están sujetos al derecho de autor alemán. Los aportes de terceros están identificados como tales. Toda reproducción, edición o distribución fuera de los límites del derecho de autor requiere autorización previa por escrito.</p>
+    </div>
+
+    <div class="lang-block" data-lang-block="en">
+      <h2>Liability for content</h2>
+      <p>The content of this website has been created with the greatest possible care. However, we cannot guarantee the accuracy, completeness, or timeliness of the election data presented. Wahlblick is an independent, private data project with no affiliation to the Federal Returning Officer (Bundeswahlleiterin), the German Bundestag, or the respective state electoral authorities. Only the official results published by the relevant electoral authorities, linked with each dataset, are binding.</p>
+
+      <h2>Liability for links</h2>
+      <p>This website contains links to external third-party websites, in particular to the official sources of election results, over whose content we have no control. No legal violations were apparent at the time of linking. Responsibility for the content of linked pages lies solely with their respective operators. Upon becoming aware of any infringement, the relevant link will be removed immediately.</p>
+
+      <h2>Copyright</h2>
+      <p>Content created by the operators of this website, such as text, layout, and map presentation, is subject to German copyright law. Contributions by third parties are identified as such. Any reproduction, editing, or distribution beyond the scope of copyright law requires prior written consent.</p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
+  </div>
+</footer>
+
+<script>
+  var TITLES = { de: "Haftungsausschluss", es: "Descargo de responsabilidad", en: "Disclaimer" };
+  var BACK_LABELS = { de: "← Zur Wahlkarte", es: "← Volver al mapa", en: "← Back to the map" };
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      document.querySelectorAll(".lang-switch button").forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+      });
+      document.querySelectorAll(".lang-block").forEach(function (block) {
+        block.classList.toggle("active", block.getAttribute("data-lang-block") === lang);
+      });
+      document.querySelector("[data-title]").textContent = TITLES[lang];
+      document.querySelector("[data-back]").textContent = BACK_LABELS[lang];
+    });
+  });
+</script>
