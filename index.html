@@ -174,6 +174,14 @@
     border-bottom: 1px solid var(--border);
   }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding: 10px 0 2px;
+  }
 
   .primary-nav { border-bottom: 1px solid var(--border); }
   .control-bar {
@@ -214,6 +222,50 @@
     white-space: nowrap;
   }
   .content-nav a:hover { color: var(--accent); }
+
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .nav-dropdown-trigger:hover { color: var(--accent); }
+  .nav-dropdown-trigger .chevron { transition: transform 0.15s ease; }
+  .nav-dropdown-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+  .nav-dropdown-trigger[aria-expanded="true"] { color: var(--accent); }
+  .nav-dropdown-panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 20;
+    display: none;
+    flex-direction: column;
+    min-width: 190px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+    padding: 6px;
+  }
+  .nav-dropdown-panel a {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 8px 10px;
+    border-radius: var(--radius);
+  }
+  .nav-dropdown-panel a:hover { background: var(--surface); color: var(--accent); }
+  .nav-dropdown-panel:not([hidden]) { display: flex; }
 
   .control-bar .year-wrap { display: flex; align-items: center; }
   .control-bar .year-wrap.hidden { display: none; }
@@ -512,6 +564,7 @@
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
     <a href="#quellen" id="mobileNavQuellen">Quellen</a>
+    <span class="mobile-menu-label" id="mobileMenuGermanyLabel">Deutschland</span>
     <a href="grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
     <a href="directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
     <a href="holidays.html" id="mobileNavHolidaysLink">Feiertage</a>
@@ -527,10 +580,18 @@
     </div>
     <div class="bar-right">
       <nav class="content-nav" aria-label="Weitere Inhalte">
-        <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
-        <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
-        <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
-        <a href="government.html" id="navGovernmentLink">Koalitionen</a>
+        <div class="nav-dropdown" id="germanyDropdown">
+          <button type="button" class="nav-dropdown-trigger" id="germanyDropdownTrigger" aria-expanded="false" aria-controls="germanyDropdownPanel">
+            <span id="navGermanyLabel">Deutschland</span>
+            <svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="nav-dropdown-panel" id="germanyDropdownPanel" hidden>
+            <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
+            <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
+            <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
+            <a href="government.html" id="navGovernmentLink">Koalitionen</a>
+          </div>
+        </div>
       </nav>
       <div class="year-wrap">
         <select id="yearSelect" aria-label="Wahljahr">
@@ -1027,6 +1088,7 @@
       searchPh: "Bundesland suchen…",
       landSelectPlaceholder: "— Bundesland wählen —",
       navQuellen: "Quellen",
+      navGermanyLabel: "Deutschland",
       mapHint: "Hover oder Klick für Details",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
@@ -1072,6 +1134,7 @@
       searchPh: "Buscar un estado federado…",
       landSelectPlaceholder: "— Elegir un estado federado —",
       navQuellen: "Fuentes",
+      navGermanyLabel: "Alemania",
       mapHint: "Pasá el mouse o hacé click para ver detalles",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
@@ -1117,6 +1180,7 @@
       searchPh: "Search a federal state…",
       landSelectPlaceholder: "— Choose a federal state —",
       navQuellen: "Sources",
+      navGermanyLabel: "Germany",
       mapHint: "Hover or click for details",
       eyebrowBundestag: "Federal election {year} · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
@@ -1522,6 +1586,8 @@
     document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
     document.getElementById("mobileNavHolidaysLink").textContent = tr("footHolidaysLink");
     document.getElementById("mobileNavGovernmentLink").textContent = tr("footGovernmentLink");
+    document.getElementById("navGermanyLabel").textContent = tr("navGermanyLabel");
+    document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
     landSearch.placeholder = tr("searchPh");
     document.getElementById("mapHint").textContent = tr("mapHint");
     bundestagNoteEl.textContent = tr("bundestagNote");
@@ -1591,6 +1657,29 @@
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !mobileMenu.hidden) closeMobileMenu();
+  });
+
+  var germanyDropdown = document.getElementById("germanyDropdown");
+  var germanyTrigger = document.getElementById("germanyDropdownTrigger");
+  var germanyPanel = document.getElementById("germanyDropdownPanel");
+  function closeGermanyDropdown() {
+    germanyPanel.hidden = true;
+    germanyTrigger.setAttribute("aria-expanded", "false");
+  }
+  germanyTrigger.addEventListener("click", function () {
+    var willOpen = germanyPanel.hidden;
+    if (willOpen) {
+      germanyPanel.hidden = false;
+      germanyTrigger.setAttribute("aria-expanded", "true");
+    } else {
+      closeGermanyDropdown();
+    }
+  });
+  document.addEventListener("click", function (e) {
+    if (!germanyPanel.hidden && !germanyDropdown.contains(e.target)) closeGermanyDropdown();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !germanyPanel.hidden) closeGermanyDropdown();
   });
 
   paintMap();
