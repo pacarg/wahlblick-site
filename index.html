@@ -163,6 +163,7 @@
   .content-nav a:hover { color: var(--accent); }
 
   .control-bar .year-wrap { display: flex; align-items: center; }
+  .control-bar .year-wrap.hidden { display: none; }
   select#yearSelect {
     appearance: none;
     background: var(--bg);
@@ -1359,7 +1360,7 @@
     document.querySelectorAll(".view-pills button").forEach(function (btn) {
       btn.setAttribute("aria-pressed", btn.getAttribute("data-view") === view);
     });
-    document.getElementById("yearSelect").disabled = view !== "bundestag";
+    document.querySelector(".control-bar .year-wrap").classList.toggle("hidden", view !== "bundestag");
     if (view === "landtag") {
       banner.textContent = tr("bannerLandtag");
       banner.classList.add("visible");
