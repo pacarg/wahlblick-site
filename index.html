@@ -122,6 +122,43 @@
   .header-nav a { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
   .header-nav a:hover { color: var(--accent); }
 
+  .menu-toggle {
+    display: none;
+    flex: none;
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    padding: 0;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .menu-toggle span { width: 16px; height: 2px; background: var(--text); border-radius: 1px; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    padding: 6px 16px 10px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+
   .primary-nav { border-bottom: 1px solid var(--border); }
   .control-bar {
     max-width: 1200px;
@@ -390,11 +427,12 @@
     .brand .wordmark { font-size: 16px; }
     .header-search { order: 4; flex-basis: 100%; max-width: none; }
     .header-nav { display: none; }
+    .menu-toggle { display: flex; }
     .control-bar { padding: 0 16px; }
     .view-pills { gap: 18px; }
     .view-pills button { font-size: 14px; padding: 12px 0 9px; }
-    .bar-right { gap: 14px; padding: 8px 0 4px; width: 100%; justify-content: space-between; }
-    .content-nav { gap: 12px; }
+    .bar-right { gap: 14px; padding: 8px 0 4px; width: 100%; justify-content: flex-end; }
+    .content-nav { display: none; }
     .land-tabs { padding: 0 16px 12px; }
     main.layout { padding: 18px 16px 32px; }
     footer { padding: 16px 16px 32px; }
@@ -433,6 +471,13 @@
     <nav class="header-nav">
       <a href="#quellen" id="navQuellen">Quellen</a>
     </nav>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="#quellen" id="mobileNavQuellen">Quellen</a>
+    <a href="grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
   </div>
 </header>
 
@@ -1380,6 +1425,8 @@
     document.getElementById("stripText").textContent = tr("stripText");
     document.getElementById("stripLink").textContent = tr("stripLink");
     document.getElementById("navQuellen").textContent = tr("navQuellen");
+    document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
+    document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     landSearch.placeholder = tr("searchPh");
     document.getElementById("mapHint").textContent = tr("mapHint");
     bundestagNoteEl.textContent = tr("bundestagNote");
@@ -1414,6 +1461,35 @@
       applyStaticTexts();
       renderLegend();
     });
+  });
+
+  var menuToggle = document.getElementById("menuToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    mobileMenu.hidden = true;
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+  menuToggle.addEventListener("click", function () {
+    var willOpen = mobileMenu.hidden;
+    if (willOpen) {
+      mobileMenu.hidden = false;
+      mobileMenu.classList.add("open");
+      menuToggle.setAttribute("aria-expanded", "true");
+    } else {
+      closeMobileMenu();
+    }
+  });
+  mobileMenu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", closeMobileMenu);
+  });
+  document.addEventListener("click", function (e) {
+    if (!mobileMenu.hidden && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+      closeMobileMenu();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !mobileMenu.hidden) closeMobileMenu();
   });
 
   paintMap();
