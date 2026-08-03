@@ -192,6 +192,7 @@
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
+    <a href="government.html" data-foot-government>Koalitionen</a>
     <a href="https://www.gesetze-im-internet.de/gg/" target="_blank" rel="noopener">gesetze-im-internet.de/gg</a>
   </div>
 </footer>
@@ -330,9 +331,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", government: "Koalitionen" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions" }
   };
 
   function render(lang) {
@@ -349,6 +350,7 @@
     document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-foot-holidays]").textContent = f.holidays;
+    document.querySelector("[data-foot-government]").textContent = f.government;
     document.querySelector("[data-art-heading]").textContent = c.artHeading;
     document.querySelector("[data-art-sub]").textContent = c.artSub;
     document.querySelector("[data-struct-heading]").textContent = c.structHeading;

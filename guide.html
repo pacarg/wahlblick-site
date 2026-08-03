@@ -187,6 +187,7 @@
     <a href="about.html" data-foot-about>Über Wahlblick</a>
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
+    <a href="government.html" data-foot-government>Koalitionen</a>
   </div>
 </footer>
 
@@ -246,9 +247,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", holidays: "Feiertage" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", holidays: "Feriados" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", holidays: "Holidays" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", holidays: "Feiertage", government: "Koalitionen" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", holidays: "Feriados", government: "Coaliciones" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", holidays: "Holidays", government: "Coalitions" }
   };
 
   function render(lang) {
@@ -264,6 +265,7 @@
     document.querySelector("[data-foot-about]").textContent = f.about;
     document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-foot-holidays]").textContent = f.holidays;
+    document.querySelector("[data-foot-government]").textContent = f.government;
     document.querySelector("[data-h-map]").textContent = c.hMap;
     document.querySelector("[data-map-p1]").textContent = c.mapP1;
     document.querySelector("[data-map-p2]").textContent = c.mapP2;

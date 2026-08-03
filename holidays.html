@@ -186,6 +186,7 @@
     <a href="about.html" data-foot-about>Über Wahlblick</a>
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
+    <a href="government.html" data-foot-government>Koalitionen</a>
   </div>
 </footer>
 
@@ -284,9 +285,9 @@
   };
 
   var FOOT = {
-    de: { impressum: "Impressum", datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise" },
-    es: { impressum: "Impressum", datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso" },
-    en: { impressum: "Impressum", datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide" }
+    de: { impressum: "Impressum", datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", government: "Koalitionen" },
+    es: { impressum: "Impressum", datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", government: "Coaliciones" },
+    en: { impressum: "Impressum", datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide", government: "Coalitions" }
   };
 
   function render(lang) {
@@ -309,6 +310,7 @@
     document.querySelector("[data-foot-about]").textContent = f.about;
     document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
+    document.querySelector("[data-foot-government]").textContent = f.government;
 
     function renderList(selector, list) {
       var wrap = document.querySelector(selector);

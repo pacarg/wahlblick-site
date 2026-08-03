@@ -178,6 +178,7 @@
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
+    <a href="government.html" data-foot-government>Koalitionen</a>
   </div>
 </footer>
 
@@ -225,9 +226,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", directory: "Directory", guide: "User Guide", holidays: "Holidays" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", government: "Koalitionen" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions" }
   };
 
   function render(lang) {
@@ -243,6 +244,7 @@
     document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-foot-holidays]").textContent = f.holidays;
+    document.querySelector("[data-foot-government]").textContent = f.government;
     document.querySelector("[data-about-heading]").textContent = c.aboutHeading;
     document.querySelector("[data-about-p1]").textContent = c.aboutP1;
     document.querySelector("[data-method-heading]").textContent = c.methodHeading;
