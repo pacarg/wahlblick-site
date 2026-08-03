@@ -139,7 +139,7 @@
     border-bottom: 3px solid transparent;
     background: none;
     color: var(--text-muted);
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     padding: 14px 2px 11px;
     cursor: pointer;
@@ -150,6 +150,17 @@
     color: var(--text);
     border-bottom-color: var(--accent);
   }
+
+  .bar-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .content-nav { display: flex; align-items: center; gap: 16px; }
+  .content-nav a {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .content-nav a:hover { color: var(--accent); }
 
   .control-bar .year-wrap { display: flex; align-items: center; }
   select#yearSelect {
@@ -381,6 +392,8 @@
     .control-bar { padding: 0 16px; }
     .view-pills { gap: 18px; }
     .view-pills button { font-size: 14px; padding: 12px 0 9px; }
+    .bar-right { gap: 14px; padding: 8px 0 4px; width: 100%; justify-content: space-between; }
+    .content-nav { gap: 12px; }
     .land-tabs { padding: 0 16px 12px; }
     main.layout { padding: 18px 16px 32px; }
     footer { padding: 16px 16px 32px; }
@@ -428,13 +441,18 @@
       <button type="button" data-view="bundestag" aria-pressed="true">Bundestag</button>
       <button type="button" data-view="landtag" aria-pressed="false">Landtag</button>
     </div>
-    <div class="year-wrap">
-      <select id="yearSelect" aria-label="Wahljahr">
-        <option value="2025">2025</option>
-        <option value="2021">2021</option>
-        <option value="2017">2017</option>
-        <option value="2013">2013</option>
-      </select>
+    <div class="bar-right">
+      <nav class="content-nav" aria-label="Weitere Inhalte">
+        <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
+      </nav>
+      <div class="year-wrap">
+        <select id="yearSelect" aria-label="Wahljahr">
+          <option value="2025">2025</option>
+          <option value="2021">2021</option>
+          <option value="2017">2017</option>
+          <option value="2013">2013</option>
+        </select>
+      </div>
     </div>
   </div>
 </nav>
@@ -1369,6 +1387,7 @@
     document.getElementById("footMethod").textContent = tr("footMethod");
     document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
     document.getElementById("footGrundgesetzLink").textContent = tr("footGrundgesetzLink");
+    document.getElementById("navGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
