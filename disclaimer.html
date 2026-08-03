@@ -236,6 +236,7 @@
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
     <a href="government.html" data-foot-government>Koalitionen</a>
+    <a href="parties.html" data-foot-parties>Parteien</a>
     <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
   </div>
 </footer>
@@ -250,6 +251,7 @@
   var FOOT_GUIDE = { de: "Nutzungshinweise", es: "Guía de uso", en: "User Guide" };
   var FOOT_HOLIDAYS = { de: "Feiertage", es: "Feriados", en: "Holidays" };
   var FOOT_GOVERNMENT = { de: "Koalitionen", es: "Coaliciones", en: "Coalitions" };
+  var FOOT_PARTIES = { de: "Parteien", es: "Partidos", en: "Parties" };
   var LANG_STORAGE_KEY = "wahlblickLang";
 
   function setLang(lang) {
@@ -270,6 +272,7 @@
     document.querySelector("[data-foot-guide]").textContent = FOOT_GUIDE[lang];
     document.querySelector("[data-foot-holidays]").textContent = FOOT_HOLIDAYS[lang];
     document.querySelector("[data-foot-government]").textContent = FOOT_GOVERNMENT[lang];
+    document.querySelector("[data-foot-parties]").textContent = FOOT_PARTIES[lang];
   }
 
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {

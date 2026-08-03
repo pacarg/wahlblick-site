@@ -43,6 +43,12 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://wahlblick.de/parties.html</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://wahlblick.de/disclaimer.html</loc>
     <lastmod>2026-08-03</lastmod>
     <changefreq>yearly</changefreq>

@@ -212,6 +212,7 @@
     <a href="directory.html" data-foot-directory>Adressverzeichnis</a>
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
+    <a href="parties.html" data-foot-parties>Parteien</a>
   </div>
 </footer>
 
@@ -276,9 +277,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", parties: "Parteien" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", parties: "Partidos" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays", parties: "Parties" }
   };
 
   function render(lang) {
@@ -302,6 +303,7 @@
     document.querySelector("[data-foot-directory]").textContent = f.directory;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-foot-holidays]").textContent = f.holidays;
+    document.querySelector("[data-foot-parties]").textContent = f.parties;
 
     var wrap = document.querySelector("[data-coalitions]");
     wrap.innerHTML = "";

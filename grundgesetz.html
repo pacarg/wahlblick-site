@@ -217,6 +217,7 @@
     <a href="guide.html" data-foot-guide>Nutzungshinweise</a>
     <a href="holidays.html" data-foot-holidays>Feiertage</a>
     <a href="government.html" data-foot-government>Koalitionen</a>
+    <a href="parties.html" data-foot-parties>Parteien</a>
     <a href="https://www.gesetze-im-internet.de/gg/" target="_blank" rel="noopener">gesetze-im-internet.de/gg</a>
   </div>
 </footer>
@@ -355,9 +356,9 @@
   };
 
   var FOOT = {
-    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", government: "Koalitionen" },
-    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones" },
-    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions" }
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", government: "Koalitionen", parties: "Parteien" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones", parties: "Partidos" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions", parties: "Parties" }
   };
 
   function render(lang) {
@@ -376,6 +377,7 @@
     document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-foot-holidays]").textContent = f.holidays;
     document.querySelector("[data-foot-government]").textContent = f.government;
+    document.querySelector("[data-foot-parties]").textContent = f.parties;
     document.querySelector("[data-art-heading]").textContent = c.artHeading;
     document.querySelector("[data-art-sub]").textContent = c.artSub;
     document.querySelector("[data-struct-heading]").textContent = c.structHeading;
