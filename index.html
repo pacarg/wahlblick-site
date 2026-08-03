@@ -491,6 +491,7 @@
     <a href="#" id="footMethod">Methodik</a>
     <a href="impressum.html">Impressum</a>
     <a href="disclaimer.html" id="footDisclaimerLink">Haftungsausschluss</a>
+    <a href="grundgesetz.html" id="footGrundgesetzLink">Grundgesetz</a>
   </div>
   <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
 </footer>
@@ -931,6 +932,7 @@
       footAbout: "Über Wahlblick",
       footMethod: "Methodik",
       footDisclaimerLink: "Haftungsausschluss",
+      footGrundgesetzLink: "Grundgesetz",
       footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.",
       neu: "neu",
       keineAngabe: "k. A.",
@@ -969,6 +971,7 @@
       footAbout: "Sobre Wahlblick",
       footMethod: "Metodología",
       footDisclaimerLink: "Descargo de responsabilidad",
+      footGrundgesetzLink: "Ley Fundamental",
       footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin y se muestran con link a la fuente original. Versión prototipo — todavía no están cargados todos los estados federados ni todos los años electorales.",
       neu: "nuevo",
       keineAngabe: "s/d",
@@ -1007,6 +1010,7 @@
       footAbout: "About Wahlblick",
       footMethod: "Methodology",
       footDisclaimerLink: "Disclaimer",
+      footGrundgesetzLink: "Basic Law",
       footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin and are shown with a link to the original source. Prototype version — not all states and election years are loaded yet.",
       neu: "new",
       keineAngabe: "n/a",
@@ -1364,6 +1368,7 @@
     document.getElementById("footAbout").textContent = tr("footAbout");
     document.getElementById("footMethod").textContent = tr("footMethod");
     document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
+    document.getElementById("footGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");

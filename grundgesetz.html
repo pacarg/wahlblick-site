@@ -1,0 +1,357 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grundgesetz — Wahlblick</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8f9;
+    --border: #e3e6ea;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #004494;
+    --accent-ink: #ffffff;
+    --strip-bg: #12161c;
+    --strip-text: #c7cdd6;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .official-strip {
+    background: var(--strip-bg);
+    color: var(--strip-text);
+    font-size: 12px;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .site-header { background: var(--bg); border-bottom: 1px solid var(--border); }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; flex: none; text-decoration: none; }
+  .brand .badge {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex: none;
+  }
+  .brand .flag-bar {
+    width: 7px; height: 34px;
+    border-radius: 2px;
+    flex: none;
+    background: linear-gradient(to bottom, #000 0% 33.33%, #dd0000 33.33% 66.66%, #ffce00 66.66% 100%);
+  }
+  .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+
+  .header-right { display: flex; align-items: center; gap: 16px; flex: none; }
+  .back-link { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .back-link:hover { color: var(--accent); }
+
+  .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; }
+  .lang-switch button {
+    border: none; background: none; color: var(--text-muted);
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 5px 7px; cursor: pointer; border-radius: var(--radius);
+  }
+  .lang-switch button:hover { color: var(--text); background: var(--surface); }
+  .lang-switch button.active { color: var(--accent); }
+  .lang-switch .sep { color: var(--border); font-size: 12px; }
+
+  main { max-width: 820px; margin: 0 auto; padding: 32px 24px 56px; }
+  h1 { font-size: 22px; margin: 0 0 8px; }
+  .intro { font-size: 14.5px; line-height: 1.65; color: var(--text-muted); margin: 0 0 28px; }
+
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .panel h2 { font-size: 16px; margin: 0 0 4px; }
+  .panel .panel-sub { font-size: 12.5px; color: var(--text-muted); margin: 0 0 18px; }
+
+  .article { padding: 12px 0; border-top: 1px solid var(--border); }
+  .article:first-of-type { border-top: none; padding-top: 0; }
+  .article .art-num { font-size: 11.5px; font-weight: 700; color: var(--accent); letter-spacing: 0.02em; }
+  .article h3 { font-size: 14.5px; margin: 2px 0 6px; }
+  .article p { font-size: 13.5px; line-height: 1.6; margin: 0; color: var(--text); }
+
+  .section-row { display: flex; gap: 14px; padding: 10px 0; border-top: 1px solid var(--border); }
+  .section-row:first-of-type { border-top: none; padding-top: 0; }
+  .section-row .range { flex: none; width: 92px; font-size: 12px; font-weight: 700; color: var(--text-muted); }
+  .section-row .body h3 { font-size: 13.5px; margin: 0 0 3px; }
+  .section-row .body p { font-size: 13px; line-height: 1.55; margin: 0; color: var(--text-muted); }
+
+  .official-link {
+    margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 13px;
+  }
+
+  footer {
+    max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer .foot-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--text-muted); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .official-strip { flex-wrap: wrap; padding: 6px 16px; font-size: 11px; }
+    .header-inner { padding: 12px 16px; }
+    .brand .wordmark { font-size: 16px; }
+    main { padding: 24px 16px 40px; }
+    .panel { padding: 20px; }
+    .section-row { flex-direction: column; gap: 2px; }
+    .section-row .range { width: auto; }
+    footer { padding: 16px 16px 32px; }
+  }
+</style>
+
+<div class="official-strip">
+  <span>Unabhängiges Datenprojekt, keine amtliche Quelle</span>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html">
+      <span class="badge">W</span>
+      <span class="flag-bar" aria-hidden="true"></span>
+      <span class="wordmark">Wahlblick</span>
+    </a>
+    <div class="header-right">
+      <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
+        <button type="button" data-lang="de" class="active">DE</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="es">ES</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="back-link" href="index.html" data-back>← Zur Wahlkarte</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h1 data-title></h1>
+  <p class="intro" data-intro></p>
+
+  <div class="panel">
+    <h2 data-art-heading></h2>
+    <p class="panel-sub" data-art-sub></p>
+    <div data-articles></div>
+  </div>
+
+  <div class="panel">
+    <h2 data-struct-heading></h2>
+    <p class="panel-sub" data-struct-sub></p>
+    <div data-sections></div>
+    <p class="official-link" data-official-link></p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="disclaimer.html">Haftungsausschluss</a>
+    <a href="https://www.gesetze-im-internet.de/gg/" target="_blank" rel="noopener">gesetze-im-internet.de/gg</a>
+  </div>
+</footer>
+
+<script>
+  var CONTENT = {
+    de: {
+      title: "Das Grundgesetz",
+      intro: "Das Grundgesetz für die Bundesrepublik Deutschland wurde am 23. Mai 1949 vom Parlamentarischen Rat in Bonn verkündet — ursprünglich als vorläufige Verfassung für Westdeutschland gedacht, daher der bewusst zurückhaltende Name „Grundgesetz“ statt „Verfassung“. Mit der deutschen Wiedervereinigung 1990 wurde es zur gesamtdeutschen Verfassung. Es beginnt mit den Grundrechten (Art. 1–19) — eine direkte Lehre aus der Zeit des Nationalsozialismus, in der die Weimarer Verfassung keinen ausreichenden Schutz vor der Aushöhlung der Demokratie geboten hatte.",
+      backLabel: "← Zur Wahlkarte",
+      artHeading: "Die Grundrechte (Art. 1–19)",
+      artSub: "Der erste Abschnitt des Grundgesetzes — kurz zusammengefasst, keine amtliche Wortlautwiedergabe.",
+      structHeading: "Der Rest des Grundgesetzes im Überblick",
+      structSub: "Die übrigen zehn Abschnitte (Art. 20–146) regeln den Aufbau des Staates — hier als Kurzübersicht, nicht Artikel für Artikel.",
+      officialLink: "Vollständiger amtlicher Wortlaut: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Bundesministerium der Justiz).",
+      articles: [
+        { num: "Art. 1", title: "Menschenwürde", text: "Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt — der zentrale, unveränderliche Grundsatz des gesamten Grundgesetzes." },
+        { num: "Art. 2", title: "Freie Entfaltung, Leben, körperliche Unversehrtheit", text: "Jede Person hat das Recht auf freie Entfaltung der Persönlichkeit, auf Leben und körperliche Unversehrtheit sowie auf Freiheit der Person — jeweils im Rahmen der Rechte anderer und der verfassungsmäßigen Ordnung." },
+        { num: "Art. 3", title: "Gleichheit vor dem Gesetz", text: "Alle Menschen sind vor dem Gesetz gleich. Männer und Frauen sind gleichberechtigt. Niemand darf wegen Geschlecht, Abstammung, Sprache, Heimat, Glauben oder Behinderung benachteiligt werden." },
+        { num: "Art. 4", title: "Glaubens-, Gewissens- und Bekenntnisfreiheit", text: "Die Freiheit des Glaubens, des Gewissens und des religiösen sowie weltanschaulichen Bekenntnisses ist unverletzlich. Niemand darf zum Kriegsdienst mit der Waffe gezwungen werden." },
+        { num: "Art. 5", title: "Meinungs-, Presse-, Kunst- und Wissenschaftsfreiheit", text: "Jede Person hat das Recht, ihre Meinung frei zu äußern und zu verbreiten. Presse-, Rundfunk- und Filmfreiheit werden ebenso gewährleistet wie Kunst, Wissenschaft, Forschung und Lehre. Eine Zensur findet nicht statt." },
+        { num: "Art. 6", title: "Ehe, Familie, Kinder", text: "Ehe und Familie stehen unter dem besonderen Schutz des Staates. Pflege und Erziehung der Kinder sind das natürliche Recht der Eltern; die staatliche Gemeinschaft wacht über ihre Betätigung." },
+        { num: "Art. 7", title: "Schulwesen", text: "Das gesamte Schulwesen steht unter der Aufsicht des Staates. Erziehungsberechtigte haben das Recht, über die Teilnahme ihrer Kinder am Religionsunterricht zu entscheiden." },
+        { num: "Art. 8", title: "Versammlungsfreiheit", text: "Alle Deutschen haben das Recht, sich ohne Anmeldung friedlich und ohne Waffen zu versammeln. Für Versammlungen unter freiem Himmel kann dieses Recht durch Gesetz eingeschränkt werden." },
+        { num: "Art. 9", title: "Vereinigungs- und Koalitionsfreiheit", text: "Alle Deutschen haben das Recht, Vereine und Gesellschaften zu bilden. Das Recht, Vereinigungen zur Wahrung und Förderung der Arbeits- und Wirtschaftsbedingungen zu bilden (z. B. Gewerkschaften), ist für jede Person und jeden Beruf gewährleistet." },
+        { num: "Art. 10", title: "Brief-, Post- und Fernmeldegeheimnis", text: "Das Brief-, Post- und Fernmeldegeheimnis ist unverletzlich. Einschränkungen dürfen nur aufgrund eines Gesetzes angeordnet werden." },
+        { num: "Art. 11", title: "Freizügigkeit", text: "Alle Deutschen genießen Freizügigkeit im ganzen Bundesgebiet — also das Recht, sich an jedem Ort niederzulassen und aufzuhalten." },
+        { num: "Art. 12", title: "Berufsfreiheit", text: "Alle Deutschen haben das Recht, Beruf, Arbeitsplatz und Ausbildungsstätte frei zu wählen. Ein Arbeitszwang ist grundsätzlich verboten; eine allgemeine Dienstpflicht (Art. 12a) ist nur in engen, vom Grundgesetz selbst festgelegten Grenzen möglich." },
+        { num: "Art. 13", title: "Unverletzlichkeit der Wohnung", text: "Die Wohnung ist unverletzlich. Durchsuchungen dürfen grundsätzlich nur durch den Richter angeordnet werden." },
+        { num: "Art. 14", title: "Eigentum, Erbrecht, Enteignung", text: "Eigentum und Erbrecht werden gewährleistet; ihr Inhalt wird durch Gesetz bestimmt. Eigentum verpflichtet — sein Gebrauch soll zugleich dem Wohle der Allgemeinheit dienen. Enteignung ist nur zum Wohle der Allgemeinheit und gegen Entschädigung zulässig." },
+        { num: "Art. 15", title: "Sozialisierung", text: "Grund und Boden, Naturschätze und Produktionsmittel können durch Gesetz zum Zwecke der Vergesellschaftung in Gemeineigentum überführt werden — ein Instrument, das in der Praxis so gut wie nie genutzt wurde." },
+        { num: "Art. 16 / 16a", title: "Staatsangehörigkeit, Auslieferung, Asylrecht", text: "Die deutsche Staatsangehörigkeit darf nicht entzogen werden; deutsche Staatsbürger*innen dürfen grundsätzlich nicht ausgeliefert werden. Politisch Verfolgte genießen Asylrecht." },
+        { num: "Art. 17 / 17a", title: "Petitionsrecht", text: "Jede Person hat das Recht, sich einzeln oder gemeinsam mit anderen schriftlich mit Bitten oder Beschwerden an die zuständigen Stellen und an die Volksvertretung zu wenden." },
+        { num: "Art. 18", title: "Verwirkung von Grundrechten", text: "Wer Grundrechte — etwa die Meinungs- oder Versammlungsfreiheit — zum Kampf gegen die freiheitliche demokratische Grundordnung missbraucht, verwirkt diese Rechte. Das Bundesverfassungsgericht entscheidet darüber." },
+        { num: "Art. 19", title: "Einschränkung von Grundrechten, Rechtsweggarantie", text: "Grundrechte dürfen nur durch oder aufgrund eines Gesetzes eingeschränkt werden und nie in ihrem Wesensgehalt angetastet werden. Wird jemand durch die öffentliche Gewalt in seinen Rechten verletzt, steht ihm der Rechtsweg offen." }
+      ],
+      sections: [
+        { range: "Art. 20–37", title: "II. Der Bund und die Länder", text: "Grundprinzipien: Demokratie, Bundesstaat, Rechtsstaat und Sozialstaat (Art. 20). Verhältnis zwischen Bund und Ländern, politische Parteien (Art. 21)." },
+        { range: "Art. 38–49", title: "III. Der Bundestag", text: "Wahl, Zusammensetzung und Arbeitsweise des Bundestags — des vom Volk gewählten Parlaments." },
+        { range: "Art. 50–53a", title: "IV / IVa. Bundesrat, Gemeinsamer Ausschuss", text: "Der Bundesrat vertritt die 16 Länder auf Bundesebene; der Gemeinsame Ausschuss tritt nur im Verteidigungsfall zusammen." },
+        { range: "Art. 54–61", title: "V. Der Bundespräsident", text: "Wahl und Aufgaben des Staatsoberhaupts — vor allem repräsentativ, mit wenigen aktiven Befugnissen." },
+        { range: "Art. 62–69", title: "VI. Die Bundesregierung", text: "Bundeskanzler*in und Bundesminister*innen, Regierungsbildung, Vertrauensfrage." },
+        { range: "Art. 70–82", title: "VII. Die Gesetzgebung des Bundes", text: "Zuständigkeiten für Bund und Länder, Gesetzgebungsverfahren." },
+        { range: "Art. 83–91e", title: "VIII / VIIIa. Verwaltung, Gemeinschaftsaufgaben", text: "Wie Bundesgesetze ausgeführt werden und welche Aufgaben Bund und Länder gemeinsam wahrnehmen." },
+        { range: "Art. 92–104", title: "IX. Die Rechtsprechung", text: "Unabhängigkeit der Gerichte, das Bundesverfassungsgericht als Hüter des Grundgesetzes." },
+        { range: "Art. 104a–115l", title: "X / Xa. Finanzwesen, Verteidigungsfall", text: "Verteilung von Steuereinnahmen und Ausgaben zwischen Bund und Ländern; besondere Regeln für den Verteidigungsfall." },
+        { range: "Art. 116–146", title: "XI. Übergangs- und Schlussbestimmungen", text: "U. a. die Definition von „Deutscher“ (Art. 116) und die Regeln, die 1990 die Wiedervereinigung ermöglichten." }
+      ]
+    },
+    es: {
+      title: "La Ley Fundamental (Grundgesetz)",
+      intro: "La Ley Fundamental para la República Federal de Alemania fue proclamada el 23 de mayo de 1949 por el Consejo Parlamentario en Bonn — pensada originalmente como una constitución provisional para Alemania Occidental, de ahí el nombre deliberadamente modesto de «Ley Fundamental» en vez de «Constitución». Con la reunificación alemana de 1990 pasó a ser la constitución de toda Alemania. Comienza con los derechos fundamentales (Art. 1–19) — una lección directa de la época del nacionalsocialismo, cuando la Constitución de Weimar no ofreció suficiente protección frente al vaciamiento de la democracia.",
+      backLabel: "← Volver al mapa",
+      artHeading: "Los derechos fundamentales (Art. 1–19)",
+      artSub: "La primera sección de la Ley Fundamental — resumida en lenguaje simple, no es una reproducción oficial del texto.",
+      structHeading: "El resto de la Ley Fundamental, en resumen",
+      structSub: "Las otras diez secciones (Art. 20–146) regulan la organización del Estado — acá como resumen general, no artículo por artículo.",
+      officialLink: "Texto oficial completo: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Ministerio Federal de Justicia, en alemán).",
+      articles: [
+        { num: "Art. 1", title: "Dignidad humana", text: "La dignidad humana es intangible. Respetarla y protegerla es obligación de todo poder estatal — el principio central e inmodificable de toda la Ley Fundamental." },
+        { num: "Art. 2", title: "Libre desarrollo, vida e integridad física", text: "Toda persona tiene derecho al libre desarrollo de su personalidad, a la vida y a la integridad física, así como a la libertad personal — dentro de los límites de los derechos de terceros y del orden constitucional." },
+        { num: "Art. 3", title: "Igualdad ante la ley", text: "Todas las personas son iguales ante la ley. Hombres y mujeres tienen los mismos derechos. Nadie puede ser perjudicado por su sexo, origen, idioma, patria, creencias o discapacidad." },
+        { num: "Art. 4", title: "Libertad de creencia, conciencia y confesión", text: "La libertad de creencia, de conciencia y de confesión religiosa e ideológica es inviolable. Nadie puede ser obligado a prestar servicio militar armado en contra de su conciencia." },
+        { num: "Art. 5", title: "Libertad de expresión, prensa, arte y ciencia", text: "Toda persona tiene derecho a expresar y difundir libremente su opinión. Se garantiza la libertad de prensa, radiodifusión y cine, así como del arte, la ciencia, la investigación y la enseñanza. No existe censura." },
+        { num: "Art. 6", title: "Matrimonio, familia e hijos", text: "El matrimonio y la familia gozan de la protección especial del Estado. El cuidado y la educación de los hijos son un derecho natural de los padres, sobre cuyo ejercicio vela la comunidad estatal." },
+        { num: "Art. 7", title: "Sistema escolar", text: "Todo el sistema escolar está bajo la supervisión del Estado. Quienes tienen la responsabilidad educativa de un menor pueden decidir sobre su participación en la clase de religión." },
+        { num: "Art. 8", title: "Libertad de reunión", text: "Todos los alemanes tienen derecho a reunirse pacíficamente y sin armas, sin necesidad de notificación previa. Para reuniones al aire libre, este derecho puede limitarse por ley." },
+        { num: "Art. 9", title: "Libertad de asociación y sindical", text: "Todos los alemanes tienen derecho a formar asociaciones y sociedades. El derecho a formar asociaciones para la defensa y mejora de las condiciones laborales y económicas (por ejemplo, sindicatos) está garantizado para toda persona y profesión." },
+        { num: "Art. 10", title: "Secreto de correspondencia, correo y telecomunicaciones", text: "El secreto de la correspondencia, así como del correo y las telecomunicaciones, es inviolable. Solo puede restringirse en virtud de una ley." },
+        { num: "Art. 11", title: "Libertad de circulación", text: "Todos los alemanes gozan de libertad de circulación en todo el territorio federal — es decir, el derecho a establecerse y permanecer en cualquier lugar." },
+        { num: "Art. 12", title: "Libertad profesional", text: "Todos los alemanes tienen derecho a elegir libremente su profesión, lugar de trabajo y centro de formación. El trabajo forzoso está prohibido en principio; un servicio obligatorio general (Art. 12a) solo es posible dentro de límites estrechos fijados por la propia Ley Fundamental." },
+        { num: "Art. 13", title: "Inviolabilidad del domicilio", text: "El domicilio es inviolable. En principio, los registros solo pueden ser ordenados por un juez." },
+        { num: "Art. 14", title: "Propiedad, herencia y expropiación", text: "Se garantizan la propiedad y el derecho de herencia; su contenido lo determina la ley. La propiedad obliga — su uso debe servir también al bien común. La expropiación solo es admisible por causa de utilidad pública y mediante indemnización." },
+        { num: "Art. 15", title: "Socialización", text: "La tierra, los recursos naturales y los medios de producción pueden, mediante ley, ser transferidos a la propiedad colectiva con fines de socialización — un instrumento que en la práctica casi nunca se ha utilizado." },
+        { num: "Art. 16 / 16a", title: "Nacionalidad, extradición, derecho de asilo", text: "No se puede privar de la nacionalidad alemana a nadie; en principio, los ciudadanos alemanes no pueden ser extraditados. Las personas perseguidas políticamente gozan de derecho de asilo." },
+        { num: "Art. 17 / 17a", title: "Derecho de petición", text: "Toda persona tiene derecho a dirigirse por escrito, individualmente o junto con otras, con peticiones o quejas a las autoridades competentes y a la representación popular." },
+        { num: "Art. 18", title: "Pérdida de derechos fundamentales", text: "Quien abuse de derechos fundamentales — como la libertad de expresión o de reunión — para combatir el orden fundamental democrático y de libertad, pierde esos derechos. La decisión corresponde al Tribunal Constitucional Federal." },
+        { num: "Art. 19", title: "Restricción de derechos fundamentales, garantía judicial", text: "Los derechos fundamentales solo pueden restringirse mediante una ley o en virtud de ella, y nunca puede afectarse su contenido esencial. Quien vea sus derechos vulnerados por el poder público tiene abierta la vía judicial." }
+      ],
+      sections: [
+        { range: "Art. 20–37", title: "II. La Federación y los Länder", text: "Principios fundamentales: democracia, Estado federal, Estado de derecho y Estado social (Art. 20). Relación entre la Federación y los estados, partidos políticos (Art. 21)." },
+        { range: "Art. 38–49", title: "III. El Bundestag", text: "Elección, composición y funcionamiento del Bundestag — el parlamento elegido por el pueblo." },
+        { range: "Art. 50–53a", title: "IV / IVa. Bundesrat, Comisión Mixta", text: "El Bundesrat representa a los 16 Länder a nivel federal; la Comisión Mixta solo se reúne en caso de defensa." },
+        { range: "Art. 54–61", title: "V. El presidente federal", text: "Elección y funciones del jefe de Estado — principalmente representativas, con pocas facultades activas." },
+        { range: "Art. 62–69", title: "VI. El Gobierno federal", text: "Canciller/a y ministros federales, formación de gobierno, moción de confianza." },
+        { range: "Art. 70–82", title: "VII. La legislación federal", text: "Competencias de la Federación y los Länder, procedimiento legislativo." },
+        { range: "Art. 83–91e", title: "VIII / VIIIa. Administración, tareas conjuntas", text: "Cómo se ejecutan las leyes federales y qué tareas comparten la Federación y los Länder." },
+        { range: "Art. 92–104", title: "IX. La administración de justicia", text: "Independencia de los tribunales, el Tribunal Constitucional Federal como guardián de la Ley Fundamental." },
+        { range: "Art. 104a–115l", title: "X / Xa. Hacienda pública, caso de defensa", text: "Distribución de ingresos y gastos entre la Federación y los Länder; reglas especiales para el caso de defensa." },
+        { range: "Art. 116–146", title: "XI. Disposiciones transitorias y finales", text: "Entre otras cosas, la definición de «alemán» (Art. 116) y las reglas que en 1990 hicieron posible la reunificación." }
+      ]
+    },
+    en: {
+      title: "The Basic Law (Grundgesetz)",
+      intro: "The Basic Law for the Federal Republic of Germany was proclaimed on 23 May 1949 by the Parliamentary Council in Bonn — originally conceived as a provisional constitution for West Germany, hence the deliberately modest name \"Basic Law\" rather than \"Constitution.\" With German reunification in 1990, it became the constitution of all of Germany. It opens with the fundamental rights (Art. 1–19) — a direct lesson from the Nazi era, when the Weimar Constitution failed to protect democracy from being hollowed out.",
+      backLabel: "← Back to the map",
+      artHeading: "The fundamental rights (Art. 1–19)",
+      artSub: "The first section of the Basic Law — summarized in plain language, not an official reproduction of the text.",
+      structHeading: "The rest of the Basic Law, at a glance",
+      structSub: "The remaining ten sections (Art. 20–146) regulate the structure of the state — shown here as a summary, not article by article.",
+      officialLink: "Full official text: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Federal Ministry of Justice, in German).",
+      articles: [
+        { num: "Art. 1", title: "Human dignity", text: "Human dignity is inviolable. To respect and protect it is the duty of all state authority — the central, unamendable principle underlying the entire Basic Law." },
+        { num: "Art. 2", title: "Free development, life, physical integrity", text: "Everyone has the right to free development of their personality, to life and physical integrity, and to personal liberty — within the limits of others' rights and the constitutional order." },
+        { num: "Art. 3", title: "Equality before the law", text: "All people are equal before the law. Men and women have equal rights. No one may be disadvantaged on account of sex, ancestry, language, homeland, beliefs, or disability." },
+        { num: "Art. 4", title: "Freedom of faith, conscience and creed", text: "Freedom of faith, conscience, and religious or ideological creed is inviolable. No one may be compelled to perform armed military service against their conscience." },
+        { num: "Art. 5", title: "Freedom of expression, press, art and science", text: "Everyone has the right to freely express and disseminate their opinions. Freedom of the press, broadcasting, and film is guaranteed, as are art, science, research, and teaching. There is no censorship." },
+        { num: "Art. 6", title: "Marriage, family and children", text: "Marriage and the family enjoy the special protection of the state. The care and upbringing of children is the natural right of parents, and the state community watches over how they exercise it." },
+        { num: "Art. 7", title: "School system", text: "The entire school system is under the supervision of the state. Parents or guardians have the right to decide whether their children take part in religious education." },
+        { num: "Art. 8", title: "Freedom of assembly", text: "All Germans have the right to assemble peacefully and unarmed without prior notice. For assemblies held outdoors, this right may be restricted by law." },
+        { num: "Art. 9", title: "Freedom of association", text: "All Germans have the right to form associations and societies. The right to form associations to safeguard and improve working and economic conditions (e.g., trade unions) is guaranteed to everyone, in every profession." },
+        { num: "Art. 10", title: "Privacy of correspondence, post and telecommunications", text: "The privacy of correspondence, posts, and telecommunications is inviolable. Restrictions may only be ordered pursuant to a law." },
+        { num: "Art. 11", title: "Freedom of movement", text: "All Germans enjoy freedom of movement throughout the federal territory — that is, the right to settle and reside anywhere." },
+        { num: "Art. 12", title: "Freedom of occupation", text: "All Germans have the right to freely choose their occupation, place of work, and place of training. Compulsory labour is prohibited in principle; general compulsory service (Art. 12a) is only possible within narrow limits set by the Basic Law itself." },
+        { num: "Art. 13", title: "Inviolability of the home", text: "The home is inviolable. Searches may, as a rule, only be ordered by a judge." },
+        { num: "Art. 14", title: "Property, inheritance and expropriation", text: "Property and the right of inheritance are guaranteed; their substance is defined by law. Property entails obligations — its use should also serve the public good. Expropriation is only permissible for the public good and against compensation." },
+        { num: "Art. 15", title: "Socialization", text: "Land, natural resources, and means of production may, by law, be transferred to public ownership for the purpose of socialization — a provision that has almost never been used in practice." },
+        { num: "Art. 16 / 16a", title: "Citizenship, extradition, right to asylum", text: "No one may be deprived of German citizenship; German citizens may, as a rule, not be extradited. Persons persecuted on political grounds enjoy the right of asylum." },
+        { num: "Art. 17 / 17a", title: "Right to petition", text: "Everyone has the right, individually or jointly with others, to address written requests or complaints to the competent authorities and to the legislature." },
+        { num: "Art. 18", title: "Forfeiture of basic rights", text: "Anyone who abuses basic rights — such as freedom of expression or assembly — to combat the free democratic basic order forfeits those rights. The Federal Constitutional Court rules on this forfeiture." },
+        { num: "Art. 19", title: "Restriction of basic rights, guarantee of recourse to the courts", text: "Basic rights may only be restricted by or pursuant to a law, and their essential content may never be affected. Anyone whose rights are violated by public authority has recourse to the courts." }
+      ],
+      sections: [
+        { range: "Art. 20–37", title: "II. The Federation and the Länder", text: "Founding principles: democracy, federal state, rule of law, and social state (Art. 20). Relationship between the Federation and the states, political parties (Art. 21)." },
+        { range: "Art. 38–49", title: "III. The Bundestag", text: "Election, composition, and functioning of the Bundestag — the parliament elected by the people." },
+        { range: "Art. 50–53a", title: "IV / IVa. Bundesrat, Joint Committee", text: "The Bundesrat represents the 16 Länder at the federal level; the Joint Committee convenes only in a state of defence." },
+        { range: "Art. 54–61", title: "V. The Federal President", text: "Election and duties of the head of state — mostly representative, with few active powers." },
+        { range: "Art. 62–69", title: "VI. The Federal Government", text: "The Chancellor and federal ministers, government formation, the vote of confidence." },
+        { range: "Art. 70–82", title: "VII. Federal legislation", text: "Legislative powers of the Federation and the Länder, the lawmaking process." },
+        { range: "Art. 83–91e", title: "VIII / VIIIa. Administration, joint tasks", text: "How federal laws are executed, and which tasks the Federation and the Länder carry out together." },
+        { range: "Art. 92–104", title: "IX. The judiciary", text: "Independence of the courts, the Federal Constitutional Court as guardian of the Basic Law." },
+        { range: "Art. 104a–115l", title: "X / Xa. Public finances, state of defence", text: "How tax revenue and spending are divided between the Federation and the Länder; special rules for a state of defence." },
+        { range: "Art. 116–146", title: "XI. Transitional and concluding provisions", text: "Among other things, the definition of \"German\" (Art. 116) and the rules that made reunification possible in 1990." }
+      ]
+    }
+  };
+
+  function render(lang) {
+    var c = CONTENT[lang];
+    document.title = c.title + " — Wahlblick";
+    document.querySelector("[data-title]").textContent = c.title;
+    document.querySelector("[data-intro]").textContent = c.intro;
+    document.querySelector("[data-back]").textContent = c.backLabel;
+    document.querySelector("[data-art-heading]").textContent = c.artHeading;
+    document.querySelector("[data-art-sub]").textContent = c.artSub;
+    document.querySelector("[data-struct-heading]").textContent = c.structHeading;
+    document.querySelector("[data-struct-sub]").textContent = c.structSub;
+    document.querySelector("[data-official-link]").innerHTML = c.officialLink;
+
+    var artWrap = document.querySelector("[data-articles]");
+    artWrap.innerHTML = "";
+    c.articles.forEach(function (a) {
+      var el = document.createElement("div");
+      el.className = "article";
+      el.innerHTML = "<div class=\"art-num\">" + a.num + "</div><h3>" + a.title + "</h3><p>" + a.text + "</p>";
+      artWrap.appendChild(el);
+    });
+
+    var secWrap = document.querySelector("[data-sections]");
+    secWrap.innerHTML = "";
+    c.sections.forEach(function (s) {
+      var el = document.createElement("div");
+      el.className = "section-row";
+      el.innerHTML = "<div class=\"range\">" + s.range + "</div><div class=\"body\"><h3>" + s.title + "</h3><p>" + s.text + "</p></div>";
+      secWrap.appendChild(el);
+    });
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll(".lang-switch button").forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+      });
+      render(btn.getAttribute("data-lang"));
+    });
+  });
+
+  render("de");
+</script>
