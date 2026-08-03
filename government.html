@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Regierungsbildung und Koalitionen — Wahlblick</title>
+<meta name="description" content="Regierungsbildung in Deutschland: Koalitionsarten wie Ampel, Große Koalition, Jamaika und Kenia einfach erklärt.">
+<link rel="canonical" href="https://wahlblick.de/government.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -8,10 +13,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wahlblick">
 <meta property="og:title" content="Regierungsbildung und Koalitionen — Wahlblick">
+<meta property="og:description" content="Regierungsbildung in Deutschland: Koalitionsarten wie Ampel, Große Koalition, Jamaika und Kenia einfach erklärt.">
 <meta property="og:image" content="https://wahlblick.de/og-image.png">
 <meta property="og:url" content="https://wahlblick.de/government.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wahlblick.de/og-image.png">
+<meta name="twitter:description" content="Regierungsbildung in Deutschland: Koalitionsarten wie Ampel, Große Koalition, Jamaika und Kenia einfach erklärt.">
 <style>
   :root {
     --bg: #ffffff;
@@ -135,6 +142,8 @@
     footer { padding: 16px 16px 32px; }
   }
 </style>
+</head>
+<body>
 
 <div class="official-strip">
   <span>Unabhängiges Datenprojekt, keine amtliche Quelle</span>
@@ -258,6 +267,7 @@
   };
 
   function render(lang) {
+    document.documentElement.lang = lang;
     var c = CONTENT[lang];
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
@@ -307,3 +317,5 @@
   });
   render(initialLang);
 </script>
+</body>
+</html>

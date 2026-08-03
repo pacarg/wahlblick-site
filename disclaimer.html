@@ -1,6 +1,11 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disclaimer — Wahlblick</title>
+<meta name="description" content="Haftungsausschluss von Wahlblick: unabhängiges Datenprojekt, keine amtliche Quelle. Auf Deutsch, Español und English.">
+<link rel="canonical" href="https://wahlblick.de/disclaimer.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -8,10 +13,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wahlblick">
 <meta property="og:title" content="Disclaimer — Wahlblick">
+<meta property="og:description" content="Haftungsausschluss von Wahlblick: unabhängiges Datenprojekt, keine amtliche Quelle. Auf Deutsch, Español und English.">
 <meta property="og:image" content="https://wahlblick.de/og-image.png">
 <meta property="og:url" content="https://wahlblick.de/disclaimer.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wahlblick.de/og-image.png">
+<meta name="twitter:description" content="Haftungsausschluss von Wahlblick: unabhängiges Datenprojekt, keine amtliche Quelle. Auf Deutsch, Español und English.">
 <style>
   :root {
     --bg: #ffffff;
@@ -136,6 +143,8 @@
     footer { padding: 16px 16px 32px; }
   }
 </style>
+</head>
+<body>
 
 <div class="official-strip">
   <span>Unabhängiges Datenprojekt, keine amtliche Quelle</span>
@@ -229,6 +238,7 @@
   var LANG_STORAGE_KEY = "wahlblickLang";
 
   function setLang(lang) {
+    document.documentElement.lang = lang;
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === lang);
     });
@@ -259,3 +269,5 @@
   if (!TITLES[initialLang]) initialLang = "de";
   if (initialLang !== "de") setLang(initialLang);
 </script>
+</body>
+</html>

@@ -1,7 +1,11 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wahlblick — Wahlkarte Deutschland</title>
 <meta name="description" content="Interaktive Karte: Wahlergebnisse nach Bundesland — Bundestagswahl & Landtagswahl. Deutsch, Español, English.">
+<link rel="canonical" href="https://wahlblick.de/">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -538,6 +542,8 @@
     .view-pills { gap: 14px; }
   }
 </style>
+</head>
+<body>
 
 <div class="official-strip">
   <span id="stripText">Unabhängiges Datenprojekt, keine amtliche Quelle</span>
@@ -1585,6 +1591,7 @@
   }
 
   function applyStaticTexts() {
+    document.documentElement.lang = currentLang;
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
     });
@@ -1697,3 +1704,5 @@
   applyStaticTexts();
 })();
 </script>
+</body>
+</html>
