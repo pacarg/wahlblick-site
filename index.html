@@ -226,12 +226,14 @@
     padding: 14px 16px;
     border-bottom: 1px solid var(--border);
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 8px;
   }
   .panel-head h2 { margin: 0; font-size: 14px; font-weight: 700; }
-  .panel-head .hint { font-size: 12px; color: var(--text-muted); }
+  .panel-head .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .eyebrow-note { display: none; margin: 3px 0 0; font-size: 11px; color: var(--text-muted); }
+  .eyebrow-note.visible { display: block; }
   .panel-body { padding: 16px; }
 
   .map-wrap { position: relative; }
@@ -444,7 +446,10 @@
 
   <section class="panel map-panel">
     <div class="panel-head">
-      <h2 id="mapEyebrow">Bundestagswahl 2025 · Zweitstimmen</h2>
+      <div>
+        <h2 id="mapEyebrow">Bundestagswahl 2025 · Zweitstimmen</h2>
+        <p class="eyebrow-note visible" id="bundestagNote">Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.</p>
+      </div>
       <span class="hint" id="mapHint">Hover oder Klick für Details</span>
     </div>
     <div class="panel-body">
@@ -907,6 +912,7 @@
       navQuellen: "Quellen",
       mapHint: "Hover oder Klick für Details",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
+      bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
       emptyTitle: "Kein Bundesland ausgewählt",
       emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
@@ -944,6 +950,7 @@
       navQuellen: "Fuentes",
       mapHint: "Pasá el mouse o hacé click para ver detalles",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
+      bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
       emptyTitle: "Ningún estado federado seleccionado",
       emptyBody: "Hacé click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
@@ -981,6 +988,7 @@
       navQuellen: "Sources",
       mapHint: "Hover or click for details",
       eyebrowBundestag: "Federal election {year} · party-list vote",
+      bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
       eyebrowLandtag: "State election · most recent per state",
       emptyTitle: "No federal state selected",
       emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
@@ -1030,6 +1038,7 @@
   var legend = document.getElementById("legend");
   var banner = document.getElementById("banner");
   var mapEyebrow = document.getElementById("mapEyebrow");
+  var bundestagNoteEl = document.getElementById("bundestagNote");
   var landTabsEl = document.getElementById("landTabs");
   var resultsEmpty = document.getElementById("resultsEmpty");
   var resultsFilled = document.getElementById("resultsFilled");
@@ -1333,9 +1342,11 @@
       banner.textContent = tr("bannerLandtag");
       banner.classList.add("visible");
       mapEyebrow.textContent = tr("eyebrowLandtag");
+      bundestagNoteEl.classList.remove("visible");
     } else {
       banner.classList.remove("visible");
       mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
+      bundestagNoteEl.classList.add("visible");
     }
     paintMap();
     renderLegend();
@@ -1348,6 +1359,7 @@
     document.getElementById("navQuellen").textContent = tr("navQuellen");
     landSearch.placeholder = tr("searchPh");
     document.getElementById("mapHint").textContent = tr("mapHint");
+    bundestagNoteEl.textContent = tr("bundestagNote");
     document.getElementById("globalFootnote").textContent = tr("footnote");
     document.getElementById("footAbout").textContent = tr("footAbout");
     document.getElementById("footMethod").textContent = tr("footMethod");
