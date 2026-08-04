@@ -438,6 +438,11 @@
   .landtag-year-tabs button:hover { color: var(--text); background: var(--surface); }
   .landtag-year-tabs button.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
 
+  .landtag-note {
+    font-size: 11.5px; font-style: italic; color: var(--text-muted); line-height: 1.5;
+    margin: 8px 0 0; padding: 8px 10px; background: var(--surface); border-radius: var(--radius);
+  }
+
   .party-filter-clear {
     border: none; background: none; color: var(--accent); cursor: pointer;
     font-size: 11.5px; font-weight: 600; text-decoration: underline; padding: 0; margin-left: 4px;
@@ -775,6 +780,7 @@
       </div>
       <div id="resultsFilled" style="display:none;">
         <div class="stat-line" id="statLine"></div>
+        <p class="landtag-note" id="landtagNote" style="display:none;"></p>
         <ol class="rank-list" id="rankList"></ol>
         <p class="source-line" id="sourceNote"></p>
       </div>
@@ -917,14 +923,46 @@
     ],
     "DE-BE": [
       {
-      date: "2023-02-12",
-      source: "https://www.berlin.de/wahlen/pressemitteilungen/2023/pressemitteilung.1298935.php",
-      winner: "union", turnout: 63.0,
-      results: [
-        { p: "union", label: "CDU", pct: 28.2 }, { p: "spd", pct: 18.4 }, { p: "gruene", pct: 18.4 },
-        { p: "linke", pct: 12.2 }, { p: "afd", pct: 9.1 }, { p: "fdp", pct: 4.6 }
-      ]
-    }
+        date: "2023-02-12",
+        source: "https://www.berlin.de/wahlen/pressemitteilungen/2023/pressemitteilung.1298935.php",
+        winner: "union", turnout: 63.0, turnoutDelta: -12.4,
+        results: [
+          { p: "union", label: "CDU", pct: 28.2, delta: 10.2 }, { p: "spd", pct: 18.4, delta: -3.0 }, { p: "gruene", pct: 18.4, delta: -0.5 },
+          { p: "linke", pct: 12.2, delta: -1.9 }, { p: "afd", pct: 9.1, delta: 1.1 }, { p: "fdp", pct: 4.6, delta: -2.5 }
+        ]
+      },
+      {
+        date: "2021-09-26",
+        source: "https://www.wahlen-berlin.de/",
+        winner: "spd", turnout: 75.4, turnoutDelta: 8.5,
+        note: {
+          de: "Diese Wahl wurde später vom Berliner Verfassungsgerichtshof für ungültig erklärt (Grund: organisatorische Pannen, kein Wahlbetrug) und am 12. Februar 2023 vollständig wiederholt.",
+          es: "Esta elección fue anulada después por el Tribunal Constitucional de Berlín (motivo: fallas organizativas, no fraude electoral) y se repitió por completo el 12 de febrero de 2023.",
+          en: "This election was later annulled by Berlin's Constitutional Court (reason: organizational failures, not electoral fraud) and fully repeated on February 12, 2023."
+        },
+        results: [
+          { p: "spd", pct: 21.4, delta: -0.2 }, { p: "gruene", pct: 18.9, delta: 3.7 }, { p: "union", label: "CDU", pct: 18.0, delta: 0.4 },
+          { p: "linke", pct: 14.1, delta: -1.5 }, { p: "afd", pct: 8.0, delta: -6.2 }, { p: "fdp", pct: 7.1, delta: 0.4 }
+        ]
+      },
+      {
+        date: "2016-09-18",
+        source: "https://www.wahlen-berlin.de/wahlen/be2016/afspraes/index.html",
+        winner: "spd", turnout: 66.9, turnoutDelta: 6.7,
+        results: [
+          { p: "spd", pct: 21.6, delta: -6.7 }, { p: "union", label: "CDU", pct: 17.6, delta: -5.7 }, { p: "linke", pct: 15.6, delta: 3.9 },
+          { p: "gruene", pct: 15.2, delta: -2.4 }, { p: "afd", pct: 14.2, delta: null }, { p: "fdp", pct: 6.7, delta: 4.9 }
+        ]
+      },
+      {
+        date: "2011-09-18",
+        source: "https://www.wahlen-berlin.de/",
+        winner: "spd", turnout: 60.2,
+        results: [
+          { p: "spd", pct: 28.3 }, { p: "union", label: "CDU", pct: 23.3 }, { p: "gruene", pct: 17.6 },
+          { p: "linke", pct: 11.7 }, { p: "fdp", pct: 1.8 }
+        ]
+      }
     ],
     "DE-BB": [
       {
@@ -2590,6 +2628,14 @@
     document.getElementById("statLine").innerHTML =
       eyebrowLabel + " <b>" + d.turnout.toLocaleString("de-DE", { minimumFractionDigits: 1 }) + " %</b>" + deltaChip;
 
+    var noteEl = document.getElementById("landtagNote");
+    if (d.note) {
+      noteEl.textContent = d.note[currentLang] || d.note.de;
+      noteEl.style.display = "block";
+    } else {
+      noteEl.style.display = "none";
+    }
+
     var list = document.getElementById("rankList");
     list.innerHTML = "";
     var sorted = d.results.slice().sort(function (a, b) { return b.pct - a.pct; });
@@ -2792,6 +2838,7 @@
     resultsEmpty.style.display = "block";
     resultsFilled.style.display = "none";
     document.getElementById("landtagYearTabs").style.display = "none";
+    document.getElementById("landtagNote").style.display = "none";
   }
 
   function updateResultsView() {
@@ -2799,6 +2846,7 @@
     var resultsPartyEl = document.getElementById("resultsPartyView");
     if (state.partyView || state.compareMode) {
       document.getElementById("landtagYearTabs").style.display = "none";
+      document.getElementById("landtagNote").style.display = "none";
     }
     if (state.partyView) {
       resultsEmpty.style.display = "none";
