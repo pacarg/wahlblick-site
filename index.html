@@ -425,6 +425,19 @@
 
   .rank-winner-tag { font-style: normal; font-weight: 400; font-size: 11px; color: var(--text-muted); }
 
+  .landtag-year-tabs { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
+  .landtag-year-tabs button {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: 11.5px; font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+  }
+  .landtag-year-tabs button:hover { color: var(--text); background: var(--surface); }
+  .landtag-year-tabs button.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+
   .party-filter-clear {
     border: none; background: none; color: var(--accent); cursor: pointer;
     font-size: 11.5px; font-weight: 600; text-decoration: underline; padding: 0; margin-left: 4px;
@@ -751,7 +764,10 @@
 
   <section class="panel results-panel" id="resultsCard">
     <div class="panel-head">
-      <h2 id="landName">Kein Bundesland ausgewählt</h2>
+      <div>
+        <h2 id="landName">Kein Bundesland ausgewählt</h2>
+        <div class="landtag-year-tabs" id="landtagYearTabs" style="display:none;"></div>
+      </div>
     </div>
     <div class="panel-body">
       <div class="results-empty" id="resultsEmpty">
@@ -841,16 +857,37 @@
   }
 
   var LANDTAG_DATA = {
-    "DE-BW": {
-      date: "2026-03-08",
-      source: "https://www.landtagswahl-bw.de/ergebnisse-2026",
-      winner: "gruene", turnout: 69.6,
-      results: [
-        { p: "gruene", pct: 30.2 }, { p: "union", label: "CDU", pct: 29.7 },
-        { p: "afd", pct: 18.8 }, { p: "spd", pct: 5.5 }, { p: "fdp", pct: 4.4 }
-      ]
-    },
-    "DE-BY": {
+    "DE-BW": [
+      {
+        date: "2026-03-08",
+        source: "https://www.landtagswahl-bw.de/ergebnisse-2026",
+        winner: "gruene", turnout: 69.6, turnoutDelta: 5.8,
+        results: [
+          { p: "gruene", pct: 30.2, delta: -2.4 }, { p: "union", label: "CDU", pct: 29.7, delta: 5.6 },
+          { p: "afd", pct: 18.8, delta: 9.1 }, { p: "spd", pct: 5.5, delta: -5.5 }, { p: "fdp", pct: 4.4, delta: -6.1 }
+        ]
+      },
+      {
+        date: "2021-03-14",
+        source: "https://www.statistik-bw.de/fileadmin/user_upload/Service/Veroeff/Statistisches_Monatsheft/PDF/Beitrag22_03_09.pdf",
+        winner: "gruene", turnout: 63.8, turnoutDelta: -6.6,
+        results: [
+          { p: "gruene", pct: 32.6, delta: 2.3 }, { p: "union", label: "CDU", pct: 24.1, delta: -2.9 },
+          { p: "spd", pct: 11.0, delta: -1.7 }, { p: "fdp", pct: 10.5, delta: 2.2 }, { p: "afd", pct: 9.7, delta: -5.4 }
+        ]
+      },
+      {
+        date: "2016-03-13",
+        source: "https://www.statistik-bw.de/fileadmin/user_upload/Service/Veroeff/Statistisches_Monatsheft/PDF/Beitrag22_03_09.pdf",
+        winner: "gruene", turnout: 70.4,
+        results: [
+          { p: "gruene", pct: 30.3 }, { p: "union", label: "CDU", pct: 27.0 },
+          { p: "afd", pct: 15.1 }, { p: "spd", pct: 12.7 }, { p: "fdp", pct: 8.3 }
+        ]
+      }
+    ],
+    "DE-BY": [
+      {
       date: "2023-10-08",
       source: "https://www.statistik.bayern.de/presse/mitteilungen/2023/pm19/index.html",
       winner: "union", turnout: 73.3,
@@ -858,8 +895,10 @@
         { p: "union", label: "CSU", pct: 37.0 }, { p: "fw", pct: 15.8 },
         { p: "afd", pct: 14.6 }, { p: "gruene", pct: 14.4 }, { p: "spd", pct: 8.4 }, { p: "fdp", pct: 3.0 }
       ]
-    },
-    "DE-BE": {
+    }
+    ],
+    "DE-BE": [
+      {
       date: "2023-02-12",
       source: "https://www.berlin.de/wahlen/pressemitteilungen/2023/pressemitteilung.1298935.php",
       winner: "union", turnout: 63.0,
@@ -867,8 +906,10 @@
         { p: "union", label: "CDU", pct: 28.2 }, { p: "spd", pct: 18.4 }, { p: "gruene", pct: 18.4 },
         { p: "linke", pct: 12.2 }, { p: "afd", pct: 9.1 }, { p: "fdp", pct: 4.6 }
       ]
-    },
-    "DE-BB": {
+    }
+    ],
+    "DE-BB": [
+      {
       date: "2024-09-22",
       source: "https://wahlen.brandenburg.de/wahlen/de/pressemitteilungen/detail/~07-10-2024-endgueltiges-ergebnis-ltw-24",
       winner: "spd", turnout: 72.9,
@@ -876,8 +917,10 @@
         { p: "spd", pct: 30.9 }, { p: "afd", pct: 29.2 }, { p: "bsw", pct: 13.5 },
         { p: "union", label: "CDU", pct: 12.1 }, { p: "gruene", pct: 4.1 }, { p: "linke", pct: 3.0 }
       ]
-    },
-    "DE-HB": {
+    }
+    ],
+    "DE-HB": [
+      {
       date: "2023-05-14",
       source: "https://www.wahlen-bremen.de/Wahlen/2023_05_14/",
       winner: "spd", turnout: 56.9,
@@ -885,8 +928,10 @@
         { p: "spd", pct: 29.8 }, { p: "union", label: "CDU", pct: 26.2 }, { p: "gruene", pct: 11.9 },
         { p: "linke", pct: 11.1 }, { p: "biw", pct: 9.4 }, { p: "fdp", pct: 5.1 }
       ]
-    },
-    "DE-HH": {
+    }
+    ],
+    "DE-HH": [
+      {
       date: "2025-03-02",
       source: "https://www.hamburg.de/politik-und-verwaltung/behoerden/behoerde-fuer-inneres-und-sport/presseservice/pressemeldungen/amtliches-endergebnis-der-buergerschaftswahl-2025-festgestellt-1039904",
       winner: "spd", turnout: 67.6,
@@ -894,8 +939,10 @@
         { p: "spd", pct: 33.5 }, { p: "union", label: "CDU", pct: 19.8 }, { p: "gruene", pct: 18.5 },
         { p: "linke", pct: 11.2 }, { p: "afd", pct: 7.5 }
       ]
-    },
-    "DE-HE": {
+    }
+    ],
+    "DE-HE": [
+      {
       date: "2023-10-08",
       source: "https://wahlen.hessen.de/landtagswahlen/ergebnisse-2023",
       winner: "union", turnout: 66.0,
@@ -903,8 +950,10 @@
         { p: "union", label: "CDU", pct: 34.6 }, { p: "afd", pct: 18.4 }, { p: "spd", pct: 15.1 },
         { p: "gruene", pct: 14.8 }, { p: "fdp", pct: 5.0 }
       ]
-    },
-    "DE-NI": {
+    }
+    ],
+    "DE-NI": [
+      {
       date: "2022-10-09",
       source: "https://wahlen.statistik.niedersachsen.de/LW2022/",
       winner: "spd", turnout: 60.3,
@@ -912,8 +961,10 @@
         { p: "spd", pct: 33.4 }, { p: "union", label: "CDU", pct: 28.1 }, { p: "gruene", pct: 14.5 },
         { p: "afd", pct: 11.0 }, { p: "fdp", pct: 4.7 }, { p: "linke", pct: 2.7 }
       ]
-    },
-    "DE-MV": {
+    }
+    ],
+    "DE-MV": [
+      {
       date: "2021-09-26",
       source: "https://www.landtag-mv.de/landtag/rund-um-wahlen/landtagswahl-2021",
       winner: "spd", turnout: 70.8,
@@ -921,8 +972,10 @@
         { p: "spd", pct: 39.6 }, { p: "afd", pct: 16.7 }, { p: "union", label: "CDU", pct: 13.3 },
         { p: "linke", pct: 9.9 }, { p: "gruene", pct: 6.3 }, { p: "fdp", pct: 5.8 }
       ]
-    },
-    "DE-NW": {
+    }
+    ],
+    "DE-NW": [
+      {
       date: "2022-05-15",
       source: "https://www.im.nrw/vorlaeufiges-amtliches-wahlergebnis",
       winner: "union", turnout: 55.5,
@@ -930,8 +983,10 @@
         { p: "union", label: "CDU", pct: 35.7 }, { p: "spd", pct: 26.7 }, { p: "gruene", pct: 18.2 },
         { p: "fdp", pct: 5.9 }, { p: "afd", pct: 5.4 }
       ]
-    },
-    "DE-RP": {
+    }
+    ],
+    "DE-RP": [
+      {
       date: "2026-03-22",
       source: "https://www.datenblick.statistik.rlp.de/landtagswahl-2026",
       winner: "union", turnout: 68.5,
@@ -940,8 +995,10 @@
         { p: "gruene", pct: 7.9 }, { p: "linke", pct: 4.4 }, { p: "fw", pct: 4.2 },
         { p: "fdp", pct: 2.1 }, { p: "bsw", pct: 1.9 }
       ]
-    },
-    "DE-SL": {
+    }
+    ],
+    "DE-SL": [
+      {
       date: "2022-03-27",
       source: "https://wahlergebnis.saarland.de/LTW/",
       winner: "spd", turnout: 61.4,
@@ -949,8 +1006,10 @@
         { p: "spd", pct: 43.5 }, { p: "union", label: "CDU", pct: 28.5 }, { p: "afd", pct: 5.7 },
         { p: "gruene", pct: 4.9 }, { p: "fdp", pct: 4.8 }, { p: "linke", pct: 2.6 }
       ]
-    },
-    "DE-SN": {
+    }
+    ],
+    "DE-SN": [
+      {
       date: "2024-09-01",
       source: "https://wahlen.sachsen.de/landtagswahl-2024-wahlergebnisse.php",
       winner: "union", turnout: 74.4,
@@ -958,8 +1017,10 @@
         { p: "union", label: "CDU", pct: 31.9 }, { p: "afd", pct: 30.6 }, { p: "bsw", pct: 11.8 },
         { p: "spd", pct: 7.3 }, { p: "gruene", pct: 5.1 }, { p: "linke", pct: 4.5 }
       ]
-    },
-    "DE-ST": {
+    }
+    ],
+    "DE-ST": [
+      {
       date: "2021-06-06",
       source: "https://wahlergebnisse.sachsen-anhalt.de/wahlen/lt21/",
       winner: "union", turnout: 60.3,
@@ -967,8 +1028,10 @@
         { p: "union", label: "CDU", pct: 37.1 }, { p: "afd", pct: 20.8 }, { p: "linke", pct: 11.1 },
         { p: "spd", pct: 8.4 }, { p: "fdp", pct: 6.4 }, { p: "gruene", pct: 5.9 }
       ]
-    },
-    "DE-SH": {
+    }
+    ],
+    "DE-SH": [
+      {
       date: "2022-05-08",
       source: "https://www.statistik-nord.de/fileadmin/wahlen/sh/ltw22/ergebnispraesentation.html",
       winner: "union", turnout: 60.3,
@@ -976,8 +1039,10 @@
         { p: "union", label: "CDU", pct: 43.4 }, { p: "gruene", pct: 18.3 }, { p: "spd", pct: 16.0 },
         { p: "fdp", pct: 6.4 }, { p: "ssw", pct: 5.7 }, { p: "afd", pct: 4.4 }, { p: "linke", pct: 1.7 }
       ]
-    },
-    "DE-TH": {
+    }
+    ],
+    "DE-TH": [
+      {
       date: "2024-09-01",
       source: "https://www.thueringer-landtag.de/presse/pressemitteilungen/2024/landtagswahl-2024/",
       winner: "afd", turnout: 73.6,
@@ -986,6 +1051,7 @@
         { p: "linke", pct: 13.1 }, { p: "spd", pct: 6.1 }, { p: "gruene", pct: 3.2 }, { p: "fdp", pct: 1.1 }
       ]
     }
+    ],
   };
 
   var DATA = {
@@ -2086,7 +2152,7 @@
   }
   function stateName(id) { return I18N[currentLang].stateNames[id]; }
 
-  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null, partyViewFilter: [] };
+  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null, partyViewFilter: [], landtagHistoryIndex: 0 };
 
   var svg = document.getElementById("germany");
   var landGroup = document.getElementById("landGroup");
@@ -2251,8 +2317,14 @@
     });
   }
 
+  function latestLandtagData() {
+    var out = {};
+    Object.keys(LANDTAG_DATA).forEach(function (id) { out[id] = LANDTAG_DATA[id][0]; });
+    return out;
+  }
+
   function currentYearData() {
-    return state.view === "landtag" ? LANDTAG_DATA : (DATA[state.year] || {});
+    return state.view === "landtag" ? latestLandtagData() : (DATA[state.year] || {});
   }
   var LOCALE_MAP = { de: "de-DE", es: "es-AR", en: "en-US" };
   function fmtDate(iso) {
@@ -2354,10 +2426,36 @@
     }
   }
 
-  function showResults(id) {
+  function renderLandtagYearTabs(id) {
+    var wrap = document.getElementById("landtagYearTabs");
+    var history = state.view === "landtag" ? LANDTAG_DATA[id] : null;
+    if (!history || history.length < 2) {
+      wrap.style.display = "none";
+      wrap.innerHTML = "";
+      return;
+    }
+    wrap.style.display = "flex";
+    wrap.innerHTML = "";
+    history.forEach(function (entry, i) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = entry.date.slice(0, 4);
+      btn.className = i === state.landtagHistoryIndex ? "active" : "";
+      btn.addEventListener("click", function () {
+        state.landtagHistoryIndex = i;
+        showResults(id, i);
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function showResults(id, historyIndex) {
     var yearData = currentYearData();
-    var d = yearData[id];
+    var landtagHistory = state.view === "landtag" ? LANDTAG_DATA[id] : null;
+    var idx = historyIndex !== undefined ? historyIndex : state.landtagHistoryIndex;
+    var d = landtagHistory ? (landtagHistory[idx] || landtagHistory[0]) : yearData[id];
     landNameEl.textContent = stateName(id);
+    renderLandtagYearTabs(id);
     if (!d) {
       resultsEmpty.style.display = "block";
       resultsFilled.style.display = "none";
@@ -2419,6 +2517,7 @@
     if (state.compareMode) { toggleCompareLand(id); return; }
     if (state.partyView) { togglePartyViewFilter(id); return; }
     state.selected = id;
+    state.landtagHistoryIndex = 0;
     tooltip.classList.remove("visible");
     paintMap();
     showResults(id);
@@ -2575,11 +2674,15 @@
     resultsEmpty.innerHTML = tr("emptyBody");
     resultsEmpty.style.display = "block";
     resultsFilled.style.display = "none";
+    document.getElementById("landtagYearTabs").style.display = "none";
   }
 
   function updateResultsView() {
     var resultsCompareEl = document.getElementById("resultsCompare");
     var resultsPartyEl = document.getElementById("resultsPartyView");
+    if (state.partyView || state.compareMode) {
+      document.getElementById("landtagYearTabs").style.display = "none";
+    }
     if (state.partyView) {
       resultsEmpty.style.display = "none";
       resultsFilled.style.display = "none";
