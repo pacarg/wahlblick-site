@@ -987,10 +987,19 @@
       {
         date: "2017-05-14",
         source: "https://www.wahlergebnisse.nrw/landtagswahlen/2017/aktuell/a000lw1700.shtml",
-        winner: "union", turnout: 65.2,
+        winner: "union", turnout: 65.2, turnoutDelta: 5.6,
         results: [
-          { p: "union", label: "CDU", pct: 33.0 }, { p: "spd", pct: 31.2 }, { p: "fdp", pct: 12.6 },
-          { p: "afd", pct: 7.4 }, { p: "gruene", pct: 6.4 }, { p: "linke", pct: 4.9 }, { p: "fw", pct: 0.4 }
+          { p: "union", label: "CDU", pct: 33.0, delta: 6.7 }, { p: "spd", pct: 31.2, delta: -7.9 }, { p: "fdp", pct: 12.6, delta: 4.0 },
+          { p: "afd", pct: 7.4, delta: null }, { p: "gruene", pct: 6.4, delta: -4.9 }, { p: "linke", pct: 4.9, delta: 2.4 }, { p: "fw", pct: 0.4, delta: null }
+        ]
+      },
+      {
+        date: "2012-05-13",
+        source: "https://www.wahlergebnisse.nrw/landtagswahlen/2012/aktuell/a0lw1200.html",
+        winner: "spd", turnout: 59.6,
+        results: [
+          { p: "spd", pct: 39.1 }, { p: "union", label: "CDU", pct: 26.3 }, { p: "gruene", pct: 11.3 },
+          { p: "fdp", pct: 8.6 }, { p: "linke", pct: 2.5 }
         ]
       }
     ],
