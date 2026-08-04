@@ -405,18 +405,25 @@
     flex: none;
     appearance: none;
     background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
     border-radius: var(--radius-pill);
-    padding: 5px 26px 5px 12px;
-    font-size: 11.5px;
-    font-weight: 600;
+    padding: 6px 30px 6px 14px;
+    font-size: 12.5px;
+    font-weight: 700;
     cursor: pointer;
-    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
-    background-position: calc(100% - 13px) center, calc(100% - 8px) center;
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position: calc(100% - 14px) center, calc(100% - 9px) center;
     background-size: 5px 5px, 5px 5px;
     background-repeat: no-repeat;
   }
+  select#partySelect:hover { background-color: var(--surface); }
+  select#partySelect.has-value {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent-ink) 50%), linear-gradient(135deg, var(--accent-ink) 50%, transparent 50%);
+  }
+  select#partySelect.has-value:hover { background-color: var(--accent); opacity: 0.92; }
 
   .scale-legend { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-muted); }
   .scale-legend-label { font-weight: 700; color: var(--text); white-space: nowrap; }
@@ -2308,6 +2315,8 @@
       partySelectPlaceholder: "— Partei-Ansicht —",
       partyViewSubtitle: "{party} in den 16 Ländern",
       partyViewSubtitleFiltered: "{party} in {count} von 16 ausgewählten Ländern",
+      partyViewSubtitleYear: "{party} in den 16 Ländern &middot; Bundestagswahl {year}",
+      partyViewSubtitleFilteredYear: "{party} in {count} von 16 ausgewählten Ländern &middot; Bundestagswahl {year}",
       partyViewClearFilter: "Alle anzeigen",
       partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
@@ -2367,6 +2376,8 @@
       partySelectPlaceholder: "— Vista por partido —",
       partyViewSubtitle: "{party} en los 16 estados federados",
       partyViewSubtitleFiltered: "{party} en {count} de 16 estados seleccionados",
+      partyViewSubtitleYear: "{party} en los 16 estados federados &middot; Elección federal {year}",
+      partyViewSubtitleFilteredYear: "{party} en {count} de 16 estados seleccionados &middot; Elección federal {year}",
       partyViewClearFilter: "Ver todos",
       partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
@@ -2426,6 +2437,8 @@
       partySelectPlaceholder: "— Party view —",
       partyViewSubtitle: "{party} across the 16 federal states",
       partyViewSubtitleFiltered: "{party} across {count} of 16 selected states",
+      partyViewSubtitleYear: "{party} across the 16 federal states &middot; {year} federal election",
+      partyViewSubtitleFilteredYear: "{party} across {count} of 16 selected states &middot; {year} federal election",
       partyViewClearFilter: "Show all",
       partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
@@ -2614,10 +2627,12 @@
       partySelectEl.appendChild(opt);
     });
     partySelectEl.value = state.partyView || "";
+    partySelectEl.classList.toggle("has-value", !!state.partyView);
   }
 
   partySelectEl.addEventListener("change", function () {
     state.partyView = partySelectEl.value || null;
+    partySelectEl.classList.toggle("has-value", !!state.partyView);
     if (!state.partyView) state.partyViewFilter = [];
     if (state.partyView) {
       state.compareMode = false;
@@ -2986,9 +3001,10 @@
         '<span class="rank-pct" style="color:' + meta.color + '">' + fmtPct(row.r.pct) + '</span>' + deltaHtml + '</li>';
     }).join('');
 
+    var isBundestag = state.view === "bundestag";
     var subtitleText = filterActive
-      ? fmt(tr("partyViewSubtitleFiltered"), { party: meta.name, count: rows.length })
-      : fmt(tr("partyViewSubtitle"), { party: meta.name });
+      ? fmt(tr(isBundestag ? "partyViewSubtitleFilteredYear" : "partyViewSubtitleFiltered"), { party: meta.name, count: rows.length, year: state.year })
+      : fmt(tr(isBundestag ? "partyViewSubtitleYear" : "partyViewSubtitle"), { party: meta.name, year: state.year });
     var clearHtml = filterActive ? ' <button type="button" class="party-filter-clear" id="partyFilterClear">' + tr("partyViewClearFilter") + '</button>' : '';
 
     wrap.innerHTML = '<p class="stat-line">' + subtitleText + clearHtml + '</p><ol class="rank-list">' + items + '</ol>';
@@ -3081,6 +3097,7 @@
       state.partyView = null;
       state.partyViewFilter = [];
       partySelectEl.value = "";
+      partySelectEl.classList.remove("has-value");
     }
     compareToggleEl.setAttribute("aria-pressed", state.compareMode ? "true" : "false");
     updateMapHint();
