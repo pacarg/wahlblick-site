@@ -75,7 +75,7 @@
   }
   .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
 
-  .header-right { display: flex; align-items: center; gap: 16px; flex: none; }
+  .header-right { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
   .back-link { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
   .back-link:hover { color: var(--accent); }
 
@@ -159,6 +159,7 @@
       <span class="wordmark">Wahlblick</span>
     </a>
     <div class="header-right">
+      <div id="contentNavMount"></div>
       <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
         <button type="button" data-lang="de" class="active">DE</button>
         <span class="sep">·</span>

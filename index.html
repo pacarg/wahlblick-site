@@ -249,59 +249,6 @@
   }
 
   .bar-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .content-nav { display: flex; align-items: center; gap: 16px; }
-  .content-nav a {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .content-nav a:hover { color: var(--accent); }
-
-  .nav-dropdown { position: relative; }
-  .nav-dropdown-trigger {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: none;
-    background: none;
-    padding: 0;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-    white-space: nowrap;
-  }
-  .nav-dropdown-trigger:hover { color: var(--accent); }
-  .nav-dropdown-trigger .chevron { transition: transform 0.15s ease; }
-  .nav-dropdown-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
-  .nav-dropdown-trigger[aria-expanded="true"] { color: var(--accent); }
-  .nav-dropdown-panel {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    z-index: 20;
-    display: none;
-    flex-direction: column;
-    min-width: 190px;
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
-    padding: 6px;
-  }
-  .nav-dropdown-panel a {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text);
-    text-decoration: none;
-    white-space: nowrap;
-    padding: 8px 10px;
-    border-radius: var(--radius);
-  }
-  .nav-dropdown-panel a:hover { background: var(--surface); color: var(--accent); }
-  .nav-dropdown-panel:not([hidden]) { display: flex; }
 
   .control-bar .year-wrap { display: flex; align-items: center; }
   .control-bar .year-wrap.hidden { display: none; }
@@ -735,29 +682,7 @@
       <button type="button" data-view="landtag" aria-pressed="false">Landtag</button>
     </div>
     <div class="bar-right">
-      <nav class="content-nav" aria-label="Weitere Inhalte">
-        <div class="nav-dropdown" id="partiesDropdown">
-          <button type="button" class="nav-dropdown-trigger" id="partiesDropdownTrigger" aria-expanded="false" aria-controls="partiesDropdownPanel">
-            <span id="navPartiesGroupLabel">Die Parteien</span>
-            <svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-dropdown-panel" id="partiesDropdownPanel" hidden>
-            <a href="parties.html" id="navPartiesLink">Parteien</a>
-            <a href="government.html" id="navGovernmentLink">Koalitionen</a>
-          </div>
-        </div>
-        <div class="nav-dropdown" id="germanyDropdown">
-          <button type="button" class="nav-dropdown-trigger" id="germanyDropdownTrigger" aria-expanded="false" aria-controls="germanyDropdownPanel">
-            <span id="navGermanyLabel">Deutschland</span>
-            <svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="nav-dropdown-panel" id="germanyDropdownPanel" hidden>
-            <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
-            <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
-            <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
-          </div>
-        </div>
-      </nav>
+      <div id="contentNavMount"></div>
       <div class="year-wrap">
         <select id="yearSelect" aria-label="Wahljahr">
           <option value="2025">2025</option>
@@ -3227,11 +3152,9 @@
     document.getElementById("mobileNavHolidaysLink").textContent = tr("footHolidaysLink");
     document.getElementById("mobileNavGovernmentLink").textContent = tr("footGovernmentLink");
     document.getElementById("mobileNavPartiesLink").textContent = tr("footPartiesLink");
-    document.getElementById("navGermanyLabel").textContent = tr("navGermanyLabel");
     shareBtn.setAttribute("aria-label", tr("shareLabel"));
     shareBtn.setAttribute("title", tr("shareLabel"));
     document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
-    document.getElementById("navPartiesGroupLabel").textContent = tr("navPartiesGroupLabel");
     document.getElementById("mobileMenuPartiesLabel").textContent = tr("navPartiesGroupLabel");
     landSearch.placeholder = tr("searchPh");
     updateMapHint();
@@ -3242,11 +3165,6 @@
     document.getElementById("footAbout").textContent = tr("footAbout");
     document.getElementById("footMethod").textContent = tr("footMethod");
     document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
-    document.getElementById("navGrundgesetzLink").textContent = tr("footGrundgesetzLink");
-    document.getElementById("navDirectoryLink").textContent = tr("footDirectoryLink");
-    document.getElementById("navHolidaysLink").textContent = tr("footHolidaysLink");
-    document.getElementById("navGovernmentLink").textContent = tr("footGovernmentLink");
-    document.getElementById("navPartiesLink").textContent = tr("footPartiesLink");
     document.getElementById("footGuideLink").textContent = tr("footGuideLink");
     document.getElementById("footDatenschutzLink").textContent = tr("footDatenschutzLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
@@ -3298,54 +3216,6 @@
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !mobileMenu.hidden) closeMobileMenu();
-  });
-
-  var germanyDropdown = document.getElementById("germanyDropdown");
-  var germanyTrigger = document.getElementById("germanyDropdownTrigger");
-  var germanyPanel = document.getElementById("germanyDropdownPanel");
-  function closeGermanyDropdown() {
-    germanyPanel.hidden = true;
-    germanyTrigger.setAttribute("aria-expanded", "false");
-  }
-  germanyTrigger.addEventListener("click", function () {
-    var willOpen = germanyPanel.hidden;
-    closePartiesDropdown();
-    if (willOpen) {
-      germanyPanel.hidden = false;
-      germanyTrigger.setAttribute("aria-expanded", "true");
-    } else {
-      closeGermanyDropdown();
-    }
-  });
-  document.addEventListener("click", function (e) {
-    if (!germanyPanel.hidden && !germanyDropdown.contains(e.target)) closeGermanyDropdown();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !germanyPanel.hidden) closeGermanyDropdown();
-  });
-
-  var partiesDropdown = document.getElementById("partiesDropdown");
-  var partiesTrigger = document.getElementById("partiesDropdownTrigger");
-  var partiesPanel = document.getElementById("partiesDropdownPanel");
-  function closePartiesDropdown() {
-    partiesPanel.hidden = true;
-    partiesTrigger.setAttribute("aria-expanded", "false");
-  }
-  partiesTrigger.addEventListener("click", function () {
-    var willOpen = partiesPanel.hidden;
-    closeGermanyDropdown();
-    if (willOpen) {
-      partiesPanel.hidden = false;
-      partiesTrigger.setAttribute("aria-expanded", "true");
-    } else {
-      closePartiesDropdown();
-    }
-  });
-  document.addEventListener("click", function (e) {
-    if (!partiesPanel.hidden && !partiesDropdown.contains(e.target)) closePartiesDropdown();
-  });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !partiesPanel.hidden) closePartiesDropdown();
   });
 
   refreshPartySelect();
