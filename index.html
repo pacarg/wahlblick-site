@@ -132,39 +132,6 @@
   .lang-switch button.active { color: var(--accent); }
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
-  .icon-btn {
-    border: none;
-    background: none;
-    color: var(--text-muted);
-    padding: 6px;
-    cursor: pointer;
-    border-radius: var(--radius);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: none;
-  }
-  .icon-btn:hover { color: var(--accent); background: var(--surface); }
-  .icon-btn svg { width: 16px; height: 16px; }
-
-  .toast {
-    position: fixed;
-    left: 50%;
-    bottom: 24px;
-    transform: translateX(-50%) translateY(8px);
-    background: var(--text);
-    color: var(--bg);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 18px;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 500;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .menu-toggle {
     display: none;
@@ -650,9 +617,6 @@
       <span class="sep">·</span>
       <button type="button" data-lang="en">EN</button>
     </div>
-    <button type="button" class="icon-btn" id="shareBtn" aria-label="Teilen" title="Teilen">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-    </button>
     <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menü">
       <span></span><span></span><span></span>
     </button>
@@ -672,8 +636,6 @@
     </div>
   </div>
 </header>
-
-<div class="toast" id="shareToast" role="status" aria-live="polite"></div>
 
 <nav class="primary-nav">
   <div class="control-bar">
@@ -2255,8 +2217,6 @@
       navQuellen: "Quellen",
       navPartiesGroupLabel: "Die Parteien",
       navGermanyLabel: "Deutschland",
-      shareLabel: "Teilen",
-      shareCopied: "Link kopiert",
       mapHint: "Hover oder Klick für Details",
       compareToggleLabel: "Vergleichen",
       compareHintActive: "Bis zu 3 Länder auf der Karte auswählen",
@@ -2317,8 +2277,6 @@
       navQuellen: "Fuentes",
       navPartiesGroupLabel: "Los partidos",
       navGermanyLabel: "Alemania",
-      shareLabel: "Compartir",
-      shareCopied: "Link copiado",
       mapHint: "Pasá el mouse o hacé click para ver detalles",
       compareToggleLabel: "Comparar",
       compareHintActive: "Elegí hasta 3 estados federados en el mapa",
@@ -2379,8 +2337,6 @@
       navQuellen: "Sources",
       navPartiesGroupLabel: "Parties",
       navGermanyLabel: "Germany",
-      shareLabel: "Share",
-      shareCopied: "Link copied",
       mapHint: "Hover or click for details",
       compareToggleLabel: "Compare",
       compareHintActive: "Select up to 3 federal states on the map",
@@ -2471,29 +2427,6 @@
   var landNameEl = document.getElementById("landName");
   var partySelectEl = document.getElementById("partySelect");
   var compareToggleEl = document.getElementById("compareToggle");
-  var shareBtn = document.getElementById("shareBtn");
-  var shareToast = document.getElementById("shareToast");
-  var shareToastTimer = null;
-
-  function showShareToast(text) {
-    shareToast.textContent = text;
-    shareToast.classList.add("show");
-    clearTimeout(shareToastTimer);
-    shareToastTimer = setTimeout(function () {
-      shareToast.classList.remove("show");
-    }, 2200);
-  }
-
-  shareBtn.addEventListener("click", function () {
-    var shareData = { title: document.title, url: location.href };
-    if (navigator.share) {
-      navigator.share(shareData).catch(function () {});
-    } else if (navigator.clipboard) {
-      navigator.clipboard.writeText(location.href).then(function () {
-        showShareToast(tr("shareCopied"));
-      }).catch(function () {});
-    }
-  });
 
   PATHS.forEach(function (p) {
     var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -3152,8 +3085,6 @@
     document.getElementById("mobileNavHolidaysLink").textContent = tr("footHolidaysLink");
     document.getElementById("mobileNavGovernmentLink").textContent = tr("footGovernmentLink");
     document.getElementById("mobileNavPartiesLink").textContent = tr("footPartiesLink");
-    shareBtn.setAttribute("aria-label", tr("shareLabel"));
-    shareBtn.setAttribute("title", tr("shareLabel"));
     document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
     document.getElementById("mobileMenuPartiesLabel").textContent = tr("navPartiesGroupLabel");
     landSearch.placeholder = tr("searchPh");

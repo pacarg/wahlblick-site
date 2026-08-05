@@ -1,11 +1,13 @@
-// Cloudflare Pages Function: injects the shared "Die Parteien" / "Deutschland"
-// content navigation (dropdowns) into every HTML page from a single source,
-// so the 11 pages of the site never need to hand-copy this block again.
+// Cloudflare Pages Function: injects the shared content navigation
+// (Die Parteien / Deutschland / Wahlsystem dropdowns + the share button)
+// into every HTML page from a single source, so the pages of the site
+// never need to hand-copy this block again.
 //
 // How it works:
 //  - Each page has an empty `<div id="contentNavMount"></div>` in its header.
 //  - This Function intercepts the HTML response and replaces that div with
-//    the nav markup + a small inline <script> (dropdown open/close + i18n).
+//    the nav markup + a small inline <script> (dropdown open/close, share
+//    button, i18n).
 //  - Runs at Cloudflare's edge before the response reaches the browser, so
 //    the injected <script> executes normally (this is not client-side
 //    innerHTML injection, which browsers would refuse to execute).
@@ -27,13 +29,20 @@ const NAV_STYLE = `<style>
 @media (max-width: 720px) {
   .nav-dropdown-panel{left:0;right:auto}
 }
+.content-nav-share{border:none;background:none;color:var(--text-muted);padding:6px;cursor:pointer;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;flex:none}
+.content-nav-share:hover{color:var(--accent);background:var(--surface)}
+.content-nav-share svg{width:16px;height:16px}
+.content-nav-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--text);color:var(--bg);font-size:13px;font-weight:600;padding:10px 18px;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:500}
+.content-nav-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>`;
+
+const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
   <div class="nav-dropdown" id="partiesDropdown">
     <button type="button" class="nav-dropdown-trigger" id="partiesDropdownTrigger" aria-expanded="false" aria-controls="partiesDropdownPanel">
       <span id="navPartiesGroupLabel">Die Parteien</span>
-      <svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ${CHEVRON}
     </button>
     <div class="nav-dropdown-panel" id="partiesDropdownPanel" hidden>
       <a href="parties.html" id="navPartiesLink">Parteien</a>
@@ -43,7 +52,7 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
   <div class="nav-dropdown" id="germanyDropdown">
     <button type="button" class="nav-dropdown-trigger" id="germanyDropdownTrigger" aria-expanded="false" aria-controls="germanyDropdownPanel">
       <span id="navGermanyLabel">Deutschland</span>
-      <svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      ${CHEVRON}
     </button>
     <div class="nav-dropdown-panel" id="germanyDropdownPanel" hidden>
       <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
@@ -51,31 +60,52 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
     </div>
   </div>
+  <div class="nav-dropdown" id="wahlsystemDropdown">
+    <button type="button" class="nav-dropdown-trigger" id="wahlsystemDropdownTrigger" aria-expanded="false" aria-controls="wahlsystemDropdownPanel">
+      <span id="navWahlsystemGroupLabel">Wahlsystem</span>
+      ${CHEVRON}
+    </button>
+    <div class="nav-dropdown-panel" id="wahlsystemDropdownPanel" hidden>
+      <a href="sitzverteilung.html" id="navSitzverteilungLink">Sitzverteilung erklärt</a>
+    </div>
+  </div>
 </nav>
+<button type="button" class="content-nav-share" id="shareBtn" aria-label="Teilen" title="Teilen">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+</button>
+<div class="content-nav-toast" id="shareToast" role="status" aria-live="polite"></div>
 <script>
 (function () {
   var LABELS = {
-    de: { partiesGroup: "Die Parteien", germany: "Deutschland", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage" },
-    es: { partiesGroup: "Los partidos", germany: "Alemania", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados" },
-    en: { partiesGroup: "Parties", germany: "Germany", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays" }
+    de: { partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
+    es: { partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
+    en: { partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
   };
+  function currentLang() { return localStorage.getItem("wahlblickLang") || "de"; }
   function applyLabels(lang) {
     var l = LABELS[lang] || LABELS.de;
     var map = {
       navPartiesGroupLabel: l.partiesGroup,
       navGermanyLabel: l.germany,
+      navWahlsystemGroupLabel: l.wahlsystem,
       navPartiesLink: l.parties,
       navGovernmentLink: l.government,
       navGrundgesetzLink: l.grundgesetz,
       navDirectoryLink: l.directory,
-      navHolidaysLink: l.holidays
+      navHolidaysLink: l.holidays,
+      navSitzverteilungLink: l.sitzverteilung
     };
     for (var id in map) {
       var el = document.getElementById(id);
       if (el) el.textContent = map[id];
     }
+    var shareBtnEl = document.getElementById("shareBtn");
+    if (shareBtnEl) {
+      shareBtnEl.setAttribute("aria-label", l.shareLabel);
+      shareBtnEl.setAttribute("title", l.shareLabel);
+    }
   }
-  applyLabels(localStorage.getItem("wahlblickLang") || "de");
+  applyLabels(currentLang());
   // Event delegation on document, not per-button listeners: this inline
   // script runs at parse time, before .lang-switch (later in the DOM) has
   // been parsed, so binding directly to the buttons here would find none.
@@ -84,16 +114,17 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
     if (btn) applyLabels(btn.getAttribute("data-lang"));
   });
 
-  function wireDropdown(triggerId, panelId, wrapId, getOtherClose) {
+  var closers = {};
+  function wireDropdown(key, triggerId, panelId, wrapId) {
     var trigger = document.getElementById(triggerId);
     var panel = document.getElementById(panelId);
     var wrap = document.getElementById(wrapId);
-    if (!trigger || !panel || !wrap) return null;
+    if (!trigger || !panel || !wrap) return;
     function close() { panel.hidden = true; trigger.setAttribute("aria-expanded", "false"); }
+    closers[key] = close;
     trigger.addEventListener("click", function () {
       var willOpen = panel.hidden;
-      var other = getOtherClose();
-      if (other) other();
+      for (var k in closers) { if (k !== key) closers[k](); }
       if (willOpen) { panel.hidden = false; trigger.setAttribute("aria-expanded", "true"); }
       else close();
     });
@@ -103,11 +134,32 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !panel.hidden) close();
     });
-    return close;
   }
-  var closeGermany = null, closeParties = null;
-  closeParties = wireDropdown("partiesDropdownTrigger", "partiesDropdownPanel", "partiesDropdown", function () { return closeGermany; });
-  closeGermany = wireDropdown("germanyDropdownTrigger", "germanyDropdownPanel", "germanyDropdown", function () { return closeParties; });
+  wireDropdown("parties", "partiesDropdownTrigger", "partiesDropdownPanel", "partiesDropdown");
+  wireDropdown("germany", "germanyDropdownTrigger", "germanyDropdownPanel", "germanyDropdown");
+  wireDropdown("wahlsystem", "wahlsystemDropdownTrigger", "wahlsystemDropdownPanel", "wahlsystemDropdown");
+
+  var shareBtn = document.getElementById("shareBtn");
+  var shareToast = document.getElementById("shareToast");
+  var shareToastTimer = null;
+  function showShareToast(text) {
+    shareToast.textContent = text;
+    shareToast.classList.add("show");
+    clearTimeout(shareToastTimer);
+    shareToastTimer = setTimeout(function () { shareToast.classList.remove("show"); }, 2200);
+  }
+  if (shareBtn) {
+    shareBtn.addEventListener("click", function () {
+      var shareData = { title: document.title, url: location.href };
+      if (navigator.share) {
+        navigator.share(shareData).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(location.href).then(function () {
+          showShareToast((LABELS[currentLang()] || LABELS.de).shareCopied);
+        }).catch(function () {});
+      }
+    });
+  }
 })();
 </script>`;
 
