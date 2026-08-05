@@ -24,6 +24,9 @@ const NAV_STYLE = `<style>
 .nav-dropdown-panel a{font-size:13px;font-weight:600;color:var(--text);text-decoration:none;white-space:nowrap;padding:8px 10px;border-radius:var(--radius);display:block}
 .nav-dropdown-panel a:hover{background:var(--surface);color:var(--accent)}
 .nav-dropdown-panel:not([hidden]){display:flex}
+@media (max-width: 720px) {
+  .nav-dropdown-panel{left:0;right:auto}
+}
 </style>`;
 
 const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
