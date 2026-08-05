@@ -46,6 +46,15 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
     </button>
     <div class="nav-dropdown-panel" id="partiesDropdownPanel" hidden>
       <a href="parties.html" id="navPartiesLink">Parteien</a>
+    </div>
+  </div>
+  <div class="nav-dropdown" id="wahlsystemDropdown">
+    <button type="button" class="nav-dropdown-trigger" id="wahlsystemDropdownTrigger" aria-expanded="false" aria-controls="wahlsystemDropdownPanel">
+      <span id="navWahlsystemGroupLabel">Wahlsystem</span>
+      ${CHEVRON}
+    </button>
+    <div class="nav-dropdown-panel" id="wahlsystemDropdownPanel" hidden>
+      <a href="sitzverteilung.html" id="navSitzverteilungLink">Sitzverteilung erklärt</a>
       <a href="government.html" id="navGovernmentLink">Koalitionen</a>
     </div>
   </div>
@@ -58,15 +67,6 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
       <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
       <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
-    </div>
-  </div>
-  <div class="nav-dropdown" id="wahlsystemDropdown">
-    <button type="button" class="nav-dropdown-trigger" id="wahlsystemDropdownTrigger" aria-expanded="false" aria-controls="wahlsystemDropdownPanel">
-      <span id="navWahlsystemGroupLabel">Wahlsystem</span>
-      ${CHEVRON}
-    </button>
-    <div class="nav-dropdown-panel" id="wahlsystemDropdownPanel" hidden>
-      <a href="sitzverteilung.html" id="navSitzverteilungLink">Sitzverteilung erklärt</a>
     </div>
   </div>
 </nav>
