@@ -67,6 +67,12 @@
   a { color: var(--accent); }
   button, input, select { font-family: inherit; }
 
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+  }
   .site-header {
     background: var(--bg);
     border-bottom: 1px solid var(--border);
@@ -678,6 +684,7 @@
 </head>
 <body>
 
+<div class="sticky-nav">
 <header class="site-header">
   <div class="header-inner">
     <div class="brand">
@@ -762,6 +769,7 @@
     </div>
   </div>
 </nav>
+</div>
 
 <div class="land-tabs" id="landTabs"></div>
 <div class="land-select-wrap">
