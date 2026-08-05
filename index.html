@@ -302,8 +302,9 @@
     margin: 14px auto 0;
     padding: 0 24px 14px;
     display: flex;
-    gap: 4px;
-    overflow-x: auto;
+    flex-wrap: wrap;
+    gap: 4px 4px;
+    row-gap: 6px;
     border-bottom: 1px solid var(--border);
   }
   .land-tabs button {
@@ -2985,11 +2986,11 @@
     var wrap = document.getElementById("resultsPartyView");
     var items = rows.map(function (row, i) {
       var d = yearData[row.id];
-      var dateTag = state.view === "landtag" ? ' <em class="rank-winner-tag">' + fmtDate(d.date) + '</em>' : "";
       if (!row.r) {
         return '<li class="rank-row"><span class="rank-num">' + (i + 1) + '</span><span class="dot" style="background:var(--p-neutral)"></span>' +
-          '<span class="rank-name">' + stateName(row.id) + dateTag + '</span><span class="rank-pct" style="color:var(--text-muted)">–</span></li>';
+          '<span class="rank-name">' + stateName(row.id) + '</span><span class="rank-pct" style="color:var(--text-muted)">–</span></li>';
       }
+      var dateTag = state.view === "landtag" ? ' <em class="rank-winner-tag">' + fmtDate(d.date) + '</em>' : "";
       var hasDelta = row.r.delta !== undefined;
       var isNumericDelta = typeof row.r.delta === "number";
       var deltaClass = !isNumericDelta ? "flat" : (row.r.delta > 0 ? "up" : "down");
