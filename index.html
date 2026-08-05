@@ -172,10 +172,6 @@
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .header-nav { display: flex; gap: 20px; flex: none; }
-  .header-nav a { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
-  .header-nav a:hover { color: var(--accent); }
-
   .menu-toggle {
     display: none;
     flex: none;
@@ -655,7 +651,6 @@
     .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 10px; }
     .brand .wordmark { font-size: 16px; }
     .header-search { order: 4; flex-basis: 100%; max-width: none; }
-    .header-nav { display: none; }
     .menu-toggle { display: flex; }
     .control-bar { padding: 0 16px; }
     .view-pills { gap: 18px; }
@@ -721,9 +716,6 @@
     <button type="button" class="icon-btn" id="shareBtn" aria-label="Teilen" title="Teilen">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
     </button>
-    <nav class="header-nav">
-      <a href="#quellen" id="navQuellen">Quellen</a>
-    </nav>
     <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menü">
       <span></span><span></span><span></span>
     </button>
@@ -3238,7 +3230,6 @@
     });
     document.getElementById("stripText").textContent = tr("stripText");
     document.getElementById("stripLink").textContent = tr("stripLink");
-    document.getElementById("navQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
