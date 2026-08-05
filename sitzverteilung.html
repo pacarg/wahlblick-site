@@ -145,6 +145,24 @@
   /* sainte-laguë */
   .sl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
   @media (max-width: 640px) { .sl-grid { grid-template-columns: 1fr; } }
+  .sl-party-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .sl-party-row label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+  select#slPartySelect {
+    appearance: none;
+    background: var(--bg);
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 999px;
+    padding: 6px 30px 6px 14px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position: calc(100% - 14px) center, calc(100% - 9px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+  select#slPartySelect:hover { background-color: var(--surface); }
   .slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
   .slider-head .lbl { font-weight: 700; font-size: 13.5px; }
   .slider-head .v { font-weight: 700; font-size: 17px; color: var(--accent); }
@@ -299,8 +317,12 @@
     <p class="panel-sub" data-sub-sl></p>
     <div class="sl-grid">
       <div>
-        <div class="slider-head"><span class="lbl" data-sl-slider-label></span><span class="v num" id="slVal"></span></div>
-        <input type="range" id="slSlider" min="100" max="400" value="226" step="1">
+        <div class="sl-party-row">
+          <label for="slPartySelect" data-sl-party-label></label>
+          <select id="slPartySelect"></select>
+        </div>
+        <div class="slider-head"><span class="lbl" id="slSliderLabel"></span><span class="v num" id="slVal"></span></div>
+        <input type="range" id="slSlider" min="0" max="500" value="226" step="1">
         <p class="hint-small" data-sl-hint></p>
       </div>
       <div class="seat-tally" id="slTally"></div>
@@ -387,8 +409,9 @@
     var name = c.slice(4, -1);
     return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   }
-  function fmtPct(n) { return n.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 2 }); }
-  function fmtInt(n) { return n.toLocaleString("de-DE"); }
+  var LOCALE = { de: "de-DE", es: "es-ES", en: "en-US" };
+  function fmtPct(n, lang) { return n.toLocaleString(LOCALE[lang] || "de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 2 }); }
+  function fmtInt(n, lang) { return n.toLocaleString(LOCALE[lang] || "de-DE"); }
 
   // Real, verified 21st Bundestag (2025) results — bundeswahlleiterin.de
   // "zweit" = officially reported (rounded) percentage, used for display.
@@ -442,7 +465,8 @@
       noteThreshold: "<b>BSW</b> verpasste den Einzug 2025 äußerst knapp mit <b>4,98 %</b> (2.472.947 Stimmen). <b>FDP</b> blieb bei 4,3 %. Zwei Ausnahmen von der Hürde: Wer mindestens <b>drei Wahlkreise</b> direkt gewinnt, zieht trotzdem proportional ein (Grundmandatsklausel). Der <b>SSW</b> ist als anerkannte Vertretung der dänischen Minderheit ganz von der Hürde befreit — deshalb sitzt er mit nur 0,2 % im Bundestag.",
       hSl: "Das Sainte-Laguë-Verfahren live",
       subSl: "Jeder der 630 Sitze geht nacheinander an die Partei mit dem höchsten Quotienten aus Zweitstimmenanteil ÷ (2 × bereits erhaltene Sitze + 1). Bewegen Sie den Regler, um zu sehen, wie empfindlich das Verfahren auf Stimmenverschiebungen reagiert.",
-      slSliderLabel: "CDU — Zweitstimmenanteil",
+      slPartyLabel: "Partei wählen",
+      slShareSuffix: "— Zweitstimmenanteil",
       slHint: "Die übrigen Anteile verschieben sich proportional mit, die Summe bleibt bei 100 %. Vereinfachtes Modell — die Grundmandatsklausel wird hier nicht simuliert.",
       hMandates: "299 Wahlkreise, aber nicht jeder Sieger zieht ein",
       subMandates: "Seit der Wahlrechtsreform 2023 garantiert ein gewonnener Wahlkreis keinen Sitz mehr automatisch — Überhang- und Ausgleichsmandate wurden abgeschafft.",
@@ -471,7 +495,8 @@
       noteThreshold: "<b>BSW</b> se quedó fuera en 2025 por un margen mínimo: <b>4,98 %</b> (2.472.947 votos). <b>FDP</b> quedó en 4,3 %. Hay dos excepciones a la valla: quien gana al menos <b>tres distritos</b> de forma directa, entra al parlamento de forma proporcional igualmente (cláusula de mandato básico). El <b>SSW</b>, como representación reconocida de la minoría danesa, está totalmente exento de la valla — por eso ocupa una banca con solo 0,2 %.",
       hSl: "El método Sainte-Laguë en vivo",
       subSl: "Cada uno de los 630 escaños se asigna, uno por uno, al partido con el cociente más alto de porcentaje de voto ÷ (2 × escaños ya obtenidos + 1). Mueva el control deslizante para ver cuán sensible es el método a los cambios de voto.",
-      slSliderLabel: "CDU — porcentaje de segundo voto",
+      slPartyLabel: "Elegir partido",
+      slShareSuffix: "— porcentaje de segundo voto",
       slHint: "Los demás porcentajes se ajustan proporcionalmente, la suma se mantiene en 100 %. Modelo simplificado — no simula la cláusula de mandato básico.",
       hMandates: "299 distritos, pero no todos los ganadores entran",
       subMandates: "Desde la reforma electoral de 2023, ganar un distrito ya no garantiza automáticamente un escaño — se eliminaron los mandatos de sobrerrepresentación y compensación.",
@@ -500,7 +525,8 @@
       noteThreshold: "<b>BSW</b> missed entry in 2025 by an extremely narrow margin: <b>4.98%</b> (2,472,947 votes). <b>FDP</b> came in at 4.3%. There are two exceptions to the threshold: winning at least <b>three constituencies</b> outright still grants proportional entry (the basic-mandate clause). <b>SSW</b>, as the recognized representation of the Danish minority, is fully exempt from the threshold — which is why it holds a seat with just 0.2%.",
       hSl: "The Sainte-Laguë method, live",
       subSl: "Each of the 630 seats is awarded, one at a time, to the party with the highest quotient of vote share ÷ (2 × seats already won + 1). Move the slider to see how sensitive the method is to vote swings.",
-      slSliderLabel: "CDU — second-vote share",
+      slPartyLabel: "Choose party",
+      slShareSuffix: "— second-vote share",
       slHint: "The other shares shift proportionally, the total stays at 100%. Simplified model — it does not simulate the basic-mandate clause.",
       hMandates: "299 constituencies, but not every winner gets a seat",
       subMandates: "Since the 2023 electoral reform, winning a constituency no longer automatically guarantees a seat — overhang and leveling seats were abolished.",
@@ -530,7 +556,7 @@
       row.innerHTML =
         '<div class="pname">' + NAMES[lang][p.key] + '</div>' +
         '<div class="bartrack"><div class="barfill" style="background:' + resolveColor(p.color) + '; width:' + (p.zweit / maxV * 100) + '%"></div></div>' +
-        '<div class="barmeta"><b class="num">' + fmtPct(p.zweit) + ' %</b> · ' + p.seats + ' <span class="num">(' + fmtInt(p.votes) + ')</span></div>';
+        '<div class="barmeta"><b class="num">' + fmtPct(p.zweit, lang) + ' %</b> · ' + p.seats + ' <span class="num">(' + fmtInt(p.votes, lang) + ')</span></div>';
       wrap.appendChild(row);
     });
   }
@@ -543,7 +569,7 @@
     all.forEach(function (p) {
       var row = document.createElement("div");
       row.className = "barrow dim";
-      var meta = fmtPct(p.zweit) + " %" + (p.votes ? ' · <span class="num">' + fmtInt(p.votes) + '</span>' : "");
+      var meta = fmtPct(p.zweit, lang) + " %" + (p.votes ? ' · <span class="num">' + fmtInt(p.votes, lang) + '</span>' : "");
       row.innerHTML =
         '<div class="pname">' + NAMES[lang][p.key] + '</div>' +
         '<div class="bartrack"><div class="barfill" style="background:' + resolveColor(p.color) + '; width:' + (p.zweit / maxV * 100) + '%"></div></div>' +
@@ -570,14 +596,15 @@
   }
 
   var ALL_SHARES_BASE = PARTIES.concat(BELOW).concat([{ key: "sonst", exact: SONST_SHARE }]);
+  var MOVABLE_PARTIES = ["cdu", "afd", "spd", "gruene", "linke", "csu"];
 
-  function computeShares(cduShare) {
-    var others = ALL_SHARES_BASE.filter(function (p) { return p.key !== "cdu"; });
+  function computeShares(movedKey, movedShare) {
+    var others = ALL_SHARES_BASE.filter(function (p) { return p.key !== movedKey; });
     var othersSum = others.reduce(function (s, p) { return s + p.exact; }, 0);
-    var remaining = 100 - cduShare;
+    var remaining = 100 - movedShare;
     var scale = remaining / othersSum;
     return ALL_SHARES_BASE.map(function (p) {
-      if (p.key === "cdu") return { key: p.key, share: cduShare };
+      if (p.key === movedKey) return { key: p.key, share: movedShare };
       return { key: p.key, share: p.exact * scale };
     });
   }
@@ -587,11 +614,21 @@
     var full = PARTIES.concat(BELOW).filter(function (q) { return q.key === p.key; })[0];
     colorByKey[p.key] = full ? full.color : SONST;
   });
+  function realSeatsFor(key) {
+    var p = PARTIES.filter(function (q) { return q.key === key; })[0];
+    return p ? p.seats : 0;
+  }
+  function realExactFor(key) {
+    var p = ALL_SHARES_BASE.filter(function (q) { return q.key === key; })[0];
+    return p ? p.exact : 0;
+  }
 
-  function renderSl(lang, cduShare) {
-    var cduShareDisp = Math.round(cduShare * 10) / 10;
-    document.getElementById("slVal").textContent = cduShareDisp.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " %";
-    var shares = computeShares(cduShare);
+  function renderSl(lang, movedKey, movedShare) {
+    document.getElementById("slSliderLabel").textContent = NAMES[lang][movedKey] + " " + CONTENT[lang].slShareSuffix;
+    var movedShareDisp = Math.round(movedShare * 10) / 10;
+    var dispStr = movedShareDisp.toLocaleString(LOCALE[lang] || "de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    document.getElementById("slVal").textContent = dispStr + " %";
+    var shares = computeShares(movedKey, movedShare);
     var seats = sainteLague(shares, TOTAL_SEATS);
     var order = ALL_SHARES_BASE.slice().sort(function (a, b) { return (seats[b.key] || 0) - (seats[a.key] || 0); });
     var maxSeats = Math.max.apply(null, order.map(function (p) { return seats[p.key] || 0; }));
@@ -599,7 +636,6 @@
     tally.innerHTML = "";
     order.forEach(function (p) {
       var s = seats[p.key] || 0;
-      if (p.key === "sonst" && s === 0 && p.zweit < THRESHOLD) { /* still list once for context below */ }
       var row = document.createElement("div");
       row.className = "seat-tally-row";
       row.innerHTML =
@@ -608,16 +644,26 @@
         '<div class="ct num">' + s + '</div>';
       tally.appendChild(row);
     });
-    var cduSeats = seats.cdu || 0;
-    var delta = cduSeats - 164;
+    var movedSeats = seats[movedKey] || 0;
+    var realSeats = realSeatsFor(movedKey);
+    var delta = movedSeats - realSeats;
     var deltaTxt;
-    if (lang === "de") deltaTxt = delta === 0 ? "unverändert bei 164 Sitzen" : (delta > 0 ? "+" + delta + " Sitze gegenüber dem echten Ergebnis" : delta + " Sitze gegenüber dem echten Ergebnis");
-    else if (lang === "es") deltaTxt = delta === 0 ? "sin cambios, 164 escaños" : (delta > 0 ? "+" + delta + " escaños respecto al resultado real" : delta + " escaños respecto al resultado real");
-    else deltaTxt = delta === 0 ? "unchanged at 164 seats" : (delta > 0 ? "+" + delta + " seats versus the real result" : delta + " seats versus the real result");
-    var dispStr = cduShareDisp.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-    var lead = lang === "de" ? "Bei <b>" + dispStr + " %</b> Zweitstimmenanteil erhielte die CDU <b>" + cduSeats + " von 630 Sitzen</b> — " :
-      lang === "es" ? "Con un <b>" + dispStr + " %</b> de segundo voto, la CDU obtendría <b>" + cduSeats + " de 630 escaños</b> — " :
-      "At a <b>" + dispStr + "%</b> second-vote share, the CDU would win <b>" + cduSeats + " of 630 seats</b> — ";
+    if (lang === "de") deltaTxt = delta === 0 ? "unverändert bei " + realSeats + " Sitzen" : (delta > 0 ? "+" + delta + " Sitze gegenüber dem echten Ergebnis" : delta + " Sitze gegenüber dem echten Ergebnis");
+    else if (lang === "es") deltaTxt = delta === 0 ? "sin cambios, " + realSeats + " escaños" : (delta > 0 ? "+" + delta + " escaños respecto al resultado real" : delta + " escaños respecto al resultado real");
+    else deltaTxt = delta === 0 ? "unchanged at " + realSeats + " seats" : (delta > 0 ? "+" + delta + " seats versus the real result" : delta + " seats versus the real result");
+    var partyName = NAMES[lang][movedKey];
+    var lead;
+    if (lang === "de") {
+      var deSubject = { cdu: "die CDU", afd: "die AfD", spd: "die SPD", gruene: "die Grünen", linke: "Die Linke", csu: "die CSU" }[movedKey];
+      var deVerb = movedKey === "gruene" ? "erhielten" : "erhielte";
+      lead = "Bei <b>" + dispStr + " %</b> Zweitstimmenanteil " + deVerb + " " + deSubject + " <b>" + movedSeats + " von 630 Sitzen</b> — ";
+    } else if (lang === "es") {
+      var esSubject = { cdu: "la CDU", afd: "la AfD", spd: "el SPD", gruene: "los Verdes", linke: "Die Linke", csu: "la CSU" }[movedKey];
+      var esVerb = movedKey === "gruene" ? "obtendrían" : "obtendría";
+      lead = "Con un <b>" + dispStr + " %</b> de segundo voto, " + esSubject + " " + esVerb + " <b>" + movedSeats + " de 630 escaños</b> — ";
+    } else {
+      lead = "At a <b>" + dispStr + "%</b> second-vote share, " + partyName + " would win <b>" + movedSeats + " of 630 seats</b> — ";
+    }
     document.getElementById("slNote").innerHTML = lead + deltaTxt + ".";
   }
 
@@ -700,8 +746,9 @@
     document.querySelector("[data-note-threshold]").innerHTML = c.noteThreshold;
     document.querySelector("[data-h-sl]").textContent = c.hSl;
     document.querySelector("[data-sub-sl]").textContent = c.subSl;
-    document.querySelector("[data-sl-slider-label]").textContent = c.slSliderLabel;
+    document.querySelector("[data-sl-party-label]").textContent = c.slPartyLabel;
     document.querySelector("[data-sl-hint]").textContent = c.slHint;
+    buildPartySelect(lang);
     document.querySelector("[data-h-mandates]").textContent = c.hMandates;
     document.querySelector("[data-sub-mandates]").textContent = c.subMandates;
     document.querySelector("[data-th-party]").textContent = c.thParty;
@@ -732,16 +779,37 @@
     buildResultsBars(lang);
     buildThresholdBars(lang);
     buildMandateTable(lang);
-    renderSl(lang, sliderTouched ? parseInt(document.getElementById("slSlider").value, 10) / 10 : cduRealExact);
+    renderSl(lang, movedKey, sliderTouched ? parseInt(document.getElementById("slSlider").value, 10) / 10 : realExactFor(movedKey));
     renderHemicycle(lang);
   }
 
+  function buildPartySelect(lang) {
+    var select = document.getElementById("slPartySelect");
+    var prev = select.value;
+    select.innerHTML = "";
+    MOVABLE_PARTIES.forEach(function (key) {
+      var opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = NAMES[lang][key];
+      select.appendChild(opt);
+    });
+    select.value = prev || movedKey;
+  }
+
   var currentLang = "de";
-  var cduRealExact = PARTIES.filter(function (p) { return p.key === "cdu"; })[0].exact;
+  var movedKey = "cdu";
   var sliderTouched = false;
+
+  document.getElementById("slPartySelect").addEventListener("change", function () {
+    movedKey = this.value;
+    sliderTouched = false;
+    var tick = Math.round(realExactFor(movedKey) * 10);
+    document.getElementById("slSlider").value = tick;
+    renderSl(currentLang, movedKey, realExactFor(movedKey));
+  });
   document.getElementById("slSlider").addEventListener("input", function () {
     sliderTouched = true;
-    renderSl(currentLang, parseInt(this.value, 10) / 10);
+    renderSl(currentLang, movedKey, parseInt(this.value, 10) / 10);
   });
 
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {
