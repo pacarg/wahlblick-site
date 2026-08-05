@@ -104,6 +104,7 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 18px 20px;
+    min-width: 0;
   }
   .cat-card h3 { font-size: 14.5px; margin: 0 0 6px; }
   .cat-card p { font-size: 13px; line-height: 1.55; margin: 0 0 10px; color: var(--text-muted); }
@@ -119,6 +120,7 @@
   .cat-card .entries { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); padding-top: 10px; }
   .cat-card .entries li { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 3px 0; }
   .cat-card .entries .val { font-weight: 700; color: var(--text); white-space: nowrap; }
+  .cat-card .entries .val:has(a) { white-space: normal; text-align: right; overflow-wrap: anywhere; }
   .cat-card .entries .val a { color: var(--accent); text-decoration: none; }
   .cat-card .entries .val a:hover { text-decoration: underline; }
 
@@ -299,7 +301,10 @@
           { name: "Freiwilligenagentur in Ihrer Nähe finden — Agenturatlas", value: "bagfa", url: "https://bagfa.de/ueber-die-bagfa/freiwilligenagenturen/" },
           { name: "Mehr Demokratie e. V. — Bürgerbeteiligung und direkte Demokratie", value: "mehr-demokratie.de", url: "https://www.mehr-demokratie.de/" }
         ] },
-        { title: "Bürgerbeauftragte und Beschwerdestellen", text: "Bürgerbeauftragte und Ombudsstellen für formelle Beschwerden gegen Entscheidungen der öffentlichen Verwaltung." }
+        { title: "Bürgerbeauftragte und Beschwerdestellen", text: "Bürgerbeauftragte und Ombudsstellen für formelle Beschwerden gegen Entscheidungen der öffentlichen Verwaltung.", entries: [
+          { name: "Bürgerbeauftragte Baden-Württemberg — Beschwerden gegen Landesbehörden", value: "buergerbeauftragte-bw.de", url: "https://www.buergerbeauftragte-bw.de/" },
+          { name: "Alle Bürgerbeauftragten und Ombudsstellen in Deutschland und der EU", value: "buergerbeauftragte-bw.de/service/links", url: "https://www.buergerbeauftragte-bw.de/service/links" }
+        ] }
       ]
     },
     es: {
@@ -377,7 +382,10 @@
           { name: "Buscar una Freiwilligenagentur (agencia de voluntariado) cerca tuyo", value: "bagfa", url: "https://bagfa.de/ueber-die-bagfa/freiwilligenagenturen/" },
           { name: "Mehr Demokratie e. V. — participación ciudadana y democracia directa", value: "mehr-demokratie.de", url: "https://www.mehr-demokratie.de/" }
         ] },
-        { title: "Defensoría y reclamos ante la administración", text: "Bürgerbeauftragte / Ombudsstellen, para reclamos formales contra decisiones de la administración pública." }
+        { title: "Defensoría y reclamos ante la administración", text: "Bürgerbeauftragte / Ombudsstellen, para reclamos formales contra decisiones de la administración pública.", entries: [
+          { name: "Bürgerbeauftragte de Baden-Württemberg — reclamos contra autoridades estatales", value: "buergerbeauftragte-bw.de", url: "https://www.buergerbeauftragte-bw.de/" },
+          { name: "Todos los Bürgerbeauftragte y defensorías de Alemania y la UE", value: "buergerbeauftragte-bw.de/service/links", url: "https://www.buergerbeauftragte-bw.de/service/links" }
+        ] }
       ]
     },
     en: {
@@ -455,7 +463,10 @@
           { name: "Find a volunteer agency (Freiwilligenagentur) near you", value: "bagfa", url: "https://bagfa.de/ueber-die-bagfa/freiwilligenagenturen/" },
           { name: "Mehr Demokratie e. V. — citizen participation and direct democracy", value: "mehr-demokratie.de", url: "https://www.mehr-demokratie.de/" }
         ] },
-        { title: "Ombudsman and administrative complaints", text: "Bürgerbeauftragte (citizen ombudsman offices) for formal complaints against public administration decisions." }
+        { title: "Ombudsman and administrative complaints", text: "Bürgerbeauftragte (citizen ombudsman offices) for formal complaints against public administration decisions.", entries: [
+          { name: "Baden-Württemberg's Bürgerbeauftragte — complaints against state authorities", value: "buergerbeauftragte-bw.de", url: "https://www.buergerbeauftragte-bw.de/" },
+          { name: "All German states' ombudsman offices and the EU level", value: "buergerbeauftragte-bw.de/service/links", url: "https://www.buergerbeauftragte-bw.de/service/links" }
+        ] }
       ]
     }
   };
