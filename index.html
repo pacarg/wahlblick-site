@@ -600,8 +600,6 @@
   .source-line a { color: var(--accent); text-decoration: none; }
   .source-line a:hover { text-decoration: underline; }
 
-  .footnote { grid-column: 1 / -1; font-size: 11px; color: var(--text-muted); }
-
   footer {
     max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
     border-top: 1px solid var(--border);
@@ -809,8 +807,6 @@
       <div id="resultsPartyView" style="display:none;"></div>
     </div>
   </section>
-
-  <p class="footnote" id="globalFootnote">Prototyp: Bundestagswahl 2025 und Landtagswahlen — jeweils für alle 16 Länder. Quellen: Bundeswahlleiterin und die amtlichen Landeswahlbehörden.</p>
 </main>
 
 <footer id="quellen">
@@ -2339,7 +2335,6 @@
       legendNoData: "Noch keine Daten",
       tooltipNoData: "Noch keine Daten",
       bannerLandtag: "Jedes Land wählt zu einem eigenen Termin — hier sehen Sie die jeweils letzte abgeschlossene Landtags-, Bürgerschafts- oder Abgeordnetenhauswahl.",
-      footnote: "Prototyp: Bundestagswahlen 2013–2025 und Landtagswahlen — jeweils für alle 16 Länder. Quellen: Bundeswahlleiterin und die amtlichen Landeswahlbehörden.",
       footAbout: "Über Wahlblick",
       footMethod: "Methodik",
       footDisclaimerLink: "Haftungsausschluss",
@@ -2350,7 +2345,7 @@
       footPartiesLink: "Parteien",
       footGuideLink: "Nutzungshinweise",
       footDatenschutzLink: "Datenschutzerklärung",
-      footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin bzw. den amtlichen Landeswahlbehörden und werden mit Link zur Originalquelle angezeigt. Bundestagswahlen 2013–2025 sind vollständig hinterlegt; bei den Landtagswahlen wird jeweils die zuletzt abgeschlossene Wahl je Land gezeigt.",
+      footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin bzw. den amtlichen Landeswahlbehörden und werden mit Link zur Originalquelle angezeigt. Bundestagswahlen 2013–2025 sind vollständig hinterlegt; bei den Landtagswahlen wird, soweit verfügbar, der historische Verlauf je Land gezeigt.",
       footCredit: "Verlässlich aus Emsdetten.",
       neu: "neu",
       keineAngabe: "k. A.",
@@ -2401,7 +2396,6 @@
       legendNoData: "Sin datos todavía",
       tooltipNoData: "Sin datos todavía",
       bannerLandtag: "Cada Land vota en su propia fecha — acá se muestra la última elección estatal (Landtag, Bürgerschaft o Abgeordnetenhaus según el Land) ya finalizada de cada uno.",
-      footnote: "Prototipo: elecciones federales 2013–2025 y elecciones estatales — ambas para los 16 estados federados. Fuentes: Bundeswahlleiterin y las autoridades electorales oficiales de cada estado.",
       footAbout: "Sobre Wahlblick",
       footMethod: "Metodología",
       footDisclaimerLink: "Descargo de responsabilidad",
@@ -2412,7 +2406,7 @@
       footPartiesLink: "Partidos",
       footGuideLink: "Guía de uso",
       footDatenschutzLink: "Política de privacidad",
-      footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin o de la autoridad electoral de cada estado, y se muestran con link a la fuente original. Las elecciones federales 2013–2025 están completas; en las elecciones estatales se muestra la última elección finalizada de cada estado.",
+      footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin o de la autoridad electoral de cada estado, y se muestran con link a la fuente original. Las elecciones federales 2013–2025 están completas; en las elecciones estatales se muestra, donde está disponible, el historial de varias elecciones de cada estado.",
       footCredit: "Con responsabilidad, desde Emsdetten, Alemania.",
       neu: "nuevo",
       keineAngabe: "s/d",
@@ -2463,7 +2457,6 @@
       legendNoData: "No data yet",
       tooltipNoData: "No data yet",
       bannerLandtag: "Each state votes on its own schedule — this shows each one's most recently completed state election (Landtag, Bürgerschaft, or Abgeordnetenhaus depending on the state).",
-      footnote: "Prototype: 2013–2025 federal elections and state elections — both for all 16 federal states. Sources: Bundeswahlleiterin and each state's official election authority.",
       footAbout: "About Wahlblick",
       footMethod: "Methodology",
       footDisclaimerLink: "Disclaimer",
@@ -2474,7 +2467,7 @@
       footPartiesLink: "Parties",
       footGuideLink: "User Guide",
       footDatenschutzLink: "Privacy Policy",
-      footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin or each state's official election authority, and are shown with a link to the original source. The 2013–2025 federal elections are complete; for state elections, each state's most recently completed election is shown.",
+      footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin or each state's official election authority, and are shown with a link to the original source. The 2013–2025 federal elections are complete; for state elections, the historical results available for each state are shown.",
       footCredit: "Reliably made in Emsdetten, Germany.",
       neu: "new",
       keineAngabe: "n/a",
@@ -3194,7 +3187,6 @@
     var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
     if (partyPlaceholderOpt) partyPlaceholderOpt.textContent = tr("partySelectPlaceholder");
     bundestagNoteEl.textContent = tr("bundestagNote");
-    document.getElementById("globalFootnote").textContent = tr("footnote");
     document.getElementById("footAbout").textContent = tr("footAbout");
     document.getElementById("footMethod").textContent = tr("footMethod");
     document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
