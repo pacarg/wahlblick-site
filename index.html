@@ -610,6 +610,8 @@
   footer p { max-width: 72ch; margin: 12px 0 0; }
   footer .foot-links { display: flex; gap: 16px; flex-wrap: wrap; row-gap: 8px; }
   footer a { color: var(--text-muted); }
+  .foot-credit { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+  .foot-credit img { width: 18px; height: auto; flex: none; }
 
   :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
@@ -822,6 +824,7 @@
     <a href="guide.html" id="footGuideLink">Nutzungshinweise</a>
   </div>
   <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
+  <p class="foot-credit"><img src="emsdetten-wappen.svg" alt="Wappen der Stadt Emsdetten" width="18" height="21"><span id="footCredit">Verlässlich aus Emsdetten.</span></p>
 </footer>
 
 <script>
@@ -2348,6 +2351,7 @@
       footGuideLink: "Nutzungshinweise",
       footDatenschutzLink: "Datenschutzerklärung",
       footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin bzw. den amtlichen Landeswahlbehörden und werden mit Link zur Originalquelle angezeigt. Bundestagswahlen 2013–2025 sind vollständig hinterlegt; bei den Landtagswahlen wird jeweils die zuletzt abgeschlossene Wahl je Land gezeigt.",
+      footCredit: "Verlässlich aus Emsdetten.",
       neu: "neu",
       keineAngabe: "k. A.",
       stateNames: {
@@ -2409,6 +2413,7 @@
       footGuideLink: "Guía de uso",
       footDatenschutzLink: "Política de privacidad",
       footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin o de la autoridad electoral de cada estado, y se muestran con link a la fuente original. Las elecciones federales 2013–2025 están completas; en las elecciones estatales se muestra la última elección finalizada de cada estado.",
+      footCredit: "Con responsabilidad, desde Emsdetten, Alemania.",
       neu: "nuevo",
       keineAngabe: "s/d",
       stateNames: {
@@ -2470,6 +2475,7 @@
       footGuideLink: "User Guide",
       footDatenschutzLink: "Privacy Policy",
       footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin or each state's official election authority, and are shown with a link to the original source. The 2013–2025 federal elections are complete; for state elections, each state's most recently completed election is shown.",
+      footCredit: "Reliably made in Emsdetten, Germany.",
       neu: "new",
       keineAngabe: "n/a",
       stateNames: {
@@ -3200,6 +3206,7 @@
     document.getElementById("footGuideLink").textContent = tr("footGuideLink");
     document.getElementById("footDatenschutzLink").textContent = tr("footDatenschutzLink");
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
+    document.getElementById("footCredit").textContent = tr("footCredit");
     mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
     updateResultsView();
