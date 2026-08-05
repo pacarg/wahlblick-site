@@ -185,6 +185,17 @@
   </div>
 
   <div class="panel">
+    <h2 data-h-compare></h2>
+    <p data-compare-p1></p>
+  </div>
+
+  <div class="panel">
+    <h2 data-h-partyview></h2>
+    <p data-partyview-p1></p>
+    <p data-partyview-p2></p>
+  </div>
+
+  <div class="panel">
     <h2 data-h-search></h2>
     <p data-search-p1></p>
   </div>
@@ -225,12 +236,17 @@
       mapP1: "Bewegen Sie die Maus über ein Bundesland, um Name und Farbe zu sehen. Klicken Sie darauf, um die vollständigen Ergebnisse — Parteien, Prozente, Wahlbeteiligung und Quelle — im Panel rechts anzuzeigen.",
       mapP2: "Das ausgewählte Bundesland wird auf der Karte hervorgehoben (Umriss-Glow) und sein Name erscheint größer. Über das Suchfeld oder die Länder-Reiter lässt es sich ebenso auswählen.",
       hViews: "Zwei Ansichten: Bundestag und Landtag",
-      viewsP1: "Oben wechseln Sie zwischen zwei Ansichten. „Bundestag“ zeigt die Bundestagswahl (mit Jahresauswahl, aktuell nur 2025 mit Daten). „Landtag“ zeigt die jeweils letzte abgeschlossene Wahl jedes einzelnen Bundeslandes — da jedes Land zu einem eigenen Termin wählt, gibt es hier kein gemeinsames Jahr.",
-      viewsP2: "Deshalb erscheint die Jahresauswahl nur in der Bundestag-Ansicht und verschwindet in der Landtag-Ansicht.",
+      viewsP1: "Oben wechseln Sie zwischen zwei Ansichten. „Bundestag“ zeigt die Bundestagswahl mit vollständiger Jahresauswahl (2013, 2017, 2021, 2025 — alle mit echten Daten für alle 16 Länder). „Landtag“ zeigt die jeweils letzte abgeschlossene Wahl jedes einzelnen Bundeslandes — da jedes Land zu einem eigenen Termin wählt, gibt es hier kein gemeinsames Jahr.",
+      viewsP2: "Für viele Länder ist auch ein längerer Verlauf hinterlegt: Sobald Sie ein Bundesland in der Landtag-Ansicht auswählen, erscheinen kleine Jahres-Reiter über dem Ergebnis, mit denen Sie zu früheren Wahlen desselben Landes zurückblättern können.",
+      hCompare: "Länder vergleichen",
+      compareP1: "Mit der Schaltfläche „Vergleichen“ neben der Karte können Sie bis zu drei Bundesländer gleichzeitig auswählen (auf der Karte, in der Liste oder über die Suche) und ihre Ergebnisse nebeneinander in einer Tabelle sehen — in beiden Ansichten, Bundestag und Landtag.",
+      hPartyview: "Eine Partei in allen 16 Ländern",
+      partyviewP1: "Das Auswahlfeld „Partei-Ansicht“ färbt die Karte nach der Stärke einer einzelnen Partei ein und zeigt rechts eine Rangliste aller 16 Länder, sortiert nach Stimmenanteil.",
+      partyviewP2: "Während diese Ansicht aktiv ist, können Sie zusätzlich einzelne Länder auf der Karte anklicken, um die Liste auf genau diese Regionen einzugrenzen — so lässt sich zum Beispiel eine Partei gezielt in wenigen ausgewählten Ländern vergleichen.",
       hSearch: "Suche und Sprache",
       searchP1: "Das Suchfeld oben findet ein Bundesland nach Namen (in jeder der drei Sprachen). Der Sprachumschalter DE/ES/EN übersetzt die gesamte Oberfläche — nur die Namen der politischen Parteien bleiben unübersetzt, das entspricht journalistischer Praxis.",
       hNav: "Weitere Inhalte finden",
-      navP1: "Neben den Wahl-Reitern führt ein kleiner Link zu weiterführenden Inhalten wie dem Grundgesetz oder dem Adressverzeichnis. Auf dem Handy sammelt ein Menü-Symbol (☰) diese Links zusammen mit „Quellen“.",
+      navP1: "Neben den Wahl-Reitern führen zwei Menüs zu weiterführenden Inhalten: „Die Parteien“ (Parteiprofile und Erklärung der Koalitionsarten) und „Deutschland“ (Grundgesetz, Adressverzeichnis, Feiertage). Auf dem Handy sammelt ein Menü-Symbol (☰) dieselben Links, gruppiert unter denselben zwei Überschriften.",
       navP2: "Im Footer stehen außerdem das Impressum, der Haftungsausschluss und die Seite „Über Wahlblick“ mit der Methodik hinter den Daten.",
       hSources: "Woher die Daten kommen",
       sourcesP1: "Jedes einzelne Ergebnis verlinkt auf seine offizielle Quelle — die Bundeswahlleiterin für den Bundestag, die jeweilige Landeswahlbehörde für jeden Landtag. Mehr zur Arbeitsweise auf der Seite „Über Wahlblick“."
@@ -242,12 +258,17 @@
       mapP1: "Pasá el mouse sobre un estado federado para ver su nombre y color. Hacé click para ver el resultado completo —partidos, porcentajes, participación y fuente— en el panel de la derecha.",
       mapP2: "El estado seleccionado queda resaltado en el mapa (con un brillo en el contorno) y su nombre aparece más grande. También podés seleccionarlo desde el buscador o desde las tabs de estados.",
       hViews: "Dos vistas: Bundestag y Landtag",
-      viewsP1: "Arriba podés alternar entre dos vistas. «Bundestag» muestra la elección federal (con selector de año, aunque hoy solo 2025 tiene datos cargados). «Landtag» muestra la última elección estatal ya finalizada de cada Land — como cada uno vota en una fecha distinta, acá no hay un año en común.",
-      viewsP2: "Por eso el selector de año solo aparece en la vista Bundestag y desaparece en la vista Landtag.",
+      viewsP1: "Arriba podés alternar entre dos vistas. «Bundestag» muestra la elección federal con selector de año completo (2013, 2017, 2021 y 2025 — los cuatro con datos reales para los 16 estados). «Landtag» muestra la última elección estatal ya finalizada de cada Land — como cada uno vota en una fecha distinta, acá no hay un año en común.",
+      viewsP2: "Para muchos estados también hay historial cargado: al seleccionar un Land en la vista Landtag, aparecen pestañas chicas de año arriba del resultado, para ver elecciones anteriores de ese mismo estado.",
+      hCompare: "Comparar estados",
+      compareP1: "Con el botón «Comparar», junto al mapa, podés elegir hasta tres estados federados a la vez (desde el mapa, la lista o el buscador) y ver sus resultados lado a lado en una tabla — funciona tanto en Bundestag como en Landtag.",
+      hPartyview: "Un partido en los 16 estados",
+      partyviewP1: "El selector «Vista por partido» colorea el mapa según la fuerza de un partido específico y muestra a la derecha un ranking de los 16 estados, ordenados por porcentaje de votos.",
+      partyviewP2: "Con esta vista activa, también podés clickear estados puntuales en el mapa para filtrar la lista a solo esas regiones — útil para comparar un partido en un grupo chico de estados elegidos por vos.",
       hSearch: "Buscador e idioma",
       searchP1: "El buscador de arriba encuentra un estado federado por nombre (en cualquiera de los 3 idiomas). El selector DE/ES/EN traduce toda la interfaz — los nombres de los partidos políticos quedan sin traducir, siguiendo la práctica periodística habitual.",
       hNav: "Encontrar más contenido",
-      navP1: "Junto a las tabs de elección hay un link chico a otros contenidos, como el Grundgesetz o el directorio de direcciones. En el celular, un ícono de menú (☰) agrupa esos links junto con «Fuentes».",
+      navP1: "Junto a las tabs de elección hay dos menús con más contenido: «Los partidos» (perfiles de cada partido y explicación de los tipos de coalición) y «Alemania» (Ley Fundamental, directorio de direcciones, feriados). En el celular, un ícono de menú (☰) agrupa los mismos links bajo esos mismos dos títulos.",
       navP2: "En el footer también están el Impressum, el descargo de responsabilidad, y la página «Sobre Wahlblick» con la metodología detrás de los datos.",
       hSources: "De dónde vienen los datos",
       sourcesP1: "Cada resultado individual tiene un link a su fuente oficial — la Bundeswahlleiterin para el Bundestag, la autoridad electoral de cada estado para su Landtag. Más sobre la metodología en la página «Sobre Wahlblick»."
@@ -259,12 +280,17 @@
       mapP1: "Hover over a federal state to see its name and color. Click it to see the full result — parties, percentages, turnout, and source — in the panel on the right.",
       mapP2: "The selected state is highlighted on the map (with an outline glow) and its name appears larger. You can also select it from the search box or the state tabs.",
       hViews: "Two views: Bundestag and Landtag",
-      viewsP1: "At the top you can switch between two views. “Bundestag” shows the federal election (with a year selector, though only 2025 currently has data). “Landtag” shows each state's most recently completed state election — since each state votes on its own schedule, there's no shared year here.",
-      viewsP2: "That's why the year selector only appears in the Bundestag view and disappears in the Landtag view.",
+      viewsP1: "At the top you can switch between two views. “Bundestag” shows the federal election with a full year selector (2013, 2017, 2021, and 2025 — all four with real data for all 16 states). “Landtag” shows each state's most recently completed state election — since each state votes on its own schedule, there's no shared year here.",
+      viewsP2: "Many states also have a longer history available: once you select a state in the Landtag view, small year tabs appear above the results, letting you browse that state's earlier elections.",
+      hCompare: "Compare states",
+      compareP1: "The “Compare” button next to the map lets you select up to three federal states at once (from the map, the list, or search) and see their results side by side in a table — this works in both the Bundestag and Landtag views.",
+      hPartyview: "One party across all 16 states",
+      partyviewP1: "The “Party view” dropdown colors the map by a single party's strength and shows a ranking of all 16 states on the right, sorted by vote share.",
+      partyviewP2: "While this view is active, you can also click individual states on the map to filter the list down to just those regions — useful for comparing a party across a handful of states you pick yourself.",
       hSearch: "Search and language",
       searchP1: "The search box at the top finds a federal state by name (in any of the 3 languages). The DE/ES/EN switch translates the whole interface — only political party names stay untranslated, following standard journalistic practice.",
       hNav: "Finding more content",
-      navP1: "Next to the election tabs, a small link leads to further content such as the Grundgesetz or the address directory. On mobile, a menu icon (☰) collects those links together with “Sources”.",
+      navP1: "Next to the election tabs, two menus lead to further content: “Parties” (party profiles and an explanation of coalition types) and “Germany” (the Basic Law, the address directory, public holidays). On mobile, a menu icon (☰) collects the same links under those same two headings.",
       navP2: "The footer also has the Impressum, the disclaimer, and the “About Wahlblick” page with the methodology behind the data.",
       hSources: "Where the data comes from",
       sourcesP1: "Every single result links to its official source — the Federal Returning Officer for the Bundestag, each state's own electoral authority for its Landtag. More on the methodology on the “About Wahlblick” page."
@@ -299,6 +325,11 @@
     document.querySelector("[data-h-views]").textContent = c.hViews;
     document.querySelector("[data-views-p1]").textContent = c.viewsP1;
     document.querySelector("[data-views-p2]").textContent = c.viewsP2;
+    document.querySelector("[data-h-compare]").textContent = c.hCompare;
+    document.querySelector("[data-compare-p1]").textContent = c.compareP1;
+    document.querySelector("[data-h-partyview]").textContent = c.hPartyview;
+    document.querySelector("[data-partyview-p1]").textContent = c.partyviewP1;
+    document.querySelector("[data-partyview-p2]").textContent = c.partyviewP2;
     document.querySelector("[data-h-search]").textContent = c.hSearch;
     document.querySelector("[data-search-p1]").textContent = c.searchP1;
     document.querySelector("[data-h-nav]").textContent = c.hNav;
