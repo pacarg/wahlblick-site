@@ -130,6 +130,8 @@
   .cat-card .entries { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); padding-top: 10px; }
   .cat-card .entries li { display: flex; justify-content: space-between; gap: 10px; font-size: 12.5px; padding: 3px 0; }
   .cat-card .entries .val { font-weight: 700; color: var(--text); white-space: nowrap; }
+  .cat-card .entries .val a { color: var(--accent); text-decoration: none; }
+  .cat-card .entries .val a:hover { text-decoration: underline; }
 
   .note {
     margin-top: 8px;
@@ -246,7 +248,11 @@
       group2Heading: "Bürgerbeteiligung und Gesellschaft",
       note: "Diese Liste ersetzt keine Rechts- oder Behördenberatung. Wahlblick prüft die aufgenommenen Stellen nach bestem Wissen, übernimmt aber keine Garantie für Vollständigkeit oder Aktualität einzelner Kontaktdaten.",
       categories: [
-        { title: "Behördengänge und Anmeldung", text: "Bürgeramt (Anmeldung des Wohnsitzes) und Ausländerbehörde für Aufenthaltstitel." },
+        { title: "Behördengänge und Anmeldung", text: "Bürgeramt (Anmeldung des Wohnsitzes) und Ausländerbehörde für Aufenthaltstitel.", entries: [
+          { name: "Wohnsitz anmelden (Bürgeramt)", value: "Bundesportal", url: "https://verwaltung.bund.de/leistungsverzeichnis/de/leistung/99115005104000" },
+          { name: "Aufenthaltstitel und Einwanderung", value: "BAMF", url: "https://www.bamf.de/DE/Themen/MigrationAufenthalt/migrationaufenthalt-node.html" },
+          { name: "Anleitung zur Anmeldung, Schritt für Schritt", value: "Make it in Germany", url: "https://www.make-it-in-germany.com/de/leben-in-deutschland/wohnen-mobilitaet/wohnen-anmelden" }
+        ] },
         { title: "Spanischsprachige Konsulate und Botschaften", text: "Konsularvertretungen spanischsprachiger Länder in Deutschland — für Reisepässe, Vollmachten und Dokumente." },
         { title: "Migrations- und Rechtsberatung", text: "Kostenlose oder günstige Beratungsstellen (Migrationsberatung) und NGOs, die Migrant*innen unterstützen." },
         { title: "Gesundheit und Krankenversicherung", text: "Wie die Krankenkasse funktioniert, wie man eine passende Versicherung wählt, und Gesundheits-Hotlines." },
@@ -282,7 +288,11 @@
       group2Heading: "Participación ciudadana y sociedad",
       note: "Este listado no reemplaza el asesoramiento legal ni de una autoridad oficial. Wahlblick revisa las entidades incluidas según su mejor criterio, pero no garantiza la exactitud ni la vigencia de cada dato de contacto.",
       categories: [
-        { title: "Trámites y registro", text: "Bürgeramt (registro de domicilio, Anmeldung) y Ausländerbehörde (oficina de extranjería) para permisos de residencia." },
+        { title: "Trámites y registro", text: "Bürgeramt (registro de domicilio, Anmeldung) y Ausländerbehörde (oficina de extranjería) para permisos de residencia.", entries: [
+          { name: "Registro de domicilio (Bürgeramt)", value: "Bundesportal", url: "https://verwaltung.bund.de/leistungsverzeichnis/de/leistung/99115005104000" },
+          { name: "Permisos de residencia e inmigración", value: "BAMF", url: "https://www.bamf.de/DE/Themen/MigrationAufenthalt/migrationaufenthalt-node.html" },
+          { name: "Guía paso a paso del Anmeldung", value: "Make it in Germany", url: "https://www.make-it-in-germany.com/de/leben-in-deutschland/wohnen-mobilitaet/wohnen-anmelden" }
+        ] },
         { title: "Consulados y embajadas hispanohablantes", text: "Sedes consulares de países de habla hispana en Alemania, para pasaportes, poderes y documentación." },
         { title: "Asesoría migratoria y legal", text: "Centros de asesoría gratuita o de bajo costo (Migrationsberatung) y ONGs de apoyo a migrantes." },
         { title: "Salud y seguro médico", text: "Cómo funciona el Krankenkasse, cómo elegir seguro, y líneas de salud." },
@@ -318,7 +328,11 @@
       group2Heading: "Civic participation and society",
       note: "This list is not a substitute for legal or official advice. Wahlblick reviews the entities it includes to the best of its ability, but does not guarantee the accuracy or currency of any individual contact detail.",
       categories: [
-        { title: "Registration and administrative procedures", text: "The Bürgeramt (residence registration, \"Anmeldung\") and the Ausländerbehörde (immigration office) for residence permits." },
+        { title: "Registration and administrative procedures", text: "The Bürgeramt (residence registration, \"Anmeldung\") and the Ausländerbehörde (immigration office) for residence permits.", entries: [
+          { name: "Register your address (Bürgeramt)", value: "Bundesportal", url: "https://verwaltung.bund.de/leistungsverzeichnis/de/leistung/99115005104000" },
+          { name: "Residence permits and immigration", value: "BAMF", url: "https://www.bamf.de/DE/Themen/MigrationAufenthalt/migrationaufenthalt-node.html" },
+          { name: "Step-by-step Anmeldung guide", value: "Make it in Germany", url: "https://www.make-it-in-germany.com/de/leben-in-deutschland/wohnen-mobilitaet/wohnen-anmelden" }
+        ] },
         { title: "Spanish-speaking consulates and embassies", text: "Consular offices of Spanish-speaking countries in Germany — for passports, powers of attorney, and official documents." },
         { title: "Migration and legal counseling", text: "Free or low-cost counseling centers (Migrationsberatung) and NGOs that support migrants." },
         { title: "Health and health insurance", text: "How the Krankenkasse (health insurance fund) system works, how to choose coverage, and health hotlines." },
@@ -386,7 +400,10 @@
         var html = "<h3>" + cat.title + "</h3><p>" + cat.text + "</p>";
         if (cat.entries && cat.entries.length) {
           html += "<ul class=\"entries\">" + cat.entries.map(function (e) {
-            return "<li><span>" + e.name + "</span><span class=\"val\">" + e.value + "</span></li>";
+            var val = e.url
+              ? "<a href=\"" + e.url + "\" target=\"_blank\" rel=\"noopener\">" + e.value + " ↗</a>"
+              : e.value;
+            return "<li><span>" + e.name + "</span><span class=\"val\">" + val + "</span></li>";
           }).join("") + "</ul>";
         } else {
           html += "<span class=\"status\">" + status + "</span>";
