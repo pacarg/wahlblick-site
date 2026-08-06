@@ -70,6 +70,7 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
       <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
       <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
+      <a href="faq.html" id="navFaqLink">Häufige Fragen</a>
     </div>
   </div>
 </nav>
@@ -80,9 +81,9 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
 <script>
 (function () {
   var LABELS = {
-    de: { elections2026: "Landtagswahlen 2026", partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
-    es: { elections2026: "Elecciones estatales 2026", partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
-    en: { elections2026: "State elections 2026", partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
+    de: { elections2026: "Landtagswahlen 2026", partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", faq: "Häufige Fragen", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
+    es: { elections2026: "Elecciones estatales 2026", partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", faq: "Preguntas frecuentes", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
+    en: { elections2026: "State elections 2026", partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", faq: "FAQ", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
   };
   function currentLang() { return localStorage.getItem("wahlblickLang") || "de"; }
   function applyLabels(lang) {
@@ -97,6 +98,7 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       navGrundgesetzLink: l.grundgesetz,
       navDirectoryLink: l.directory,
       navHolidaysLink: l.holidays,
+      navFaqLink: l.faq,
       navSitzverteilungLink: l.sitzverteilung
     };
     for (var id in map) {
