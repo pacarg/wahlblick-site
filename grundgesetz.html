@@ -203,6 +203,15 @@
     <div data-sections></div>
     <p class="official-link" data-official-link></p>
   </div>
+
+  <section class="related" aria-label="Weiterlesen">
+    <h2 class="related-h" data-related-heading></h2>
+    <div class="related-grid">
+      <a class="related-card" href="faq.html"><span class="related-card-title" data-rc-faq-t></span><span class="related-card-desc" data-rc-faq-d></span></a>
+      <a class="related-card" href="sitzverteilung.html"><span class="related-card-title" data-rc-seats-t></span><span class="related-card-desc" data-rc-seats-d></span></a>
+      <a class="related-card" href="index.html"><span class="related-card-title" data-rc-map-t></span><span class="related-card-desc" data-rc-map-d></span></a>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -227,6 +236,10 @@
       artSub: "Der erste Abschnitt des Grundgesetzes — kurz zusammengefasst, keine amtliche Wortlautwiedergabe.",
       structHeading: "Der Rest des Grundgesetzes im Überblick",
       structSub: "Die übrigen zehn Abschnitte (Art. 20–146) regeln den Aufbau des Staates — hier als Kurzübersicht, nicht Artikel für Artikel.",
+      relatedHeading: "Weiterlesen",
+      relatedFaqT: "Häufige Fragen", relatedFaqD: "Kanzlerwahl, Volksabstimmungen, Immunität — kurz erklärt.",
+      relatedSeatsT: "Sitzverteilung erklärt", relatedSeatsD: "Wie aus Stimmen die Sitze im Bundestag werden.",
+      relatedMapT: "Zur Wahlkarte", relatedMapD: "Wahlergebnisse nach Bundesland auf der interaktiven Karte.",
       officialLink: "Vollständiger amtlicher Wortlaut: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Bundesministerium der Justiz).",
       articles: [
         { num: "Art. 1", title: "Menschenwürde", text: "Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt — der zentrale, unveränderliche Grundsatz des gesamten Grundgesetzes." },
@@ -270,6 +283,10 @@
       artSub: "La primera sección de la Ley Fundamental — resumida en lenguaje simple, no es una reproducción oficial del texto.",
       structHeading: "El resto de la Ley Fundamental, en resumen",
       structSub: "Las otras diez secciones (Art. 20–146) regulan la organización del Estado — acá como resumen general, no artículo por artículo.",
+      relatedHeading: "Seguir explorando",
+      relatedFaqT: "Preguntas frecuentes", relatedFaqD: "Elección del canciller, referéndums, inmunidad — en breve.",
+      relatedSeatsT: "Cómo se reparten las bancas", relatedSeatsD: "Cómo los votos se convierten en escaños del Bundestag.",
+      relatedMapT: "Ir al mapa electoral", relatedMapD: "Resultados electorales por estado en el mapa interactivo.",
       officialLink: "Texto oficial completo: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Ministerio Federal de Justicia, en alemán).",
       articles: [
         { num: "Art. 1", title: "Dignidad humana", text: "La dignidad humana es intangible. Respetarla y protegerla es obligación de todo poder estatal — el principio central e inmodificable de toda la Ley Fundamental." },
@@ -313,6 +330,10 @@
       artSub: "The first section of the Basic Law — summarized in plain language, not an official reproduction of the text.",
       structHeading: "The rest of the Basic Law, at a glance",
       structSub: "The remaining ten sections (Art. 20–146) regulate the structure of the state — shown here as a summary, not article by article.",
+      relatedHeading: "Keep exploring",
+      relatedFaqT: "FAQ", relatedFaqD: "Chancellor election, referendums, immunity — briefly.",
+      relatedSeatsT: "How seats are allocated", relatedSeatsD: "How votes turn into Bundestag seats.",
+      relatedMapT: "Go to the election map", relatedMapD: "Election results by state on the interactive map.",
       officialLink: "Full official text: <a href=\"https://www.gesetze-im-internet.de/gg/\" target=\"_blank\" rel=\"noopener\">gesetze-im-internet.de/gg</a> (Federal Ministry of Justice, in German).",
       articles: [
         { num: "Art. 1", title: "Human dignity", text: "Human dignity is inviolable. To respect and protect it is the duty of all state authority — the central, unamendable principle underlying the entire Basic Law." },
@@ -369,6 +390,13 @@
     document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
     document.querySelector("[data-foot-about]").textContent = f.about;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
+    document.querySelector("[data-related-heading]").textContent = c.relatedHeading;
+    document.querySelector("[data-rc-faq-t]").textContent = c.relatedFaqT;
+    document.querySelector("[data-rc-faq-d]").textContent = c.relatedFaqD;
+    document.querySelector("[data-rc-seats-t]").textContent = c.relatedSeatsT;
+    document.querySelector("[data-rc-seats-d]").textContent = c.relatedSeatsD;
+    document.querySelector("[data-rc-map-t]").textContent = c.relatedMapT;
+    document.querySelector("[data-rc-map-d]").textContent = c.relatedMapD;
     document.querySelector("[data-art-heading]").textContent = c.artHeading;
     document.querySelector("[data-art-sub]").textContent = c.artSub;
     document.querySelector("[data-struct-heading]").textContent = c.structHeading;
