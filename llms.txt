@@ -1,0 +1,27 @@
+# Wahlblick
+
+> Wahlblick (wahlblick.de) is an independent, free, interactive map of German election results by federal state (Bundesland): the Bundestag (federal) election and the most recent election in each of the 16 state parliaments (Landtage), with historical results. The whole site is available in German, Spanish and English.
+
+## Main
+
+- [Interactive election map](https://wahlblick.de/): results by Bundesland for the Bundestag and the Landtage, with year selection, side-by-side comparison of states and a single-party view.
+- [Electoral system / Wahlsystem](https://wahlblick.de/sitzverteilung.html): how the Bundestag's 630 seats are allocated (Sainte-Laguë method), with an interactive seat-distribution simulator.
+- [Parties / Parteien](https://wahlblick.de/parties.html): profiles of Germany's political parties.
+- [Coalitions / Koalitionen](https://wahlblick.de/government.html): coalition types and how a government is formed.
+
+## Germany
+
+- [Basic Law / Grundgesetz](https://wahlblick.de/grundgesetz.html): Germany's constitution.
+- [Address directory / Adressverzeichnis](https://wahlblick.de/directory.html): useful official addresses and services, aimed especially at the Spanish-speaking community.
+- [Public holidays / Feiertage](https://wahlblick.de/holidays.html): public holidays in Germany.
+
+## About
+
+- [About Wahlblick / Über uns](https://wahlblick.de/about.html): the project, its methodology and its data sources.
+- [User guide / Nutzungshinweise](https://wahlblick.de/guide.html): how to use the site.
+
+## Legal
+
+- [Impressum](https://wahlblick.de/impressum.html)
+- [Privacy / Datenschutz](https://wahlblick.de/datenschutz.html)
+- [Disclaimer / Haftungsausschluss](https://wahlblick.de/disclaimer.html)

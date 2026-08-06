@@ -1,0 +1,14 @@
+# Cloudflare Pages — cache policy for static assets.
+# HTML is intentionally left at the platform default so page content and
+# the edge-injected navigation always revalidate. og-image.png is
+# cache-busted via a ?v= query, so a long cache here is safe.
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.ico
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
