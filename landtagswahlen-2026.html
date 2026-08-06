@@ -46,6 +46,9 @@
   .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 24px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin: 26px 0 10px; }
   .hub-note { font-size: 14px; line-height: 1.6; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 0 0 8px; }
+  .hub-cta { font-size: 13.5px; line-height: 1.5; margin: 0 0 18px; }
+  .hub-cta a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .hub-cta a:hover { text-decoration: underline; }
 
   .elec-row { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; transition: border-color .12s, background .12s; }
   .elec-row:hover { border-color: var(--accent); background: var(--surface); }
@@ -123,9 +126,11 @@
 
   <h2 id="not" data-t="notHeading">Wo wird 2026 nicht gewählt?</h2>
   <p class="hub-note" data-t="notText">In vielen Ländern wird 2026 kein neuer Landtag gewählt — die nächste Wahl kommt erst später. Zum Beispiel: Sachsen (zuletzt 2024, nächste 2029), Nordrhein-Westfalen (2027) und Bayern (2028). 2026 wählen nur die oben genannten fünf Länder.</p>
+  <p class="hub-cta" data-t="notCta" data-html>→ <a href="index.html">Und wo wurde schon gewählt? Alle Ergebnisse nach Bundesland auf der Karte</a></p>
 
   <h2 id="who" data-t="whoHeading">Wer darf bei einer Landtagswahl wählen — und wer nicht?</h2>
   <p class="hub-note" data-t="whoText">Wählen darf, wer die deutsche Staatsangehörigkeit besitzt, den Hauptwohnsitz im jeweiligen Bundesland hat und das Mindestwahlalter erreicht — je nach Land 16 oder 18 Jahre. Wichtig: EU-Bürgerinnen und -Bürger ohne deutschen Pass dürfen bei Landtagswahlen nicht wählen — anders als bei Kommunalwahlen, wo sie es dürfen.</p>
+  <p class="hub-cta" data-t="whoCta" data-html>→ <a href="sitzverteilung.html">Und wie werden aus Stimmen Sitze? Fünf-Prozent-Hürde und Grundmandatsklausel erklärt</a></p>
 
   <a class="cta" href="index.html" data-t="cta">Alle Ergebnisse auf der interaktiven Karte →</a>
 </main>
@@ -164,6 +169,8 @@
       notText: "In vielen Ländern wird 2026 kein neuer Landtag gewählt — die nächste Wahl kommt erst später. Zum Beispiel: Sachsen (zuletzt 2024, nächste 2029), Nordrhein-Westfalen (2027) und Bayern (2028). 2026 wählen nur die oben genannten fünf Länder.",
       whoHeading: "Wer darf bei einer Landtagswahl wählen — und wer nicht?",
       whoText: "Wählen darf, wer die deutsche Staatsangehörigkeit besitzt, den Hauptwohnsitz im jeweiligen Bundesland hat und das Mindestwahlalter erreicht — je nach Land 16 oder 18 Jahre. Wichtig: EU-Bürgerinnen und -Bürger ohne deutschen Pass dürfen bei Landtagswahlen nicht wählen — anders als bei Kommunalwahlen, wo sie es dürfen.",
+      notCta: "→ <a href=\"index.html\">Und wo wurde schon gewählt? Alle Ergebnisse nach Bundesland auf der Karte</a>",
+      whoCta: "→ <a href=\"sitzverteilung.html\">Und wie werden aus Stimmen Sitze? Fünf-Prozent-Hürde und Grundmandatsklausel erklärt</a>",
       badgeUp: "Kommend", badgePast: "Bereits gewählt",
       cta: "Alle Ergebnisse auf der interaktiven Karte →",
       datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", guide: "Nutzungshinweise"
@@ -179,6 +186,8 @@
       notText: "En muchos estados no hay elección estatal en 2026 — la próxima recién más adelante. Por ejemplo: Sajonia (Sachsen; última en 2024, próxima en 2029), Renania del Norte-Westfalia (NRW; 2027) y Baviera (Bayern; 2028). En 2026 votan solo los cinco estados de arriba.",
       whoHeading: "¿Quién puede votar en una elección estatal — y quién no?",
       whoText: "Puede votar quien tenga la nacionalidad alemana, tenga su domicilio principal en el estado federado correspondiente y haya alcanzado la edad mínima —16 o 18 años según el Land—. Importante: los ciudadanos de la UE sin pasaporte alemán no pueden votar en las elecciones estatales (Landtagswahlen), a diferencia de las municipales (Kommunalwahlen), donde sí pueden.",
+      notCta: "→ <a href=\"index.html\">¿Y dónde ya se votó? Todos los resultados por estado en el mapa</a>",
+      whoCta: "→ <a href=\"sitzverteilung.html\">¿Y cómo se convierten los votos en escaños? La barrera del 5 % y la cláusula de mandato básico, explicadas</a>",
       badgeUp: "Próxima", badgePast: "Ya votó",
       cta: "Todos los resultados en el mapa interactivo →",
       datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", guide: "Guía de uso"
@@ -194,6 +203,8 @@
       notText: "Many states hold no state election in 2026 — their next vote comes later. For example: Saxony (Sachsen; last in 2024, next in 2029), North Rhine-Westphalia (NRW; 2027) and Bavaria (Bayern; 2028). In 2026, only the five states listed above vote.",
       whoHeading: "Who may vote in a state election — and who may not?",
       whoText: "You may vote if you hold German citizenship, have your main residence in the respective state and have reached the minimum voting age — 16 or 18 depending on the state. Important: EU citizens without a German passport may not vote in state elections (Landtagswahlen), unlike municipal elections (Kommunalwahlen), where they can.",
+      notCta: "→ <a href=\"index.html\">And where has voting already happened? All results by state on the map</a>",
+      whoCta: "→ <a href=\"sitzverteilung.html\">And how do votes become seats? The 5% threshold and the basic-mandate clause, explained</a>",
       badgeUp: "Upcoming", badgePast: "Already held",
       cta: "All results on the interactive map →",
       datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", guide: "User Guide"
@@ -220,7 +231,9 @@
     document.title = c.docTitle;
     document.querySelectorAll("[data-t]").forEach(function (el) {
       var k = el.getAttribute("data-t");
-      if (c[k] != null) el.textContent = c[k];
+      if (c[k] == null) return;
+      if (el.hasAttribute("data-html")) el.innerHTML = c[k];
+      else el.textContent = c[k];
     });
     buildLists(lang);
   }
