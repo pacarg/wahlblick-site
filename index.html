@@ -235,6 +235,41 @@
     background-repeat: no-repeat;
   }
 
+  .welcome {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .welcome-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px;
+  }
+  .welcome-text { width: 80%; margin: 0 auto; }
+  .welcome-title {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .welcome-body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-muted);
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .welcome-body a { color: var(--accent); font-weight: 600; }
+  @media (max-width: 720px) {
+    .welcome-inner { padding: 14px 16px; }
+    .welcome-text { width: auto; }
+    .welcome-title { font-size: 17px; }
+    .welcome-body { font-size: 13px; line-height: 1.5; }
+  }
+
   .land-tabs {
     max-width: 1200px;
     margin: 14px auto 0;
@@ -657,6 +692,15 @@
   </div>
 </nav>
 </div>
+
+<section class="welcome" aria-labelledby="welcomeTitle">
+  <div class="welcome-inner">
+    <div class="welcome-text">
+      <h1 class="welcome-title" id="welcomeTitle">Deutschland wählt — hier behalten Sie den Überblick.</h1>
+      <p class="welcome-body" id="welcomeBody">Wahlblick ist eine interaktive, unabhängige Karte der Wahlergebnisse in Deutschland. Wählen Sie ein Bundesland, um zu sehen, wer gewonnen hat, mit welchem Ergebnis und wie es sich zur vorigen Wahl verändert hat — für die Bundestagswahl und die 16 Landtage, mit ihrer Geschichte. Sie möchten wissen, wie aus Stimmen Sitze werden? Der Bereich <a href="sitzverteilung.html">Wahlsystem</a> erklärt es Schritt für Schritt.</p>
+    </div>
+  </div>
+</section>
 
 <div class="land-tabs" id="landTabs"></div>
 <div class="land-select-wrap">
@@ -2233,6 +2277,8 @@
       partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
+      welcomeTitle: "Deutschland wählt — hier behalten Sie den Überblick.",
+      welcomeBody: "Wahlblick ist eine interaktive, unabhängige Karte der Wahlergebnisse in Deutschland. Wählen Sie ein Bundesland, um zu sehen, wer gewonnen hat, mit welchem Ergebnis und wie es sich zur vorigen Wahl verändert hat — für die Bundestagswahl und die 16 Landtage, mit ihrer Geschichte. Sie möchten wissen, wie aus Stimmen Sitze werden? Der Bereich <a href=\"sitzverteilung.html\">Wahlsystem</a> erklärt es Schritt für Schritt.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
       emptyTitle: "Kein Bundesland ausgewählt",
       emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
@@ -2293,6 +2339,8 @@
       partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
+      welcomeTitle: "Alemania vota. Acá lo ves claro.",
+      welcomeBody: "Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elegí un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Querés entender cómo los votos se convierten en escaños? La sección <a href=\"sitzverteilung.html\">Sistema electoral</a> lo explica paso a paso.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
       emptyTitle: "Ningún estado federado seleccionado",
       emptyBody: "Hacé click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
@@ -2353,6 +2401,8 @@
       partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
+      welcomeTitle: "Germany votes. See it clearly.",
+      welcomeBody: "Wahlblick is an interactive, independent map of Germany's election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href=\"sitzverteilung.html\">Electoral system</a> section explains it step by step.",
       eyebrowLandtag: "State election · most recent per state",
       emptyTitle: "No federal state selected",
       emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
@@ -3079,6 +3129,8 @@
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
     });
+    document.getElementById("welcomeTitle").textContent = tr("welcomeTitle");
+    document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
