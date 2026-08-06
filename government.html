@@ -198,6 +198,15 @@
     <h2 data-minority-heading></h2>
     <p class="plain" data-minority-text></p>
   </div>
+
+  <section class="related" aria-label="Weiterlesen">
+    <h2 class="related-h" data-related-heading></h2>
+    <div class="related-grid">
+      <a class="related-card" href="parties.html"><span class="related-card-title" data-rc-parties-t></span><span class="related-card-desc" data-rc-parties-d></span></a>
+      <a class="related-card" href="sitzverteilung.html"><span class="related-card-title" data-rc-seats-t></span><span class="related-card-desc" data-rc-seats-d></span></a>
+      <a class="related-card" href="index.html"><span class="related-card-title" data-rc-map-t></span><span class="related-card-desc" data-rc-map-d></span></a>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -224,6 +233,10 @@
       note: "Diese Übersicht beschreibt allgemein gebräuchliche Koalitionsmuster und ihre Namen — sie behauptet nicht, welche Koalition aktuell auf Bundesebene regiert. Aktuelle Zusammensetzung und Arbeit des Parlaments: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Weitere Quellen: Wikipedia (Ampelkoalition) und bundestagwahlumfrage.de.",
       minorityHeading: "Minderheitsregierung",
       minorityText: "Nicht immer kommt eine Koalition mit Mehrheit zustande. Eine Minderheitsregierung regiert ohne eigene Mehrheit im Parlament und muss sich für jedes Gesetz wechselnde Unterstützung suchen — seltener, aber ebenfalls Teil der deutschen Verfassungspraxis.",
+      relatedHeading: "Weiterlesen",
+      relatedPartiesT: "Die Parteien", relatedPartiesD: "Wer die Parteien sind, die diese Koalitionen bilden.",
+      relatedSeatsT: "Sitzverteilung erklärt", relatedSeatsD: "Wie Mehrheiten im Bundestag rechnerisch entstehen.",
+      relatedMapT: "Zur Wahlkarte", relatedMapD: "Ergebnisse und Mehrheiten nach Bundesland auf der Karte.",
       coalitions: [
         { colors: [CDU, SPD], title: "Große Koalition (GroKo)", text: "CDU/CSU + SPD — die beiden traditionell großen Volksparteien gemeinsam an der Regierung." },
         { colors: [SPD, GRUENE, FDP], title: "Ampelkoalition", text: "SPD + Grüne + FDP — erstmals 2021 auf Bundesebene, benannt nach den Ampelfarben Rot, Grün und Gelb." },
@@ -242,6 +255,10 @@
       note: "Este resumen describe patrones de coalición y sus nombres de uso común — no afirma cuál coalición gobierna actualmente a nivel federal. Composición y trabajo actual del parlamento: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Otras fuentes: Wikipedia (Ampelkoalition) y bundestagwahlumfrage.de.",
       minorityHeading: "Gobierno en minoría",
       minorityText: "No siempre se forma una coalición con mayoría. Un gobierno en minoría gobierna sin mayoría propia en el parlamento y necesita buscar apoyos distintos para cada ley — es menos frecuente, pero también forma parte de la práctica constitucional alemana.",
+      relatedHeading: "Seguir explorando",
+      relatedPartiesT: "Los partidos", relatedPartiesD: "Quiénes son los partidos que forman estas coaliciones.",
+      relatedSeatsT: "Cómo se reparten las bancas", relatedSeatsD: "Cómo se arman aritméticamente las mayorías en el Bundestag.",
+      relatedMapT: "Ir al mapa electoral", relatedMapD: "Resultados y mayorías por estado en el mapa interactivo.",
       coalitions: [
         { colors: [CDU, SPD], title: "Gran Coalición (GroKo)", text: "CDU/CSU + SPD — los dos grandes partidos tradicionales gobernando juntos." },
         { colors: [SPD, GRUENE, FDP], title: "Coalición semáforo (Ampel)", text: "SPD + Verdes + FDP — por primera vez a nivel federal en 2021, llamada así por los colores de un semáforo: rojo, verde y amarillo." },
@@ -260,6 +277,10 @@
       note: "This overview describes commonly used coalition patterns and their names — it does not claim which coalition currently governs at the federal level. Current parliament composition and work: <a href=\"https://www.bundestag.de\" target=\"_blank\" rel=\"noopener\">bundestag.de</a>. Other sources: Wikipedia (Ampelkoalition) and bundestagwahlumfrage.de.",
       minorityHeading: "Minority government",
       minorityText: "A majority coalition doesn't always come together. A minority government governs without its own majority in parliament and has to seek shifting support for each individual law — less common, but still part of German constitutional practice.",
+      relatedHeading: "Keep exploring",
+      relatedPartiesT: "The parties", relatedPartiesD: "Who the parties forming these coalitions are.",
+      relatedSeatsT: "How seats are allocated", relatedSeatsD: "How majorities in the Bundestag add up.",
+      relatedMapT: "Go to the election map", relatedMapD: "Results and majorities by state on the interactive map.",
       coalitions: [
         { colors: [CDU, SPD], title: "Grand Coalition (GroKo)", text: "CDU/CSU + SPD — the two traditionally largest parties governing together." },
         { colors: [SPD, GRUENE, FDP], title: "Traffic-light coalition (Ampel)", text: "SPD + Greens + FDP — first formed at the federal level in 2021, named after the traffic-light colors red, green, and yellow." },
@@ -295,6 +316,13 @@
     document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
     document.querySelector("[data-foot-about]").textContent = f.about;
     document.querySelector("[data-foot-guide]").textContent = f.guide;
+    document.querySelector("[data-related-heading]").textContent = c.relatedHeading;
+    document.querySelector("[data-rc-parties-t]").textContent = c.relatedPartiesT;
+    document.querySelector("[data-rc-parties-d]").textContent = c.relatedPartiesD;
+    document.querySelector("[data-rc-seats-t]").textContent = c.relatedSeatsT;
+    document.querySelector("[data-rc-seats-d]").textContent = c.relatedSeatsD;
+    document.querySelector("[data-rc-map-t]").textContent = c.relatedMapT;
+    document.querySelector("[data-rc-map-d]").textContent = c.relatedMapD;
 
     var wrap = document.querySelector("[data-coalitions]");
     wrap.innerHTML = "";

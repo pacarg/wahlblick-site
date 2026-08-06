@@ -384,6 +384,15 @@
     <p class="plain" data-sources-text></p>
   </div>
 
+  <section class="related" aria-label="Weiterlesen">
+    <h2 class="related-h" data-related-heading></h2>
+    <div class="related-grid">
+      <a class="related-card" href="parties.html"><span class="related-card-title" data-rc-parties-t></span><span class="related-card-desc" data-rc-parties-d></span></a>
+      <a class="related-card" href="government.html"><span class="related-card-title" data-rc-gov-t></span><span class="related-card-desc" data-rc-gov-d></span></a>
+      <a class="related-card" href="faq.html"><span class="related-card-title" data-rc-faq-t></span><span class="related-card-desc" data-rc-faq-d></span></a>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -482,6 +491,10 @@
       hemiText: "Die Reform von 2023 legt die Bundestagsgröße fest auf 630 Sitze. Zuvor war der Bundestag durch Überhang- und Ausgleichsmandate immer weiter gewachsen — von 598 vorgesehenen Sitzen auf zuletzt 736 Sitze im 20. Bundestag (2021–2025).",
       hSources: "Quellen",
       sourcesText: "Alle Zahlen dieser Seite stammen von der Bundeswahlleiterin und dem Deutschen Bundestag: Endergebnis 2025 (bundeswahlleiterin.de), gewählte Abgeordnete (bundeswahlleiterin.de) sowie die Übersicht zu den 23 Wahlkreisen ohne Mandat (bundestag.de). Amtliche Ergebnisse für den eigenen Wahlkreis: wahlen-sh.de und die Landeswahlleitungen der übrigen Länder.",
+      relatedHeading: "Weiterlesen",
+      relatedPartiesT: "Die Parteien", relatedPartiesD: "Wer die Parteien hinter den Zahlen sind.",
+      relatedGovT: "Koalitionen", relatedGovD: "Wie aus Sitzen eine Regierung wird.",
+      relatedFaqT: "Häufige Fragen", relatedFaqD: "Kanzlerwahl, Volksabstimmungen und mehr — kurz erklärt.",
       datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", about: "Über Wahlblick", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", parties: "Parteien"
     },
     es: {
@@ -512,6 +525,10 @@
       hemiText: "La reforma de 2023 fija el tamaño del Bundestag en 630 escaños. Antes, el parlamento crecía cada elección por los mandatos de sobrerrepresentación y compensación — de 598 escaños previstos hasta 736 escaños en el 20.º Bundestag (2021–2025).",
       hSources: "Fuentes",
       sourcesText: "Todos los datos de esta página provienen de la Bundeswahlleiterin y del Bundestag alemán: resultado final 2025 (bundeswahlleiterin.de), diputados electos (bundeswahlleiterin.de) y el resumen de los 23 distritos sin mandato (bundestag.de). Resultados oficiales por distrito propio: wahlen-sh.de y las autoridades electorales de cada estado federado.",
+      relatedHeading: "Seguir explorando",
+      relatedPartiesT: "Los partidos", relatedPartiesD: "Quiénes son los partidos detrás de los números.",
+      relatedGovT: "Coaliciones", relatedGovD: "Cómo de los escaños se pasa a un gobierno.",
+      relatedFaqT: "Preguntas frecuentes", relatedFaqD: "Elección del canciller, referéndums y más — en breve.",
       datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", parties: "Partidos"
     },
     en: {
@@ -529,6 +546,10 @@
       slPartyLabel: "Choose party",
       slShareSuffix: "— second-vote share",
       slHint: "The other shares shift proportionally, the total stays at 100%. Simplified model — it does not simulate the basic-mandate clause.",
+      relatedHeading: "Keep exploring",
+      relatedPartiesT: "The parties", relatedPartiesD: "Who the parties behind the numbers are.",
+      relatedGovT: "Coalitions", relatedGovD: "How seats turn into a government.",
+      relatedFaqT: "FAQ", relatedFaqD: "Chancellor election, referendums and more — briefly.",
       hMandates: "299 constituencies, but not every winner gets a seat",
       subMandates: "Since the 2023 electoral reform, winning a constituency no longer automatically guarantees a seat — overhang and leveling seats were abolished.",
       thParty: "Party", thWon: "Won", thUncovered: "No seat", thSeated: "Direct seats",
@@ -772,6 +793,13 @@
     document.querySelector("[data-foot-disclaimer]").textContent = c.disclaimer;
     document.querySelector("[data-foot-about]").textContent = c.about;
     document.querySelector("[data-foot-guide]").textContent = c.guide;
+    document.querySelector("[data-related-heading]").textContent = c.relatedHeading;
+    document.querySelector("[data-rc-parties-t]").textContent = c.relatedPartiesT;
+    document.querySelector("[data-rc-parties-d]").textContent = c.relatedPartiesD;
+    document.querySelector("[data-rc-gov-t]").textContent = c.relatedGovT;
+    document.querySelector("[data-rc-gov-d]").textContent = c.relatedGovD;
+    document.querySelector("[data-rc-faq-t]").textContent = c.relatedFaqT;
+    document.querySelector("[data-rc-faq-d]").textContent = c.relatedFaqD;
 
     buildResultsBars(lang);
     buildThresholdBars(lang);

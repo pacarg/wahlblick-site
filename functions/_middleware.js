@@ -47,6 +47,17 @@ const NAV_STYLE = `<style>
 .site-header .lang-switch button{border-radius:999px}
 .site-header .lang-switch button.active{color:#fff;background:var(--accent)}
 @media (max-width:720px){.site-header .lang-switch{padding:1px 2px 1px 3px}.site-header .lang-switch::before{width:13px;margin:0 2px 0 1px}}
+/* "Weiterlesen" related-page cards at the foot of content pages (parties,
+   government, sitzverteilung, …). Shared here so the component stays
+   consistent and phase-2 pages only need to add the markup + text. */
+.related-h{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin:30px 0 12px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.related-card{display:flex;flex-direction:column;gap:5px;text-decoration:none;color:var(--text);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color .12s,background .12s}
+.related-card:hover{border-color:var(--accent);background:var(--surface)}
+.related-card-title{font-size:14.5px;font-weight:700}
+.related-card-title::after{content:" →";color:var(--accent)}
+.related-card-desc{font-size:12.5px;line-height:1.45;color:var(--text-muted)}
+@media (max-width:720px){.related-grid{grid-template-columns:1fr}}
 </style>`;
 
 const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
