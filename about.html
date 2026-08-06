@@ -240,6 +240,8 @@
 </footer>
 
 <script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
   var CONTENT = {
     de: {
       title: "Über Wahlblick",
@@ -334,6 +336,13 @@
     b.classList.toggle("active", b.getAttribute("data-lang") === initialLang);
   });
   render(initialLang);
+
+  if (location.hash) {
+    var hashTarget = document.getElementById(location.hash.slice(1));
+    if (hashTarget) hashTarget.scrollIntoView();
+  } else {
+    window.scrollTo(0, 0);
+  }
 </script>
 </body>
 </html>
