@@ -30,6 +30,7 @@
     --accent-ink: #ffffff;
     --strip-bg: #12161c;
     --strip-text: #c7cdd6;
+    --tile: #dfe3e8;
     --radius: 4px;
   }
 
@@ -97,6 +98,14 @@
   .panel p { font-size: 14.5px; line-height: 1.65; margin: 0 0 14px; color: var(--text); }
   .panel p:last-child { margin-bottom: 0; }
 
+  .fig { width: 100%; height: auto; display: block; margin: 18px 0 8px; }
+  .fig text { font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+  .gf-chrome { font-size: 13px; font-weight: 700; }
+  .gf-num { font-size: 12px; font-weight: 800; fill: #fff; }
+  .gf-lbl { font-size: 12px; font-weight: 700; fill: var(--text-muted); }
+  .fig-cap { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+  .fig-cap b { color: var(--accent); font-weight: 800; }
+
   footer {
     max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
     border-top: 1px solid var(--border);
@@ -162,39 +171,154 @@
     <h2 data-h-map></h2>
     <p data-map-p1></p>
     <p data-map-p2></p>
+    <svg class="fig" viewBox="0 0 600 230" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="16" y="20" width="228" height="180" rx="12" fill="var(--surface)" stroke="var(--border)"/>
+      <rect x="98" y="86" width="72" height="54" rx="8" fill="var(--accent)" opacity="0.18"/>
+      <g fill="var(--tile)">
+        <rect x="32" y="36" width="58" height="42" rx="6"/><rect x="103" y="36" width="58" height="42" rx="6"/><rect x="174" y="36" width="54" height="42" rx="6"/>
+        <rect x="32" y="90" width="58" height="42" rx="6"/><rect x="174" y="90" width="54" height="42" rx="6"/>
+        <rect x="32" y="144" width="58" height="42" rx="6"/><rect x="103" y="144" width="58" height="42" rx="6"/><rect x="174" y="144" width="54" height="42" rx="6"/>
+      </g>
+      <rect x="103" y="90" width="58" height="42" rx="6" fill="var(--accent)"/>
+      <path d="M138 118 l0 24 l6 -6 l4 9 l5 -2 l-4 -9 l8 0 z" fill="#fff" stroke="var(--text)" stroke-width="1.3" stroke-linejoin="round"/>
+      <circle cx="170" cy="86" r="11" fill="var(--accent)"/><text x="170" y="86" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <path d="M250 110 h34" stroke="var(--accent)" stroke-width="2.5" fill="none"/><path d="M282 104 l10 6 l-10 6 z" fill="var(--accent)"/>
+      <rect x="300" y="20" width="284" height="180" rx="10" fill="var(--bg)" stroke="var(--border)"/>
+      <rect x="320" y="40" width="130" height="11" rx="5.5" fill="#c7cbd1"/>
+      <rect x="320" y="72" width="200" height="15" rx="4" fill="#e3000f"/>
+      <rect x="320" y="98" width="156" height="15" rx="4" fill="#1a1a1a"/>
+      <rect x="320" y="124" width="112" height="15" rx="4" fill="#46962b"/>
+      <rect x="320" y="150" width="84" height="15" rx="4" fill="#009ee0"/>
+      <rect x="320" y="178" width="120" height="9" rx="4.5" fill="#e3e6ea"/>
+      <circle cx="568" cy="36" r="11" fill="var(--accent)"/><text x="568" y="36" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-figmap-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-views></h2>
     <p data-views-p1></p>
     <p data-views-p2></p>
+    <svg class="fig" viewBox="0 0 600 140" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="24" width="244" height="44" rx="22" fill="var(--surface)" stroke="var(--border)"/>
+      <rect x="23" y="27" width="119" height="38" rx="19" fill="var(--accent)"/>
+      <text x="82" y="51" text-anchor="middle" class="gf-chrome" fill="#fff">Bundestag</text>
+      <text x="205" y="51" text-anchor="middle" class="gf-chrome" fill="var(--text-muted)">Landtag</text>
+      <circle cx="288" cy="46" r="11" fill="var(--accent)"/><text x="288" y="46" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <rect x="20" y="90" width="66" height="34" rx="8" fill="var(--bg)" stroke="var(--border)"/><text x="53" y="111" text-anchor="middle" class="gf-lbl">2013</text>
+      <rect x="94" y="90" width="66" height="34" rx="8" fill="var(--bg)" stroke="var(--border)"/><text x="127" y="111" text-anchor="middle" class="gf-lbl">2017</text>
+      <rect x="168" y="90" width="66" height="34" rx="8" fill="var(--bg)" stroke="var(--border)"/><text x="201" y="111" text-anchor="middle" class="gf-lbl">2021</text>
+      <rect x="242" y="90" width="66" height="34" rx="8" fill="var(--accent)"/><text x="275" y="111" text-anchor="middle" class="gf-chrome" fill="#fff">2025</text>
+      <circle cx="332" cy="107" r="11" fill="var(--accent)"/><text x="332" y="107" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-figviews-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-compare></h2>
     <p data-compare-p1></p>
+    <svg class="fig" viewBox="0 0 600 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="16" width="158" height="40" rx="20" fill="var(--accent)"/>
+      <text x="99" y="41" text-anchor="middle" class="gf-chrome" fill="#fff">+ Vergleichen</text>
+      <circle cx="196" cy="36" r="11" fill="var(--accent)"/><text x="196" y="36" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <g>
+        <rect x="20" y="84" width="110" height="10" rx="5" fill="#c7cbd1"/>
+        <rect x="20" y="104" width="150" height="13" rx="4" fill="#e3000f"/><rect x="20" y="124" width="120" height="13" rx="4" fill="#1a1a1a"/><rect x="20" y="144" width="95" height="13" rx="4" fill="#46962b"/>
+      </g>
+      <g>
+        <rect x="215" y="84" width="110" height="10" rx="5" fill="#c7cbd1"/>
+        <rect x="215" y="104" width="130" height="13" rx="4" fill="#1a1a1a"/><rect x="215" y="124" width="150" height="13" rx="4" fill="#e3000f"/><rect x="215" y="144" width="80" height="13" rx="4" fill="#009ee0"/>
+      </g>
+      <g>
+        <rect x="410" y="84" width="110" height="10" rx="5" fill="#c7cbd1"/>
+        <rect x="410" y="104" width="140" height="13" rx="4" fill="#46962b"/><rect x="410" y="124" width="100" height="13" rx="4" fill="#e3000f"/><rect x="410" y="144" width="120" height="13" rx="4" fill="#1a1a1a"/>
+      </g>
+      <circle cx="566" cy="70" r="11" fill="var(--accent)"/><text x="566" y="70" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-figcompare-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-partyview></h2>
     <p data-partyview-p1></p>
     <p data-partyview-p2></p>
+    <svg class="fig" viewBox="0 0 600 220" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="16" y="18" width="224" height="184" rx="12" fill="var(--surface)" stroke="var(--border)"/>
+      <g fill="var(--accent)">
+        <rect x="32" y="34" width="58" height="42" rx="6" opacity="1"/><rect x="103" y="34" width="58" height="42" rx="6" opacity="0.5"/><rect x="174" y="34" width="52" height="42" rx="6" opacity="0.3"/>
+        <rect x="32" y="88" width="58" height="42" rx="6" opacity="0.8"/><rect x="103" y="88" width="58" height="42" rx="6" opacity="0.62"/><rect x="174" y="88" width="52" height="42" rx="6" opacity="0.22"/>
+        <rect x="32" y="142" width="58" height="42" rx="6" opacity="0.42"/><rect x="103" y="142" width="58" height="42" rx="6" opacity="0.34"/><rect x="174" y="142" width="52" height="42" rx="6" opacity="0.18"/>
+      </g>
+      <circle cx="240" cy="38" r="11" fill="var(--accent)"/><text x="240" y="38" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <g>
+        <circle cx="284" cy="46" r="10" fill="none" stroke="var(--border)" stroke-width="1.5"/><text x="284" y="46" dy="4" text-anchor="middle" class="gf-lbl">1</text>
+        <rect x="304" y="38" width="180" height="16" rx="4" fill="var(--accent)"/>
+        <circle cx="284" cy="82" r="10" fill="none" stroke="var(--border)" stroke-width="1.5"/><text x="284" y="82" dy="4" text-anchor="middle" class="gf-lbl">2</text>
+        <rect x="304" y="74" width="150" height="16" rx="4" fill="var(--accent)" opacity="0.8"/>
+        <circle cx="284" cy="118" r="10" fill="none" stroke="var(--border)" stroke-width="1.5"/><text x="284" y="118" dy="4" text-anchor="middle" class="gf-lbl">3</text>
+        <rect x="304" y="110" width="120" height="16" rx="4" fill="var(--accent)" opacity="0.62"/>
+        <circle cx="284" cy="154" r="10" fill="none" stroke="var(--border)" stroke-width="1.5"/><text x="284" y="154" dy="4" text-anchor="middle" class="gf-lbl">4</text>
+        <rect x="304" y="146" width="92" height="16" rx="4" fill="var(--accent)" opacity="0.44"/>
+        <circle cx="284" cy="190" r="10" fill="none" stroke="var(--border)" stroke-width="1.5"/><text x="284" y="190" dy="4" text-anchor="middle" class="gf-lbl">5</text>
+        <rect x="304" y="182" width="70" height="16" rx="4" fill="var(--accent)" opacity="0.3"/>
+      </g>
+      <circle cx="566" cy="38" r="11" fill="var(--accent)"/><text x="566" y="38" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-figparty-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-search></h2>
     <p data-search-p1></p>
+    <svg class="fig" viewBox="0 0 600 150" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="20" width="340" height="42" rx="21" fill="var(--bg)" stroke="var(--border)"/>
+      <circle cx="46" cy="41" r="7" fill="none" stroke="var(--text-muted)" stroke-width="2"/><path d="M51 46 l6 6" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round"/>
+      <text x="68" y="46" class="gf-chrome" fill="var(--text-muted)" style="font-weight:400">Bundesland suchen…</text>
+      <circle cx="380" cy="41" r="11" fill="var(--accent)"/><text x="380" y="41" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <rect x="20" y="92" width="150" height="34" rx="17" fill="var(--bg)" stroke="var(--border)"/>
+      <circle cx="40" cy="109" r="8" fill="none" stroke="var(--text-muted)" stroke-width="1.6"/><path d="M32 109 h16 M40 101 a12 12 0 0 1 0 16 a12 12 0 0 1 0 -16" fill="none" stroke="var(--text-muted)" stroke-width="1.2"/>
+      <rect x="56" y="96" width="34" height="26" rx="13" fill="var(--accent)"/><text x="73" y="113" text-anchor="middle" class="gf-chrome" fill="#fff">DE</text>
+      <text x="108" y="113" text-anchor="middle" class="gf-chrome" fill="var(--text-muted)">ES</text>
+      <text x="142" y="113" text-anchor="middle" class="gf-chrome" fill="var(--text-muted)">EN</text>
+      <circle cx="190" cy="109" r="11" fill="var(--accent)"/><text x="190" y="109" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-figsearch-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-nav></h2>
     <p data-nav-p1></p>
     <p data-nav-p2></p>
+    <svg class="fig" viewBox="0 0 600 210" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="20" width="20" height="15" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M23 27 l3 3 l6 -6" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="44" y="33" class="gf-chrome" fill="var(--accent)">Landtagswahlen 2026</text>
+      <circle cx="205" cy="27" r="11" fill="var(--accent)"/><text x="205" y="27" dy="4" text-anchor="middle" class="gf-num">1</text>
+      <text x="250" y="33" class="gf-chrome" fill="var(--text-muted)">Die Parteien ▾</text>
+      <text x="370" y="33" class="gf-chrome" fill="var(--text-muted)">Wahlsystem ▾</text>
+      <text x="478" y="33" class="gf-chrome" fill="var(--accent)">Deutschland ▾</text>
+      <rect x="430" y="52" width="168" height="132" rx="8" fill="var(--bg)" stroke="var(--border)"/>
+      <text x="446" y="78" class="gf-chrome" fill="var(--text)" style="font-weight:400">Grundgesetz</text>
+      <text x="446" y="104" class="gf-chrome" fill="var(--text)" style="font-weight:400">Adressverzeichnis</text>
+      <text x="446" y="130" class="gf-chrome" fill="var(--text)" style="font-weight:400">Feiertage</text>
+      <text x="446" y="160" class="gf-chrome" fill="var(--accent)">Häufige Fragen</text>
+      <rect x="446" y="168" width="88" height="16" rx="8" fill="#eafaf0"/><text x="490" y="180" text-anchor="middle" fill="#16a34a" style="font-size:11px;font-weight:700">neu · nuevo</text>
+      <circle cx="408" cy="152" r="11" fill="var(--accent)"/><text x="408" y="152" dy="4" text-anchor="middle" class="gf-num">2</text>
+    </svg>
+    <p class="fig-cap" data-fignav-cap data-html></p>
   </div>
 
   <div class="panel">
     <h2 data-h-sources></h2>
     <p data-sources-p1></p>
+    <svg class="fig" viewBox="0 0 600 130" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="16" width="330" height="100" rx="10" fill="var(--bg)" stroke="var(--border)"/>
+      <rect x="40" y="34" width="150" height="14" rx="4" fill="#e3000f"/><rect x="40" y="56" width="110" height="14" rx="4" fill="#1a1a1a"/>
+      <path d="M42 92 a5 5 0 0 1 5 -5 h6 M50 92 a5 5 0 0 0 5 5 h6" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>
+      <text x="66" y="96" class="gf-chrome" fill="var(--accent)">bundeswahlleiterin.de</text>
+      <path d="M232 88 h9 v9 M241 88 l-11 11" stroke="var(--accent)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="380" cy="92" r="11" fill="var(--accent)"/><text x="380" y="92" dy="4" text-anchor="middle" class="gf-num">1</text>
+    </svg>
+    <p class="fig-cap" data-figsources-cap data-html></p>
   </div>
 </main>
 
@@ -227,10 +351,17 @@
       hSearch: "Suche und Sprache",
       searchP1: "Das Suchfeld oben findet ein Bundesland nach Namen (in jeder der drei Sprachen). Der Sprachumschalter DE/ES/EN übersetzt die gesamte Oberfläche — nur die Namen der politischen Parteien bleiben unübersetzt, das entspricht journalistischer Praxis.",
       hNav: "Weitere Inhalte finden",
-      navP1: "Neben den Wahl-Reitern führen drei Menüs zu weiterführenden Inhalten: „Die Parteien“ (Profile der einzelnen Parteien), „Wahlsystem“ (wie sich die Sitze im Bundestag verteilen — mit einem interaktiven Rechner — sowie die Arten von Koalitionen) und „Deutschland“ (Grundgesetz, Adressverzeichnis, Feiertage). Auf dem Handy sammelt ein Menü-Symbol (☰) dieselben Links, gruppiert unter denselben drei Überschriften.",
+      navP1: "Neben den Wahl-Reitern führt ein hervorgehobener Link direkt zu den Landtagswahlen 2026. Drei Menüs bündeln die weiteren Inhalte: „Die Parteien“ (Profile der einzelnen Parteien), „Wahlsystem“ (wie sich die Sitze im Bundestag verteilen — mit einem interaktiven Rechner — sowie die Arten von Koalitionen) und „Deutschland“ (Grundgesetz, Adressverzeichnis, Feiertage und die neue FAQ mit häufigen Fragen). Auf dem Handy sammelt ein Menü-Symbol (☰) dieselben Links, gruppiert unter denselben Überschriften.",
       navP2: "Über die Teilen-Schaltfläche (das Symbol mit drei verbundenen Punkten) lässt sich jede Seite direkt weitergeben — am Handy über das Menü (☰). Im Footer stehen außerdem das Impressum, der Haftungsausschluss und die Seite „Über Wahlblick“ mit der Methodik hinter den Daten.",
       hSources: "Woher die Daten kommen",
-      sourcesP1: "Jedes einzelne Ergebnis verlinkt auf seine offizielle Quelle — die Bundeswahlleiterin für den Bundestag, die jeweilige Landeswahlbehörde für jeden Landtag. Mehr zur Arbeitsweise auf der Seite „Über Wahlblick“."
+      sourcesP1: "Jedes einzelne Ergebnis verlinkt auf seine offizielle Quelle — die Bundeswahlleiterin für den Bundestag, die jeweilige Landeswahlbehörde für jeden Landtag. Mehr zur Arbeitsweise auf der Seite „Über Wahlblick“.",
+      figMapCap: "<b>①</b> Auf ein Bundesland klicken — <b>②</b> das vollständige Ergebnis (Parteien, Prozente, Quelle) erscheint rechts.",
+      figViewsCap: "<b>①</b> Bundestags- oder Landtagswahl wählen — <b>②</b> Wahljahr auswählen (viele Länder mit Verlauf).",
+      figCompareCap: "<b>①</b> „Vergleichen“ aktivieren — <b>②</b> bis zu drei Länder nebeneinander stellen.",
+      figPartyCap: "<b>①</b> Die Karte färbt sich nach der Stärke einer Partei — <b>②</b> daneben die Rangliste aller 16 Länder.",
+      figSearchCap: "<b>①</b> Ein Bundesland nach Namen suchen — <b>②</b> mit DE · ES · EN die ganze Oberfläche umschalten.",
+      figNavCap: "<b>①</b> Direkter Zugang zu den Landtagswahlen 2026 — <b>②</b> unter „Deutschland“ jetzt auch die neue FAQ (Häufige Fragen).",
+      figSourcesCap: "<b>①</b> Jedes Ergebnis verlinkt seine offizielle Quelle — z. B. bundeswahlleiterin.de."
     },
     es: {
       title: "Guía de uso",
@@ -249,10 +380,17 @@
       hSearch: "Buscador e idioma",
       searchP1: "El buscador de arriba encuentra un estado federado por nombre (en cualquiera de los 3 idiomas). El selector DE/ES/EN traduce toda la interfaz — los nombres de los partidos políticos quedan sin traducir, siguiendo la práctica periodística habitual.",
       hNav: "Encontrar más contenido",
-      navP1: "Junto a las tabs de elección hay tres menús con más contenido: «Los partidos» (perfiles de cada partido), «Sistema electoral» (cómo se reparten las bancas del Bundestag —con un simulador interactivo— y los tipos de coalición) y «Alemania» (Ley Fundamental, directorio de direcciones, feriados). En el celular, un ícono de menú (☰) agrupa los mismos links bajo esos mismos tres títulos.",
+      navP1: "Junto a las tabs de elección, un enlace destacado lleva directo a las Landtagswahlen 2026. Tres menús agrupan el resto del contenido: «Los partidos» (perfiles de cada partido), «Sistema electoral» (cómo se reparten las bancas del Bundestag —con un simulador interactivo— y los tipos de coalición) y «Alemania» (Ley Fundamental, directorio de direcciones, feriados y la nueva FAQ con preguntas frecuentes). En el celular, un ícono de menú (☰) agrupa los mismos links bajo esos mismos títulos.",
       navP2: "Con el botón de Compartir (el ícono de tres puntos conectados) podés difundir cualquier página directamente —en el celular, desde el menú (☰)—. En el footer también están el Impressum, el descargo de responsabilidad y la página «Sobre Wahlblick» con la metodología detrás de los datos.",
       hSources: "De dónde vienen los datos",
-      sourcesP1: "Cada resultado individual tiene un link a su fuente oficial — la Bundeswahlleiterin para el Bundestag, la autoridad electoral de cada estado para su Landtag. Más sobre la metodología en la página «Sobre Wahlblick»."
+      sourcesP1: "Cada resultado individual tiene un link a su fuente oficial — la Bundeswahlleiterin para el Bundestag, la autoridad electoral de cada estado para su Landtag. Más sobre la metodología en la página «Sobre Wahlblick».",
+      figMapCap: "<b>①</b> Hacé clic en un estado — <b>②</b> el resultado completo (partidos, porcentajes, fuente) aparece a la derecha.",
+      figViewsCap: "<b>①</b> Elegí elección federal o estatal — <b>②</b> elegí el año (muchos estados con historial).",
+      figCompareCap: "<b>①</b> Activá «Comparar» — <b>②</b> poné hasta tres estados lado a lado.",
+      figPartyCap: "<b>①</b> El mapa se pinta según la fuerza de un partido — <b>②</b> al lado, el ranking de los 16 estados.",
+      figSearchCap: "<b>①</b> Buscá un estado por nombre — <b>②</b> con DE · ES · EN cambiás toda la interfaz.",
+      figNavCap: "<b>①</b> Acceso directo a las Landtagswahlen 2026 — <b>②</b> en «Alemania», ahora también la nueva FAQ (preguntas frecuentes).",
+      figSourcesCap: "<b>①</b> Cada resultado enlaza su fuente oficial — por ejemplo, bundeswahlleiterin.de."
     },
     en: {
       title: "User guide",
@@ -271,10 +409,17 @@
       hSearch: "Search and language",
       searchP1: "The search box at the top finds a federal state by name (in any of the 3 languages). The DE/ES/EN switch translates the whole interface — only political party names stay untranslated, following standard journalistic practice.",
       hNav: "Finding more content",
-      navP1: "Next to the election tabs, three menus lead to further content: “Parties” (profiles of each party), “Electoral system” (how the Bundestag's seats are allocated — with an interactive simulator — and the types of coalition) and “Germany” (the Basic Law, the address directory, public holidays). On mobile, a menu icon (☰) collects the same links under those same three headings.",
+      navP1: "Next to the election tabs, a highlighted link leads straight to the Landtagswahlen 2026. Three menus group the rest of the content: “Parties” (profiles of each party), “Electoral system” (how the Bundestag's seats are allocated — with an interactive simulator — and the types of coalition) and “Germany” (the Basic Law, the address directory, public holidays, and the new FAQ). On mobile, a menu icon (☰) collects the same links under those same headings.",
       navP2: "The Share button (the icon of three connected dots) lets you send any page along directly — on mobile, from the menu (☰). The footer also has the Impressum, the disclaimer, and the “About Wahlblick” page with the methodology behind the data.",
       hSources: "Where the data comes from",
-      sourcesP1: "Every single result links to its official source — the Federal Returning Officer for the Bundestag, each state's own electoral authority for its Landtag. More on the methodology on the “About Wahlblick” page."
+      sourcesP1: "Every single result links to its official source — the Federal Returning Officer for the Bundestag, each state's own electoral authority for its Landtag. More on the methodology on the “About Wahlblick” page.",
+      figMapCap: "<b>①</b> Click a federal state — <b>②</b> the full result (parties, percentages, source) appears on the right.",
+      figViewsCap: "<b>①</b> Pick the federal or state election — <b>②</b> pick the year (many states have history).",
+      figCompareCap: "<b>①</b> Turn on “Compare” — <b>②</b> place up to three states side by side.",
+      figPartyCap: "<b>①</b> The map is shaded by one party's strength — <b>②</b> next to it, the ranking of all 16 states.",
+      figSearchCap: "<b>①</b> Search a state by name — <b>②</b> switch the whole interface with DE · ES · EN.",
+      figNavCap: "<b>①</b> Direct access to the Landtagswahlen 2026 — <b>②</b> under “Germany”, now also the new FAQ.",
+      figSourcesCap: "<b>①</b> Every result links to its official source — e.g. bundeswahlleiterin.de."
     }
   };
 
@@ -313,6 +458,13 @@
     document.querySelector("[data-nav-p2]").textContent = c.navP2;
     document.querySelector("[data-h-sources]").textContent = c.hSources;
     document.querySelector("[data-sources-p1]").textContent = c.sourcesP1;
+    document.querySelector("[data-figmap-cap]").innerHTML = c.figMapCap;
+    document.querySelector("[data-figviews-cap]").innerHTML = c.figViewsCap;
+    document.querySelector("[data-figcompare-cap]").innerHTML = c.figCompareCap;
+    document.querySelector("[data-figparty-cap]").innerHTML = c.figPartyCap;
+    document.querySelector("[data-figsearch-cap]").innerHTML = c.figSearchCap;
+    document.querySelector("[data-fignav-cap]").innerHTML = c.figNavCap;
+    document.querySelector("[data-figsources-cap]").innerHTML = c.figSourcesCap;
   }
 
   var LANG_STORAGE_KEY = "wahlblickLang";
