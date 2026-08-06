@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Landtagswahlen 2026 in Deutschland — Termine &amp; Ergebnisse | Wahlblick</title>
-<meta name="description" content="Landtagswahlen 2026 in Deutschland: fünf Wahlen — Baden-Württemberg und Rheinland-Pfalz im März, Sachsen-Anhalt, Mecklenburg-Vorpommern und Berlin im September. Alle Termine, Ergebnisse und der historische Verlauf. Neutral, quellenbasiert, dreisprachig.">
+<title>Landtagswahlen 2026: Welche Bundesländer wählen wann? — Termine &amp; Ergebnisse | Wahlblick</title>
+<meta name="description" content="Welche Bundesländer wählen 2026 und wann? Fünf Landtagswahlen: Baden-Württemberg und Rheinland-Pfalz im März, Sachsen-Anhalt (6.9.), Mecklenburg-Vorpommern (13.9.) und Berlin (20.9.) im September. Alle Termine, Ergebnisse und Verlauf. Neutral, dreisprachig.">
 <link rel="canonical" href="https://wahlblick.de/landtagswahlen-2026.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wahlblick">
-<meta property="og:title" content="Landtagswahlen 2026 in Deutschland — Termine &amp; Ergebnisse">
+<meta property="og:title" content="Landtagswahlen 2026: Welche Bundesländer wählen wann?">
 <meta property="og:description" content="Alle fünf Landtagswahlen 2026: Termine, Ergebnisse und Verlauf — neutral und quellenbasiert auf wahlblick.de.">
 <meta property="og:image" content="https://wahlblick.de/og-image.png?v=2">
 <meta property="og:url" content="https://wahlblick.de/landtagswahlen-2026.html">
@@ -45,6 +45,7 @@
   h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
   .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 24px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin: 26px 0 10px; }
+  .hub-note { font-size: 14px; line-height: 1.6; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 0 0 8px; }
 
   .elec-row { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; transition: border-color .12s, background .12s; }
   .elec-row:hover { border-color: var(--accent); background: var(--surface); }
@@ -112,13 +113,16 @@
 
 <main>
   <h1 data-t="h1">Landtagswahlen 2026 in Deutschland</h1>
-  <p class="lead" data-t="lead">2026 wird in fünf Bundesländern ein neuer Landtag gewählt: zwei Wahlen im März sind bereits gelaufen, drei folgen im September. Hier findest du alle Termine, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.</p>
+  <p class="lead" data-t="lead">2026 wählen fünf Bundesländer einen neuen Landtag — zwei im März (bereits gelaufen) und drei im September. Hier siehst du auf einen Blick, welche Bundesländer wann wählen, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.</p>
 
   <h2 data-t="upHeading">Kommende Wahlen · September 2026</h2>
   <div id="upcoming"></div>
 
   <h2 data-t="pastHeading">Bereits gewählt · März 2026</h2>
   <div id="past"></div>
+
+  <h2 data-t="notHeading">Wo wird 2026 nicht gewählt?</h2>
+  <p class="hub-note" data-t="notText">In vielen Ländern wird 2026 kein neuer Landtag gewählt — die nächste Wahl kommt erst später. Zum Beispiel: Sachsen (zuletzt 2024, nächste 2029), Nordrhein-Westfalen (2027) und Bayern (2028). 2026 wählen nur die oben genannten fünf Länder.</p>
 
   <a class="cta" href="index.html" data-t="cta">Alle Ergebnisse auf der interaktiven Karte →</a>
 </main>
@@ -147,34 +151,40 @@
 
   var CONTENT = {
     de: {
-      docTitle: "Landtagswahlen 2026 in Deutschland — Termine & Ergebnisse | Wahlblick",
+      docTitle: "Landtagswahlen 2026: Welche Bundesländer wählen wann? — Termine & Ergebnisse | Wahlblick",
       back: "← Zur Wahlkarte",
       h1: "Landtagswahlen 2026 in Deutschland",
-      lead: "2026 wird in fünf Bundesländern ein neuer Landtag gewählt: zwei Wahlen im März sind bereits gelaufen, drei folgen im September. Hier findest du alle Termine, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.",
+      lead: "2026 wählen fünf Bundesländer einen neuen Landtag — zwei im März (bereits gelaufen) und drei im September. Hier siehst du auf einen Blick, welche Bundesländer wann wählen, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.",
       upHeading: "Kommende Wahlen · September 2026",
       pastHeading: "Bereits gewählt · März 2026",
+      notHeading: "Wo wird 2026 nicht gewählt?",
+      notText: "In vielen Ländern wird 2026 kein neuer Landtag gewählt — die nächste Wahl kommt erst später. Zum Beispiel: Sachsen (zuletzt 2024, nächste 2029), Nordrhein-Westfalen (2027) und Bayern (2028). 2026 wählen nur die oben genannten fünf Länder.",
       badgeUp: "Kommend", badgePast: "Bereits gewählt",
       cta: "Alle Ergebnisse auf der interaktiven Karte →",
       datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", guide: "Nutzungshinweise"
     },
     es: {
-      docTitle: "Elecciones estatales de Alemania en 2026 — Fechas y resultados | Wahlblick",
+      docTitle: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo? — Fechas y resultados | Wahlblick",
       back: "← Volver al mapa",
       h1: "Elecciones estatales (Landtag) de Alemania en 2026",
-      lead: "En 2026, cinco estados federados eligen un nuevo parlamento estatal (Landtag): dos elecciones de marzo ya pasaron y tres siguen en septiembre. Acá tenés todas las fechas, el historial de cada elección y —la noche electoral de cada una— los resultados. Neutral, con fuentes y en tres idiomas.",
+      lead: "En 2026, cinco estados federados eligen un nuevo parlamento estatal (Landtag): dos en marzo (ya votaron) y tres en septiembre. Acá ves de un vistazo qué estados votan y cuándo, el historial de cada elección y —la noche electoral de cada una— los resultados. Neutral, con fuentes y en tres idiomas.",
       upHeading: "Próximas elecciones · septiembre 2026",
       pastHeading: "Ya votaron · marzo 2026",
+      notHeading: "¿Dónde NO se vota en 2026?",
+      notText: "En muchos estados no hay elección estatal en 2026 — la próxima recién más adelante. Por ejemplo: Sajonia (Sachsen; última en 2024, próxima en 2029), Renania del Norte-Westfalia (NRW; 2027) y Baviera (Bayern; 2028). En 2026 votan solo los cinco estados de arriba.",
       badgeUp: "Próxima", badgePast: "Ya votó",
       cta: "Todos los resultados en el mapa interactivo →",
       datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", guide: "Guía de uso"
     },
     en: {
-      docTitle: "Germany's state elections in 2026 — dates & results | Wahlblick",
+      docTitle: "Germany's 2026 state elections: which states vote and when? — dates & results | Wahlblick",
       back: "← Back to the map",
       h1: "Germany's state elections (Landtag) in 2026",
-      lead: "In 2026, five federal states elect a new state parliament (Landtag): two elections in March have already been held, and three follow in September. Here you'll find every date, the historical record of each election and — on each election night — the results. Neutral, sourced, and in three languages.",
+      lead: "In 2026, five German states elect a new state parliament (Landtag): two in March (already held) and three in September. Here you can see at a glance which states vote and when, the historical record of each election and — on each election night — the results. Neutral, sourced, and in three languages.",
       upHeading: "Upcoming elections · September 2026",
       pastHeading: "Already held · March 2026",
+      notHeading: "Where is there no election in 2026?",
+      notText: "Many states hold no state election in 2026 — their next vote comes later. For example: Saxony (Sachsen; last in 2024, next in 2029), North Rhine-Westphalia (NRW; 2027) and Bavaria (Bayern; 2028). In 2026, only the five states listed above vote.",
       badgeUp: "Upcoming", badgePast: "Already held",
       cta: "All results on the interactive map →",
       datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", guide: "User Guide"
