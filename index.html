@@ -185,6 +185,14 @@
     padding: 10px 0 2px;
   }
   .mobile-menu-group a { font-size: 13.5px; }
+  .mobile-menu-share {
+    display: flex; align-items: center; gap: 8px;
+    width: 100%; margin-top: 8px; padding: 12px 0 4px;
+    border: none; border-top: 1px solid var(--border);
+    background: none; font-family: inherit; font-size: 14px; font-weight: 600;
+    color: var(--accent); cursor: pointer; text-align: left;
+  }
+  .mobile-menu-share svg { width: 16px; height: 16px; flex: none; }
 
   .primary-nav { border-bottom: 1px solid var(--border); }
   .control-bar {
@@ -661,6 +669,10 @@
     <span class="mobile-menu-label" id="mobileMenuPartiesLabel">Die Parteien</span>
     <div class="mobile-menu-group">
       <a href="parties.html" id="mobileNavPartiesLink">Parteien</a>
+    </div>
+    <span class="mobile-menu-label" id="mobileMenuWahlsystemLabel">Wahlsystem</span>
+    <div class="mobile-menu-group">
+      <a href="sitzverteilung.html" id="mobileNavSitzverteilungLink">Sitzverteilung erklärt</a>
       <a href="government.html" id="mobileNavGovernmentLink">Koalitionen</a>
     </div>
     <span class="mobile-menu-label" id="mobileMenuGermanyLabel">Deutschland</span>
@@ -669,6 +681,10 @@
       <a href="directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
       <a href="holidays.html" id="mobileNavHolidaysLink">Feiertage</a>
     </div>
+    <button type="button" class="mobile-menu-share" id="mobileShareBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      <span id="mobileShareLabel">Teilen</span>
+    </button>
   </div>
 </header>
 
@@ -2260,6 +2276,9 @@
       landSelectPlaceholder: "— Bundesland wählen —",
       navQuellen: "Quellen",
       navPartiesGroupLabel: "Die Parteien",
+      navWahlsystemGroupLabel: "Wahlsystem",
+      navSitzverteilungLink: "Sitzverteilung erklärt",
+      navShareLabel: "Teilen",
       navGermanyLabel: "Deutschland",
       mapHint: "Hover oder Klick für Details",
       compareToggleLabel: "Vergleichen",
@@ -2322,6 +2341,9 @@
       landSelectPlaceholder: "— Elegir un estado federado —",
       navQuellen: "Fuentes",
       navPartiesGroupLabel: "Los partidos",
+      navWahlsystemGroupLabel: "Sistema electoral",
+      navSitzverteilungLink: "Cómo se reparten las bancas",
+      navShareLabel: "Compartir",
       navGermanyLabel: "Alemania",
       mapHint: "Pasá el mouse o hacé click para ver detalles",
       compareToggleLabel: "Comparar",
@@ -2384,6 +2406,9 @@
       landSelectPlaceholder: "— Choose a federal state —",
       navQuellen: "Sources",
       navPartiesGroupLabel: "Parties",
+      navWahlsystemGroupLabel: "Electoral system",
+      navSitzverteilungLink: "How seats are allocated",
+      navShareLabel: "Share",
       navGermanyLabel: "Germany",
       mapHint: "Hover or click for details",
       compareToggleLabel: "Compare",
@@ -3139,6 +3164,9 @@
     document.getElementById("mobileNavPartiesLink").textContent = tr("footPartiesLink");
     document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
     document.getElementById("mobileMenuPartiesLabel").textContent = tr("navPartiesGroupLabel");
+    document.getElementById("mobileMenuWahlsystemLabel").textContent = tr("navWahlsystemGroupLabel");
+    document.getElementById("mobileNavSitzverteilungLink").textContent = tr("navSitzverteilungLink");
+    document.getElementById("mobileShareLabel").textContent = tr("navShareLabel");
     landSearch.placeholder = tr("searchPh");
     updateMapHint();
     document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
@@ -3192,6 +3220,14 @@
   mobileMenu.querySelectorAll("a").forEach(function (a) {
     a.addEventListener("click", closeMobileMenu);
   });
+  var mobileShareBtn = document.getElementById("mobileShareBtn");
+  if (mobileShareBtn) {
+    mobileShareBtn.addEventListener("click", function () {
+      closeMobileMenu();
+      var injectedShare = document.getElementById("shareBtn");
+      if (injectedShare) injectedShare.click();
+    });
+  }
   document.addEventListener("click", function (e) {
     if (!mobileMenu.hidden && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
       closeMobileMenu();
