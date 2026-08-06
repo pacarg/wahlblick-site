@@ -36,6 +36,17 @@ const NAV_STYLE = `<style>
 .content-nav-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .content-nav a.content-nav-featured{font-weight:700;color:var(--accent)}
 .content-nav a.content-nav-featured:hover{color:var(--accent);text-decoration:underline}
+/* Language switcher: a test user missed it because muted DE·ES·EN text did
+   not read as a control. Give it a globe icon + a segmented-pill frame so it
+   clearly looks tappable. Scoped as ".site-header .lang-switch" (specificity
+   0,2,0) so it overrides each page's own inline ".lang-switch" rules, which
+   are injected after this shared style. */
+.site-header .lang-switch{gap:1px;border:1px solid var(--border);border-radius:999px;padding:2px 2px 2px 4px;background:var(--bg)}
+.site-header .lang-switch::before{content:"";width:15px;height:15px;margin:0 3px 0 2px;flex:none;opacity:.8;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E") center/contain no-repeat}
+.site-header .lang-switch .sep{display:none}
+.site-header .lang-switch button{border-radius:999px}
+.site-header .lang-switch button.active{color:#fff;background:var(--accent)}
+@media (max-width:720px){.site-header .lang-switch{padding:1px 2px 1px 3px}.site-header .lang-switch::before{width:13px;margin:0 2px 0 1px}}
 </style>`;
 
 const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
