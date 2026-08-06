@@ -34,11 +34,14 @@ const NAV_STYLE = `<style>
 .content-nav-share svg{width:16px;height:16px}
 .content-nav-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(8px);background:var(--text);color:var(--bg);font-size:13px;font-weight:600;padding:10px 18px;border-radius:var(--radius);box-shadow:0 4px 16px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;z-index:500}
 .content-nav-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.content-nav a.content-nav-featured{font-weight:700;color:var(--accent)}
+.content-nav a.content-nav-featured:hover{color:var(--accent);text-decoration:underline}
 </style>`;
 
 const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
+  <a href="landtagswahlen-2026.html" class="content-nav-featured" id="navElections2026">Landtagswahlen 2026</a>
   <div class="nav-dropdown" id="partiesDropdown">
     <button type="button" class="nav-dropdown-trigger" id="partiesDropdownTrigger" aria-expanded="false" aria-controls="partiesDropdownPanel">
       <span id="navPartiesGroupLabel">Die Parteien</span>
@@ -77,14 +80,15 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
 <script>
 (function () {
   var LABELS = {
-    de: { partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
-    es: { partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
-    en: { partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
+    de: { elections2026: "Landtagswahlen 2026", partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
+    es: { elections2026: "Elecciones estatales 2026", partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
+    en: { elections2026: "State elections 2026", partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
   };
   function currentLang() { return localStorage.getItem("wahlblickLang") || "de"; }
   function applyLabels(lang) {
     var l = LABELS[lang] || LABELS.de;
     var map = {
+      navElections2026: l.elections2026,
       navPartiesGroupLabel: l.partiesGroup,
       navGermanyLabel: l.germany,
       navWahlsystemGroupLabel: l.wahlsystem,

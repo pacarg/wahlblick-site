@@ -169,6 +169,7 @@
     border-bottom: 1px solid var(--border);
   }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.mobile-menu-featured { color: var(--accent); font-weight: 700; }
   .mobile-menu-group {
     display: flex;
     flex-direction: column;
@@ -670,6 +671,7 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="landtagswahlen-2026.html" id="mobileNavElections" class="mobile-menu-featured">Landtagswahlen 2026</a>
     <a href="#quellen" id="mobileNavQuellen">Quellen</a>
     <span class="mobile-menu-label" id="mobileMenuPartiesLabel">Die Parteien</span>
     <div class="mobile-menu-group">
@@ -2304,6 +2306,7 @@
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
       welcomeTitle: "Deutschland wählt — hier behalten Sie den Überblick.",
       welcomeElections: "Landtagswahlen 2026 →",
+      navElectionsHub: "Landtagswahlen 2026",
       welcomeBody: "Wahlblick ist eine interaktive, unabhängige Karte der Wahlergebnisse in Deutschland. Wählen Sie ein Bundesland, um zu sehen, wer gewonnen hat, mit welchem Ergebnis und wie es sich zur vorigen Wahl verändert hat — für die Bundestagswahl und die 16 Landtage, mit ihrer Geschichte. Sie möchten wissen, wie aus Stimmen Sitze werden? Der Bereich <a href=\"sitzverteilung.html\">Wahlsystem</a> erklärt es Schritt für Schritt.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
       emptyTitle: "Kein Bundesland ausgewählt",
@@ -2370,6 +2373,7 @@
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
       welcomeTitle: "Alemania vota. Acá lo ves claro.",
       welcomeElections: "Elecciones estatales 2026 →",
+      navElectionsHub: "Elecciones estatales 2026",
       welcomeBody: "Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elegí un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Querés entender cómo los votos se convierten en escaños? La sección <a href=\"sitzverteilung.html\">Sistema electoral</a> lo explica paso a paso.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
       emptyTitle: "Ningún estado federado seleccionado",
@@ -2436,6 +2440,7 @@
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
       welcomeTitle: "Germany votes. See it clearly.",
       welcomeElections: "State elections 2026 →",
+      navElectionsHub: "State elections 2026",
       welcomeBody: "Wahlblick is an interactive, independent map of Germany's election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href=\"sitzverteilung.html\">Electoral system</a> section explains it step by step.",
       eyebrowLandtag: "State election · most recent per state",
       emptyTitle: "No federal state selected",
@@ -3166,6 +3171,7 @@
     document.getElementById("welcomeTitle").textContent = tr("welcomeTitle");
     document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
     document.getElementById("welcomeElectionsText").textContent = tr("welcomeElections");
+    document.getElementById("mobileNavElections").textContent = tr("navElectionsHub");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
     document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
@@ -3251,6 +3257,18 @@
   paintMap();
   renderLegend();
   applyStaticTexts();
+
+  // Deep-link desde el hub/páginas por Land: index.html?land=DE-XX&view=landtag
+  // preselecciona el Bundesland y muestra sus resultados directamente.
+  (function () {
+    var p = new URLSearchParams(location.search);
+    var land = p.get("land");
+    if (!land || LAND_ORDER.indexOf(land) < 0) return;
+    if (p.get("view") === "landtag") setView("landtag");
+    selectLand(land);
+    var target = document.querySelector(".map-panel");
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  })();
 })();
 </script>
 </body>
