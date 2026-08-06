@@ -146,7 +146,7 @@
       <span class="wordmark">Wahlblick</span>
     </a>
     <div id="contentNavMount"></div>
-    <a class="back-link" href="index.html">← Zur Wahlkarte</a>
+    <a class="back-link" href="index.html" data-t="back">← Zur Wahlkarte</a>
   </div>
 </header>
 
@@ -253,17 +253,36 @@
 
 <footer>
   <div class="foot-links">
-    <a href="index.html">← Zur Wahlkarte</a>
+    <a href="index.html" data-t="back">← Zur Wahlkarte</a>
     <a href="impressum.html">Impressum</a>
-    <a href="disclaimer.html">Haftungsausschluss</a>
-    <a href="grundgesetz.html">Grundgesetz</a>
-    <a href="about.html">Über Wahlblick</a>
-    <a href="directory.html">Adressverzeichnis</a>
-    <a href="guide.html">Nutzungshinweise</a>
-    <a href="holidays.html">Feiertage</a>
-    <a href="government.html">Koalitionen</a>
-    <a href="parties.html">Parteien</a>
+    <a href="disclaimer.html" data-t="disclaimer">Haftungsausschluss</a>
+    <a href="grundgesetz.html" data-t="grundgesetz">Grundgesetz</a>
+    <a href="about.html" data-t="about">Über Wahlblick</a>
+    <a href="directory.html" data-t="directory">Adressverzeichnis</a>
+    <a href="guide.html" data-t="guide">Nutzungshinweise</a>
+    <a href="holidays.html" data-t="holidays">Feiertage</a>
+    <a href="government.html" data-t="government">Koalitionen</a>
+    <a href="parties.html" data-t="parties">Parteien</a>
   </div>
 </footer>
+
+<script>
+  // Footer/back-link labels follow the language chosen elsewhere on the site
+  // (stored in localStorage). The legal body stays German; proper names
+  // (Wahlblick, Impressum, Bundeswahlleiterin) are never translated.
+  (function () {
+    var L = {
+      es: { back: "← Volver al mapa", disclaimer: "Descargo de responsabilidad", datenschutz: "Política de privacidad", grundgesetz: "Ley Fundamental", about: "Sobre Wahlblick", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones", parties: "Partidos" },
+      en: { back: "← Back to the map", disclaimer: "Disclaimer", datenschutz: "Privacy Policy", grundgesetz: "Basic Law", about: "About Wahlblick", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions", parties: "Parties" }
+    };
+    var dict = L[localStorage.getItem("wahlblickLang") || "de"];
+    if (dict) {
+      document.querySelectorAll("[data-t]").forEach(function (el) {
+        var k = el.getAttribute("data-t");
+        if (dict[k]) el.textContent = dict[k];
+      });
+    }
+  })();
+</script>
 </body>
 </html>
