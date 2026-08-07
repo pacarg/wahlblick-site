@@ -68,7 +68,7 @@ const NAV_STYLE = `<style>
 .content-nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .content-nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
 .content-nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-.content-nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;z-index:90;flex-direction:column;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:6px 16px 12px;box-shadow:0 10px 24px rgba(0,0,0,.10)}
+.content-nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;z-index:90;flex-direction:column;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:#eaf0f8;padding:6px 16px 12px;box-shadow:0 10px 24px rgba(0,0,0,.10)}
 .content-nav-mobile.open{display:flex}
 .content-nav-mobile a{font-size:14px;font-weight:600;color:var(--text);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border)}
 .content-nav-mobile a:last-child{border-bottom:none}
