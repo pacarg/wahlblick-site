@@ -1,0 +1,3249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wahlblick — Mapa electoral interactivo de Alemania</title>
+<meta name="description" content="Mapa interactivo e independiente: resultados electorales por estado federado (Bundesland) en Alemania — elección federal al Bundestag y elecciones estatales (Landtag), con su historial. Deutsch · Español · English.">
+<link rel="canonical" href="https://wahlblick.de/es/">
+<link rel="alternate" hreflang="de" href="https://wahlblick.de/">
+<link rel="alternate" hreflang="es" href="https://wahlblick.de/es/">
+<link rel="alternate" hreflang="x-default" href="https://wahlblick.de/">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wahlblick">
+<meta property="og:title" content="Wahlblick — Mapa electoral de Alemania">
+<meta property="og:description" content="Mapa interactivo e independiente de los resultados electorales de Alemania: Bundestag y los 16 Landtage, con historial. Neutral y en tres idiomas.">
+<meta property="og:image" content="https://wahlblick.de/og-image.png?v=2">
+<meta property="og:url" content="https://wahlblick.de/es/">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wahlblick — Mapa electoral de Alemania">
+<meta name="twitter:description" content="Mapa interactivo de los resultados electorales de Alemania: Bundestag y los 16 Landtage.">
+<meta name="twitter:image" content="https://wahlblick.de/og-image.png?v=2">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8f9;
+    --border: #e3e6ea;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #004494;
+    --accent-ink: #ffffff;
+    --strip-bg: #12161c;
+    --strip-text: #c7cdd6;
+    --up: #16a34a;
+    --up-bg: #eafaf0;
+    --down: #dc2626;
+    --down-bg: #fdecec;
+    --focus: #004494;
+    --accent-glow: rgba(0, 68, 148, 0.55);
+    --accent-glow-soft: rgba(0, 68, 148, 0.28);
+
+    --p-union: #1a1a1a;
+    --p-afd: #009ee0;
+    --p-spd: #e3000f;
+    --p-gruene: #46962b;
+    --p-linke: #e6007e;
+    --p-fdp: #ab8f00;
+    --p-fw: #c7660a;
+    --p-bsw: #8a2846;
+    --p-ssw: #0f7d8c;
+    --p-biw: #6b4c9a;
+    --p-neutral: #c7cbd1;
+
+    --radius: 4px;
+    --radius-pill: 999px;
+  }
+
+  /* Wahlblick committing to a single light, institutional identity — deliberately no dark mode, matching europa.eu */
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  button, input, select { font-family: inherit; }
+
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+  }
+  .site-header {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; flex: none; }
+  .brand .badge {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex: none;
+  }
+  .brand .flag-bar {
+    width: 7px; height: 34px;
+    border-radius: 2px;
+    flex: none;
+    background: linear-gradient(to bottom, #000 0% 33.33%, #dd0000 33.33% 66.66%, #ffce00 66.66% 100%);
+  }
+  .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; white-space: nowrap; }
+
+  .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; margin-left: auto; }
+  .lang-switch button {
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 5px 7px;
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .lang-switch button:hover { color: var(--text); background: var(--surface); }
+  .lang-switch button.active { color: var(--accent); }
+  .lang-switch .sep { color: var(--border); font-size: 12px; }
+
+
+  .menu-toggle {
+    display: none;
+    flex: none;
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    padding: 0;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+  .menu-toggle span { width: 16px; height: 2px; background: var(--text); border-radius: 1px; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+    background: #eaf0f8;
+    padding: 6px 16px 10px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.mobile-menu-featured { color: var(--accent); font-weight: 700; }
+  .mobile-menu-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 14px;
+    margin-left: 2px;
+    border-left: 2px solid var(--border);
+  }
+  .mobile-menu-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding: 10px 0 2px;
+  }
+  .mobile-menu-group a { font-size: 13.5px; }
+  .mobile-menu-share {
+    display: flex; align-items: center; gap: 8px;
+    width: 100%; margin-top: 8px; padding: 12px 0 4px;
+    border: none; border-top: 1px solid var(--border);
+    background: none; font-family: inherit; font-size: 14px; font-weight: 600;
+    color: var(--accent); cursor: pointer; text-align: left;
+  }
+  .mobile-menu-share svg { width: 16px; height: 16px; flex: none; }
+
+  .primary-nav { border-bottom: 1px solid var(--border); }
+  .control-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .view-pills { display: flex; gap: 28px; }
+  .view-pills button {
+    border: none;
+    border-bottom: 3px solid transparent;
+    background: none;
+    color: var(--text-muted);
+    font-size: 17px;
+    font-weight: 700;
+    padding: 14px 2px 11px;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+  }
+  .view-pills button:hover { color: var(--text); }
+  .view-pills button[aria-pressed="true"] {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+
+  .bar-right { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+
+  .control-bar .year-wrap { display: flex; align-items: center; }
+  .control-bar .year-wrap.hidden { display: none; }
+  select#yearSelect {
+    appearance: none;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 7px 30px 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 15px) center, calc(100% - 10px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  .welcome {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .welcome-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px;
+  }
+  .welcome-text { width: 80%; margin: 0 auto; }
+  .welcome-title {
+    margin: 0 0 6px;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--text);
+  }
+  .welcome-body {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-muted);
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .welcome-body a { color: var(--accent); font-weight: 600; }
+  .welcome-cta { margin-top: 12px; }
+  .welcome-elections { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--accent); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 7px 14px; text-decoration: none; }
+  .welcome-elections:hover { background: #eaf0f8; border-color: #d4e0f0; }
+  .welcome-elections svg { width: 15px; height: 15px; flex: none; }
+  @media (max-width: 720px) {
+    .welcome-inner { padding: 14px 16px; }
+    .welcome-text { width: auto; }
+    .welcome-title { font-size: 17px; }
+    .welcome-body { font-size: 13px; line-height: 1.5; }
+  }
+
+  .land-tabs {
+    max-width: 1200px;
+    margin: 14px auto 0;
+    padding: 0 24px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 4px;
+    row-gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .land-tabs button {
+    flex: none;
+    border: none;
+    background: none;
+    color: var(--text-muted);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .land-tabs button:hover { color: var(--text); background: var(--surface); }
+  .land-tabs button.active { color: var(--accent); background: var(--surface); }
+  .land-tabs button.has-data::after { content: ""; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: 0.5; margin-left: 5px; }
+
+  .land-select-wrap { display: none; max-width: 1200px; margin: 14px auto 0; padding: 0 24px 14px; }
+  select#landSelect {
+    width: 100%;
+    appearance: none;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    padding: 11px 34px 11px 16px;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%), linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+
+  main.layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 22px 24px 40px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  main.layout > .panel { min-width: 0; }
+  @media (max-width: 880px) { main.layout { grid-template-columns: 1fr; } }
+
+  .banner {
+    display: none;
+    grid-column: 1 / -1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    color: var(--text);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .banner.visible { display: block; }
+
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .panel-head {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .panel-head > div { min-width: 0; }
+  .panel-head h2 { margin: 0; font-size: 14px; font-weight: 700; }
+  .panel-head .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .eyebrow-note { display: none; margin: 3px 0 0; font-size: 11px; color: var(--text-muted); }
+  .eyebrow-note.visible { display: block; }
+  .panel-body { padding: 16px; }
+
+  .map-head-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+  .compare-toggle {
+    flex: none;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: 11.5px; font-weight: 700;
+    padding: 5px 11px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .compare-toggle:hover { color: var(--text); background: var(--surface); }
+  .compare-toggle[aria-pressed="true"] { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+
+  select#partySelect {
+    flex: none;
+    appearance: none;
+    background: var(--bg);
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-pill);
+    padding: 6px 30px 6px 14px;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent) 50%), linear-gradient(135deg, var(--accent) 50%, transparent 50%);
+    background-position: calc(100% - 14px) center, calc(100% - 9px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+  }
+  select#partySelect:hover { background-color: var(--surface); }
+  select#partySelect.has-value {
+    background-color: var(--accent);
+    color: var(--accent-ink);
+    background-image: linear-gradient(45deg, transparent 50%, var(--accent-ink) 50%), linear-gradient(135deg, var(--accent-ink) 50%, transparent 50%);
+  }
+  select#partySelect.has-value:hover { background-color: var(--accent); opacity: 0.92; }
+
+  .scale-legend { display: flex; align-items: center; gap: 8px; font-size: 11.5px; color: var(--text-muted); }
+  .scale-legend-label { font-weight: 700; color: var(--text); white-space: nowrap; }
+  .scale-legend-bar { width: 90px; height: 8px; border-radius: 4px; flex: none; }
+  .scale-legend-max { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .rank-winner-tag { font-style: normal; font-weight: 400; font-size: 11px; color: var(--text-muted); }
+
+  .landtag-year-tabs { display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap; }
+  .landtag-year-tabs button {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: 11.5px; font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+  }
+  .landtag-year-tabs button:hover { color: var(--text); background: var(--surface); }
+  .landtag-year-tabs button.active { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+
+  .landtag-note {
+    font-size: 11.5px; font-style: italic; color: var(--text-muted); line-height: 1.5;
+    margin: 8px 0 0; padding: 8px 10px; background: var(--surface); border-radius: var(--radius);
+  }
+
+  .party-filter-clear {
+    border: none; background: none; color: var(--accent); cursor: pointer;
+    font-size: 11.5px; font-weight: 600; text-decoration: underline; padding: 0; margin-left: 4px;
+  }
+
+  .compare-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
+  .compare-note { font-size: 11.5px; color: var(--text-muted); margin: 10px 0 0; line-height: 1.5; }
+
+  .compare-table-wrap { overflow-x: auto; }
+  .compare-table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+  .compare-table th, .compare-table td { padding: 7px 10px; text-align: right; white-space: nowrap; }
+  .compare-table th:first-child, .compare-table td:first-child { text-align: left; white-space: normal; }
+  .compare-table thead th { border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 700; vertical-align: bottom; }
+  .compare-table thead .land-date { display: block; font-weight: 400; font-size: 10.5px; color: var(--text-muted); margin-top: 2px; }
+  .compare-table .remove-btn {
+    border: none; background: none; color: var(--text-muted); cursor: pointer;
+    font-size: 13px; line-height: 1; padding: 0 0 0 8px; vertical-align: middle;
+  }
+  .compare-table .remove-btn:hover { color: var(--accent); }
+  .compare-table tbody tr { border-bottom: 1px solid var(--border); }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table .party-cell { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+  .compare-table .party-cell .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .compare-table .winner-cell { font-weight: 800; }
+  .compare-table .compare-turnout-row td { font-weight: 700; }
+  .compare-sources { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 11px; }
+  .compare-sources a { color: var(--accent); text-decoration: none; }
+  .compare-sources a:hover { text-decoration: underline; }
+
+  .map-wrap { position: relative; }
+  svg#germany { width: 100%; height: auto; display: block; overflow: visible; }
+
+  path.land {
+    fill: var(--p-neutral);
+    stroke: var(--bg);
+    stroke-width: 0.12;
+    cursor: pointer;
+    transition: fill 0.12s ease, filter 0.12s ease, stroke 0.15s ease, stroke-width 0.15s ease;
+  }
+  path.land.no-data { cursor: default; }
+  path.land:hover { filter: brightness(1.15); }
+  path.land:focus { outline: none; }
+  path.land.selected {
+    stroke: var(--accent);
+    stroke-width: 0.5;
+    filter: drop-shadow(0 0 2.2px var(--accent-glow)) drop-shadow(0 0 6px var(--accent-glow-soft));
+  }
+  svg#germany.dimmed path.land { fill: var(--p-neutral) !important; opacity: 0.6; filter: none; }
+
+  .land-label {
+    font-size: var(--label-fs, 4.4px);
+    font-weight: 700;
+    paint-order: stroke fill;
+    stroke-width: 0.65;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+    letter-spacing: 0.01em;
+    transition: font-size 0.18s ease, font-weight 0.18s ease;
+  }
+  .land-label.on-light { fill: #14181f; stroke: rgba(255, 255, 255, 0.92); }
+  .land-label.on-dark { fill: #ffffff; stroke: rgba(0, 0, 0, 0.6); }
+  .land-label.selected { font-size: 8.6px; font-weight: 800; stroke-width: 0.8; }
+  svg#germany.dimmed .land-label { opacity: 0.6; }
+
+  .select-ping {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 0.6;
+    pointer-events: none;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ping-out 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+  }
+  @keyframes ping-out {
+    0% { r: 1.5; opacity: 0.7; stroke-width: 0.9; }
+    100% { r: 16; opacity: 0; stroke-width: 0.05; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .select-ping { display: none; }
+  }
+
+  .tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: var(--text);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 9px;
+    border-radius: var(--radius);
+    transform: translate(-50%, -130%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.08s ease;
+    z-index: 20;
+  }
+  .tooltip.visible { opacity: 1; }
+  .tooltip .hint { display: block; font-weight: 400; opacity: 0.7; font-size: 10.5px; margin-top: 1px; }
+
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 8px 16px;
+    padding: 12px 16px; border-top: 1px solid var(--border);
+    font-size: 11.5px; color: var(--text-muted);
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+  .results-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
+  .results-empty strong { display: block; color: var(--text); font-size: 14.5px; margin-bottom: 4px; }
+
+  .stat-line {
+    display: flex; align-items: baseline; gap: 6px;
+    font-size: 12.5px; color: var(--text-muted);
+    margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-line b { color: var(--text); font-size: 15px; }
+
+  .rank-list { list-style: none; margin: 0; padding: 0; }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 18px 8px 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+  }
+  .rank-num { font-size: 11px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+  .rank-row .dot { width: 9px; height: 9px; }
+  .rank-name { font-size: 13.5px; font-weight: 600; }
+  .rank-pct { font-size: 14.5px; font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; }
+  .rank-delta {
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px;
+    border-radius: var(--radius-pill);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .rank-delta.up { color: var(--up); background: var(--up-bg); }
+  .rank-delta.down { color: var(--down); background: var(--down-bg); }
+  .rank-delta.flat { color: var(--text-muted); background: var(--surface); }
+
+  .source-line {
+    margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border);
+    font-size: 11.5px; color: var(--text-muted);
+  }
+  .source-line a { color: var(--accent); text-decoration: none; }
+  .source-line a:hover { text-decoration: underline; }
+
+  footer {
+    max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer p { max-width: 700px; margin: 12px 0 0; }
+  footer .foot-links { display: flex; gap: 8px 18px; flex-wrap: wrap; }
+  footer .foot-links a { display: inline-flex; align-items: center; min-height: 24px; }
+  footer a { color: var(--text-muted); }
+  .foot-credit { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+  .foot-credit img { width: 18px; height: auto; flex: none; }
+  .foot-bottom-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px 16px; margin-top: 12px; }
+  .foot-bottom-row p { margin: 0; }
+
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  @media (prefers-reduced-motion: reduce) { path.land, .tooltip { transition: none; } }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 10px; }
+    .brand .wordmark { font-size: 16px; }
+    .menu-toggle { display: flex; }
+    .control-bar { padding: 0 16px; }
+    .view-pills { gap: 18px; }
+    .view-pills button { font-size: 14px; padding: 12px 0 9px; }
+    .bar-right { gap: 14px; padding: 8px 0 4px; width: 100%; justify-content: flex-end; }
+    .content-nav { display: none; }
+    .bar-right .content-nav-toggle, .bar-right .content-nav-mobile { display: none; }
+    .land-tabs { display: none; }
+    .land-select-wrap { display: block; padding: 0 16px 12px; }
+    main.layout { padding: 18px 16px 32px; }
+    footer { padding: 16px 16px 32px; }
+  }
+  @media (max-width: 420px) {
+    .lang-switch button { padding: 5px 5px; font-size: 12px; }
+    .brand .wordmark { font-size: 15px; }
+    .view-pills { gap: 14px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Wahlblick",
+  "url": "https://wahlblick.de/",
+  "description": "Interaktive Karte: Wahlergebnisse nach Bundesland — Bundestagswahl & Landtagswahl. Deutsch, Español, English.",
+  "inLanguage": [
+    "de",
+    "es",
+    "en"
+  ],
+  "author": {
+    "@type": "Person",
+    "name": "Pablo A. Churín"
+  }
+}
+</script>
+</head>
+<body>
+<script>try{localStorage.setItem("wahlblickLang","es")}catch(e){}</script>
+
+<div class="sticky-nav">
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="badge">W</span>
+      <span class="flag-bar" aria-hidden="true"></span>
+      <span class="wordmark">Wahlblick</span>
+    </div>
+    <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
+      <button type="button" data-lang="de" class="active">DE</button>
+      <span class="sep">·</span>
+      <button type="button" data-lang="es">ES</button>
+      <span class="sep">·</span>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+    <a href="/landtagswahlen-2026.html" id="mobileNavElections" class="mobile-menu-featured">Landtagswahlen 2026</a>
+    <a href="#quellen" id="mobileNavQuellen">Quellen</a>
+    <span class="mobile-menu-label" id="mobileMenuPartiesLabel">Die Parteien</span>
+    <div class="mobile-menu-group">
+      <a href="/parties.html" id="mobileNavPartiesLink">Parteien</a>
+    </div>
+    <span class="mobile-menu-label" id="mobileMenuWahlsystemLabel">Wahlsystem</span>
+    <div class="mobile-menu-group">
+      <a href="/sitzverteilung.html" id="mobileNavSitzverteilungLink">Sitzverteilung erklärt</a>
+      <a href="/government.html" id="mobileNavGovernmentLink">Koalitionen</a>
+    </div>
+    <span class="mobile-menu-label" id="mobileMenuGermanyLabel">Deutschland</span>
+    <div class="mobile-menu-group">
+      <a href="/grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
+      <a href="/directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
+      <a href="/holidays.html" id="mobileNavHolidaysLink">Feiertage</a>
+      <a href="/faq.html" id="mobileNavFaqLink">Häufige Fragen</a>
+    </div>
+    <button type="button" class="mobile-menu-share" id="mobileShareBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      <span id="mobileShareLabel">Teilen</span>
+    </button>
+  </div>
+</header>
+
+<nav class="primary-nav">
+  <div class="control-bar">
+    <div class="view-pills" role="group" aria-label="Wahltyp">
+      <button type="button" data-view="bundestag" aria-pressed="true">Bundestag</button>
+      <button type="button" data-view="landtag" aria-pressed="false">Landtag</button>
+    </div>
+    <div class="bar-right">
+      <div id="contentNavMount"></div>
+      <div class="year-wrap">
+        <select id="yearSelect" aria-label="Wahljahr">
+          <option value="2025">2025</option>
+          <option value="2021">2021</option>
+          <option value="2017">2017</option>
+          <option value="2013">2013</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+</div>
+
+<section class="welcome" aria-labelledby="welcomeTitle">
+  <div class="welcome-inner">
+    <div class="welcome-text">
+      <h1 class="welcome-title" id="welcomeTitle">Alemania vota. Acá lo ves claro.</h1>
+      <p class="welcome-body" id="welcomeBody">Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elegí un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Querés entender cómo los votos se convierten en escaños? La sección <a href="/sitzverteilung.html">Sistema electoral</a> lo explica paso a paso.</p>
+      <div class="welcome-cta"><a class="welcome-elections" id="welcomeElections" href="/landtagswahlen-2026.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="9.5" rx="1.5"></rect><path d="M9 11h6"></path><path d="M8.6 7.8l2.1 2.1L15.6 4.8"></path></svg><span id="welcomeElectionsText">Landtagswahlen 2026 →</span></a></div>
+    </div>
+  </div>
+</section>
+
+<div class="land-tabs" id="landTabs"></div>
+<div class="land-select-wrap">
+  <select id="landSelect" aria-label="Bundesland auswählen">
+    <option value="" data-placeholder>— Bundesland wählen —</option>
+  </select>
+</div>
+
+<main class="layout">
+  <div class="banner" id="banner"></div>
+
+  <section class="panel map-panel">
+    <div class="panel-head">
+      <div>
+        <h2 id="mapEyebrow">Bundestagswahl 2025 · Zweitstimmen</h2>
+        <p class="eyebrow-note visible" id="bundestagNote">Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.</p>
+      </div>
+      <div class="map-head-actions">
+        <span class="hint" id="mapHint">Hover oder Klick für Details</span>
+        <select id="partySelect" aria-label="Partei-Ansicht">
+          <option value="" data-placeholder>— Partei-Ansicht —</option>
+        </select>
+        <button type="button" class="compare-toggle" id="compareToggle" aria-pressed="false">Vergleichen</button>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="map-wrap">
+        <svg id="germany" viewBox="-6.32 -8.57 328.88 445.83" xmlns="http://www.w3.org/2000/svg">
+          <g id="landGroup"></g>
+          <g id="labelLayer"></g>
+          <g id="pingLayer"></g>
+        </svg>
+        <div class="tooltip" id="tooltip"></div>
+      </div>
+    </div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section class="panel results-panel" id="resultsCard">
+    <div class="panel-head">
+      <div>
+        <h2 id="landName">Kein Bundesland ausgewählt</h2>
+        <div class="landtag-year-tabs" id="landtagYearTabs" style="display:none;"></div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="results-empty" id="resultsEmpty">
+        Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.
+      </div>
+      <div id="resultsFilled" style="display:none;">
+        <div class="stat-line" id="statLine"></div>
+        <p class="landtag-note" id="landtagNote" style="display:none;"></p>
+        <ol class="rank-list" id="rankList"></ol>
+        <p class="source-line" id="sourceNote"></p>
+      </div>
+      <div id="resultsCompare" style="display:none;"></div>
+      <div id="resultsPartyView" style="display:none;"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="quellen">
+  <div class="foot-links">
+    <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
+    <a href="/about.html" id="footAbout">Über Wahlblick</a>
+    <a href="/about.html#methodik" id="footMethod">Methodik</a>
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html" id="footDatenschutzLink">Datenschutzerklärung</a>
+    <a href="/disclaimer.html" id="footDisclaimerLink">Haftungsausschluss</a>
+    <a href="/guide.html" id="footGuideLink">Nutzungshinweise</a>
+  </div>
+  <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
+  <div class="foot-bottom-row">
+    <p class="foot-credit"><img src="/emsdetten-wappen.svg" alt="Wappen der Stadt Emsdetten" width="18" height="21"><span id="footCredit">Verlässlich aus Emsdetten.</span></p>
+    <p id="footUpdated"></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PATHS = [{"id": "DE-SN","d": "M294.7,222.87 L293.28,221.81 L290.9,221.57 L290.07,222.41 L289.2,224.56 L291.46,225.26 L291.08,226.15 L291.96,227.03 L294.15,227.95 L293.95,229.32 L292.93,230.18 L288.99,230.23 L287.56,231.96 L282.19,234.45 L279.59,234.48 L278.34,235.7 L277.28,235.67 L276.81,236.6 L276.92,237.74 L275.28,238.79 L265.69,239.72 L264.28,240.59 L264.68,241.43 L264.54,242.17 L263.51,243.22 L263.68,243.99 L261.94,245.74 L260.53,245.52 L259.21,244.04 L257.6,245.46 L257.04,246.93 L256.31,247.3 L254.51,246.58 L253.36,249.7 L252.02,251.26 L246.83,251.5 L246.38,254.74 L244.86,256.36 L243.68,256.3 L240.2,254.23 L237.46,254.86 L235.87,256.89 L233.58,256.6 L229.61,257.21 L228.39,258.27 L228.11,259.79 L225.74,261.26 L223.61,264.37 L223.52,265.24 L222.65,266.65 L222.85,269.39 L222.37,269.75 L221.43,269.11 L220.78,266.64 L219.94,265.68 L220.27,264.48 L218.15,263.81 L217.82,261.93 L213.51,260.57 L211.64,259.39 L211.36,257.4 L209.96,255.79 L208.74,255.76 L208.47,255.31 L209.74,254.28 L210.2,253.17 L210.12,252.46 L209.45,251.73 L209.73,250.75 L211.64,248.56 L213.68,249.36 L214.81,247.72 L217.02,247.65 L217.54,246.49 L217.48,245.39 L218.46,244.14 L220.73,244.15 L222.41,242.76 L223.11,241.52 L221.62,241.21 L221.16,240.04 L221.28,239.09 L220.33,238.87 L220.6,237.75 L221.98,236.61 L220.87,235.57 L220.91,235.01 L223.42,234.24 L224.79,233.16 L226.64,233.25 L229.52,230.11 L233.08,230.74 L234.32,229.51 L232.78,226.21 L230.37,224.71 L228.96,222.03 L228.69,220.39 L223.35,218.76 L219.69,218.7 L219.29,217.46 L218.2,216.07 L218.36,214.57 L217.3,214.24 L217.8,212.73 L217.69,211.14 L216.89,209.68 L216.57,207.55 L217.04,206.34 L218.27,205.73 L218.43,204.7 L217.87,202.95 L217.4,199.06 L218.59,197.74 L218.75,194.51 L219.76,193.65 L220.13,192.68 L222.28,193.28 L224.3,192.37 L226.86,192.11 L227.3,190.51 L227.61,190.39 L230.81,190.81 L234.84,190.51 L236.68,188.49 L238.96,189.11 L241.74,186.84 L242.74,186.74 L243.55,187.85 L245.73,189.07 L247.02,188.66 L250.46,191.42 L251.23,191.33 L252.33,192.21 L252.2,193.6 L253.26,194.52 L253.75,196.29 L253.02,197.4 L253.39,198.4 L253.16,200.35 L252.49,201.22 L252.84,202.33 L254.06,201.43 L255.19,202.41 L260.66,200.42 L262.28,201.21 L264.91,203.59 L272.93,204.45 L279.96,203.84 L282.5,200.05 L283.29,197.53 L284.64,195.77 L286.46,194.61 L288.6,194.1 L290.26,194.31 L292.66,195.55 L298.55,192.97 L300.76,192.51 L303.86,193.78 L305.36,193.85 L306.23,195.22 L312.4,197.8 L313.93,199.65 L313.64,200.33 L314.12,205.15 L316.14,208.65 L315.96,210.25 L316.23,210.57 L315.17,213.2 L314.78,216.84 L314.1,217.84 L313.93,220.07 L310.65,228.17 L308.93,230.36 L308.93,231.38 L308.39,232.85 L307.17,234.03 L305.14,233.72 L302.13,232.09 L302.08,230.69 L302.87,228.58 L302.68,227.95 L300.36,228.74 L299.96,228.43 L300.83,226.31 L300.79,224.94 L299.69,223.66 L298.33,223.13 L297.61,221.55 L296.92,222.51 L294.7,222.87Z"},{"id": "DE-BY","d": "M215.5,261.32 L214.63,261.26 L215.71,262.59 L215.84,263.38 L215.77,264.08 L214.75,265.24 L218.05,268.55 L218.41,270.03 L218.19,272.1 L218.49,272.94 L220.03,274.17 L220.52,276.12 L226.3,279.53 L227.57,279.66 L228.15,280.23 L227.97,282.37 L230.08,283.82 L229.7,285.73 L228.65,288.09 L227.96,287.88 L227.62,290.71 L225.65,291.91 L225.24,292.74 L226.48,295.08 L229.13,296.74 L229.41,297.33 L229.15,298.73 L229.51,298.94 L229.32,299.51 L230.86,300.84 L232.11,304.86 L233.49,305.55 L233.64,308.28 L234.2,309.97 L237.16,312.08 L238.84,315.3 L241.55,315.87 L242.2,315.78 L242.04,315.07 L242.52,314.92 L244.42,315.62 L246.49,317.37 L246.88,318.86 L251.65,325.08 L252.65,327.08 L256.83,328.44 L259.34,331.48 L259.72,332.43 L259.75,333.98 L260.24,334.82 L262.32,336.62 L263.13,337.02 L263.81,335.46 L264.29,335.23 L267.49,336.55 L267.57,337.59 L268.48,339.45 L269.72,340.39 L271.49,340.89 L274.63,346.44 L273.52,349.25 L274.67,350.34 L274.12,351.46 L274.17,354.95 L273.2,357.29 L271.8,357.81 L271.21,359.9 L269.72,359.14 L268.03,357.5 L264.45,356.44 L262.17,357.05 L261.67,357.74 L262.33,360.19 L261.61,362.27 L261.54,364.91 L260.48,367.88 L255.95,371.7 L251.2,372.59 L247.63,374.1 L244.19,377.08 L241.76,377.78 L240.36,379.76 L237.49,382.35 L237.6,383.82 L238.23,385.03 L240.65,387.74 L241.74,390.65 L244.12,392.73 L246.19,397.0 L243.97,400.84 L243.64,402.33 L242.77,403.8 L243.33,404.41 L245.26,404.8 L247.18,404.38 L248.71,406.52 L249.08,408.03 L248.98,409.36 L247.82,411.47 L247.92,412.69 L247.47,413.8 L247.78,416.48 L246.56,417.96 L245.45,417.43 L244.51,417.72 L242.45,416.17 L240.58,414.04 L238.87,413.08 L238.69,411.72 L239.11,410.45 L240.05,409.94 L237.93,407.88 L238.29,406.92 L234.53,406.46 L232.65,407.13 L230.57,408.87 L229.13,409.0 L227.35,407.5 L226.64,405.56 L224.13,406.1 L222.14,405.64 L220.24,406.25 L219.71,405.32 L220.36,403.33 L218.1,404.77 L219.08,406.62 L219.14,408.09 L218.98,408.95 L218.0,410.31 L209.8,410.0 L206.9,410.64 L205.81,411.95 L198.92,411.16 L197.84,412.22 L197.16,414.59 L196.53,415.34 L194.16,415.95 L191.75,415.76 L190.13,417.78 L190.92,418.17 L190.76,419.13 L188.06,419.65 L185.7,421.93 L184.87,421.82 L184.94,420.33 L184.21,420.0 L180.41,422.17 L176.81,422.11 L175.98,421.06 L176.14,419.81 L174.42,417.8 L172.64,416.91 L172.4,416.47 L173.81,415.28 L172.65,414.41 L169.27,415.34 L168.55,414.53 L163.17,412.66 L161.55,414.45 L159.68,414.29 L158.67,413.55 L158.8,411.74 L157.84,411.86 L157.32,412.08 L157.9,413.77 L157.51,416.48 L158.47,417.6 L158.62,419.46 L157.81,421.81 L155.85,423.39 L154.88,425.4 L153.59,426.97 L151.29,428.32 L148.55,428.68 L148.85,427.62 L149.61,427.19 L150.25,423.11 L149.62,422.74 L145.89,423.84 L144.87,421.33 L145.65,420.67 L145.81,420.09 L145.51,419.44 L143.82,416.76 L142.81,417.38 L142.44,417.14 L142.06,415.74 L141.27,414.76 L141.17,413.85 L140.23,414.32 L138.17,413.82 L137.29,414.19 L136.59,413.8 L136.41,411.9 L135.52,411.23 L134.51,411.58 L132.83,414.37 L131.89,414.85 L129.68,414.89 L127.66,414.29 L129.74,411.21 L131.12,410.81 L132.0,409.96 L133.21,410.33 L138.37,406.48 L141.42,407.32 L144.85,406.21 L145.65,407.86 L146.14,406.23 L147.42,406.34 L147.07,401.64 L145.77,400.14 L147.5,398.69 L146.62,396.3 L146.0,395.97 L146.7,394.22 L146.84,392.23 L145.98,390.47 L147.52,386.67 L147.84,383.4 L146.81,380.45 L144.9,371.83 L143.14,368.3 L142.36,367.62 L144.55,364.58 L144.44,363.84 L145.24,362.68 L147.52,361.76 L148.33,362.97 L151.68,360.81 L152.29,359.54 L154.05,359.3 L153.77,358.91 L154.2,356.72 L153.76,355.32 L154.52,354.31 L152.93,353.01 L152.33,351.77 L152.41,351.02 L153.17,349.93 L154.07,350.64 L155.14,350.71 L155.86,352.05 L157.9,349.81 L158.36,350.13 L157.94,351.32 L158.16,351.88 L160.11,350.12 L159.28,348.24 L158.25,347.79 L157.92,347.02 L158.19,344.6 L158.87,342.91 L158.49,341.86 L158.75,339.15 L158.38,338.74 L159.16,337.93 L158.17,335.76 L155.91,333.3 L155.35,331.86 L152.5,330.83 L152.63,329.94 L151.98,329.26 L152.05,328.59 L150.95,327.93 L151.79,327.52 L152.11,325.48 L151.37,324.77 L150.58,325.06 L148.13,322.4 L148.6,321.93 L147.41,318.88 L148.52,318.8 L148.1,317.14 L148.35,316.18 L147.24,315.18 L147.24,313.27 L147.85,312.5 L148.95,312.58 L147.88,309.79 L146.91,309.28 L147.59,307.61 L147.19,306.53 L147.43,305.46 L146.44,305.02 L146.58,304.11 L145.97,303.66 L145.01,304.59 L145.3,305.59 L144.0,307.02 L140.84,307.1 L140.61,303.32 L140.01,302.66 L140.24,302.14 L140.03,301.75 L138.67,302.73 L138.34,303.62 L137.49,303.44 L138.98,299.98 L137.37,297.88 L137.27,295.72 L135.95,293.92 L133.64,295.79 L132.86,293.92 L132.08,294.71 L131.91,295.61 L131.06,295.74 L130.29,295.15 L130.86,293.51 L130.94,290.52 L129.31,291.2 L128.36,290.56 L127.34,290.76 L124.84,289.84 L120.27,290.52 L119.32,291.48 L119.59,292.36 L119.36,293.33 L121.19,293.92 L121.27,295.18 L121.77,295.09 L122.24,294.09 L123.18,294.48 L122.87,297.11 L123.13,297.78 L122.5,298.39 L121.54,297.82 L118.68,298.76 L118.42,299.13 L118.54,300.01 L117.48,301.76 L112.37,301.96 L111.05,300.0 L112.39,298.4 L111.98,295.84 L113.2,295.21 L113.13,294.14 L113.69,292.7 L112.68,291.69 L113.41,290.29 L111.97,289.58 L111.7,287.21 L110.93,287.86 L109.47,283.69 L109.52,279.4 L110.38,279.6 L109.44,276.12 L107.74,275.69 L108.75,274.94 L108.97,273.15 L112.37,271.67 L113.89,272.48 L113.7,273.23 L115.04,272.0 L115.22,271.08 L116.66,270.66 L119.9,270.93 L121.57,271.81 L122.58,273.51 L123.92,273.57 L126.02,272.65 L126.37,272.2 L126.2,270.74 L126.79,269.42 L125.74,268.76 L126.06,265.64 L129.16,266.27 L131.35,265.7 L131.25,264.6 L131.77,263.46 L134.36,261.79 L134.17,259.5 L135.41,255.81 L136.2,255.53 L137.12,256.56 L138.17,256.65 L142.38,254.54 L143.47,253.24 L144.93,250.19 L147.38,247.64 L147.52,248.45 L149.84,248.44 L150.56,249.1 L151.02,250.4 L154.33,251.69 L154.8,253.36 L156.81,255.33 L156.56,256.11 L156.87,256.73 L158.54,256.64 L160.27,259.15 L162.08,258.86 L163.43,260.66 L163.73,262.5 L163.51,263.67 L164.04,265.91 L167.89,267.19 L168.52,264.97 L172.2,265.03 L172.04,263.74 L171.06,263.35 L170.58,262.56 L169.56,262.5 L167.69,260.89 L167.93,258.93 L169.17,258.92 L170.24,257.35 L173.2,256.91 L173.93,257.56 L175.57,257.29 L177.11,259.35 L177.44,258.59 L179.24,259.47 L181.4,258.51 L182.92,260.49 L182.19,261.58 L182.46,262.03 L184.15,263.66 L184.68,262.91 L186.33,263.48 L186.69,261.82 L186.46,260.94 L186.79,259.17 L187.19,258.87 L186.46,256.42 L186.58,255.07 L186.1,252.6 L188.43,251.5 L189.48,250.06 L192.25,250.37 L192.65,251.25 L192.03,251.88 L192.05,254.23 L193.18,255.07 L193.98,255.08 L194.33,256.77 L195.65,257.74 L196.7,257.56 L197.17,256.89 L198.94,257.32 L204.59,255.81 L205.91,256.54 L206.11,257.09 L209.65,255.66 L211.36,257.4 L211.64,259.39 L215.5,261.32Z"},{"id": "DE-RP","d": "M8.58,275.11 L8.9,272.76 L9.55,271.22 L9.08,270.59 L9.27,269.71 L10.58,269.11 L10.78,268.59 L10.61,267.34 L10.15,266.82 L11.63,265.24 L14.46,263.89 L14.38,262.84 L14.95,261.88 L17.57,261.71 L17.96,260.82 L19.77,260.31 L18.6,258.12 L18.71,257.58 L20.42,258.83 L20.89,259.84 L23.3,258.33 L25.28,257.84 L26.56,258.46 L26.41,259.18 L26.65,259.33 L28.23,258.66 L29.86,259.81 L32.5,259.03 L32.72,258.61 L32.03,256.97 L31.91,255.28 L31.04,254.57 L31.3,252.71 L33.39,251.86 L34.06,252.99 L35.21,253.17 L35.71,252.38 L35.61,249.9 L36.58,249.48 L37.48,248.08 L39.54,247.43 L41.7,245.98 L42.8,246.35 L43.65,245.38 L44.91,245.53 L46.44,243.53 L47.38,244.42 L49.32,244.56 L51.32,244.0 L52.44,243.15 L52.92,239.89 L55.05,239.75 L59.29,238.17 L60.25,238.25 L60.88,237.22 L62.41,236.55 L62.94,235.74 L63.58,235.86 L63.67,235.04 L62.87,234.04 L65.03,232.31 L66.14,232.43 L65.7,228.47 L67.22,227.29 L69.22,227.86 L68.76,230.26 L70.12,230.91 L72.08,232.83 L73.04,232.56 L73.51,234.43 L73.41,236.05 L75.23,238.66 L76.0,240.59 L77.35,240.25 L78.7,240.97 L78.2,242.85 L79.02,245.45 L79.71,246.37 L78.79,248.81 L78.01,249.51 L77.28,249.58 L75.88,248.56 L74.21,249.95 L74.04,252.97 L74.72,253.57 L73.14,256.58 L74.95,257.24 L75.77,258.17 L76.82,260.43 L77.76,261.48 L78.22,263.8 L75.64,264.11 L75.21,264.94 L75.56,265.59 L74.86,266.72 L73.83,266.03 L71.38,267.59 L70.47,269.67 L71.66,271.09 L71.36,272.61 L70.48,271.95 L69.21,272.06 L68.5,273.95 L66.18,275.65 L68.88,278.0 L69.86,280.08 L72.75,279.52 L75.73,277.58 L80.05,276.08 L81.41,276.15 L85.63,280.81 L86.31,282.68 L85.79,284.59 L87.18,287.25 L88.4,290.82 L88.68,291.39 L90.5,291.38 L89.2,293.63 L87.14,294.52 L86.55,295.59 L86.5,297.05 L88.44,301.72 L88.14,303.06 L90.05,307.6 L89.32,308.72 L91.09,309.25 L91.46,309.88 L90.97,310.98 L91.23,312.89 L89.92,316.27 L90.73,316.57 L90.61,317.26 L87.42,320.83 L86.38,327.57 L83.84,333.05 L82.0,335.49 L80.95,335.89 L77.18,334.74 L71.71,331.68 L69.12,331.82 L66.26,330.95 L64.64,331.63 L63.2,331.24 L61.47,331.52 L60.56,330.19 L57.54,328.99 L55.82,326.54 L56.22,326.06 L55.99,325.26 L53.88,324.92 L53.73,324.3 L51.62,324.32 L49.74,322.31 L49.51,320.38 L50.95,319.06 L51.94,316.23 L52.93,315.07 L53.04,313.75 L52.52,313.06 L49.62,312.21 L49.69,311.67 L48.28,309.89 L48.06,309.06 L50.23,306.63 L49.7,305.7 L48.91,301.81 L46.76,302.55 L44.33,300.54 L41.82,300.32 L39.53,298.97 L38.58,299.57 L37.58,299.06 L29.65,303.33 L28.19,303.38 L25.96,304.43 L17.12,304.7 L17.38,301.83 L19.5,298.44 L18.98,297.53 L22.05,295.05 L21.86,294.38 L22.32,294.42 L21.83,293.24 L22.19,292.44 L22.42,289.83 L18.78,289.12 L16.62,287.38 L15.52,287.67 L14.98,286.24 L12.77,284.8 L11.63,281.99 L11.04,281.0 L10.67,281.76 L9.28,278.8 L9.01,276.59 L8.41,275.92 L8.86,275.1 L8.58,275.11Z"},{"id": "DE-SL","d": "M17.0,308.55 L17.12,304.7 L25.96,304.43 L28.19,303.38 L29.65,303.33 L37.58,299.06 L38.58,299.57 L39.53,298.97 L41.82,300.32 L44.33,300.54 L46.76,302.55 L48.91,301.81 L49.7,305.7 L50.23,306.63 L48.06,309.06 L48.28,309.89 L49.69,311.67 L49.62,312.21 L52.52,313.06 L53.04,313.75 L52.93,315.07 L51.94,316.23 L50.95,319.06 L50.5,319.74 L49.77,319.83 L49.47,320.9 L49.74,322.31 L51.62,324.32 L52.39,324.45 L51.68,324.84 L51.09,326.21 L49.82,326.55 L49.04,327.82 L47.89,327.33 L44.92,327.3 L42.33,325.78 L42.01,326.11 L42.1,326.98 L41.04,327.68 L40.28,327.05 L39.88,325.54 L39.9,323.6 L36.62,322.23 L33.83,322.07 L33.63,322.84 L34.02,324.64 L33.43,325.47 L29.7,324.86 L29.26,324.09 L29.53,322.72 L29.31,321.84 L28.56,322.18 L27.98,320.18 L27.17,319.69 L27.15,318.68 L24.28,315.64 L24.25,314.5 L25.01,314.02 L22.98,311.47 L22.73,310.23 L18.98,307.99 L17.0,308.55Z"},{"id": "DE-SH","d": "M102.49,8.77 L115.27,11.82 L115.84,12.29 L116.36,14.27 L116.97,14.5 L120.0,14.42 L121.83,13.53 L122.52,14.13 L124.12,14.02 L126.17,13.06 L128.55,10.95 L128.66,12.93 L133.88,14.19 L136.2,15.51 L136.96,16.97 L139.43,16.27 L139.29,15.13 L141.23,15.72 L142.02,16.65 L142.71,18.96 L143.66,20.03 L142.02,20.03 L140.7,20.9 L140.6,21.53 L142.91,21.26 L143.43,21.91 L144.19,21.58 L144.38,21.92 L143.96,27.8 L143.39,29.21 L141.85,30.75 L137.52,32.08 L137.52,32.45 L139.01,33.18 L147.34,31.33 L147.98,31.54 L150.07,33.24 L149.38,33.88 L149.83,36.04 L149.63,36.77 L147.92,38.12 L148.4,39.71 L147.92,40.75 L149.25,39.83 L150.77,35.83 L152.42,35.49 L154.01,34.21 L155.48,34.33 L158.33,36.24 L163.76,38.5 L166.84,41.2 L168.26,41.53 L169.84,41.26 L172.97,38.87 L175.29,37.72 L178.17,37.37 L178.17,37.74 L176.69,37.78 L178.69,38.37 L181.11,36.98 L182.2,37.37 L180.55,39.25 L179.82,38.87 L180.78,43.0 L180.53,43.69 L180.63,47.15 L179.82,48.48 L175.81,50.92 L173.83,52.95 L171.87,53.64 L170.81,53.38 L168.99,55.84 L169.45,57.25 L170.61,58.56 L173.23,58.84 L173.64,60.58 L174.28,60.73 L174.44,62.74 L176.19,63.44 L174.52,63.98 L174.32,63.24 L173.56,63.04 L169.49,65.89 L168.93,67.34 L169.62,69.96 L169.21,72.46 L170.83,72.83 L172.61,74.95 L174.58,75.27 L175.64,76.36 L176.02,77.82 L175.91,78.71 L175.45,79.01 L175.93,81.81 L175.53,82.26 L175.95,82.46 L175.07,83.43 L174.34,82.12 L171.65,82.24 L171.78,83.46 L171.4,85.19 L169.25,86.74 L167.32,87.32 L166.86,88.42 L165.14,88.79 L164.49,92.09 L163.77,93.14 L162.68,93.58 L156.36,90.28 L154.35,89.8 L154.09,88.53 L151.57,86.71 L150.41,85.06 L149.47,84.7 L149.01,82.04 L150.3,81.45 L150.72,78.74 L150.12,77.16 L148.72,75.94 L149.65,73.63 L148.14,74.34 L146.09,74.01 L145.11,76.31 L143.51,76.58 L142.49,78.01 L140.53,78.08 L136.69,80.97 L136.35,80.65 L136.48,79.61 L135.05,78.99 L134.1,82.1 L132.43,81.92 L128.68,79.91 L127.54,78.69 L126.9,74.48 L123.58,72.42 L122.77,70.76 L122.18,67.89 L117.44,64.89 L111.77,64.51 L109.58,63.7 L108.82,64.51 L106.81,63.38 L105.65,62.04 L102.8,56.59 L104.78,55.96 L107.7,57.27 L108.45,56.93 L109.18,53.21 L107.67,51.55 L107.77,50.58 L106.92,50.34 L103.74,51.71 L102.09,48.67 L103.26,45.75 L103.02,44.54 L105.86,43.51 L107.28,41.12 L104.45,42.63 L104.68,41.88 L100.78,42.63 L99.55,42.43 L97.46,43.79 L95.56,42.64 L94.85,41.43 L94.75,40.0 L95.24,39.43 L98.05,38.87 L98.05,38.5 L96.5,37.8 L95.95,38.5 L95.76,37.27 L96.42,36.24 L97.16,36.55 L99.95,35.83 L104.62,35.61 L108.71,32.97 L108.94,32.08 L108.95,30.75 L105.25,26.66 L104.68,25.49 L103.66,25.26 L102.54,25.7 L102.31,25.28 L103.49,24.53 L102.28,21.54 L101.84,20.78 L97.81,18.15 L98.01,16.78 L96.42,13.61 L96.23,12.16 L96.85,9.3 L99.33,9.7 L102.49,8.77Z M107.28,29.79 L107.06,30.57 L105.49,32.44 L104.68,32.83 L103.19,32.94 L102.09,32.08 L102.53,31.58 L102.09,30.99 L103.19,30.01 L105.76,29.42 L107.28,29.79Z M186.34,32.26 L188.36,35.83 L184.02,35.15 L183.39,35.49 L183.7,35.81 L181.41,35.76 L181.02,35.3 L180.92,33.75 L179.53,33.55 L178.64,33.99 L178.41,33.36 L177.81,33.59 L177.72,32.83 L178.68,30.61 L180.04,29.38 L181.7,29.12 L184.65,30.3 L186.34,32.26Z M85.52,20.43 L87.25,23.44 L87.9,23.78 L86.26,24.55 L85.45,23.87 L84.11,21.91 L85.11,20.16 L86.49,19.28 L85.52,20.43Z M91.22,16.99 L93.14,17.1 L94.54,18.53 L93.57,20.78 L90.79,20.75 L87.67,19.28 L89.12,17.43 L91.22,16.99Z M86.49,6.44 L86.29,8.39 L87.45,9.41 L89.12,9.79 L96.63,9.44 L95.77,10.08 L91.46,9.85 L89.44,10.95 L87.07,10.95 L85.92,10.24 L84.65,11.0 L84.23,12.86 L84.26,16.84 L83.87,17.76 L83.62,15.54 L84.34,8.4 L86.95,1.67 L88.4,0.0 L90.04,0.81 L87.67,1.18 L88.62,1.27 L88.91,1.94 L88.6,2.7 L87.2,3.42 L86.55,4.32 L86.19,5.42 L86.49,6.44Z M95.94,28.75 L98.16,27.87 L98.23,28.47 L97.96,29.81 L97.16,30.99 L96.18,31.51 L95.4,31.5 L94.61,30.34 L94.82,29.46 L95.94,28.75Z M70.76,48.67 L69.92,47.93 L70.42,47.89 L70.76,48.67Z M71.04,48.02 L71.77,48.15 L71.04,48.02Z"},{"id": "DE-NI","d": "M42.06,122.32 L45.16,117.3 L45.91,115.46 L46.28,111.73 L45.96,107.79 L45.5,106.02 L46.31,103.42 L46.28,100.12 L47.63,98.54 L47.49,97.28 L48.36,96.02 L49.63,95.78 L52.22,96.94 L51.39,95.77 L50.02,95.29 L42.17,95.03 L40.89,94.42 L40.39,92.89 L40.38,88.82 L41.35,85.4 L41.63,84.9 L43.7,85.2 L44.46,84.05 L44.1,82.96 L42.64,82.04 L42.57,81.32 L43.05,80.71 L47.37,76.94 L50.09,75.93 L55.4,75.36 L56.95,76.27 L72.39,73.89 L75.14,74.65 L74.92,76.6 L75.89,78.6 L78.46,81.1 L78.17,82.14 L79.85,83.17 L79.42,84.66 L76.09,85.98 L77.03,88.51 L77.5,88.99 L79.32,88.86 L81.14,91.0 L83.01,90.92 L84.16,89.37 L84.93,87.47 L85.11,85.59 L84.11,84.48 L82.03,84.71 L82.64,81.13 L83.4,79.89 L85.42,79.6 L86.08,79.89 L87.43,81.85 L93.1,83.7 L90.96,86.84 L90.79,91.53 L91.46,93.9 L91.22,87.48 L91.75,86.29 L93.28,85.0 L93.82,85.99 L94.85,86.62 L96.1,85.18 L96.22,84.34 L95.45,81.27 L95.82,80.38 L91.75,79.65 L90.86,76.91 L90.83,75.07 L93.83,66.42 L95.0,65.11 L96.54,64.51 L97.67,64.73 L101.05,67.26 L103.74,67.89 L109.11,67.36 L109.76,66.65 L112.5,66.01 L115.23,66.04 L115.81,65.63 L118.02,66.01 L119.08,67.14 L122.44,72.76 L125.26,75.64 L125.74,77.3 L128.1,80.62 L132.57,82.98 L134.9,83.47 L135.05,85.64 L136.71,88.46 L138.11,89.79 L139.44,88.92 L140.03,90.74 L141.14,90.34 L142.18,90.82 L144.0,90.08 L144.15,89.34 L145.9,88.79 L149.47,91.35 L151.37,91.23 L152.88,89.8 L155.12,89.83 L162.68,93.58 L163.77,93.14 L167.51,93.33 L168.26,94.23 L168.54,96.63 L169.77,97.08 L171.98,99.29 L175.12,101.03 L180.61,105.66 L182.91,104.03 L184.22,105.84 L185.27,105.18 L186.34,106.1 L187.55,108.17 L189.39,109.95 L190.77,109.9 L192.63,108.98 L194.44,110.25 L197.57,111.24 L196.9,113.04 L195.0,113.53 L194.64,115.28 L194.77,116.75 L193.74,116.89 L191.62,118.8 L186.26,120.4 L184.89,119.22 L178.03,118.44 L177.48,118.77 L177.15,120.08 L175.51,121.34 L173.57,122.0 L170.47,122.04 L169.2,122.66 L169.14,125.34 L170.41,127.46 L170.66,128.86 L171.9,129.53 L175.05,134.81 L176.05,134.35 L176.72,134.7 L175.74,136.2 L175.68,137.63 L177.58,141.2 L175.89,141.4 L175.42,143.18 L177.89,146.4 L180.04,148.12 L179.72,149.13 L177.5,149.88 L178.69,151.74 L178.03,152.79 L179.06,154.2 L179.62,154.22 L179.72,155.19 L180.23,154.79 L180.46,155.9 L180.22,156.44 L178.81,156.96 L178.24,157.92 L178.46,158.83 L179.4,159.33 L179.52,160.19 L179.19,160.91 L178.0,162.05 L175.76,163.11 L176.46,164.0 L176.25,165.3 L165.83,166.13 L164.47,168.01 L162.7,168.22 L163.39,169.9 L165.3,170.95 L164.35,171.7 L164.18,172.74 L164.94,173.46 L165.1,175.0 L163.11,176.97 L162.96,179.31 L163.22,180.81 L164.39,181.87 L165.94,184.7 L166.11,186.75 L167.09,188.54 L164.81,190.21 L165.6,191.79 L165.45,192.66 L164.36,192.05 L162.26,192.98 L160.77,193.0 L157.9,191.1 L155.96,191.38 L156.07,192.45 L155.37,194.09 L153.6,195.51 L153.08,196.57 L151.3,197.63 L149.57,197.31 L148.97,198.88 L148.1,199.36 L148.2,199.84 L145.96,199.88 L145.42,200.49 L144.47,199.82 L141.28,202.59 L139.79,201.39 L139.5,200.54 L138.3,201.12 L138.74,202.6 L138.24,203.13 L137.27,201.73 L136.01,201.13 L136.19,201.75 L135.86,202.12 L133.12,203.65 L134.44,205.37 L135.61,204.96 L135.09,206.28 L133.45,207.62 L131.64,206.02 L128.18,204.76 L126.99,203.43 L128.24,203.72 L127.96,202.62 L128.52,201.73 L130.49,201.39 L130.28,198.38 L130.56,197.73 L129.81,196.99 L129.06,195.09 L129.67,194.79 L129.92,193.21 L130.78,193.34 L130.54,192.13 L131.7,192.83 L132.21,192.14 L131.53,191.42 L131.12,190.14 L129.96,188.88 L128.73,189.16 L127.49,188.38 L126.75,189.01 L125.78,188.94 L125.2,187.59 L122.13,188.39 L121.41,187.99 L121.47,187.02 L122.0,186.32 L122.04,183.23 L123.51,181.4 L124.13,179.72 L124.17,178.44 L124.49,177.94 L123.72,177.35 L124.45,176.0 L119.65,176.5 L120.22,174.46 L119.79,173.21 L117.35,172.86 L118.02,172.03 L118.41,170.09 L116.94,169.49 L116.11,170.23 L114.45,169.36 L115.4,167.66 L114.64,165.47 L115.08,164.25 L114.66,163.38 L113.41,162.67 L113.48,161.5 L110.75,161.0 L108.43,161.22 L108.81,160.02 L108.14,158.23 L110.13,157.92 L109.88,156.57 L111.05,155.44 L108.09,154.27 L108.38,150.86 L108.82,149.94 L111.1,149.41 L112.97,146.13 L112.31,143.76 L113.04,143.04 L113.09,142.37 L111.35,141.23 L108.52,143.14 L107.21,146.09 L102.57,147.21 L98.58,146.67 L98.33,142.18 L97.38,140.49 L96.23,139.77 L93.6,140.7 L91.19,140.74 L90.06,141.66 L89.51,143.59 L88.67,144.06 L86.71,144.32 L84.46,143.78 L85.58,146.68 L87.82,147.72 L89.27,149.14 L89.93,151.86 L89.96,156.81 L90.06,157.33 L91.22,158.19 L91.02,158.9 L88.75,160.84 L87.88,162.41 L83.26,161.24 L80.3,164.02 L77.87,164.93 L76.63,164.48 L75.38,164.7 L73.02,166.47 L71.04,165.51 L70.32,163.66 L71.38,162.46 L73.72,161.82 L74.66,159.24 L73.73,158.6 L72.25,158.7 L71.8,157.88 L70.63,157.32 L71.49,155.92 L71.17,154.81 L72.21,153.51 L71.64,151.93 L73.12,151.29 L70.81,147.84 L67.94,148.61 L64.05,146.19 L63.44,143.66 L63.05,143.18 L60.31,142.5 L59.64,144.59 L60.34,145.75 L58.94,148.14 L57.29,148.24 L53.94,151.33 L49.94,153.64 L43.76,154.15 L41.41,155.51 L40.49,155.47 L39.98,153.93 L41.24,148.51 L40.75,147.1 L38.65,143.77 L37.9,144.53 L36.13,144.84 L30.65,143.64 L29.06,142.43 L28.68,139.66 L28.25,138.8 L30.74,137.81 L29.36,136.52 L29.58,135.12 L29.29,134.54 L31.66,133.34 L38.46,133.58 L40.21,134.16 L40.84,132.99 L41.41,125.11 L42.06,122.32Z M93.53,101.94 L92.32,101.24 L91.17,101.27 L91.75,102.61 L95.35,103.87 L96.06,106.43 L98.26,109.0 L98.37,110.87 L100.68,110.59 L103.17,111.77 L103.83,111.54 L103.93,110.98 L105.6,112.24 L107.61,110.7 L108.2,108.45 L107.09,106.89 L107.7,106.06 L106.35,104.64 L105.24,106.02 L102.47,104.35 L100.91,104.23 L99.77,103.05 L97.87,103.23 L94.42,101.75 L93.53,101.94Z M32.61,80.35 L30.0,81.1 L31.18,82.63 L30.13,81.85 L28.44,81.93 L27.83,80.64 L32.15,79.49 L32.61,80.35Z M35.22,76.59 L36.5,75.99 L41.2,75.41 L42.52,75.81 L35.22,76.59Z M44.17,74.65 L45.75,73.77 L47.61,73.47 L51.53,73.82 L45.56,75.02 L44.17,74.65Z M52.22,73.55 L53.49,73.07 L54.6,73.55 L54.1,73.93 L52.22,73.55Z M78.2,73.93 L79.32,72.94 L80.82,73.55 L79.26,74.31 L78.2,74.31 L78.2,73.93Z M57.42,71.68 L60.49,71.65 L61.2,72.29 L57.3,72.59 L57.21,73.55 L56.19,73.6 L55.77,72.6 L55.94,71.97 L57.42,71.68Z M62.37,71.68 L63.24,70.64 L67.61,70.52 L67.61,70.89 L65.38,71.74 L63.54,71.27 L62.93,71.91 L62.37,71.68Z M69.71,70.89 L69.04,70.44 L69.81,69.88 L71.1,69.85 L72.53,70.53 L69.76,70.23 L69.71,70.89Z"},{"id": "DE-NW","d": "M31.7,162.61 L33.73,162.38 L35.6,159.78 L37.77,158.54 L38.95,156.82 L40.48,155.91 L40.49,155.47 L41.41,155.51 L43.76,154.15 L49.94,153.64 L53.94,151.33 L57.29,148.24 L58.94,148.14 L60.34,145.75 L59.64,144.59 L60.06,142.84 L60.58,142.44 L63.21,143.3 L63.91,146.04 L67.72,148.51 L70.81,147.84 L73.04,151.13 L73.03,151.54 L71.64,151.93 L72.21,153.51 L71.17,154.81 L71.49,155.92 L70.63,157.32 L71.8,157.88 L72.25,158.7 L73.73,158.6 L74.66,159.24 L73.72,161.82 L71.38,162.46 L70.32,163.66 L71.04,165.51 L73.16,166.48 L75.38,164.7 L76.63,164.48 L77.87,164.93 L80.3,164.02 L83.26,161.24 L87.88,162.41 L88.75,160.84 L91.02,158.9 L91.22,158.19 L90.06,157.33 L89.96,156.81 L89.93,151.86 L89.27,149.14 L87.82,147.72 L85.58,146.68 L84.46,143.78 L86.71,144.32 L88.67,144.06 L89.51,143.59 L90.06,141.66 L91.19,140.74 L93.6,140.7 L96.23,139.77 L97.38,140.49 L98.33,142.18 L98.58,146.67 L102.57,147.21 L107.21,146.09 L108.52,143.14 L109.43,142.22 L111.68,141.23 L113.17,142.47 L112.31,143.76 L112.97,146.13 L111.1,149.41 L108.82,149.94 L108.38,150.86 L108.09,154.27 L111.05,155.44 L109.88,156.57 L110.13,157.92 L108.14,158.23 L108.81,160.02 L108.43,161.22 L110.75,161.0 L113.48,161.5 L113.41,162.67 L114.66,163.38 L115.08,164.25 L114.64,165.47 L115.4,167.66 L114.45,169.36 L116.11,170.23 L116.94,169.49 L118.41,170.09 L118.02,172.03 L117.35,172.86 L119.79,173.21 L120.22,174.46 L119.65,176.5 L124.45,176.0 L123.72,177.35 L124.49,177.94 L124.17,178.44 L124.13,179.72 L123.51,181.4 L122.04,183.23 L122.0,186.32 L121.39,187.5 L121.61,188.37 L123.72,187.9 L122.96,189.1 L120.03,190.23 L120.79,191.0 L120.14,193.13 L118.77,195.13 L116.28,196.81 L115.87,198.46 L113.85,199.49 L112.3,199.23 L111.48,198.45 L111.26,196.73 L109.08,195.59 L105.13,197.4 L105.69,200.41 L106.81,200.91 L106.31,202.07 L104.88,202.14 L103.57,202.98 L101.96,202.6 L99.16,203.07 L97.57,203.68 L96.61,204.67 L94.54,207.31 L93.91,208.73 L94.81,210.19 L95.35,210.38 L96.13,209.68 L98.99,208.81 L98.9,209.56 L99.3,209.85 L100.0,213.81 L98.05,216.42 L98.42,217.74 L96.85,218.74 L92.16,218.46 L92.01,218.92 L92.6,220.12 L92.85,222.46 L91.63,224.68 L90.98,225.08 L90.26,226.69 L90.14,228.17 L88.79,228.61 L87.75,229.71 L87.68,230.46 L86.62,231.21 L85.1,231.19 L84.52,230.21 L83.84,230.22 L80.86,233.11 L80.52,233.96 L78.66,235.69 L80.1,237.78 L79.82,239.66 L78.7,240.97 L77.35,240.25 L76.0,240.59 L75.23,238.66 L73.41,236.05 L73.51,234.43 L73.04,232.56 L72.08,232.83 L70.12,230.91 L68.76,230.26 L69.22,227.86 L66.77,227.43 L65.7,228.47 L65.58,229.09 L66.15,231.57 L66.05,232.59 L65.03,232.31 L62.87,234.04 L63.67,235.04 L63.51,235.93 L62.94,235.74 L62.41,236.55 L60.88,237.22 L60.25,238.25 L59.29,238.17 L55.05,239.75 L52.92,239.89 L52.44,243.15 L51.32,244.0 L49.32,244.56 L47.38,244.42 L46.44,243.53 L44.91,245.53 L43.65,245.38 L42.8,246.35 L41.7,245.98 L39.54,247.43 L37.48,248.08 L36.58,249.48 L35.61,249.9 L35.71,252.38 L35.21,253.17 L34.06,252.99 L33.39,251.86 L31.3,252.71 L31.04,254.57 L31.91,255.28 L32.6,258.98 L29.86,259.81 L28.23,258.66 L26.65,259.33 L26.41,259.18 L26.56,258.46 L25.28,257.84 L23.3,258.33 L20.89,259.84 L20.42,258.83 L18.8,257.52 L18.6,258.12 L19.8,260.24 L17.96,260.82 L16.73,258.35 L17.2,254.75 L16.52,254.01 L16.24,252.96 L16.71,252.14 L13.9,251.39 L12.23,251.85 L11.38,250.73 L11.66,250.26 L10.98,250.11 L11.2,249.43 L10.63,248.7 L11.26,247.68 L13.12,246.3 L13.68,244.8 L10.59,244.36 L10.18,243.57 L10.64,243.27 L7.88,239.35 L5.49,239.62 L5.46,238.06 L4.84,237.65 L4.99,236.63 L4.01,234.89 L5.03,234.55 L5.41,232.37 L7.04,231.7 L7.26,230.69 L6.97,229.56 L7.29,228.68 L5.08,227.48 L5.21,225.04 L2.59,224.82 L0.76,225.5 L0.73,224.11 L0.2,222.53 L0.0,221.24 L0.97,220.73 L2.31,221.96 L2.95,221.89 L4.5,219.49 L10.17,215.22 L9.44,214.54 L10.5,213.73 L9.71,213.46 L7.99,214.65 L7.19,214.19 L7.04,211.95 L7.34,210.85 L10.18,206.09 L11.76,204.65 L12.25,202.27 L11.73,201.65 L12.17,198.38 L11.76,195.58 L8.07,190.84 L7.92,190.16 L8.51,188.15 L6.17,187.13 L5.38,186.13 L5.85,184.57 L5.5,184.22 L4.34,183.45 L2.99,183.34 L3.02,182.75 L3.79,181.99 L3.85,180.88 L3.39,179.82 L2.61,179.22 L3.3,178.33 L7.98,176.64 L10.47,177.28 L8.29,174.9 L9.47,174.27 L12.85,176.15 L14.21,175.95 L15.0,177.05 L16.88,177.58 L16.98,178.43 L18.28,178.08 L18.14,176.29 L21.05,176.93 L23.32,175.39 L26.75,174.23 L29.8,174.13 L30.74,173.64 L33.05,170.76 L32.99,169.72 L31.92,168.52 L28.37,166.68 L28.3,165.84 L28.53,165.27 L29.62,164.89 L30.95,162.94 L31.7,162.61Z"},{"id": "DE-BW","d": "M127.51,414.25 L117.97,407.84 L115.34,407.51 L114.87,406.72 L109.12,406.25 L107.92,407.17 L105.31,407.74 L103.47,406.7 L102.95,405.77 L103.58,405.61 L101.57,403.99 L100.64,403.95 L100.33,405.02 L100.61,405.36 L98.79,405.39 L98.22,403.8 L98.88,402.49 L98.66,401.94 L97.58,401.86 L96.72,400.25 L96.27,400.09 L95.78,401.64 L95.35,401.94 L95.02,401.67 L94.81,399.89 L94.17,399.58 L92.76,399.87 L93.08,400.73 L92.56,401.02 L90.05,401.58 L89.16,403.82 L87.92,404.7 L87.55,405.53 L87.78,406.4 L87.56,406.99 L89.87,408.4 L93.66,407.13 L95.01,407.5 L94.81,408.8 L94.53,408.25 L94.08,408.45 L94.09,410.58 L93.4,411.18 L92.08,409.39 L89.99,410.26 L89.54,411.46 L86.27,411.64 L84.63,411.02 L84.01,409.72 L82.1,409.39 L80.23,409.72 L77.07,412.39 L75.52,412.76 L71.03,412.76 L70.55,411.26 L67.84,410.85 L66.02,413.02 L63.14,413.66 L60.6,412.53 L61.5,412.54 L62.32,410.78 L59.78,411.44 L59.93,410.16 L57.43,406.47 L57.23,404.69 L58.12,403.34 L57.8,399.76 L58.3,397.97 L58.96,397.44 L58.81,395.27 L59.54,393.75 L59.75,391.87 L60.99,390.16 L60.92,388.45 L59.43,385.64 L59.32,383.37 L60.73,378.74 L63.27,374.68 L63.8,371.48 L65.46,369.82 L65.04,366.23 L66.35,361.19 L67.63,360.02 L67.22,358.48 L67.52,354.77 L68.97,352.37 L70.47,351.39 L72.65,348.92 L73.03,346.94 L74.66,346.69 L75.4,345.1 L77.18,344.18 L80.25,336.74 L83.12,334.23 L86.38,327.57 L87.42,320.83 L90.61,317.26 L90.73,316.57 L89.92,316.27 L91.23,312.89 L90.97,310.98 L91.46,309.88 L91.09,309.25 L89.32,308.72 L90.05,307.6 L88.14,303.06 L88.44,301.72 L90.42,301.38 L93.59,304.59 L95.33,303.62 L94.71,300.04 L97.36,299.36 L97.92,300.47 L97.91,302.04 L98.83,303.8 L100.44,304.78 L101.91,304.8 L102.63,305.94 L104.77,305.76 L104.84,306.44 L104.3,307.44 L103.45,306.93 L102.66,307.99 L102.78,309.64 L102.12,310.3 L102.03,311.23 L103.25,311.8 L104.8,310.21 L105.15,309.03 L105.58,309.52 L106.49,308.99 L106.58,308.18 L106.04,307.11 L106.95,305.94 L109.76,306.02 L111.18,305.05 L112.92,305.64 L111.13,302.12 L111.97,302.52 L112.37,301.96 L117.48,301.76 L118.54,300.01 L118.42,299.13 L118.68,298.76 L121.54,297.82 L122.5,298.39 L123.13,297.78 L122.87,297.11 L123.18,294.48 L122.24,294.09 L121.77,295.09 L121.27,295.18 L121.19,293.92 L119.36,293.33 L119.59,292.36 L119.32,291.48 L119.87,290.78 L124.84,289.84 L127.34,290.76 L128.36,290.56 L129.31,291.2 L130.94,290.52 L130.86,293.51 L130.34,295.27 L131.76,295.75 L132.08,294.71 L132.95,293.92 L133.64,295.79 L134.9,294.42 L136.04,294.02 L137.27,295.72 L137.37,297.88 L138.98,299.98 L137.49,303.44 L138.34,303.62 L138.67,302.73 L140.03,301.75 L140.24,302.14 L140.01,302.66 L140.61,303.32 L140.84,307.1 L144.0,307.02 L145.3,305.59 L145.01,304.59 L145.97,303.66 L146.58,304.11 L146.44,305.02 L147.43,305.46 L147.19,306.53 L147.59,307.61 L146.91,309.28 L147.88,309.79 L148.95,312.58 L147.85,312.5 L147.24,313.27 L147.24,315.18 L148.35,316.18 L148.1,317.14 L148.52,318.8 L147.41,318.88 L148.6,321.93 L148.13,322.4 L150.58,325.06 L151.37,324.77 L152.11,325.48 L151.79,327.52 L150.95,327.93 L152.05,328.59 L151.98,329.26 L152.63,329.94 L152.5,330.83 L155.25,331.76 L155.7,333.0 L157.35,334.54 L158.86,336.93 L159.15,338.27 L158.38,338.74 L158.75,339.15 L158.49,341.86 L158.87,342.91 L158.19,344.6 L157.92,347.02 L158.25,347.79 L159.28,348.24 L160.11,350.12 L158.16,351.88 L157.94,351.32 L158.36,350.13 L157.9,349.81 L155.86,352.05 L155.14,350.71 L154.07,350.64 L153.17,349.93 L152.41,351.02 L152.33,351.77 L152.93,353.01 L154.52,354.31 L153.76,355.32 L154.2,356.72 L153.77,358.91 L154.05,359.3 L152.29,359.54 L151.68,360.81 L148.33,362.97 L147.52,361.76 L145.24,362.68 L144.44,363.84 L144.55,364.58 L142.36,367.62 L143.14,368.3 L144.9,371.83 L146.81,380.45 L147.84,383.4 L147.52,386.67 L145.98,390.47 L146.84,392.23 L146.7,394.22 L146.0,395.97 L146.62,396.3 L147.5,398.69 L145.77,400.14 L147.07,401.64 L147.42,406.34 L146.14,406.23 L145.65,407.86 L144.85,406.21 L141.42,407.32 L138.37,406.48 L133.21,410.33 L132.0,409.96 L131.12,410.81 L129.74,411.21 L127.51,414.25Z"},{"id": "DE-BB","d": "M301.95,135.79 L303.22,136.86 L301.99,140.11 L302.79,141.27 L301.39,143.85 L299.6,145.39 L299.79,147.57 L301.34,151.58 L301.13,152.58 L301.9,153.43 L305.02,154.65 L305.55,155.62 L305.54,156.74 L304.87,157.62 L305.37,158.72 L304.65,161.94 L305.0,162.73 L307.24,164.38 L306.34,165.62 L306.02,167.14 L305.09,169.01 L304.68,173.44 L301.08,178.21 L301.19,179.38 L302.85,181.3 L303.35,184.15 L305.8,186.43 L306.24,187.38 L306.64,190.23 L305.56,192.39 L305.36,193.85 L303.86,193.78 L300.76,192.51 L298.55,192.97 L292.66,195.55 L290.26,194.31 L288.6,194.1 L286.46,194.61 L284.64,195.77 L283.29,197.53 L282.5,200.05 L279.62,203.96 L272.93,204.45 L264.91,203.59 L262.28,201.21 L260.66,200.42 L255.19,202.41 L254.06,201.43 L252.97,202.41 L252.49,201.22 L253.33,199.79 L253.39,198.4 L253.02,197.4 L253.76,196.6 L253.38,194.75 L252.2,193.6 L252.22,192.06 L251.23,191.33 L250.46,191.42 L248.62,189.76 L249.33,188.48 L252.65,185.28 L252.76,184.62 L251.98,182.83 L251.94,180.58 L254.66,176.54 L252.67,176.22 L252.04,177.15 L251.06,176.43 L248.78,176.7 L246.2,175.11 L245.19,173.89 L242.25,173.5 L241.12,171.8 L239.42,171.55 L235.0,168.9 L232.96,170.5 L230.78,169.81 L228.1,167.41 L227.52,168.0 L226.52,167.96 L224.6,166.39 L224.47,165.42 L222.32,162.56 L220.85,161.4 L219.17,158.79 L218.9,157.79 L219.67,155.81 L220.56,154.71 L219.22,153.25 L219.14,151.71 L220.12,149.34 L220.01,147.34 L220.89,145.12 L220.55,144.13 L221.9,141.96 L222.19,140.21 L220.84,140.31 L219.31,138.77 L218.66,140.05 L217.39,140.22 L217.06,139.34 L217.58,138.4 L216.26,138.18 L217.21,136.69 L217.6,133.61 L219.07,133.33 L219.79,131.6 L219.87,130.63 L218.56,128.11 L219.21,127.24 L218.74,125.74 L220.08,124.06 L219.2,121.2 L218.04,120.61 L215.85,120.93 L215.81,120.13 L215.21,119.55 L211.41,120.03 L208.45,119.0 L206.21,117.54 L206.86,116.06 L205.36,115.78 L203.83,113.86 L201.46,114.48 L200.99,112.92 L198.98,112.36 L199.47,111.55 L199.1,110.83 L197.57,111.24 L194.44,110.25 L192.63,108.98 L190.77,109.9 L189.39,109.95 L186.97,107.13 L191.12,107.64 L191.28,106.27 L191.82,106.01 L195.73,106.96 L196.43,106.44 L196.67,105.56 L195.78,102.86 L198.2,100.54 L201.26,99.79 L202.76,100.8 L203.19,101.74 L204.64,101.05 L206.46,101.14 L206.36,100.37 L205.66,99.84 L207.21,99.77 L208.02,98.83 L209.94,98.05 L210.59,98.31 L212.42,97.12 L212.79,95.49 L214.21,94.01 L216.25,93.41 L217.12,94.1 L218.63,93.28 L219.82,94.74 L223.71,96.2 L226.84,98.83 L229.67,98.6 L233.52,99.5 L234.92,100.63 L237.52,101.24 L237.6,102.52 L237.99,102.94 L240.41,102.7 L241.89,103.4 L244.88,102.85 L245.09,103.2 L244.63,104.01 L246.53,104.37 L250.01,101.34 L250.39,100.35 L251.53,99.43 L252.29,99.48 L253.05,100.58 L254.44,100.77 L255.1,98.68 L256.23,97.77 L257.86,97.82 L259.88,98.69 L262.67,96.97 L263.52,96.03 L265.08,91.78 L265.57,91.34 L267.43,90.97 L270.95,87.45 L274.38,86.93 L273.35,84.7 L273.42,83.68 L274.01,83.77 L274.87,85.05 L276.47,85.65 L276.53,86.85 L278.25,90.1 L282.71,90.07 L284.31,90.53 L285.0,89.59 L285.86,89.42 L287.1,90.02 L289.35,90.1 L289.24,92.58 L288.71,93.78 L287.47,95.66 L284.57,97.53 L284.54,98.61 L289.56,99.34 L292.14,96.6 L294.48,95.22 L294.89,98.26 L296.21,99.74 L294.11,103.15 L294.42,106.35 L293.29,109.93 L291.77,111.99 L285.97,115.8 L286.67,119.33 L286.17,121.04 L285.26,121.81 L286.25,123.04 L288.43,123.6 L289.56,124.89 L294.16,128.0 L295.88,130.86 L297.89,132.81 L299.95,133.6 L301.95,135.79Z M268.1,141.81 L268.83,138.93 L266.12,137.61 L263.85,135.03 L263.78,133.2 L262.84,132.1 L261.62,133.31 L260.71,132.91 L259.06,134.29 L257.19,133.96 L256.94,132.5 L256.47,132.45 L255.52,133.77 L254.11,134.16 L253.71,135.38 L253.97,136.28 L251.75,135.71 L251.36,139.76 L251.9,141.04 L250.44,142.53 L250.26,143.55 L250.52,144.37 L249.66,145.75 L251.89,146.77 L253.88,145.66 L255.19,146.33 L256.64,145.76 L257.16,146.53 L258.42,146.19 L259.45,147.33 L261.18,147.63 L261.15,146.19 L262.3,145.67 L263.2,146.67 L264.71,146.32 L268.1,147.45 L268.48,147.91 L268.66,149.63 L269.05,149.76 L269.5,148.81 L270.76,148.14 L270.79,146.71 L271.82,145.51 L272.39,143.83 L269.41,141.66 L268.1,141.81Z"},{"id": "DE-MV","d": "M290.08,75.09 L289.98,77.5 L291.23,80.72 L291.22,84.49 L291.47,85.62 L293.39,89.17 L294.48,95.22 L292.14,96.6 L289.56,99.34 L284.54,98.61 L284.57,97.53 L287.47,95.66 L288.71,93.78 L289.24,92.58 L289.35,90.1 L287.1,90.02 L285.86,89.42 L285.0,89.59 L284.31,90.53 L282.71,90.07 L278.25,90.1 L276.53,86.85 L276.47,85.65 L274.87,85.05 L274.01,83.77 L273.42,83.68 L273.35,84.7 L274.38,86.93 L270.95,87.45 L267.43,90.97 L265.57,91.34 L265.08,91.78 L263.52,96.03 L262.67,96.97 L259.88,98.69 L257.86,97.82 L256.23,97.77 L255.1,98.68 L254.44,100.77 L253.05,100.58 L252.29,99.48 L251.53,99.43 L250.39,100.35 L250.01,101.34 L246.53,104.37 L245.65,104.52 L244.63,104.01 L245.09,103.2 L244.88,102.85 L241.89,103.4 L240.41,102.7 L237.99,102.94 L237.6,102.52 L237.52,101.24 L234.92,100.63 L233.52,99.5 L229.67,98.6 L226.84,98.83 L223.71,96.2 L219.82,94.74 L218.63,93.28 L217.12,94.1 L216.25,93.41 L214.21,94.01 L212.79,95.49 L212.42,97.12 L210.59,98.31 L209.94,98.05 L208.02,98.83 L207.21,99.77 L205.66,99.84 L206.36,100.37 L206.46,101.14 L204.64,101.05 L203.19,101.74 L202.76,100.8 L201.26,99.79 L198.2,100.54 L195.78,102.86 L196.67,105.56 L196.43,106.44 L195.73,106.96 L191.82,106.01 L191.28,106.27 L191.12,107.64 L186.97,107.13 L185.27,105.18 L184.22,105.84 L182.91,104.03 L180.61,105.66 L175.12,101.03 L171.98,99.29 L169.77,97.08 L168.54,96.63 L168.26,94.23 L167.51,93.33 L163.77,93.14 L164.62,91.74 L165.14,88.79 L166.86,88.42 L167.32,87.32 L169.25,86.74 L171.4,85.19 L171.78,83.46 L171.65,82.24 L174.34,82.12 L175.07,83.43 L175.95,82.46 L175.53,82.26 L175.93,81.81 L175.45,79.01 L175.91,78.71 L176.02,77.82 L175.55,76.16 L174.58,75.27 L172.61,74.95 L170.83,72.83 L169.17,72.39 L169.62,69.96 L168.93,67.34 L169.36,66.02 L173.56,63.04 L174.32,63.24 L174.52,63.98 L176.19,63.44 L174.44,62.74 L174.28,60.73 L179.37,58.13 L183.56,57.6 L184.57,59.18 L185.98,59.78 L185.9,61.61 L187.65,61.85 L189.05,60.72 L189.88,61.85 L191.31,61.85 L192.65,63.59 L193.31,63.75 L193.97,61.19 L193.81,60.31 L194.69,59.59 L194.48,58.46 L195.66,57.34 L195.42,56.59 L196.6,56.93 L197.3,56.45 L197.91,54.98 L199.06,53.99 L199.09,52.55 L200.21,50.77 L201.31,50.06 L205.53,50.35 L213.76,48.7 L215.05,47.92 L215.17,52.32 L215.98,53.21 L215.29,50.58 L216.93,48.67 L215.5,49.04 L215.76,48.53 L218.45,45.21 L221.99,43.46 L223.81,41.88 L227.13,36.82 L229.32,32.55 L230.42,31.74 L230.18,32.08 L230.92,33.18 L232.41,33.75 L240.26,33.75 L241.55,34.33 L242.35,33.91 L243.34,34.14 L243.78,34.75 L242.04,35.67 L235.96,34.74 L235.13,35.49 L233.54,35.33 L232.99,36.24 L232.78,35.83 L232.07,36.24 L232.28,36.92 L232.78,37.03 L232.52,37.37 L231.12,37.1 L230.18,38.12 L228.94,37.14 L227.13,37.28 L226.44,38.76 L226.63,39.62 L225.69,39.25 L225.51,40.93 L224.51,41.53 L225.12,43.35 L224.73,43.79 L226.23,44.77 L227.81,44.54 L226.16,43.79 L226.71,42.66 L228.3,41.53 L228.52,40.34 L231.34,38.87 L230.66,38.12 L231.81,38.12 L231.81,37.74 L232.46,38.28 L235.37,37.03 L235.13,36.24 L235.49,36.0 L236.75,35.83 L236.75,36.24 L235.89,36.8 L235.6,38.12 L236.31,36.62 L237.36,37.79 L237.74,37.37 L238.51,37.69 L239.15,37.03 L240.22,38.9 L241.48,38.91 L242.22,38.5 L243.18,36.62 L244.06,35.8 L246.8,34.5 L247.68,34.74 L247.24,35.14 L247.48,36.49 L249.79,38.12 L249.14,39.2 L249.28,40.05 L250.26,41.53 L250.46,43.19 L252.38,43.38 L252.38,43.79 L251.44,44.13 L252.57,44.03 L256.46,45.71 L257.59,47.89 L258.53,48.67 L257.59,49.42 L259.73,48.8 L260.41,49.04 L259.7,50.17 L260.9,50.17 L262.03,52.52 L263.17,53.57 L263.98,53.59 L263.98,53.21 L263.02,51.71 L267.28,50.92 L271.05,49.04 L271.14,49.57 L270.58,50.17 L274.37,52.84 L273.16,56.05 L272.23,56.59 L274.0,58.65 L275.42,59.35 L275.76,61.04 L277.74,61.73 L277.19,63.38 L274.72,65.3 L274.37,66.01 L274.67,66.68 L276.25,67.32 L277.53,69.09 L282.27,72.05 L287.42,72.9 L288.39,72.63 L289.06,71.7 L289.61,71.8 L290.1,72.25 L290.21,73.15 L288.32,74.65 L290.08,75.09Z M288.23,61.98 L287.64,63.46 L287.03,63.74 L287.91,65.29 L284.0,65.72 L282.65,65.23 L280.84,66.64 L278.86,67.14 L275.47,66.83 L274.84,66.01 L278.63,64.13 L278.88,62.54 L277.6,60.25 L277.69,58.84 L280.04,59.18 L279.57,61.85 L280.55,60.72 L281.94,60.72 L281.48,61.5 L282.65,61.85 L282.37,61.13 L282.81,59.78 L282.75,58.31 L282.27,57.4 L281.48,57.71 L280.35,55.49 L279.12,54.93 L278.08,55.49 L278.39,56.59 L277.22,58.03 L276.02,58.46 L276.72,56.59 L276.28,55.84 L273.89,57.6 L273.19,57.34 L274.4,54.46 L274.6,53.02 L274.3,52.18 L272.46,50.17 L273.31,49.02 L274.6,49.04 L276.02,52.08 L276.93,52.96 L281.56,55.29 L288.23,61.98Z M190.48,59.59 L190.99,58.34 L192.23,57.33 L193.66,56.89 L194.69,57.34 L193.31,60.72 L192.88,60.73 L192.94,58.75 L192.46,59.21 L192.62,59.97 L192.11,60.37 L190.48,59.59Z M195.75,54.46 L195.94,53.93 L198.76,52.43 L196.13,55.46 L195.75,54.46Z M251.44,25.7 L250.6,26.34 L250.03,29.45 L249.08,30.57 L248.85,32.83 L248.61,32.83 L248.71,30.81 L250.02,25.81 L251.71,25.32 L251.91,26.26 L251.66,26.07 L251.66,26.82 L251.44,25.7Z M270.58,37.03 L272.08,39.32 L272.93,39.62 L271.68,41.17 L271.44,43.28 L270.32,43.0 L271.05,42.83 L271.05,41.88 L269.93,42.42 L268.95,42.25 L271.05,40.34 L267.77,41.12 L270.32,39.62 L270.32,39.25 L268.92,39.21 L268.11,39.94 L267.16,39.25 L263.73,39.62 L261.29,41.49 L260.5,42.91 L258.9,43.44 L258.76,44.91 L259.24,44.54 L259.02,44.13 L260.9,43.96 L261.08,45.79 L260.54,46.04 L257.24,44.78 L258.06,43.0 L257.11,43.79 L257.35,44.13 L255.74,44.49 L253.74,43.42 L253.37,42.95 L253.56,42.25 L251.66,42.63 L251.42,42.2 L251.63,41.83 L252.62,41.88 L252.62,41.53 L250.48,40.0 L251.63,37.84 L252.51,37.47 L254.2,38.11 L255.7,37.37 L254.75,36.94 L254.74,35.49 L253.79,34.88 L251.91,35.12 L252.77,33.68 L255.45,32.83 L255.92,32.08 L254.54,31.47 L254.27,30.99 L254.52,30.2 L252.89,30.64 L252.22,30.04 L251.97,28.86 L251.44,28.73 L255.45,28.14 L256.44,28.9 L256.77,30.01 L257.16,29.18 L256.88,28.32 L259.24,26.41 L258.29,28.32 L259.02,28.73 L258.53,29.79 L259.73,29.34 L259.94,28.73 L259.02,28.32 L259.49,27.54 L260.89,29.74 L260.67,30.57 L261.35,31.49 L263.98,31.74 L263.73,31.33 L264.46,29.79 L263.73,27.95 L264.46,27.2 L263.28,27.95 L261.72,27.95 L261.11,26.99 L260.27,26.72 L259.23,24.93 L255.92,27.74 L255.23,27.54 L255.35,25.87 L256.29,24.53 L256.62,23.27 L254.25,23.67 L254.46,22.66 L255.24,22.02 L259.97,20.74 L261.85,21.19 L259.98,22.81 L259.7,23.59 L260.1,25.35 L261.14,26.41 L262.58,26.86 L267.05,26.07 L268.58,26.38 L269.63,27.45 L269.85,28.87 L268.95,30.2 L266.66,31.83 L266.34,32.64 L266.77,34.53 L267.52,35.83 L270.58,37.03Z"},{"id": "DE-HB","d": "M93.28,85.0 L93.57,83.52 L91.75,79.65 L95.82,80.38 L95.45,81.27 L96.2,83.93 L96.1,85.18 L94.74,86.66 L93.28,85.0Z M91.95,101.16 L97.4,103.12 L99.77,103.05 L100.91,104.23 L102.47,104.35 L104.93,105.96 L105.53,105.93 L106.35,104.64 L107.7,106.06 L107.09,106.89 L108.2,108.45 L107.61,110.7 L105.6,112.24 L103.93,110.98 L103.83,111.54 L103.17,111.77 L100.68,110.59 L98.37,110.87 L98.26,109.0 L96.06,106.43 L95.35,103.87 L91.75,102.61 L91.17,101.27 L91.95,101.16Z"},{"id": "DE-HH","d": "M134.9,83.47 L137.24,83.7 L135.52,82.26 L134.1,82.1 L135.05,78.99 L136.48,79.61 L136.35,80.65 L136.69,80.97 L140.53,78.08 L142.49,78.01 L143.51,76.58 L145.11,76.31 L146.01,74.05 L148.14,74.34 L149.5,73.58 L149.69,74.12 L148.72,75.94 L150.12,77.16 L150.72,78.74 L150.3,81.45 L149.01,82.04 L149.35,84.5 L154.09,88.53 L154.35,89.8 L152.55,89.9 L151.37,91.23 L149.47,91.35 L145.9,88.79 L144.15,89.34 L144.0,90.08 L142.53,90.77 L141.14,90.34 L140.03,90.74 L139.44,88.92 L138.25,89.82 L136.71,88.46 L135.05,85.64 L134.9,83.47Z"},{"id": "DE-HE","d": "M141.28,202.59 L140.4,203.78 L141.21,206.88 L142.48,207.88 L144.73,208.38 L144.71,209.42 L145.43,210.19 L145.7,211.22 L149.0,212.26 L151.07,213.7 L150.23,215.28 L149.89,217.19 L149.02,215.63 L147.38,216.11 L147.88,216.91 L148.87,217.24 L147.9,220.37 L149.7,221.13 L150.12,221.85 L150.23,222.45 L149.63,223.78 L147.63,223.89 L147.21,223.1 L144.8,223.21 L143.94,223.83 L143.85,224.58 L144.52,225.7 L144.46,226.84 L141.75,226.72 L141.38,227.12 L141.5,227.73 L141.99,227.49 L142.15,228.76 L143.33,227.97 L144.96,230.05 L143.93,231.36 L143.83,232.76 L141.29,233.76 L141.18,235.88 L140.49,236.07 L140.3,236.59 L140.81,237.29 L140.74,238.29 L140.04,240.5 L138.94,241.9 L138.82,243.2 L138.99,243.72 L141.23,244.08 L141.67,243.41 L141.22,242.68 L141.34,242.14 L143.18,241.38 L145.12,241.97 L145.66,244.38 L144.62,245.29 L145.0,248.1 L144.57,249.89 L144.93,250.19 L143.07,253.93 L140.22,255.84 L137.77,256.71 L136.2,255.53 L135.41,255.81 L134.17,259.5 L134.36,261.79 L131.77,263.46 L131.25,264.6 L131.35,265.7 L129.16,266.27 L126.06,265.64 L125.74,268.76 L126.79,269.42 L126.2,270.74 L126.37,272.2 L126.02,272.65 L123.92,273.57 L122.58,273.51 L121.57,271.81 L119.9,270.93 L116.66,270.66 L115.22,271.08 L115.04,272.0 L113.7,273.23 L113.89,272.48 L112.37,271.67 L108.97,273.15 L108.75,274.94 L107.74,275.69 L109.44,276.12 L110.38,279.6 L109.52,279.4 L109.47,283.69 L110.93,287.86 L111.7,287.21 L111.97,289.58 L113.41,290.29 L112.68,291.69 L113.69,292.7 L113.13,294.14 L113.2,295.21 L111.98,295.84 L112.39,298.4 L111.05,300.0 L112.37,301.96 L112.06,302.5 L111.31,302.03 L111.12,302.42 L112.92,305.64 L111.18,305.05 L109.76,306.02 L106.95,305.94 L106.04,307.11 L106.58,308.18 L106.49,308.99 L105.58,309.52 L105.15,309.03 L104.8,310.21 L103.45,311.73 L102.15,311.43 L102.09,310.37 L102.78,309.64 L102.72,307.82 L103.45,306.93 L104.3,307.44 L104.84,306.44 L104.77,305.76 L102.63,305.94 L101.91,304.8 L100.44,304.78 L98.83,303.8 L97.91,302.04 L97.92,300.47 L97.36,299.36 L94.71,300.04 L95.33,303.62 L93.59,304.59 L90.42,301.38 L88.44,301.72 L86.5,297.05 L86.55,295.59 L87.14,294.52 L89.2,293.63 L90.5,291.38 L88.68,291.39 L87.18,287.25 L85.79,284.59 L86.31,282.68 L85.63,280.81 L81.93,276.49 L80.05,276.08 L75.73,277.58 L72.75,279.52 L69.86,280.08 L68.88,278.0 L66.18,275.65 L68.5,273.95 L69.21,272.06 L70.48,271.95 L71.36,272.61 L71.66,271.09 L70.47,269.67 L71.38,267.59 L73.83,266.03 L74.86,266.72 L75.56,265.59 L75.22,265.08 L75.5,264.19 L77.38,264.18 L78.27,263.65 L77.76,261.48 L76.82,260.43 L75.77,258.17 L74.95,257.24 L73.14,256.58 L74.72,253.57 L74.04,252.97 L74.21,249.95 L75.88,248.56 L77.28,249.58 L78.01,249.51 L78.79,248.81 L79.71,246.37 L79.02,245.45 L78.2,242.85 L79.02,240.22 L79.82,239.66 L80.1,237.68 L78.99,236.59 L78.69,235.62 L83.84,230.22 L84.52,230.21 L85.1,231.19 L86.62,231.21 L87.68,230.46 L87.75,229.71 L88.79,228.61 L90.05,228.3 L90.26,226.69 L90.98,225.08 L91.63,224.68 L92.85,222.46 L92.6,220.12 L92.01,218.92 L92.16,218.46 L96.85,218.74 L98.42,217.74 L98.05,216.42 L100.0,213.81 L99.3,209.85 L98.9,209.56 L98.99,208.81 L96.13,209.68 L95.35,210.38 L94.81,210.19 L93.91,208.73 L94.54,207.31 L97.57,203.68 L101.96,202.6 L103.57,202.98 L104.88,202.14 L106.31,202.07 L106.81,200.91 L105.69,200.41 L105.13,197.4 L109.08,195.59 L111.26,196.73 L111.48,198.45 L112.3,199.23 L113.85,199.49 L115.87,198.46 L116.28,196.81 L118.77,195.13 L120.14,193.13 L120.79,191.0 L120.03,190.23 L122.96,189.1 L123.72,187.9 L124.02,188.17 L124.65,187.57 L125.34,187.66 L125.52,188.71 L126.06,189.03 L127.49,188.38 L128.73,189.16 L129.96,188.88 L132.21,192.14 L131.7,192.83 L130.54,192.13 L130.78,193.34 L129.92,193.21 L129.67,194.79 L129.06,195.09 L129.81,196.99 L130.56,197.73 L130.28,198.38 L130.57,201.12 L130.36,201.54 L128.52,201.73 L127.96,202.62 L128.24,203.72 L126.99,203.43 L128.18,204.76 L131.64,206.02 L133.57,207.61 L135.09,206.28 L135.61,204.96 L134.44,205.37 L133.12,203.65 L135.86,202.12 L136.19,201.75 L136.01,201.13 L137.27,201.73 L138.24,203.13 L138.74,202.6 L138.3,201.12 L139.64,200.55 L139.79,201.39 L141.28,202.59Z"},{"id": "DE-TH","d": "M141.31,206.93 L140.41,204.0 L140.64,203.15 L144.47,199.82 L145.42,200.49 L145.96,199.88 L148.2,199.84 L148.1,199.36 L148.97,198.88 L149.57,197.31 L151.05,197.74 L153.08,196.57 L153.44,195.7 L155.61,193.76 L156.12,192.13 L155.96,191.38 L157.9,191.1 L160.77,193.0 L162.26,192.98 L164.36,192.05 L165.29,192.73 L165.6,191.79 L164.73,190.54 L165.41,189.51 L167.09,188.54 L170.74,188.8 L175.64,190.88 L175.86,191.86 L174.74,191.91 L174.49,192.49 L175.69,194.85 L175.64,196.12 L176.54,197.93 L176.3,200.06 L176.58,200.59 L177.49,201.11 L187.49,202.21 L190.19,203.93 L193.11,208.66 L192.09,210.19 L189.47,211.02 L189.01,211.7 L190.92,213.15 L192.02,214.81 L192.27,216.49 L191.89,216.87 L192.46,218.33 L194.93,218.69 L195.98,218.08 L200.55,218.06 L201.45,218.74 L201.57,220.06 L203.02,222.78 L207.2,222.35 L209.64,223.7 L211.95,226.38 L214.35,226.01 L216.34,226.65 L217.31,226.15 L218.93,227.56 L219.56,227.04 L219.49,226.11 L221.51,223.06 L221.35,222.32 L220.43,221.61 L221.13,218.99 L223.35,218.76 L228.69,220.39 L228.96,222.03 L230.37,224.71 L232.78,226.21 L234.32,229.51 L233.08,230.74 L229.52,230.11 L226.64,233.25 L224.79,233.16 L223.42,234.24 L220.91,235.01 L220.87,235.57 L221.98,236.61 L220.6,237.75 L220.33,238.87 L221.28,239.09 L221.16,240.04 L221.62,241.21 L223.11,241.52 L222.41,242.76 L220.73,244.15 L218.46,244.14 L217.48,245.39 L217.54,246.49 L217.02,247.65 L214.81,247.72 L213.68,249.36 L211.64,248.56 L209.51,251.24 L209.51,251.86 L210.18,252.69 L209.74,254.28 L208.55,254.98 L208.74,255.76 L207.6,256.44 L205.93,257.06 L205.91,256.54 L204.59,255.81 L198.94,257.32 L197.17,256.89 L196.7,257.56 L195.65,257.74 L194.33,256.77 L193.98,255.08 L193.18,255.07 L192.05,254.23 L192.03,251.88 L192.65,251.25 L192.25,250.37 L189.48,250.06 L188.43,251.5 L186.1,252.6 L186.58,255.07 L186.46,256.42 L187.19,258.87 L186.79,259.17 L186.46,260.94 L186.69,261.82 L186.33,263.48 L184.68,262.91 L184.15,263.66 L182.46,262.03 L182.19,261.58 L182.92,260.49 L181.4,258.51 L179.24,259.47 L177.44,258.59 L177.11,259.35 L175.57,257.29 L173.93,257.56 L173.2,256.91 L170.24,257.35 L169.17,258.92 L167.93,258.93 L167.69,260.89 L169.56,262.5 L170.58,262.56 L171.06,263.35 L172.04,263.74 L172.2,265.03 L168.52,264.97 L167.89,267.19 L165.87,266.24 L164.32,266.25 L163.54,263.88 L163.73,262.5 L163.43,260.66 L162.08,258.86 L160.18,259.1 L158.54,256.64 L156.74,256.62 L156.81,255.33 L154.8,253.36 L154.33,251.69 L151.02,250.4 L150.56,249.1 L149.84,248.44 L147.52,248.45 L147.38,247.64 L144.67,250.16 L145.0,248.1 L144.62,245.29 L145.66,244.38 L145.58,243.11 L145.0,241.87 L142.95,241.4 L141.34,242.14 L141.22,242.68 L141.67,243.41 L141.23,244.08 L138.88,243.55 L138.94,241.9 L140.04,240.5 L140.74,238.29 L140.81,237.29 L140.3,236.59 L140.49,236.07 L141.18,235.88 L141.29,233.76 L143.83,232.76 L143.93,231.36 L144.96,230.05 L143.33,227.97 L142.15,228.76 L141.99,227.49 L141.4,227.64 L141.42,226.95 L144.46,226.84 L144.52,225.7 L143.85,224.58 L143.94,223.83 L144.8,223.21 L147.21,223.1 L147.63,223.89 L149.63,223.78 L150.23,222.45 L150.12,221.85 L149.7,221.13 L147.9,220.37 L148.87,217.24 L147.88,216.91 L147.38,216.11 L149.02,215.63 L149.89,217.19 L150.23,215.28 L151.07,213.7 L149.0,212.26 L145.7,211.22 L145.43,210.19 L144.71,209.42 L144.73,208.38 L142.48,207.88 L141.31,206.93Z"},{"id": "DE-ST","d": "M167.64,188.88 L166.11,186.75 L165.84,184.49 L164.39,181.87 L163.17,180.68 L163.04,177.12 L165.1,175.0 L164.94,173.46 L164.18,172.74 L164.35,171.7 L165.3,170.95 L163.39,169.9 L162.7,168.22 L164.47,168.01 L165.83,166.13 L176.25,165.3 L176.46,164.0 L175.76,163.11 L178.0,162.05 L179.19,160.91 L179.52,160.19 L179.4,159.33 L178.46,158.83 L178.24,157.92 L178.81,156.96 L180.22,156.44 L180.46,155.9 L180.23,154.79 L179.72,155.19 L179.62,154.22 L179.06,154.2 L178.03,152.79 L178.69,151.74 L177.5,149.88 L179.72,149.13 L180.04,148.12 L177.89,146.4 L175.42,143.18 L175.89,141.4 L177.58,141.2 L175.68,137.63 L175.74,136.2 L176.72,134.7 L176.05,134.35 L175.05,134.81 L171.9,129.53 L170.66,128.86 L170.41,127.46 L169.14,125.34 L169.2,122.66 L170.47,122.04 L173.57,122.0 L175.51,121.34 L177.15,120.08 L177.48,118.77 L178.03,118.44 L184.89,119.22 L186.26,120.4 L191.62,118.8 L193.74,116.89 L194.84,116.66 L194.64,115.28 L195.1,113.38 L196.56,113.28 L197.57,111.24 L199.1,110.83 L199.47,111.55 L198.98,112.36 L200.99,112.92 L201.46,114.48 L203.83,113.86 L205.36,115.78 L206.86,116.06 L206.21,117.54 L208.45,119.0 L211.41,120.03 L215.35,119.58 L215.88,120.3 L215.85,120.93 L218.04,120.61 L219.38,121.59 L220.08,124.06 L218.74,125.74 L219.21,127.24 L218.56,128.11 L219.87,130.63 L219.79,131.6 L219.07,133.33 L217.6,133.61 L217.21,136.69 L216.26,138.18 L217.58,138.4 L217.06,139.34 L217.39,140.22 L218.66,140.05 L219.31,138.77 L220.84,140.31 L222.19,140.21 L221.9,141.96 L220.55,144.13 L220.89,145.12 L220.01,147.34 L220.12,149.34 L219.1,152.0 L219.22,153.25 L220.56,154.71 L219.67,155.81 L218.87,157.93 L220.85,161.4 L222.32,162.56 L224.47,165.42 L224.6,166.39 L226.69,168.03 L228.27,167.49 L231.37,170.15 L232.96,170.5 L235.0,168.9 L239.42,171.55 L241.12,171.8 L242.25,173.5 L245.19,173.89 L246.2,175.11 L248.78,176.7 L251.06,176.43 L252.04,177.15 L252.67,176.22 L254.66,176.54 L251.94,180.58 L251.98,182.83 L252.76,184.62 L252.65,185.28 L249.33,188.48 L248.62,189.76 L246.8,188.58 L245.73,189.07 L243.12,187.55 L242.74,186.74 L241.74,186.84 L238.96,189.11 L236.68,188.49 L234.84,190.51 L230.81,190.81 L227.61,190.39 L227.3,190.51 L226.86,192.11 L224.3,192.37 L222.28,193.28 L220.13,192.68 L219.76,193.65 L218.75,194.51 L218.59,197.74 L217.4,199.06 L218.38,205.38 L217.04,206.34 L216.58,207.7 L216.89,209.68 L217.69,211.14 L217.8,212.73 L217.3,214.24 L218.36,214.57 L218.2,216.07 L219.29,217.46 L219.54,218.57 L221.13,218.99 L220.43,221.61 L221.53,222.89 L219.49,226.11 L219.56,227.04 L218.93,227.56 L217.31,226.15 L216.34,226.65 L214.35,226.01 L211.95,226.38 L209.64,223.7 L207.2,222.35 L203.02,222.78 L201.57,220.06 L201.45,218.74 L200.55,218.06 L195.98,218.08 L194.93,218.69 L192.35,218.25 L191.89,216.87 L192.27,216.49 L192.02,214.81 L190.92,213.15 L189.01,211.7 L189.47,211.02 L192.09,210.19 L193.11,208.66 L190.19,203.93 L187.49,202.21 L177.49,201.11 L176.58,200.59 L176.3,200.06 L176.54,197.93 L175.64,196.12 L175.69,194.85 L174.49,192.49 L174.74,191.91 L175.86,191.86 L175.52,190.67 L170.74,188.8 L167.64,188.88Z"},{"id": "DE-BE","d": "M262.84,132.1 L263.78,133.2 L263.85,135.03 L266.12,137.61 L268.83,138.93 L268.1,141.81 L269.41,141.66 L272.39,143.83 L271.82,145.51 L270.93,146.34 L270.64,148.3 L269.64,148.68 L268.72,149.78 L268.48,147.91 L268.1,147.45 L264.71,146.32 L263.2,146.67 L262.3,145.67 L261.15,146.19 L261.18,147.63 L259.45,147.33 L258.42,146.19 L257.16,146.53 L256.64,145.76 L255.19,146.33 L253.88,145.66 L251.89,146.77 L249.67,145.84 L250.52,144.37 L250.26,143.55 L250.44,142.53 L251.9,141.04 L251.36,139.76 L251.49,136.41 L251.83,135.62 L253.97,136.28 L253.71,135.38 L254.11,134.16 L255.52,133.77 L256.47,132.45 L256.94,132.5 L257.19,133.96 L259.06,134.29 L260.71,132.91 L261.62,133.31 L262.84,132.1Z"}];
+
+  var LAND_ORDER = ["DE-BY","DE-NW","DE-BW","DE-NI","DE-HE","DE-SN","DE-RP","DE-BE","DE-SH","DE-BB","DE-ST","DE-TH","DE-HH","DE-MV","DE-SL","DE-HB"];
+
+  var PARTIES = {
+    union:  { name: "CDU/CSU", color: "var(--p-union)", hex: "#1a1a1a" },
+    afd:    { name: "AfD",     color: "var(--p-afd)", hex: "#009ee0" },
+    spd:    { name: "SPD",     color: "var(--p-spd)", hex: "#e3000f" },
+    gruene: { name: "Grüne",   color: "var(--p-gruene)", hex: "#46962b" },
+    linke:  { name: "Die Linke", color: "var(--p-linke)", hex: "#e6007e" },
+    fdp:    { name: "FDP",     color: "var(--p-fdp)", hex: "#ab8f00" },
+    fw:     { name: "Freie Wähler", color: "var(--p-fw)", hex: "#c7660a" },
+    bsw:    { name: "BSW",     color: "var(--p-bsw)", hex: "#8a2846" },
+    ssw:    { name: "SSW",     color: "var(--p-ssw)", hex: "#0f7d8c" },
+    biw:    { name: "BIW",     color: "var(--p-biw)", hex: "#6b4c9a" }
+  };
+  var NEUTRAL_HEX = "#c7cbd1";
+
+  function relativeLuminance(hex) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  }
+
+  function mixColor(hex, t) {
+    var c = { r: parseInt(hex.slice(1, 3), 16), g: parseInt(hex.slice(3, 5), 16), b: parseInt(hex.slice(5, 7), 16) };
+    var toHex = function (n) { return Math.round(n).toString(16).padStart(2, "0"); };
+    var mix = function (channel) { return 255 + (channel - 255) * t; };
+    return "#" + toHex(mix(c.r)) + toHex(mix(c.g)) + toHex(mix(c.b));
+  }
+
+  function computePartyMax(yearData, key) {
+    var max = 0;
+    Object.keys(yearData).forEach(function (id) {
+      var d = yearData[id];
+      for (var i = 0; i < d.results.length; i++) {
+        if (d.results[i].p === key && d.results[i].pct > max) max = d.results[i].pct;
+      }
+    });
+    return max || 1;
+  }
+
+  function partyResultFor(d, key) {
+    for (var i = 0; i < d.results.length; i++) {
+      if (d.results[i].p === key) return d.results[i];
+    }
+    return null;
+  }
+
+  var LANDTAG_DATA = {
+    "DE-BW": [
+      {
+        date: "2026-03-08",
+        source: "https://www.landtagswahl-bw.de/ergebnisse-2026",
+        winner: "gruene", turnout: 69.6, turnoutDelta: 5.8,
+        results: [
+          { p: "gruene", pct: 30.2, delta: -2.4 }, { p: "union", label: "CDU", pct: 29.7, delta: 5.6 },
+          { p: "afd", pct: 18.8, delta: 9.1 }, { p: "spd", pct: 5.5, delta: -5.5 }, { p: "fdp", pct: 4.4, delta: -6.1 }
+        ]
+      },
+      {
+        date: "2021-03-14",
+        source: "https://www.statistik-bw.de/fileadmin/user_upload/Service/Veroeff/Statistisches_Monatsheft/PDF/Beitrag22_03_09.pdf",
+        winner: "gruene", turnout: 63.8, turnoutDelta: -6.6,
+        results: [
+          { p: "gruene", pct: 32.6, delta: 2.3 }, { p: "union", label: "CDU", pct: 24.1, delta: -2.9 },
+          { p: "spd", pct: 11.0, delta: -1.7 }, { p: "fdp", pct: 10.5, delta: 2.2 }, { p: "afd", pct: 9.7, delta: -5.4 }
+        ]
+      },
+      {
+        date: "2016-03-13",
+        source: "https://www.statistik-bw.de/fileadmin/user_upload/Service/Veroeff/Statistisches_Monatsheft/PDF/Beitrag22_03_09.pdf",
+        winner: "gruene", turnout: 70.4,
+        results: [
+          { p: "gruene", pct: 30.3 }, { p: "union", label: "CDU", pct: 27.0 },
+          { p: "afd", pct: 15.1 }, { p: "spd", pct: 12.7 }, { p: "fdp", pct: 8.3 }
+        ]
+      }
+    ],
+    "DE-BY": [
+      {
+        date: "2023-10-08",
+        source: "https://www.statistik.bayern.de/presse/mitteilungen/2023/pm19/index.html",
+        winner: "union", turnout: 73.3, turnoutDelta: 1.0,
+        results: [
+          { p: "union", label: "CSU", pct: 37.0, delta: -0.2 }, { p: "fw", pct: 15.8, delta: 4.2 },
+          { p: "afd", pct: 14.6, delta: 4.4 }, { p: "gruene", pct: 14.4, delta: -3.2 }, { p: "spd", pct: 8.4, delta: -1.3 }, { p: "fdp", pct: 3.0, delta: -2.1 }
+        ]
+      },
+      {
+        date: "2018-10-14",
+        source: "https://www.statistik.bayern.de/presse/mitteilungen/2018/pm010/index.html",
+        winner: "union", turnout: 72.3, turnoutDelta: 8.7,
+        results: [
+          { p: "union", label: "CSU", pct: 37.2, delta: -10.5 }, { p: "gruene", pct: 17.6, delta: 9.0 }, { p: "fw", pct: 11.6, delta: 2.6 },
+          { p: "afd", pct: 10.2, delta: null }, { p: "spd", pct: 9.7, delta: -10.9 }, { p: "fdp", pct: 5.1, delta: 1.8 }, { p: "linke", pct: 3.2, delta: 1.1 }
+        ]
+      },
+      {
+        date: "2013-09-15",
+        source: "https://www.statistik.bayern.de/wahlen/landtagswahlen/ergebnisse/index.html",
+        winner: "union", turnout: 63.6,
+        results: [
+          { p: "union", label: "CSU", pct: 47.7 }, { p: "spd", pct: 20.6 }, { p: "fw", pct: 9.0 },
+          { p: "gruene", pct: 8.6 }, { p: "fdp", pct: 3.3 }, { p: "linke", pct: 2.1 }
+        ]
+      }
+    ],
+    "DE-BE": [
+      {
+        date: "2023-02-12",
+        source: "https://www.berlin.de/wahlen/pressemitteilungen/2023/pressemitteilung.1298935.php",
+        winner: "union", turnout: 63.0, turnoutDelta: -12.4,
+        results: [
+          { p: "union", label: "CDU", pct: 28.2, delta: 10.2 }, { p: "spd", pct: 18.4, delta: -3.0 }, { p: "gruene", pct: 18.4, delta: -0.5 },
+          { p: "linke", pct: 12.2, delta: -1.9 }, { p: "afd", pct: 9.1, delta: 1.1 }, { p: "fdp", pct: 4.6, delta: -2.5 }
+        ]
+      },
+      {
+        date: "2021-09-26",
+        source: "https://www.wahlen-berlin.de/",
+        winner: "spd", turnout: 75.4, turnoutDelta: 8.5,
+        note: {
+          de: "Diese Wahl wurde später vom Berliner Verfassungsgerichtshof für ungültig erklärt (Grund: organisatorische Pannen, kein Wahlbetrug) und am 12. Februar 2023 vollständig wiederholt.",
+          es: "Esta elección fue anulada después por el Tribunal Constitucional de Berlín (motivo: fallas organizativas, no fraude electoral) y se repitió por completo el 12 de febrero de 2023.",
+          en: "This election was later annulled by Berlin's Constitutional Court (reason: organizational failures, not electoral fraud) and fully repeated on February 12, 2023."
+        },
+        results: [
+          { p: "spd", pct: 21.4, delta: -0.2 }, { p: "gruene", pct: 18.9, delta: 3.7 }, { p: "union", label: "CDU", pct: 18.0, delta: 0.4 },
+          { p: "linke", pct: 14.1, delta: -1.5 }, { p: "afd", pct: 8.0, delta: -6.2 }, { p: "fdp", pct: 7.1, delta: 0.4 }
+        ]
+      },
+      {
+        date: "2016-09-18",
+        source: "https://www.wahlen-berlin.de/wahlen/be2016/afspraes/index.html",
+        winner: "spd", turnout: 66.9, turnoutDelta: 6.7,
+        results: [
+          { p: "spd", pct: 21.6, delta: -6.7 }, { p: "union", label: "CDU", pct: 17.6, delta: -5.7 }, { p: "linke", pct: 15.6, delta: 3.9 },
+          { p: "gruene", pct: 15.2, delta: -2.4 }, { p: "afd", pct: 14.2, delta: null }, { p: "fdp", pct: 6.7, delta: 4.9 }
+        ]
+      },
+      {
+        date: "2011-09-18",
+        source: "https://www.wahlen-berlin.de/",
+        winner: "spd", turnout: 60.2,
+        results: [
+          { p: "spd", pct: 28.3 }, { p: "union", label: "CDU", pct: 23.3 }, { p: "gruene", pct: 17.6 },
+          { p: "linke", pct: 11.7 }, { p: "fdp", pct: 1.8 }
+        ]
+      }
+    ],
+    "DE-BB": [
+      {
+        date: "2024-09-22",
+        source: "https://wahlen.brandenburg.de/wahlen/de/pressemitteilungen/detail/~07-10-2024-endgueltiges-ergebnis-ltw-24",
+        winner: "spd", turnout: 72.9, turnoutDelta: 11.6,
+        results: [
+          { p: "spd", pct: 30.9, delta: 4.7 }, { p: "afd", pct: 29.2, delta: 5.7 }, { p: "bsw", pct: 13.5, delta: null },
+          { p: "union", label: "CDU", pct: 12.1, delta: -3.5 }, { p: "gruene", pct: 4.1, delta: -6.7 }, { p: "linke", pct: 3.0, delta: -7.7 }
+        ]
+      },
+      {
+        date: "2019-09-01",
+        source: "https://wahlen.brandenburg.de/wahlen/de/pressemitteilungen/detail/~13-09-2019-endgueltiges-ergebnis-ltw-2019",
+        winner: "spd", turnout: 61.3, turnoutDelta: 13.4,
+        results: [
+          { p: "spd", pct: 26.2, delta: -5.7 }, { p: "afd", pct: 23.5, delta: 11.3 }, { p: "union", label: "CDU", pct: 15.6, delta: -7.4 },
+          { p: "gruene", pct: 10.8, delta: 4.6 }, { p: "linke", pct: 10.7, delta: -7.9 }, { p: "fw", pct: 5.0, delta: 2.3 }, { p: "fdp", pct: 4.1, delta: 2.6 }
+        ]
+      },
+      {
+        date: "2014-09-14",
+        source: "https://wahlen.brandenburg.de/wahlen/de/pressemitteilungen/detail/~26-09-2014-endgueltiges-ergebnis-landtagswahl",
+        winner: "spd", turnout: 47.9,
+        results: [
+          { p: "spd", pct: 31.9 }, { p: "union", label: "CDU", pct: 23.0 }, { p: "linke", pct: 18.6 },
+          { p: "afd", pct: 12.2 }, { p: "gruene", pct: 6.2 }, { p: "fw", pct: 2.7 }, { p: "fdp", pct: 1.5 }
+        ]
+      }
+    ],
+    "DE-HB": [
+      {
+        date: "2023-05-14",
+        source: "https://www.wahlen-bremen.de/Wahlen/2023_05_14/",
+        winner: "spd", turnout: 56.9, turnoutDelta: -7.2,
+        results: [
+          { p: "spd", pct: 29.8, delta: 4.9 }, { p: "union", label: "CDU", pct: 26.2, delta: -0.5 }, { p: "gruene", pct: 11.9, delta: -5.5 },
+          { p: "linke", pct: 11.1, delta: -0.2 }, { p: "biw", pct: 9.4, delta: 7.0 }, { p: "fdp", pct: 5.1, delta: -0.8 }
+        ]
+      },
+      {
+        date: "2019-05-26",
+        source: "https://www.wahlen-bremen.de/Wahlen/2019_05_26/04010000/html5/Buergerschaft_Bremen_22_Kreis_Land_Bremen.html",
+        winner: "union", turnout: 64.1, turnoutDelta: 13.9,
+        results: [
+          { p: "union", label: "CDU", pct: 26.7, delta: 4.3 }, { p: "spd", pct: 24.9, delta: -7.9 }, { p: "gruene", pct: 17.4, delta: 2.3 },
+          { p: "linke", pct: 11.3, delta: 1.8 }, { p: "afd", pct: 6.1, delta: 0.6 }, { p: "fdp", pct: 5.9, delta: -0.7 }, { p: "biw", pct: 2.4, delta: -0.8 }
+        ]
+      },
+      {
+        date: "2015-05-10",
+        source: "https://www.wahlen-bremen.de/Wahlen/2015_05_10/04010000/html5/index.html",
+        winner: "spd", turnout: 50.2, turnoutDelta: -5.3,
+        results: [
+          { p: "spd", pct: 32.8, delta: -5.8 }, { p: "union", label: "CDU", pct: 22.4, delta: 2.0 }, { p: "gruene", pct: 15.1, delta: -7.4 },
+          { p: "linke", pct: 9.5, delta: 3.9 }, { p: "fdp", pct: 6.6, delta: 4.2 }, { p: "afd", pct: 5.5, delta: null }, { p: "biw", pct: 3.2, delta: null }
+        ]
+      },
+      {
+        date: "2011-05-22",
+        source: "https://www.statistik.bremen.de/sixcms/media.php/13/Faltblatt_Buergerschaft2011.pdf",
+        winner: "spd", turnout: 55.5,
+        results: [
+          { p: "spd", pct: 38.6 }, { p: "gruene", pct: 22.5 }, { p: "union", label: "CDU", pct: 20.4 },
+          { p: "linke", pct: 5.6 }, { p: "fdp", pct: 2.4 }
+        ]
+      }
+    ],
+    "DE-HH": [
+      {
+        date: "2025-03-02",
+        source: "https://www.hamburg.de/politik-und-verwaltung/behoerden/behoerde-fuer-inneres-und-sport/presseservice/pressemeldungen/amtliches-endergebnis-der-buergerschaftswahl-2025-festgestellt-1039904",
+        winner: "spd", turnout: 67.6, turnoutDelta: 4.4,
+        results: [
+          { p: "spd", pct: 33.5, delta: -5.7 }, { p: "union", label: "CDU", pct: 19.8, delta: 8.6 }, { p: "gruene", pct: 18.5, delta: -5.7 },
+          { p: "linke", pct: 11.2, delta: 2.1 }, { p: "afd", pct: 7.5, delta: 2.2 }
+        ]
+      },
+      {
+        date: "2020-02-23",
+        source: "https://www.statistik-nord.de/wahlen/wahlen-in-hamburg/buergerschaftswahlen/buergerschaftswahl-2020-in-hamburg",
+        winner: "spd", turnout: 63.2, turnoutDelta: 6.7,
+        results: [
+          { p: "spd", pct: 39.2, delta: -6.4 }, { p: "gruene", pct: 24.2, delta: 11.9 }, { p: "union", label: "CDU", pct: 11.2, delta: -4.7 },
+          { p: "linke", pct: 9.1, delta: 0.6 }, { p: "afd", pct: 5.3, delta: -0.8 }, { p: "fdp", pct: 5.0, delta: -2.4 }
+        ]
+      },
+      {
+        date: "2015-02-15",
+        source: "https://www.statistik-nord.de/wahlen/wahlen-in-hamburg/buergerschaftswahlen/2015",
+        winner: "spd", turnout: 56.5, turnoutDelta: -0.8,
+        results: [
+          { p: "spd", pct: 45.6, delta: -2.8 }, { p: "union", label: "CDU", pct: 15.9, delta: -6.0 }, { p: "gruene", pct: 12.3, delta: 1.1 },
+          { p: "linke", pct: 8.5, delta: 2.1 }, { p: "fdp", pct: 7.4, delta: 0.7 }, { p: "afd", pct: 6.1, delta: null }
+        ]
+      },
+      {
+        date: "2011-02-20",
+        source: "https://www.statistik-nord.de/wahlen/wahlen-in-hamburg/buergerschaftswahlen/2011",
+        winner: "spd", turnout: 57.3,
+        results: [
+          { p: "spd", pct: 48.4 }, { p: "union", label: "CDU", pct: 21.9 }, { p: "gruene", pct: 11.2 },
+          { p: "fdp", pct: 6.7 }, { p: "linke", pct: 6.4 }
+        ]
+      }
+    ],
+    "DE-HE": [
+      {
+        date: "2023-10-08",
+        source: "https://wahlen.hessen.de/landtagswahlen/ergebnisse-2023",
+        winner: "union", turnout: 66.0, turnoutDelta: -1.3,
+        results: [
+          { p: "union", label: "CDU", pct: 34.6, delta: 7.6 }, { p: "afd", pct: 18.4, delta: 5.3 }, { p: "spd", pct: 15.1, delta: -4.7 },
+          { p: "gruene", pct: 14.8, delta: -5.0 }, { p: "fdp", pct: 5.0, delta: -2.5 }
+        ]
+      },
+      {
+        date: "2018-10-28",
+        source: "https://statistik.hessen.de/sites/statistik.hessen.de/files/2023-11/BVII2-4_5j2023_Landtagswahl_Tabelle_1.xlsx",
+        winner: "union", turnout: 67.3, turnoutDelta: -5.9,
+        results: [
+          { p: "union", label: "CDU", pct: 27.0, delta: -11.3 }, { p: "gruene", pct: 19.8, delta: 8.7 }, { p: "spd", pct: 19.8, delta: -10.9 },
+          { p: "afd", pct: 13.1, delta: 9.0 }, { p: "fdp", pct: 7.5, delta: 2.5 }, { p: "linke", pct: 6.3, delta: 1.1 }
+        ]
+      },
+      {
+        date: "2013-09-22",
+        source: "https://statistik.hessen.de/sites/statistik.hessen.de/files/2023-11/BVII2-4_5j2023_Landtagswahl_Tabelle_1.xlsx",
+        winner: "union", turnout: 73.2,
+        results: [
+          { p: "union", label: "CDU", pct: 38.3 }, { p: "spd", pct: 30.7 }, { p: "gruene", pct: 11.1 },
+          { p: "linke", pct: 5.2 }, { p: "fdp", pct: 5.0 }, { p: "afd", pct: 4.1 }
+        ]
+      }
+    ],
+    "DE-NI": [
+      {
+        date: "2022-10-09",
+        source: "https://wahlen.statistik.niedersachsen.de/LW2022/",
+        winner: "spd", turnout: 60.3, turnoutDelta: -2.8,
+        results: [
+          { p: "spd", pct: 33.4, delta: -3.5 }, { p: "union", label: "CDU", pct: 28.1, delta: -5.5 }, { p: "gruene", pct: 14.5, delta: 5.8 },
+          { p: "afd", pct: 11.0, delta: 4.8 }, { p: "fdp", pct: 4.7, delta: -2.8 }, { p: "linke", pct: 2.7, delta: -1.9 }
+        ]
+      },
+      {
+        date: "2017-10-15",
+        source: "https://landeswahlleiter.niedersachsen.de/presse_service/presseinformationen/landtagswahl-am-15-oktober-2017-ergebnis-der-landtagswahl-steht-endgueltig-fest-159058.html",
+        winner: "spd", turnout: 63.1, turnoutDelta: 3.7,
+        results: [
+          { p: "spd", pct: 36.9, delta: 4.3 }, { p: "union", label: "CDU", pct: 33.6, delta: -2.4 }, { p: "gruene", pct: 8.7, delta: -5.0 },
+          { p: "fdp", pct: 7.5, delta: -2.4 }, { p: "afd", pct: 6.2, delta: null }, { p: "linke", pct: 4.6, delta: 1.5 }, { p: "fw", pct: 0.4, delta: -0.7 }
+        ]
+      },
+      {
+        date: "2013-01-20",
+        source: "https://landeswahlleiter.niedersachsen.de/presse_service/presseinformationen/ergebnis-der-landtagswahl-vom-20-januar-2013-steht-endgueltig-fest-112518.html",
+        winner: "union", turnout: 59.4,
+        results: [
+          { p: "union", label: "CDU", pct: 36.0 }, { p: "spd", pct: 32.6 }, { p: "gruene", pct: 13.7 },
+          { p: "fdp", pct: 9.9 }, { p: "linke", pct: 3.1 }, { p: "fw", pct: 1.1 }
+        ]
+      }
+    ],
+    "DE-MV": [
+      {
+        date: "2021-09-26",
+        source: "https://www.landtag-mv.de/landtag/rund-um-wahlen/landtagswahl-2021",
+        winner: "spd", turnout: 70.8, turnoutDelta: 8.9,
+        results: [
+          { p: "spd", pct: 39.6, delta: 9.0 }, { p: "afd", pct: 16.7, delta: -4.1 }, { p: "union", label: "CDU", pct: 13.3, delta: -5.7 },
+          { p: "linke", pct: 9.9, delta: -3.3 }, { p: "gruene", pct: 6.3, delta: 1.5 }, { p: "fdp", pct: 5.8, delta: 2.8 }
+        ]
+      },
+      {
+        date: "2016-09-04",
+        source: "https://www.laiv-mv.de/Wahlen/Landtagswahlen/2016/",
+        winner: "spd", turnout: 61.9, turnoutDelta: 10.4,
+        results: [
+          { p: "spd", pct: 30.6, delta: -5.0 }, { p: "afd", pct: 20.8, delta: null }, { p: "union", label: "CDU", pct: 19.0, delta: -4.0 },
+          { p: "linke", pct: 13.2, delta: -5.2 }, { p: "gruene", pct: 4.8, delta: -3.9 }, { p: "fdp", pct: 3.0, delta: 0.2 }
+        ]
+      },
+      {
+        date: "2011-09-04",
+        source: "https://www.laiv-mv.de/Wahlen/Landtagswahlen/2011/Ergebnisse/",
+        winner: "spd", turnout: 51.5,
+        results: [
+          { p: "spd", pct: 35.6 }, { p: "union", label: "CDU", pct: 23.0 }, { p: "linke", pct: 18.4 },
+          { p: "gruene", pct: 8.7 }, { p: "fdp", pct: 2.8 }
+        ]
+      }
+    ],
+    "DE-NW": [
+      {
+        date: "2022-05-15",
+        source: "https://www.im.nrw/vorlaeufiges-amtliches-wahlergebnis",
+        winner: "union", turnout: 55.5, turnoutDelta: -9.7,
+        results: [
+          { p: "union", label: "CDU", pct: 35.7, delta: 2.7 }, { p: "spd", pct: 26.7, delta: -4.5 }, { p: "gruene", pct: 18.2, delta: 11.8 },
+          { p: "fdp", pct: 5.9, delta: -6.7 }, { p: "afd", pct: 5.4, delta: -2.0 }
+        ]
+      },
+      {
+        date: "2017-05-14",
+        source: "https://www.wahlergebnisse.nrw/landtagswahlen/2017/aktuell/a000lw1700.shtml",
+        winner: "union", turnout: 65.2, turnoutDelta: 5.6,
+        results: [
+          { p: "union", label: "CDU", pct: 33.0, delta: 6.7 }, { p: "spd", pct: 31.2, delta: -7.9 }, { p: "fdp", pct: 12.6, delta: 4.0 },
+          { p: "afd", pct: 7.4, delta: null }, { p: "gruene", pct: 6.4, delta: -4.9 }, { p: "linke", pct: 4.9, delta: 2.4 }, { p: "fw", pct: 0.4, delta: null }
+        ]
+      },
+      {
+        date: "2012-05-13",
+        source: "https://www.wahlergebnisse.nrw/landtagswahlen/2012/aktuell/a0lw1200.html",
+        winner: "spd", turnout: 59.6,
+        results: [
+          { p: "spd", pct: 39.1 }, { p: "union", label: "CDU", pct: 26.3 }, { p: "gruene", pct: 11.3 },
+          { p: "fdp", pct: 8.6 }, { p: "linke", pct: 2.5 }
+        ]
+      }
+    ],
+    "DE-RP": [
+      {
+        date: "2026-03-22",
+        source: "https://www.datenblick.statistik.rlp.de/landtagswahl-2026",
+        winner: "union", turnout: 68.5, turnoutDelta: 4.2,
+        results: [
+          { p: "union", label: "CDU", pct: 31.0, delta: 3.3 }, { p: "spd", pct: 25.9, delta: -9.8 }, { p: "afd", pct: 19.5, delta: 11.2 },
+          { p: "gruene", pct: 7.9, delta: -1.4 }, { p: "linke", pct: 4.4, delta: 1.9 }, { p: "fw", pct: 4.2, delta: -1.2 },
+          { p: "fdp", pct: 2.1, delta: -3.4 }, { p: "bsw", pct: 1.9, delta: null }
+        ]
+      },
+      {
+        date: "2021-03-14",
+        source: "https://www.wahlen.rlp.de/landtagswahl/ergebnisse",
+        winner: "spd", turnout: 64.3, turnoutDelta: -6.1,
+        results: [
+          { p: "spd", pct: 35.7, delta: -0.5 }, { p: "union", label: "CDU", pct: 27.7, delta: -4.1 }, { p: "gruene", pct: 9.3, delta: 4.0 },
+          { p: "afd", pct: 8.3, delta: -4.3 }, { p: "fdp", pct: 5.5, delta: -0.7 }, { p: "fw", pct: 5.4, delta: 3.2 }, { p: "linke", pct: 2.5, delta: -0.3 }
+        ]
+      },
+      {
+        date: "2016-03-13",
+        source: "https://www.wahlen.rlp.de/landtagswahl/ergebnisse",
+        winner: "spd", turnout: 70.4, turnoutDelta: 8.6,
+        results: [
+          { p: "spd", pct: 36.2, delta: 0.5 }, { p: "union", label: "CDU", pct: 31.8, delta: -3.4 }, { p: "afd", pct: 12.6, delta: null },
+          { p: "fdp", pct: 6.2, delta: 2.0 }, { p: "gruene", pct: 5.3, delta: -10.1 }, { p: "linke", pct: 2.8, delta: -0.2 }, { p: "fw", pct: 2.2, delta: -0.1 }
+        ]
+      },
+      {
+        date: "2011-03-27",
+        source: "https://www.wahlen.rlp.de/landtagswahl/ergebnisse",
+        winner: "spd", turnout: 61.8,
+        results: [
+          { p: "spd", pct: 35.7 }, { p: "union", label: "CDU", pct: 35.2 }, { p: "gruene", pct: 15.4 },
+          { p: "fdp", pct: 4.2 }, { p: "linke", pct: 3.0 }, { p: "fw", pct: 2.3 }
+        ]
+      }
+    ],
+    "DE-SL": [
+      {
+        date: "2022-03-27",
+        source: "https://wahlergebnis.saarland.de/LTW/",
+        winner: "spd", turnout: 61.4, turnoutDelta: -8.3,
+        results: [
+          { p: "spd", pct: 43.5, delta: 13.9 }, { p: "union", label: "CDU", pct: 28.5, delta: -12.2 }, { p: "afd", pct: 5.7, delta: -0.5 },
+          { p: "gruene", pct: 4.9, delta: 0.9 }, { p: "fdp", pct: 4.8, delta: 1.5 }, { p: "linke", pct: 2.6, delta: -10.2 }
+        ]
+      },
+      {
+        date: "2017-03-26",
+        source: "https://wahlergebnis.saarland.de/LTW_17/",
+        winner: "union", turnout: 69.7, turnoutDelta: 8.1,
+        results: [
+          { p: "union", label: "CDU", pct: 40.7, delta: 5.5 }, { p: "spd", pct: 29.6, delta: -1.0 }, { p: "linke", pct: 12.8, delta: -3.3 },
+          { p: "afd", pct: 6.2, delta: null }, { p: "gruene", pct: 4.0, delta: -1.0 }, { p: "fdp", pct: 3.3, delta: 2.1 }
+        ]
+      },
+      {
+        date: "2012-03-25",
+        source: "https://wahlergebnis.saarland.de/",
+        winner: "union", turnout: 61.6,
+        results: [
+          { p: "union", label: "CDU", pct: 35.2 }, { p: "spd", pct: 30.6 }, { p: "linke", pct: 16.1 },
+          { p: "gruene", pct: 5.0 }, { p: "fdp", pct: 1.2 }
+        ]
+      }
+    ],
+    "DE-SN": [
+      {
+        date: "2024-09-01",
+        source: "https://wahlen.sachsen.de/landtagswahl-2024-wahlergebnisse.php",
+        winner: "union", turnout: 74.4, turnoutDelta: 7.9,
+        results: [
+          { p: "union", label: "CDU", pct: 31.9, delta: -0.2 }, { p: "afd", pct: 30.6, delta: 3.1 }, { p: "bsw", pct: 11.8, delta: null },
+          { p: "spd", pct: 7.3, delta: -0.4 }, { p: "gruene", pct: 5.1, delta: -3.5 }, { p: "linke", pct: 4.5, delta: -5.9 }
+        ]
+      },
+      {
+        date: "2019-09-01",
+        source: "https://www.wahlen.sachsen.de/landtagswahl-2019-wahlergebnisse.php",
+        winner: "union", turnout: 66.5, turnoutDelta: 17.4,
+        results: [
+          { p: "union", label: "CDU", pct: 32.1, delta: -7.3 }, { p: "afd", pct: 27.5, delta: 17.8 }, { p: "linke", pct: 10.4, delta: -8.5 },
+          { p: "gruene", pct: 8.6, delta: 2.9 }, { p: "spd", pct: 7.7, delta: -4.7 }, { p: "fdp", pct: 4.5, delta: 0.7 }, { p: "fw", pct: 3.4, delta: 1.8 }
+        ]
+      },
+      {
+        date: "2014-08-31",
+        source: "https://www.wahlen.sachsen.de/landtagswahl-2014-wahlergebnisse.php",
+        winner: "union", turnout: 49.1,
+        results: [
+          { p: "union", label: "CDU", pct: 39.4 }, { p: "linke", pct: 18.9 }, { p: "spd", pct: 12.4 },
+          { p: "afd", pct: 9.7 }, { p: "gruene", pct: 5.7 }, { p: "fdp", pct: 3.8 }, { p: "fw", pct: 1.6 }
+        ]
+      }
+    ],
+    "DE-ST": [
+      {
+        date: "2021-06-06",
+        source: "https://wahlergebnisse.sachsen-anhalt.de/wahlen/lt21/",
+        winner: "union", turnout: 60.3, turnoutDelta: -0.8,
+        results: [
+          { p: "union", label: "CDU", pct: 37.1, delta: 7.3 }, { p: "afd", pct: 20.8, delta: -3.5 }, { p: "linke", pct: 11.1, delta: -5.2 },
+          { p: "spd", pct: 8.4, delta: -2.2 }, { p: "fdp", pct: 6.4, delta: 1.5 }, { p: "gruene", pct: 5.9, delta: 0.7 }
+        ]
+      },
+      {
+        date: "2016-03-13",
+        source: "https://wahlergebnisse.sachsen-anhalt.de/wahlen/lt16/",
+        winner: "union", turnout: 61.1, turnoutDelta: 9.9,
+        results: [
+          { p: "union", label: "CDU", pct: 29.8, delta: -2.7 }, { p: "afd", pct: 24.3, delta: null }, { p: "linke", pct: 16.3, delta: -7.4 },
+          { p: "spd", pct: 10.6, delta: -10.9 }, { p: "gruene", pct: 5.2, delta: -1.9 }, { p: "fdp", pct: 4.9, delta: 1.1 }, { p: "fw", pct: 2.2, delta: -0.6 }
+        ]
+      },
+      {
+        date: "2011-03-20",
+        source: "https://wahlergebnisse.sachsen-anhalt.de/wahlen/lt11/",
+        winner: "union", turnout: 51.2,
+        results: [
+          { p: "union", label: "CDU", pct: 32.5 }, { p: "linke", pct: 23.7 }, { p: "spd", pct: 21.5 },
+          { p: "gruene", pct: 7.1 }, { p: "fdp", pct: 3.8 }, { p: "fw", pct: 2.8 }
+        ]
+      }
+    ],
+    "DE-SH": [
+      {
+        date: "2022-05-08",
+        source: "https://www.statistik-nord.de/fileadmin/wahlen/sh/ltw22/ergebnispraesentation.html",
+        winner: "union", turnout: 60.3, turnoutDelta: -3.9,
+        results: [
+          { p: "union", label: "CDU", pct: 43.4, delta: 11.4 }, { p: "gruene", pct: 18.3, delta: 5.4 }, { p: "spd", pct: 16.0, delta: -11.3 },
+          { p: "fdp", pct: 6.4, delta: -5.1 }, { p: "ssw", pct: 5.7, delta: 2.4 }, { p: "afd", pct: 4.4, delta: -1.5 }, { p: "linke", pct: 1.7, delta: -2.1 }
+        ]
+      },
+      {
+        date: "2017-05-07",
+        source: "https://www.statistik-nord.de/fileadmin/Dokumente/Wahlen/Schleswig-Holstein/Landtagswahlen/2017/endgueltig/LTW_2017_Endgueltiger_Bericht_INTERNET.pdf",
+        winner: "union", turnout: 64.2, turnoutDelta: 4.0,
+        results: [
+          { p: "union", label: "CDU", pct: 32.0, delta: 1.2 }, { p: "spd", pct: 27.3, delta: -3.1 }, { p: "gruene", pct: 12.9, delta: -0.3 },
+          { p: "fdp", pct: 11.5, delta: 3.3 }, { p: "afd", pct: 5.9, delta: null }, { p: "linke", pct: 3.8, delta: 1.5 }, { p: "ssw", pct: 3.3, delta: -1.3 }
+        ]
+      },
+      {
+        date: "2012-05-06",
+        source: "https://www.statistik-nord.de/fileadmin/Dokumente/Wahlen/Schleswig-Holstein/Landtagswahlen/2012/endgueltig/SH_LTW_2012_Endgueltiger_Bericht_Internet.pdf",
+        winner: "union", turnout: 60.2,
+        results: [
+          { p: "union", label: "CDU", pct: 30.8 }, { p: "spd", pct: 30.4 }, { p: "gruene", pct: 13.2 },
+          { p: "fdp", pct: 8.2 }, { p: "ssw", pct: 4.6 }, { p: "linke", pct: 2.3 }
+        ]
+      }
+    ],
+    "DE-TH": [
+      {
+        date: "2024-09-01",
+        source: "https://www.thueringer-landtag.de/presse/pressemitteilungen/2024/landtagswahl-2024/",
+        winner: "afd", turnout: 73.6, turnoutDelta: 8.7,
+        results: [
+          { p: "afd", pct: 32.8, delta: 9.4 }, { p: "union", label: "CDU", pct: 23.6, delta: 1.9 }, { p: "bsw", pct: 15.8, delta: null },
+          { p: "linke", pct: 13.1, delta: -17.9 }, { p: "spd", pct: 6.1, delta: -2.1 }, { p: "gruene", pct: 3.2, delta: -2.0 }, { p: "fdp", pct: 1.1, delta: -3.9 }
+        ]
+      },
+      {
+        date: "2019-10-27",
+        source: "https://wahlen.thueringen.de/datenbank/wahl1/wahl.asp?wahlart=LW&wJahr=2019&zeigeErg=Land",
+        winner: "linke", turnout: 64.9, turnoutDelta: 8.7,
+        results: [
+          { p: "linke", pct: 31.0, delta: 3.6 }, { p: "afd", pct: 23.4, delta: null }, { p: "union", label: "CDU", pct: 21.7, delta: -9.5 },
+          { p: "spd", pct: 8.2, delta: -10.3 }, { p: "gruene", pct: 5.2, delta: -1.0 }, { p: "fdp", pct: 5.0, delta: -2.6 }
+        ]
+      },
+      {
+        date: "2009-08-30",
+        source: "https://wahlen.thueringen.de/datenbank/wahl1/wahl.asp?wahlart=LW&wJahr=2009&zeigeErg=Land",
+        winner: "union", turnout: 56.2,
+        results: [
+          { p: "union", label: "CDU", pct: 31.2 }, { p: "linke", pct: 27.4 }, { p: "spd", pct: 18.5 },
+          { p: "fdp", pct: 7.6 }, { p: "gruene", pct: 6.2 }
+        ]
+      }
+    ],
+  };
+
+  var DATA = {
+    2025: {
+      "DE-BY": {
+        turnout: 84.3, turnoutDelta: 4.4,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-9.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CSU", pct: 37.2, delta: 5.4 },
+          { p: "afd", pct: 19.0, delta: 10.0 },
+          { p: "gruene", pct: 12.0, delta: -2.1 },
+          { p: "spd", pct: 11.5, delta: -6.4 },
+          { p: "fw", pct: 4.3, delta: -3.1 },
+          { p: "fdp", pct: 4.2, delta: -6.4 },
+          { p: "linke", pct: 5.7, delta: 2.9 },
+          { p: "bsw", pct: 3.1, delta: null }
+        ]
+      },
+      "DE-BE": {
+        turnout: 80.3, turnoutDelta: 10.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-11.html",
+        winner: "linke",
+        results: [
+          { p: "linke", pct: 19.9, delta: 8.3 },
+          { p: "union", label: "CDU", pct: 18.3, delta: 1.1 },
+          { p: "gruene", pct: 16.8, delta: -5.2 },
+          { p: "afd", pct: 15.2, delta: 5.8 },
+          { p: "spd", pct: 15.1, delta: -7.1 },
+          { p: "bsw", pct: 6.7, delta: null },
+          { p: "fdp", pct: 3.8, delta: -4.3 }
+        ]
+      },
+      "DE-NW": {
+        turnout: 82.2, turnoutDelta: 5.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-5.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 30.1, delta: 4.2 },
+          { p: "spd", pct: 20.0, delta: -9.1 },
+          { p: "afd", pct: 16.8, delta: 9.6 },
+          { p: "gruene", pct: 12.4, delta: -3.7 },
+          { p: "linke", pct: 8.3, delta: 4.6 },
+          { p: "bsw", pct: 4.1, delta: null },
+          { p: "fdp", pct: 4.4, delta: -7.0 }
+        ]
+      },
+      "DE-SH": {
+        turnout: 83.5, turnoutDelta: 5.4,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-1.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 27.6, delta: 5.5 },
+          { p: "spd", pct: 18.8, delta: -9.3 },
+          { p: "afd", pct: 16.3, delta: 9.5 },
+          { p: "gruene", pct: 14.9, delta: -3.4 },
+          { p: "linke", pct: 7.8, delta: 4.1 },
+          { p: "fdp", pct: 4.7, delta: -7.8 },
+          { p: "ssw", pct: 4.0, delta: 0.9 },
+          { p: "bsw", pct: 3.4, delta: null }
+        ]
+      },
+      "DE-HH": {
+        turnout: 80.9, turnoutDelta: 3.0,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-2.html",
+        winner: "spd",
+        results: [
+          { p: "spd", pct: 22.7, delta: -6.9 },
+          { p: "union", label: "CDU", pct: 20.7, delta: 5.3 },
+          { p: "gruene", pct: 19.3, delta: -5.6 },
+          { p: "linke", pct: 14.5, delta: 7.7 },
+          { p: "afd", pct: 10.9, delta: 5.8 },
+          { p: "fdp", pct: 4.5, delta: -6.9 },
+          { p: "bsw", pct: 4.0, delta: null }
+        ]
+      },
+      "DE-NI": {
+        turnout: 83.4, turnoutDelta: 8.7,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-3.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 28.1, delta: 3.9 },
+          { p: "spd", pct: 23.0, delta: -10.1 },
+          { p: "afd", pct: 17.8, delta: 10.4 },
+          { p: "gruene", pct: 11.5, delta: -4.6 },
+          { p: "linke", pct: 8.1, delta: 4.8 },
+          { p: "fdp", pct: 4.1, delta: -6.4 },
+          { p: "bsw", pct: 3.8, delta: null }
+        ]
+      },
+      "DE-HB": {
+        turnout: 77.8, turnoutDelta: 5.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-4.html",
+        winner: "spd",
+        results: [
+          { p: "spd", pct: 23.1, delta: -8.3 },
+          { p: "union", label: "CDU", pct: 20.6, delta: 3.3 },
+          { p: "gruene", pct: 15.6, delta: -5.3 },
+          { p: "afd", pct: 15.1, delta: 8.2 },
+          { p: "linke", pct: 14.8, delta: 7.0 },
+          { p: "bsw", pct: 4.3, delta: null },
+          { p: "fdp", pct: 3.5, delta: -5.8 }
+        ]
+      },
+      "DE-HE": {
+        turnout: 83.1, turnoutDelta: 6.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-6.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 28.9, delta: 6.0 },
+          { p: "spd", pct: 18.4, delta: -9.2 },
+          { p: "afd", pct: 17.8, delta: 9.0 },
+          { p: "gruene", pct: 12.6, delta: -3.2 },
+          { p: "linke", pct: 8.7, delta: 4.4 },
+          { p: "fdp", pct: 5.0, delta: -7.7 },
+          { p: "bsw", pct: 4.4, delta: null }
+        ]
+      },
+      "DE-RP": {
+        turnout: 83.0, turnoutDelta: 5.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-7.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 30.6, delta: 5.9 },
+          { p: "afd", pct: 20.1, delta: 10.9 },
+          { p: "spd", pct: 18.6, delta: -10.7 },
+          { p: "gruene", pct: 10.3, delta: -2.2 },
+          { p: "linke", pct: 6.5, delta: 3.3 },
+          { p: "fdp", pct: 4.6, delta: -7.1 },
+          { p: "bsw", pct: 4.2, delta: null },
+          { p: "fw", pct: 2.1, delta: -1.5 }
+        ]
+      },
+      "DE-BW": {
+        turnout: 83.4, turnoutDelta: 5.6,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-8.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 31.6, delta: 6.8 },
+          { p: "afd", pct: 19.8, delta: 10.2 },
+          { p: "spd", pct: 14.2, delta: -7.5 },
+          { p: "gruene", pct: 13.6, delta: -3.5 },
+          { p: "linke", pct: 6.8, delta: 3.5 },
+          { p: "fdp", pct: 5.6, delta: -9.6 },
+          { p: "bsw", pct: 4.1, delta: null },
+          { p: "fw", pct: 1.4, delta: -0.4 }
+        ]
+      },
+      "DE-SL": {
+        turnout: 82.4, turnoutDelta: 5.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-10.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 26.9, delta: 3.3 },
+          { p: "spd", pct: 21.9, delta: -15.4 },
+          { p: "afd", pct: 21.6, delta: 11.5 },
+          { p: "linke", pct: 7.4, delta: 0.2 },
+          { p: "gruene", pct: 7.2, delta: "na" },
+          { p: "bsw", pct: 6.2, delta: null },
+          { p: "fdp", pct: 4.3, delta: -7.2 }
+        ]
+      },
+      "DE-BB": {
+        turnout: 81.6, turnoutDelta: 5.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-12.html",
+        winner: "afd",
+        results: [
+          { p: "afd", pct: 32.5, delta: 14.4 },
+          { p: "union", label: "CDU", pct: 18.1, delta: 2.8 },
+          { p: "spd", pct: 14.8, delta: -14.6 },
+          { p: "linke", pct: 10.7, delta: 2.2 },
+          { p: "bsw", pct: 10.7, delta: null },
+          { p: "gruene", pct: 6.6, delta: -2.4 },
+          { p: "fdp", pct: 3.2, delta: -6.1 }
+        ]
+      },
+      "DE-MV": {
+        turnout: 79.5, turnoutDelta: 8.3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-13.html",
+        winner: "afd",
+        results: [
+          { p: "afd", pct: 35.0, delta: 17.0 },
+          { p: "union", label: "CDU", pct: 17.8, delta: 0.4 },
+          { p: "linke", pct: 12.0, delta: 1.0 },
+          { p: "spd", pct: 12.4, delta: -16.7 },
+          { p: "bsw", pct: 10.6, delta: null },
+          { p: "gruene", pct: 5.4, delta: -2.5 },
+          { p: "fdp", pct: 3.2, delta: -5.0 }
+        ]
+      },
+      "DE-SN": {
+        turnout: 81.1, turnoutDelta: 4.6,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-14.html",
+        winner: "afd",
+        results: [
+          { p: "afd", pct: 37.3, delta: 12.7 },
+          { p: "union", label: "CDU", pct: 19.7, delta: 2.6 },
+          { p: "linke", pct: 11.3, delta: 2.0 },
+          { p: "bsw", pct: 9.0, delta: null },
+          { p: "spd", pct: 8.5, delta: -10.8 },
+          { p: "gruene", pct: 6.5, delta: -2.1 },
+          { p: "fdp", pct: 3.2, delta: -7.8 },
+          { p: "fw", pct: 1.6, delta: -0.7 }
+        ]
+      },
+      "DE-ST": {
+        turnout: 77.7, turnoutDelta: 9.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-15.html",
+        winner: "afd",
+        results: [
+          { p: "afd", pct: 37.1, delta: 17.5 },
+          { p: "union", label: "CDU", pct: 19.2, delta: -1.8 },
+          { p: "linke", pct: 10.8, delta: 1.2 },
+          { p: "bsw", pct: 11.2, delta: null },
+          { p: "spd", pct: 11.0, delta: -14.4 },
+          { p: "gruene", pct: 4.4, delta: -2.1 },
+          { p: "fdp", pct: 3.1, delta: -6.4 }
+        ]
+      },
+      "DE-TH": {
+        turnout: 80.7, turnoutDelta: 5.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/bund-99/land-16.html",
+        winner: "afd",
+        results: [
+          { p: "afd", pct: 38.6, delta: 14.6 },
+          { p: "union", label: "CDU", pct: 18.6, delta: 1.7 },
+          { p: "linke", pct: 15.2, delta: 3.7 },
+          { p: "bsw", pct: 9.4, delta: null },
+          { p: "spd", pct: 8.8, delta: -14.7 },
+          { p: "gruene", pct: 4.2, delta: -2.3 },
+          { p: "fdp", pct: 2.8, delta: -6.2 }
+        ]
+      }
+    },
+    2021: {
+      "DE-BY": {
+        turnout: 79.9, turnoutDelta: 1.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-9.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CSU", pct: 31.7, delta: -7.1 },
+          { p: "spd", pct: 18, delta: 2.7 },
+          { p: "gruene", pct: 14.1, delta: 4.3 },
+          { p: "fdp", pct: 10.5, delta: 0.3 },
+          { p: "linke", pct: 2.8, delta: -3.3 },
+          { p: "afd", pct: 9, delta: -3.4 },
+          { p: "fw", pct: 7.5, delta: 4.8 }
+        ]
+      },
+      "DE-NW": {
+        turnout: 76.4, turnoutDelta: 1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-5.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 26, delta: -6.6 },
+          { p: "spd", pct: 29.1, delta: 3.1 },
+          { p: "gruene", pct: 16.1, delta: 8.5 },
+          { p: "fdp", pct: 11.4, delta: -1.7 },
+          { p: "linke", pct: 3.7, delta: -3.8 },
+          { p: "afd", pct: 7.3, delta: -2.1 },
+          { p: "fw", pct: 0.7, delta: 0.4 }
+        ]
+      },
+      "DE-BW": {
+        turnout: 77.8, turnoutDelta: -0.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-8.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 24.8, delta: -9.6 },
+          { p: "spd", pct: 21.6, delta: 5.2 },
+          { p: "gruene", pct: 17.2, delta: 3.7 },
+          { p: "fdp", pct: 15.3, delta: 2.6 },
+          { p: "linke", pct: 3.3, delta: -3.1 },
+          { p: "afd", pct: 9.6, delta: -2.6 },
+          { p: "fw", pct: 1.7, delta: 1 }
+        ]
+      },
+      "DE-NI": {
+        turnout: 74.7, turnoutDelta: -1.7,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-3.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 24.2, delta: -10.7 },
+          { p: "spd", pct: 33.1, delta: 5.7 },
+          { p: "gruene", pct: 16.1, delta: 7.4 },
+          { p: "fdp", pct: 10.5, delta: 1.2 },
+          { p: "linke", pct: 3.3, delta: -3.7 },
+          { p: "afd", pct: 7.4, delta: -1.7 },
+          { p: "fw", pct: 0.8, delta: 0.4 }
+        ]
+      },
+      "DE-HE": {
+        turnout: 76.2, turnoutDelta: -0.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-6.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 22.8, delta: -8.1 },
+          { p: "spd", pct: 27.6, delta: 4.1 },
+          { p: "gruene", pct: 15.8, delta: 6.1 },
+          { p: "fdp", pct: 12.8, delta: 1.3 },
+          { p: "linke", pct: 4.3, delta: -3.8 },
+          { p: "afd", pct: 8.8, delta: -3.1 },
+          { p: "fw", pct: 1.7, delta: 0.8 }
+        ]
+      },
+      "DE-SN": {
+        turnout: 76.5, turnoutDelta: 1.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-14.html",
+        winner: "afd",
+        results: [
+          { p: "union", label: "CDU", pct: 17.2, delta: -9.7 },
+          { p: "spd", pct: 19.3, delta: 8.8 },
+          { p: "gruene", pct: 8.6, delta: 4 },
+          { p: "fdp", pct: 11, delta: 2.8 },
+          { p: "linke", pct: 9.3, delta: -6.8 },
+          { p: "afd", pct: 24.6, delta: -2.4 },
+          { p: "fw", pct: 2.3, delta: 1.2 }
+        ]
+      },
+      "DE-RP": {
+        turnout: 77.2, turnoutDelta: -0.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-7.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 24.7, delta: -11.2 },
+          { p: "spd", pct: 29.4, delta: 5.3 },
+          { p: "gruene", pct: 12.6, delta: 5 },
+          { p: "fdp", pct: 11.7, delta: 1.3 },
+          { p: "linke", pct: 3.3, delta: -3.5 },
+          { p: "afd", pct: 9.2, delta: -2 },
+          { p: "fw", pct: 3.6, delta: 2.2 }
+        ]
+      },
+      "DE-BE": {
+        turnout: 69.5, turnoutDelta: -6.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-11.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 17.2, delta: -5.5 },
+          { p: "spd", pct: 22.2, delta: 4.3 },
+          { p: "gruene", pct: 22, delta: 9.4 },
+          { p: "fdp", pct: 8.1, delta: -0.8 },
+          { p: "linke", pct: 11.5, delta: -7.3 },
+          { p: "afd", pct: 9.4, delta: -2.6 },
+          { p: "fw", pct: 0.9, delta: 0.6 }
+        ]
+      },
+      "DE-SH": {
+        turnout: 78.2, turnoutDelta: 1.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-1.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 22, delta: -12 },
+          { p: "spd", pct: 28, delta: 4.7 },
+          { p: "gruene", pct: 18.3, delta: 6.3 },
+          { p: "fdp", pct: 12.5, delta: -0.1 },
+          { p: "linke", pct: 3.6, delta: -3.7 },
+          { p: "afd", pct: 6.8, delta: -1.4 },
+          { p: "fw", pct: 1, delta: 0.4 },
+          { p: "ssw", pct: 3.2, delta: null }
+        ]
+      },
+      "DE-BB": {
+        turnout: 75.6, turnoutDelta: 1.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-12.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 15.3, delta: -11.4 },
+          { p: "spd", pct: 29.5, delta: 11.9 },
+          { p: "gruene", pct: 9, delta: 4 },
+          { p: "fdp", pct: 9.3, delta: 2.2 },
+          { p: "linke", pct: 8.5, delta: -8.7 },
+          { p: "afd", pct: 18.1, delta: -2.1 },
+          { p: "fw", pct: 2.6, delta: 1.4 }
+        ]
+      },
+      "DE-ST": {
+        turnout: 67.9, turnoutDelta: -0.2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-15.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 21, delta: -9.3 },
+          { p: "spd", pct: 25.4, delta: 10.2 },
+          { p: "gruene", pct: 6.5, delta: 2.8 },
+          { p: "fdp", pct: 9.5, delta: 1.7 },
+          { p: "linke", pct: 9.6, delta: -8.1 },
+          { p: "afd", pct: 19.6, delta: 0 },
+          { p: "fw", pct: 1.9, delta: 0.7 }
+        ]
+      },
+      "DE-TH": {
+        turnout: 74.9, turnoutDelta: 0.6,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-16.html",
+        winner: "afd",
+        results: [
+          { p: "union", label: "CDU", pct: 16.9, delta: -11.9 },
+          { p: "spd", pct: 23.4, delta: 10.2 },
+          { p: "gruene", pct: 6.6, delta: 2.5 },
+          { p: "fdp", pct: 9, delta: 1.2 },
+          { p: "linke", pct: 11.4, delta: -5.5 },
+          { p: "afd", pct: 24, delta: 1.3 },
+          { p: "fw", pct: 2.1, delta: 0.5 }
+        ]
+      },
+      "DE-HH": {
+        turnout: 77.8, turnoutDelta: 1.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-2.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 15.4, delta: -11.8 },
+          { p: "spd", pct: 29.7, delta: 6.2 },
+          { p: "gruene", pct: 24.9, delta: 11 },
+          { p: "fdp", pct: 11.4, delta: 0.6 },
+          { p: "linke", pct: 6.7, delta: -5.5 },
+          { p: "afd", pct: 5, delta: -2.8 },
+          { p: "fw", pct: 0.6, delta: 0.2 }
+        ]
+      },
+      "DE-MV": {
+        turnout: 71.1, turnoutDelta: 0.2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-13.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 17.4, delta: -15.7 },
+          { p: "spd", pct: 29.1, delta: 14 },
+          { p: "gruene", pct: 7.8, delta: 3.5 },
+          { p: "fdp", pct: 8.2, delta: 2 },
+          { p: "linke", pct: 11.1, delta: -6.7 },
+          { p: "afd", pct: 18, delta: -0.6 },
+          { p: "fw", pct: 1.5, delta: 0.7 }
+        ]
+      },
+      "DE-SL": {
+        turnout: 77.3, turnoutDelta: 0.7,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-10.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 23.6, delta: -8.8 },
+          { p: "spd", pct: 37.3, delta: 10.2 },
+          { p: "fdp", pct: 11.5, delta: 3.9 },
+          { p: "linke", pct: 7.2, delta: -5.7 },
+          { p: "afd", pct: 10, delta: -0.1 },
+          { p: "fw", pct: 2, delta: 1.2 }
+        ]
+      },
+      "DE-HB": {
+        turnout: 71.9, turnoutDelta: 1.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2021/ergebnisse/bund-99/land-4.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 17.2, delta: -7.9 },
+          { p: "spd", pct: 31.5, delta: 4.7 },
+          { p: "gruene", pct: 20.9, delta: 9.8 },
+          { p: "fdp", pct: 9.3, delta: 0 },
+          { p: "linke", pct: 7.7, delta: -5.7 },
+          { p: "afd", pct: 6.9, delta: -3.1 },
+          { p: "fw", pct: 0.9, delta: 0.5 }
+        ]
+      },
+    },
+    2017: {
+      "DE-BY": {
+        turnout: 78.1, turnoutDelta: 8.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-9.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CSU", pct: 38.8, delta: -10.5 },
+          { p: "spd", pct: 15.3, delta: -4.7 },
+          { p: "gruene", pct: 9.8, delta: 1.4 },
+          { p: "fdp", pct: 10.2, delta: 5.1 },
+          { p: "linke", pct: 6.1, delta: 2.3 },
+          { p: "afd", pct: 12.4, delta: 8.1 },
+          { p: "fw", pct: 2.7, delta: 0 }
+        ]
+      },
+      "DE-NW": {
+        turnout: 75.4, turnoutDelta: 2.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-5.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 32.6, delta: -7.2 },
+          { p: "spd", pct: 26, delta: -5.9 },
+          { p: "gruene", pct: 7.6, delta: -0.4 },
+          { p: "fdp", pct: 13.1, delta: 7.9 },
+          { p: "linke", pct: 7.5, delta: 1.4 },
+          { p: "afd", pct: 9.4, delta: 5.5 },
+          { p: "fw", pct: 0.3, delta: 0 }
+        ]
+      },
+      "DE-BW": {
+        turnout: 78.3, turnoutDelta: 4,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-8.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 34.4, delta: -11.3 },
+          { p: "spd", pct: 16.4, delta: -4.2 },
+          { p: "gruene", pct: 13.5, delta: 2.5 },
+          { p: "fdp", pct: 12.7, delta: 6.5 },
+          { p: "linke", pct: 6.4, delta: 1.6 },
+          { p: "afd", pct: 12.2, delta: 7 },
+          { p: "fw", pct: 0.7, delta: 0.1 }
+        ]
+      },
+      "DE-NI": {
+        turnout: 76.4, turnoutDelta: 3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-3.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 34.9, delta: -6.2 },
+          { p: "spd", pct: 27.4, delta: -5.7 },
+          { p: "gruene", pct: 8.7, delta: -0.1 },
+          { p: "fdp", pct: 9.3, delta: 5.1 },
+          { p: "linke", pct: 7, delta: 2 },
+          { p: "afd", pct: 9.1, delta: 5.4 },
+          { p: "fw", pct: 0.4, delta: -0.1 }
+        ]
+      },
+      "DE-HE": {
+        turnout: 77, turnoutDelta: 3.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-6.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 30.9, delta: -8.3 },
+          { p: "spd", pct: 23.5, delta: -5.3 },
+          { p: "gruene", pct: 9.7, delta: -0.2 },
+          { p: "fdp", pct: 11.5, delta: 5.9 },
+          { p: "linke", pct: 8.1, delta: 2.1 },
+          { p: "afd", pct: 11.9, delta: 6.3 },
+          { p: "fw", pct: 0.9, delta: 0.1 }
+        ]
+      },
+      "DE-SN": {
+        turnout: 75.4, turnoutDelta: 5.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-14.html",
+        winner: "afd",
+        results: [
+          { p: "union", label: "CDU", pct: 26.9, delta: -15.7 },
+          { p: "spd", pct: 10.5, delta: -4.1 },
+          { p: "gruene", pct: 4.6, delta: -0.3 },
+          { p: "fdp", pct: 8.2, delta: 5.1 },
+          { p: "linke", pct: 16.1, delta: -3.9 },
+          { p: "afd", pct: 27, delta: 20.2 },
+          { p: "fw", pct: 1.1, delta: -0.4 }
+        ]
+      },
+      "DE-RP": {
+        turnout: 77.7, turnoutDelta: 4.9,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-7.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 35.9, delta: -7.4 },
+          { p: "spd", pct: 24.1, delta: -3.4 },
+          { p: "gruene", pct: 7.6, delta: 0 },
+          { p: "fdp", pct: 10.4, delta: 4.9 },
+          { p: "linke", pct: 6.8, delta: 1.4 },
+          { p: "afd", pct: 11.2, delta: 6.4 },
+          { p: "fw", pct: 1.4, delta: 0.1 }
+        ]
+      },
+      "DE-BE": {
+        turnout: 75.6, turnoutDelta: 3.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-11.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 22.7, delta: -5.8 },
+          { p: "spd", pct: 17.9, delta: -6.7 },
+          { p: "gruene", pct: 12.6, delta: 0.3 },
+          { p: "fdp", pct: 8.9, delta: 5.3 },
+          { p: "linke", pct: 18.8, delta: 0.3 },
+          { p: "afd", pct: 12, delta: 7.1 },
+          { p: "fw", pct: 0.3, delta: -0.1 }
+        ]
+      },
+      "DE-SH": {
+        turnout: 76.3, turnoutDelta: 3.2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-1.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 34, delta: -5.2 },
+          { p: "spd", pct: 23.3, delta: -8.2 },
+          { p: "gruene", pct: 12, delta: 2.6 },
+          { p: "fdp", pct: 12.6, delta: 7 },
+          { p: "linke", pct: 7.3, delta: 2.1 },
+          { p: "afd", pct: 8.2, delta: 3.6 },
+          { p: "fw", pct: 0.6, delta: 0.1 }
+        ]
+      },
+      "DE-BB": {
+        turnout: 73.7, turnoutDelta: 5.3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-12.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 26.7, delta: -8.1 },
+          { p: "spd", pct: 17.6, delta: -5.5 },
+          { p: "gruene", pct: 5, delta: 0.3 },
+          { p: "fdp", pct: 7.1, delta: 4.6 },
+          { p: "linke", pct: 17.2, delta: -5.2 },
+          { p: "afd", pct: 20.2, delta: 14.2 },
+          { p: "fw", pct: 1.2, delta: 0.2 }
+        ]
+      },
+      "DE-ST": {
+        turnout: 68.1, turnoutDelta: 6,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-15.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 30.3, delta: -10.9 },
+          { p: "spd", pct: 15.2, delta: -3 },
+          { p: "gruene", pct: 3.7, delta: -0.3 },
+          { p: "fdp", pct: 7.8, delta: 5.2 },
+          { p: "linke", pct: 17.7, delta: -6.2 },
+          { p: "afd", pct: 19.6, delta: 15.4 },
+          { p: "fw", pct: 1.2, delta: 0.2 }
+        ]
+      },
+      "DE-TH": {
+        turnout: 74.3, turnoutDelta: 6.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-16.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 28.8, delta: -10 },
+          { p: "spd", pct: 13.2, delta: -2.9 },
+          { p: "gruene", pct: 4.1, delta: -0.8 },
+          { p: "fdp", pct: 7.8, delta: 5.2 },
+          { p: "linke", pct: 16.9, delta: -6.5 },
+          { p: "afd", pct: 22.7, delta: 16.5 },
+          { p: "fw", pct: 1.6, delta: 0.2 }
+        ]
+      },
+      "DE-HH": {
+        turnout: 76, turnoutDelta: 5.7,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-2.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 27.2, delta: -4.9 },
+          { p: "spd", pct: 23.5, delta: -8.9 },
+          { p: "gruene", pct: 13.9, delta: 1.2 },
+          { p: "fdp", pct: 10.8, delta: 6 },
+          { p: "linke", pct: 12.2, delta: 3.4 },
+          { p: "afd", pct: 7.8, delta: 3.6 },
+          { p: "fw", pct: 0.4, delta: 0.1 }
+        ]
+      },
+      "DE-MV": {
+        turnout: 70.9, turnoutDelta: 5.6,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-13.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 33.1, delta: -9.4 },
+          { p: "spd", pct: 15.1, delta: -2.7 },
+          { p: "gruene", pct: 4.3, delta: 0 },
+          { p: "fdp", pct: 6.2, delta: 4 },
+          { p: "linke", pct: 17.8, delta: -3.7 },
+          { p: "afd", pct: 18.6, delta: 13 },
+          { p: "fw", pct: 0.8, delta: -0.1 }
+        ]
+      },
+      "DE-SL": {
+        turnout: 76.6, turnoutDelta: 4.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-10.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 32.4, delta: -5.4 },
+          { p: "spd", pct: 27.1, delta: -3.9 },
+          { p: "gruene", pct: 6, delta: 0.3 },
+          { p: "fdp", pct: 7.6, delta: 3.8 },
+          { p: "linke", pct: 12.9, delta: 2.9 },
+          { p: "afd", pct: 10.1, delta: 4.9 },
+          { p: "fw", pct: 0.8, delta: 0.1 }
+        ]
+      },
+      "DE-HB": {
+        turnout: 70.8, turnoutDelta: 2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2017/ergebnisse/bund-99/land-4.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 25.1, delta: -4.2 },
+          { p: "spd", pct: 26.8, delta: -8.8 },
+          { p: "gruene", pct: 11.1, delta: -1 },
+          { p: "fdp", pct: 9.3, delta: 5.9 },
+          { p: "linke", pct: 13.4, delta: 3.3 },
+          { p: "afd", pct: 10, delta: 6.3 },
+          { p: "fw", pct: 0.4, delta: 0.2 }
+        ]
+      },
+    },
+    2013: {
+      "DE-BY": {
+        turnout: 70,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-9.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CSU", pct: 49.3 },
+          { p: "spd", pct: 20 },
+          { p: "gruene", pct: 8.4 },
+          { p: "fdp", pct: 5.1 },
+          { p: "linke", pct: 3.8 },
+          { p: "afd", pct: 4.3 },
+          { p: "fw", pct: 2.7 }
+        ]
+      },
+      "DE-NW": {
+        turnout: 72.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-5.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 39.8 },
+          { p: "spd", pct: 31.9 },
+          { p: "gruene", pct: 8 },
+          { p: "fdp", pct: 5.2 },
+          { p: "linke", pct: 6.1 },
+          { p: "afd", pct: 3.9 },
+          { p: "fw", pct: 0.3 }
+        ]
+      },
+      "DE-BW": {
+        turnout: 74.3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-8.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 45.7 },
+          { p: "spd", pct: 20.6 },
+          { p: "gruene", pct: 11 },
+          { p: "fdp", pct: 6.2 },
+          { p: "linke", pct: 4.8 },
+          { p: "afd", pct: 5.2 },
+          { p: "fw", pct: 0.6 }
+        ]
+      },
+      "DE-NI": {
+        turnout: 73.4,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-3.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 41.1 },
+          { p: "spd", pct: 33.1 },
+          { p: "gruene", pct: 8.8 },
+          { p: "fdp", pct: 4.2 },
+          { p: "linke", pct: 5 },
+          { p: "afd", pct: 3.7 },
+          { p: "fw", pct: 0.5 }
+        ]
+      },
+      "DE-HE": {
+        turnout: 73.2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-6.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 39.2 },
+          { p: "spd", pct: 28.8 },
+          { p: "gruene", pct: 9.9 },
+          { p: "fdp", pct: 5.6 },
+          { p: "linke", pct: 6 },
+          { p: "afd", pct: 5.6 },
+          { p: "fw", pct: 0.8 }
+        ]
+      },
+      "DE-SN": {
+        turnout: 69.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-14.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 42.6 },
+          { p: "spd", pct: 14.6 },
+          { p: "gruene", pct: 4.9 },
+          { p: "fdp", pct: 3.1 },
+          { p: "linke", pct: 20 },
+          { p: "afd", pct: 6.8 },
+          { p: "fw", pct: 1.5 }
+        ]
+      },
+      "DE-RP": {
+        turnout: 72.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-7.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 43.3 },
+          { p: "spd", pct: 27.5 },
+          { p: "gruene", pct: 7.6 },
+          { p: "fdp", pct: 5.5 },
+          { p: "linke", pct: 5.4 },
+          { p: "afd", pct: 4.8 },
+          { p: "fw", pct: 1.3 }
+        ]
+      },
+      "DE-BE": {
+        turnout: 72.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-11.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 28.5 },
+          { p: "spd", pct: 24.6 },
+          { p: "gruene", pct: 12.3 },
+          { p: "fdp", pct: 3.6 },
+          { p: "linke", pct: 18.5 },
+          { p: "afd", pct: 4.9 },
+          { p: "fw", pct: 0.4 }
+        ]
+      },
+      "DE-SH": {
+        turnout: 73.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-1.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 39.2 },
+          { p: "spd", pct: 31.5 },
+          { p: "gruene", pct: 9.4 },
+          { p: "fdp", pct: 5.6 },
+          { p: "linke", pct: 5.2 },
+          { p: "afd", pct: 4.6 },
+          { p: "fw", pct: 0.5 }
+        ]
+      },
+      "DE-BB": {
+        turnout: 68.4,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-12.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 34.8 },
+          { p: "spd", pct: 23.1 },
+          { p: "gruene", pct: 4.7 },
+          { p: "fdp", pct: 2.5 },
+          { p: "linke", pct: 22.4 },
+          { p: "afd", pct: 6 },
+          { p: "fw", pct: 1 }
+        ]
+      },
+      "DE-ST": {
+        turnout: 62.1,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-15.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 41.2 },
+          { p: "spd", pct: 18.2 },
+          { p: "gruene", pct: 4 },
+          { p: "fdp", pct: 2.6 },
+          { p: "linke", pct: 23.9 },
+          { p: "afd", pct: 4.2 },
+          { p: "fw", pct: 1 }
+        ]
+      },
+      "DE-TH": {
+        turnout: 68.2,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-16.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 38.8 },
+          { p: "spd", pct: 16.1 },
+          { p: "gruene", pct: 4.9 },
+          { p: "fdp", pct: 2.6 },
+          { p: "linke", pct: 23.4 },
+          { p: "afd", pct: 6.2 },
+          { p: "fw", pct: 1.4 }
+        ]
+      },
+      "DE-HH": {
+        turnout: 70.3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-2.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 32.1 },
+          { p: "spd", pct: 32.4 },
+          { p: "gruene", pct: 12.7 },
+          { p: "fdp", pct: 4.8 },
+          { p: "linke", pct: 8.8 },
+          { p: "afd", pct: 4.2 },
+          { p: "fw", pct: 0.3 }
+        ]
+      },
+      "DE-MV": {
+        turnout: 65.3,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-13.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 42.5 },
+          { p: "spd", pct: 17.8 },
+          { p: "gruene", pct: 4.3 },
+          { p: "fdp", pct: 2.2 },
+          { p: "linke", pct: 21.5 },
+          { p: "afd", pct: 5.6 },
+          { p: "fw", pct: 0.9 }
+        ]
+      },
+      "DE-SL": {
+        turnout: 72.5,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-10.html",
+        winner: "union",
+        results: [
+          { p: "union", label: "CDU", pct: 37.8 },
+          { p: "spd", pct: 31 },
+          { p: "gruene", pct: 5.7 },
+          { p: "fdp", pct: 3.8 },
+          { p: "linke", pct: 10 },
+          { p: "afd", pct: 5.2 },
+          { p: "fw", pct: 0.7 }
+        ]
+      },
+      "DE-HB": {
+        turnout: 68.8,
+        source: "https://www.bundeswahlleiterin.de/bundestagswahlen/2013/ergebnisse/bund-99/land-4.html",
+        winner: "spd",
+        results: [
+          { p: "union", label: "CDU", pct: 29.3 },
+          { p: "spd", pct: 35.6 },
+          { p: "gruene", pct: 12.1 },
+          { p: "fdp", pct: 3.4 },
+          { p: "linke", pct: 10.1 },
+          { p: "afd", pct: 3.7 },
+          { p: "fw", pct: 0.2 }
+        ]
+      },
+    },
+  };
+
+  var SITE_LAST_UPDATED = "2026-08-06";
+
+  var I18N = {
+    de: {
+      landSelectPlaceholder: "— Bundesland wählen —",
+      navQuellen: "Quellen",
+      navPartiesGroupLabel: "Die Parteien",
+      navWahlsystemGroupLabel: "Wahlsystem",
+      navSitzverteilungLink: "Sitzverteilung erklärt",
+      navShareLabel: "Teilen",
+      navGermanyLabel: "Deutschland",
+      mapHint: "Hover oder Klick für Details",
+      compareToggleLabel: "Vergleichen",
+      compareHintActive: "Bis zu 3 Länder auf der Karte auswählen",
+      compareEmptyPrompt: "Wählen Sie bis zu 3 Länder auf der Karte, in der Liste oder über die Suche aus, um sie zu vergleichen.",
+      compareRemove: "Entfernen",
+      compareTurnoutLabel: "Wahlbeteiligung",
+      compareTitle: "Ländervergleich",
+      partySelectPlaceholder: "— Partei-Ansicht —",
+      partyViewSubtitle: "{party} in den 16 Ländern",
+      partyViewSubtitleFiltered: "{party} in {count} von 16 ausgewählten Ländern",
+      partyViewSubtitleYear: "{party} in den 16 Ländern &middot; Bundestagswahl {year}",
+      partyViewSubtitleFilteredYear: "{party} in {count} von 16 ausgewählten Ländern &middot; Bundestagswahl {year}",
+      partyViewClearFilter: "Alle anzeigen",
+      partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
+      eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
+      bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
+      welcomeTitle: "Deutschland wählt — hier behalten Sie den Überblick.",
+      welcomeElections: "Landtagswahlen 2026 →",
+      navElectionsHub: "Landtagswahlen 2026",
+      welcomeBody: "Wahlblick ist eine interaktive, unabhängige Karte der Wahlergebnisse in Deutschland. Wählen Sie ein Bundesland, um zu sehen, wer gewonnen hat, mit welchem Ergebnis und wie es sich zur vorigen Wahl verändert hat — für die Bundestagswahl und die 16 Landtage, mit ihrer Geschichte. Sie möchten wissen, wie aus Stimmen Sitze werden? Der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> erklärt es Schritt für Schritt.",
+      eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
+      emptyTitle: "Kein Bundesland ausgewählt",
+      emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
+      noDataBody: "Für {scope} sind in diesem Prototyp noch keine Daten hinterlegt.",
+      scopeBundestag: "die Bundestagswahl {year}",
+      scopeLandtag: "die Landtagswahl",
+      turnoutLine: "Bundestagswahl {year} &middot; Wahlbeteiligung",
+      turnoutLineLandtag: "Landtagswahl {date} &middot; Wahlbeteiligung",
+      sourcePrefix: "Quelle:",
+      sourceLinkText: "amtliches Ergebnis {land}",
+      legendWinnerSuffix: "stärkste Kraft",
+      legendNoData: "Noch keine Daten",
+      tooltipNoData: "Noch keine Daten",
+      bannerLandtag: "Jedes Land wählt zu einem eigenen Termin — hier sehen Sie die jeweils letzte abgeschlossene Landtags-, Bürgerschafts- oder Abgeordnetenhauswahl.",
+      footAbout: "Über Wahlblick",
+      footMethod: "Methodik",
+      footDisclaimerLink: "Haftungsausschluss",
+      footGrundgesetzLink: "Grundgesetz",
+      footDirectoryLink: "Adressverzeichnis",
+      footHolidaysLink: "Feiertage",
+      footFaqLink: "Häufige Fragen",
+      footGovernmentLink: "Koalitionen",
+      footPartiesLink: "Parteien",
+      footGuideLink: "Nutzungshinweise",
+      footDatenschutzLink: "Datenschutzerklärung",
+      footDisclaimer: "Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin bzw. den amtlichen Landeswahlbehörden und werden mit Link zur Originalquelle angezeigt. Bundestagswahlen 2013–2025 sind vollständig hinterlegt; bei den Landtagswahlen wird, soweit verfügbar, der historische Verlauf je Land gezeigt.",
+      footCredit: "Verlässlich aus Emsdetten.",
+      footUpdatedLabel: "Letzte Aktualisierung",
+      neu: "neu",
+      keineAngabe: "k. A.",
+      stateNames: {
+        "DE-BW": "Baden-Württemberg", "DE-BY": "Bayern", "DE-BE": "Berlin",
+        "DE-BB": "Brandenburg", "DE-HB": "Bremen", "DE-HH": "Hamburg",
+        "DE-HE": "Hessen", "DE-MV": "Mecklenburg-Vorpommern", "DE-NI": "Niedersachsen",
+        "DE-NW": "Nordrhein-Westfalen", "DE-RP": "Rheinland-Pfalz", "DE-SL": "Saarland",
+        "DE-SN": "Sachsen", "DE-ST": "Sachsen-Anhalt", "DE-SH": "Schleswig-Holstein",
+        "DE-TH": "Thüringen"
+      }
+    },
+    es: {
+      landSelectPlaceholder: "— Elegir un estado federado —",
+      navQuellen: "Fuentes",
+      navPartiesGroupLabel: "Los partidos",
+      navWahlsystemGroupLabel: "Sistema electoral",
+      navSitzverteilungLink: "Cómo se reparten las bancas",
+      navShareLabel: "Compartir",
+      navGermanyLabel: "Alemania",
+      mapHint: "Pasá el mouse o hacé click para ver detalles",
+      compareToggleLabel: "Comparar",
+      compareHintActive: "Elegí hasta 3 estados federados en el mapa",
+      compareEmptyPrompt: "Elegí hasta 3 estados federados en el mapa, en la lista o con el buscador para compararlos.",
+      compareRemove: "Quitar",
+      compareTurnoutLabel: "Participación",
+      compareTitle: "Comparación entre estados",
+      partySelectPlaceholder: "— Vista por partido —",
+      partyViewSubtitle: "{party} en los 16 estados federados",
+      partyViewSubtitleFiltered: "{party} en {count} de 16 estados seleccionados",
+      partyViewSubtitleYear: "{party} en los 16 estados federados &middot; Elección federal {year}",
+      partyViewSubtitleFilteredYear: "{party} en {count} de 16 estados seleccionados &middot; Elección federal {year}",
+      partyViewClearFilter: "Ver todos",
+      partyViewHintActive: "Clickeá Länder para filtrar la lista",
+      eyebrowBundestag: "Elección federal {year} · voto de lista",
+      bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
+      welcomeTitle: "Alemania vota. Acá lo ves claro.",
+      welcomeElections: "Elecciones estatales 2026 →",
+      navElectionsHub: "Elecciones estatales 2026",
+      welcomeBody: "Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elegí un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Querés entender cómo los votos se convierten en escaños? La sección <a href=\"/sitzverteilung.html\">Sistema electoral</a> lo explica paso a paso.",
+      eyebrowLandtag: "Elección estatal · última de cada Land",
+      emptyTitle: "Ningún estado federado seleccionado",
+      emptyBody: "Hacé click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
+      noDataBody: "Todavía no hay datos cargados para {scope} en este prototipo.",
+      scopeBundestag: "la elección federal {year}",
+      scopeLandtag: "la elección estatal",
+      turnoutLine: "Elección federal {year} &middot; Participación",
+      turnoutLineLandtag: "Elección estatal {date} &middot; Participación",
+      sourcePrefix: "Fuente:",
+      sourceLinkText: "resultado oficial de {land}",
+      legendWinnerSuffix: "fuerza más votada",
+      legendNoData: "Sin datos todavía",
+      tooltipNoData: "Sin datos todavía",
+      bannerLandtag: "Cada Land vota en su propia fecha — acá se muestra la última elección estatal (Landtag, Bürgerschaft o Abgeordnetenhaus según el Land) ya finalizada de cada uno.",
+      footAbout: "Sobre Wahlblick",
+      footMethod: "Metodología",
+      footDisclaimerLink: "Descargo de responsabilidad",
+      footGrundgesetzLink: "Ley Fundamental",
+      footDirectoryLink: "Directorio",
+      footHolidaysLink: "Feriados",
+      footFaqLink: "Preguntas frecuentes",
+      footGovernmentLink: "Coaliciones",
+      footPartiesLink: "Partidos",
+      footGuideLink: "Guía de uso",
+      footDatenschutzLink: "Política de privacidad",
+      footDisclaimer: "Wahlblick es un proyecto independiente, no una fuente oficial. Todos los datos provienen de la Bundeswahlleiterin o de la autoridad electoral de cada estado, y se muestran con link a la fuente original. Las elecciones federales 2013–2025 están completas; en las elecciones estatales se muestra, donde está disponible, el historial de varias elecciones de cada estado.",
+      footCredit: "Con responsabilidad, desde Emsdetten, Alemania.",
+      footUpdatedLabel: "Última actualización",
+      neu: "nuevo",
+      keineAngabe: "s/d",
+      stateNames: {
+        "DE-BW": "Baden-Wurtemberg", "DE-BY": "Baviera", "DE-BE": "Berlín",
+        "DE-BB": "Brandeburgo", "DE-HB": "Bremen", "DE-HH": "Hamburgo",
+        "DE-HE": "Hesse", "DE-MV": "Mecklemburgo-Pomerania Occidental", "DE-NI": "Baja Sajonia",
+        "DE-NW": "Renania del Norte-Westfalia", "DE-RP": "Renania-Palatinado", "DE-SL": "Sarre",
+        "DE-SN": "Sajonia", "DE-ST": "Sajonia-Anhalt", "DE-SH": "Schleswig-Holstein",
+        "DE-TH": "Turingia"
+      }
+    },
+    en: {
+      landSelectPlaceholder: "— Choose a federal state —",
+      navQuellen: "Sources",
+      navPartiesGroupLabel: "Parties",
+      navWahlsystemGroupLabel: "Electoral system",
+      navSitzverteilungLink: "How seats are allocated",
+      navShareLabel: "Share",
+      navGermanyLabel: "Germany",
+      mapHint: "Hover or click for details",
+      compareToggleLabel: "Compare",
+      compareHintActive: "Select up to 3 federal states on the map",
+      compareEmptyPrompt: "Select up to 3 federal states on the map, in the list, or via search to compare them.",
+      compareRemove: "Remove",
+      compareTurnoutLabel: "Turnout",
+      compareTitle: "State comparison",
+      partySelectPlaceholder: "— Party view —",
+      partyViewSubtitle: "{party} across the 16 federal states",
+      partyViewSubtitleFiltered: "{party} across {count} of 16 selected states",
+      partyViewSubtitleYear: "{party} across the 16 federal states &middot; {year} federal election",
+      partyViewSubtitleFilteredYear: "{party} across {count} of 16 selected states &middot; {year} federal election",
+      partyViewClearFilter: "Show all",
+      partyViewHintActive: "Click federal states to filter the list",
+      eyebrowBundestag: "Federal election {year} · party-list vote",
+      bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
+      welcomeTitle: "Germany votes. See it clearly.",
+      welcomeElections: "State elections 2026 →",
+      navElectionsHub: "State elections 2026",
+      welcomeBody: "Wahlblick is an interactive, independent map of Germany's election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href=\"/sitzverteilung.html\">Electoral system</a> section explains it step by step.",
+      eyebrowLandtag: "State election · most recent per state",
+      emptyTitle: "No federal state selected",
+      emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
+      noDataBody: "No data has been loaded yet for {scope} in this prototype.",
+      scopeBundestag: "the {year} federal election",
+      scopeLandtag: "the state election",
+      turnoutLine: "Federal election {year} &middot; Turnout",
+      turnoutLineLandtag: "State election {date} &middot; Turnout",
+      sourcePrefix: "Source:",
+      sourceLinkText: "official result for {land}",
+      legendWinnerSuffix: "leading party",
+      legendNoData: "No data yet",
+      tooltipNoData: "No data yet",
+      bannerLandtag: "Each state votes on its own schedule — this shows each one's most recently completed state election (Landtag, Bürgerschaft, or Abgeordnetenhaus depending on the state).",
+      footAbout: "About Wahlblick",
+      footMethod: "Methodology",
+      footDisclaimerLink: "Disclaimer",
+      footGrundgesetzLink: "Basic Law",
+      footDirectoryLink: "Directory",
+      footHolidaysLink: "Holidays",
+      footFaqLink: "FAQ",
+      footGovernmentLink: "Coalitions",
+      footPartiesLink: "Parties",
+      footGuideLink: "User Guide",
+      footDatenschutzLink: "Privacy Policy",
+      footDisclaimer: "Wahlblick is an independent project, not an official source. All figures come from the Bundeswahlleiterin or each state's official election authority, and are shown with a link to the original source. The 2013–2025 federal elections are complete; for state elections, the historical results available for each state are shown.",
+      footCredit: "Reliably made in Emsdetten, Germany.",
+      footUpdatedLabel: "Last updated",
+      neu: "new",
+      keineAngabe: "n/a",
+      stateNames: {
+        "DE-BW": "Baden-Württemberg", "DE-BY": "Bavaria", "DE-BE": "Berlin",
+        "DE-BB": "Brandenburg", "DE-HB": "Bremen", "DE-HH": "Hamburg",
+        "DE-HE": "Hesse", "DE-MV": "Mecklenburg-Western Pomerania", "DE-NI": "Lower Saxony",
+        "DE-NW": "North Rhine-Westphalia", "DE-RP": "Rhineland-Palatinate", "DE-SL": "Saarland",
+        "DE-SN": "Saxony", "DE-ST": "Saxony-Anhalt", "DE-SH": "Schleswig-Holstein",
+        "DE-TH": "Thuringia"
+      }
+    }
+  };
+
+  var LANG_STORAGE_KEY = "wahlblickLang";
+  var currentLang = localStorage.getItem(LANG_STORAGE_KEY) || "de";
+  if (!I18N[currentLang]) currentLang = "de";
+  function tr(key) { return I18N[currentLang][key]; }
+  function fmt(str, vals) {
+    return str.replace(/\{(\w+)\}/g, function (m, k) { return vals[k]; });
+  }
+  function stateName(id) { return I18N[currentLang].stateNames[id]; }
+  var LOCALE_MAP = { de: "de-DE", es: "es-AR", en: "en-US" };
+  function sortedLandIds(lang) {
+    var names = I18N[lang].stateNames;
+    return LAND_ORDER.slice().sort(function (a, b) {
+      return names[a].localeCompare(names[b], LOCALE_MAP[lang]);
+    });
+  }
+
+  var state = { view: "bundestag", year: "2025", selected: null, compareMode: false, compareSelection: [], partyView: null, partyViewFilter: [], landtagHistoryIndex: 0 };
+
+  var svg = document.getElementById("germany");
+  var landGroup = document.getElementById("landGroup");
+  var labelLayer = document.getElementById("labelLayer");
+  var pingLayer = document.getElementById("pingLayer");
+  var tooltip = document.getElementById("tooltip");
+  var legend = document.getElementById("legend");
+  var banner = document.getElementById("banner");
+  var mapEyebrow = document.getElementById("mapEyebrow");
+  var bundestagNoteEl = document.getElementById("bundestagNote");
+  var landTabsEl = document.getElementById("landTabs");
+  var landSelectEl = document.getElementById("landSelect");
+  var resultsEmpty = document.getElementById("resultsEmpty");
+  var resultsFilled = document.getElementById("resultsFilled");
+  var landNameEl = document.getElementById("landName");
+  var partySelectEl = document.getElementById("partySelect");
+  var compareToggleEl = document.getElementById("compareToggle");
+
+  PATHS.forEach(function (p) {
+    var el = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    el.setAttribute("class", "land");
+    el.setAttribute("data-id", p.id);
+    el.setAttribute("d", p.d);
+    el.setAttribute("tabindex", "0");
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", stateName(p.id));
+    landGroup.appendChild(el);
+  });
+
+  var LABEL_OFFSET = {
+    "DE-HB": { x: 3.2, y: -1.4 },
+    "DE-SH": { x: 0, y: 3.5 },
+    "DE-HH": { x: 4.5, y: 0.5 },
+    "DE-BB": { x: 28.9, y: 24.6 }
+  };
+
+  var LABEL_BASE_FS = 4.4;
+  var LABEL_MIN_FS = 2.15;
+  var LABEL_WIDTH_AT_Y = {};
+
+  function widthAtY(pathEl, box, y) {
+    var pt = svg.createSVGPoint();
+    pt.y = y;
+    var samples = 120;
+    var minX = null, maxX = null;
+    for (var i = 0; i <= samples; i++) {
+      pt.x = box.x + (box.width * i / samples);
+      if (pathEl.isPointInFill(pt)) {
+        if (minX === null) minX = pt.x;
+        maxX = pt.x;
+      }
+    }
+    return minX === null ? box.width : (maxX - minX);
+  }
+
+  function fitLabelFontSize(t, availableWidth) {
+    t.style.removeProperty("--label-fs");
+    var measured = t.getComputedTextLength();
+    var available = availableWidth * 0.92;
+    var size = LABEL_BASE_FS;
+    if (measured > 0) {
+      size = Math.min(LABEL_BASE_FS, LABEL_BASE_FS * (available / measured));
+      size = Math.max(LABEL_MIN_FS, size);
+    }
+    t.style.setProperty("--label-fs", size.toFixed(2) + "px");
+  }
+
+  PATHS.forEach(function (p) {
+    var pathEl = landGroup.querySelector('[data-id="' + p.id + '"]');
+    var box = pathEl.getBBox();
+    var off = LABEL_OFFSET[p.id] || { x: 0, y: 0 };
+    var cx = box.x + box.width / 2 + off.x;
+    var cy = box.y + box.height / 2 + off.y;
+    LABEL_WIDTH_AT_Y[p.id] = widthAtY(pathEl, box, cy);
+    var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    t.setAttribute("class", "land-label");
+    t.setAttribute("data-id", p.id);
+    t.setAttribute("x", cx);
+    t.setAttribute("y", cy);
+    t.textContent = stateName(p.id);
+    labelLayer.appendChild(t);
+    fitLabelFontSize(t, LABEL_WIDTH_AT_Y[p.id]);
+  });
+
+  function refreshMapLabels() {
+    Array.prototype.forEach.call(labelLayer.children, function (t) {
+      var id = t.getAttribute("data-id");
+      t.textContent = stateName(id);
+      fitLabelFontSize(t, LABEL_WIDTH_AT_Y[id]);
+    });
+  }
+
+  sortedLandIds(currentLang).forEach(function (id) {
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = stateName(id);
+    btn.setAttribute("data-id", id);
+    btn.addEventListener("click", function () { selectLand(id); });
+    landTabsEl.appendChild(btn);
+
+    var opt = document.createElement("option");
+    opt.value = id;
+    opt.textContent = stateName(id);
+    landSelectEl.appendChild(opt);
+  });
+
+  landSelectEl.addEventListener("change", function () {
+    if (landSelectEl.value) selectLand(landSelectEl.value);
+  });
+
+  function availablePartyKeys() {
+    var yearData = currentYearData();
+    var set = {};
+    Object.keys(yearData).forEach(function (id) {
+      yearData[id].results.forEach(function (r) { set[r.p] = true; });
+    });
+    return Object.keys(PARTIES).filter(function (k) { return set[k]; });
+  }
+
+  function refreshPartySelect() {
+    var keys = availablePartyKeys();
+    if (state.partyView && keys.indexOf(state.partyView) === -1) { state.partyView = null; state.partyViewFilter = []; }
+    partySelectEl.innerHTML = "";
+    var placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.setAttribute("data-placeholder", "");
+    placeholder.textContent = tr("partySelectPlaceholder");
+    partySelectEl.appendChild(placeholder);
+    keys.forEach(function (k) {
+      var opt = document.createElement("option");
+      opt.value = k;
+      opt.textContent = PARTIES[k].name;
+      partySelectEl.appendChild(opt);
+    });
+    partySelectEl.value = state.partyView || "";
+    partySelectEl.classList.toggle("has-value", !!state.partyView);
+  }
+
+  partySelectEl.addEventListener("change", function () {
+    state.partyView = partySelectEl.value || null;
+    partySelectEl.classList.toggle("has-value", !!state.partyView);
+    if (!state.partyView) state.partyViewFilter = [];
+    if (state.partyView) {
+      state.compareMode = false;
+      state.compareSelection = [];
+      compareToggleEl.setAttribute("aria-pressed", "false");
+    }
+    updateMapHint();
+    paintMap();
+    renderLegend();
+    updateResultsView();
+  });
+
+  function refreshLandTabLabels() {
+    var order = sortedLandIds(currentLang);
+    order.forEach(function (id) {
+      var btn = landTabsEl.querySelector('button[data-id="' + id + '"]');
+      if (btn) {
+        btn.textContent = stateName(id);
+        landTabsEl.appendChild(btn);
+      }
+    });
+    var placeholderOpt = landSelectEl.querySelector("[data-placeholder]");
+    if (placeholderOpt) placeholderOpt.textContent = tr("landSelectPlaceholder");
+    order.forEach(function (id) {
+      var opt = landSelectEl.querySelector('option[value="' + id + '"]');
+      if (opt) {
+        opt.textContent = stateName(id);
+        landSelectEl.appendChild(opt);
+      }
+    });
+  }
+
+  function latestLandtagData() {
+    var out = {};
+    Object.keys(LANDTAG_DATA).forEach(function (id) { out[id] = LANDTAG_DATA[id][0]; });
+    return out;
+  }
+
+  function currentYearData() {
+    return state.view === "landtag" ? latestLandtagData() : (DATA[state.year] || {});
+  }
+  function fmtDate(iso) {
+    var d = new Date(iso + "T00:00:00");
+    return new Intl.DateTimeFormat(LOCALE_MAP[currentLang], { day: "numeric", month: "long", year: "numeric" }).format(d);
+  }
+
+  function fmtPct(n) { return n.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " %"; }
+  function fmtDelta(n) {
+    if (n === "na") return tr("keineAngabe");
+    if (n === null || n === undefined) return tr("neu");
+    var sign = n > 0 ? "+" : "";
+    return sign + n.toLocaleString("de-DE", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  }
+
+  function isMarked(id) {
+    if (state.compareMode) return state.compareSelection.indexOf(id) !== -1;
+    if (state.partyView) return state.partyViewFilter.indexOf(id) !== -1;
+    return state.selected === id;
+  }
+
+  function paintMap() {
+    var yearData = currentYearData();
+    var dimmed = false;
+    svg.classList.toggle("dimmed", dimmed);
+    var partyMax = state.partyView ? computePartyMax(yearData, state.partyView) : 0;
+    function fillFor(id) {
+      var d = yearData[id];
+      if (!d) return { hex: NEUTRAL_HEX, css: "" };
+      if (state.partyView) {
+        var r = partyResultFor(d, state.partyView);
+        if (!r) return { hex: NEUTRAL_HEX, css: "var(--p-neutral)" };
+        var t = Math.max(0.1, r.pct / partyMax);
+        var hex = mixColor(PARTIES[state.partyView].hex, t);
+        return { hex: hex, css: hex };
+      }
+      return { hex: PARTIES[d.winner].hex, css: PARTIES[d.winner].color };
+    }
+    Array.prototype.forEach.call(landGroup.children, function (el) {
+      var id = el.getAttribute("data-id");
+      var d = yearData[id];
+      el.classList.toggle("no-data", !d);
+      el.classList.toggle("selected", isMarked(id));
+      el.style.fill = fillFor(id).css;
+    });
+    Array.prototype.forEach.call(landTabsEl.children, function (btn) {
+      var id = btn.getAttribute("data-id");
+      btn.classList.toggle("active", isMarked(id));
+      btn.classList.toggle("has-data", !!yearData[id] && !dimmed);
+    });
+    landSelectEl.value = (state.compareMode || state.partyView) ? "" : (state.selected || "");
+    Array.prototype.forEach.call(labelLayer.children, function (t) {
+      var id = t.getAttribute("data-id");
+      var bgHex = fillFor(id).hex;
+      var onLight = relativeLuminance(bgHex) > 0.55;
+      t.classList.toggle("on-light", onLight);
+      t.classList.toggle("on-dark", !onLight);
+      t.classList.toggle("selected", isMarked(id));
+    });
+  }
+
+  function renderLegend() {
+    var yearData = currentYearData();
+    if (state.partyView) {
+      var meta = PARTIES[state.partyView];
+      var max = computePartyMax(yearData, state.partyView);
+      legend.innerHTML =
+        '<div class="scale-legend">' +
+          '<span class="scale-legend-label">' + meta.name + '</span>' +
+          '<div class="scale-legend-bar" style="background:linear-gradient(to right,' + mixColor(meta.hex, 0.1) + ',' + meta.hex + ')"></div>' +
+          '<span class="scale-legend-max">' + fmtPct(max) + '</span>' +
+        '</div>';
+      return;
+    }
+    var used = {};
+    Object.keys(yearData).forEach(function (id) { used[yearData[id].winner] = true; });
+    legend.innerHTML = "";
+    Object.keys(PARTIES).forEach(function (key) {
+      if (!used[key]) return;
+      var item = document.createElement("span");
+      item.className = "legend-item";
+      var sw = document.createElement("span");
+      sw.className = "dot";
+      sw.style.background = PARTIES[key].color;
+      item.appendChild(sw);
+      item.appendChild(document.createTextNode(PARTIES[key].name + " " + tr("legendWinnerSuffix")));
+      legend.appendChild(item);
+    });
+    var missingData = LAND_ORDER.some(function (id) { return !yearData[id]; });
+    if (missingData) {
+      var sw2 = document.createElement("span");
+      sw2.className = "legend-item";
+      var swatch2 = document.createElement("span");
+      swatch2.className = "dot";
+      swatch2.style.background = "var(--p-neutral)";
+      sw2.appendChild(swatch2);
+      sw2.appendChild(document.createTextNode(tr("legendNoData")));
+      legend.appendChild(sw2);
+    }
+  }
+
+  function renderLandtagYearTabs(id) {
+    var wrap = document.getElementById("landtagYearTabs");
+    var history = state.view === "landtag" ? LANDTAG_DATA[id] : null;
+    if (!history || history.length < 2) {
+      wrap.style.display = "none";
+      wrap.innerHTML = "";
+      return;
+    }
+    wrap.style.display = "flex";
+    wrap.innerHTML = "";
+    history.forEach(function (entry, i) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = entry.date.slice(0, 4);
+      btn.className = i === state.landtagHistoryIndex ? "active" : "";
+      btn.addEventListener("click", function () {
+        state.landtagHistoryIndex = i;
+        showResults(id, i);
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function showResults(id, historyIndex) {
+    var yearData = currentYearData();
+    var landtagHistory = state.view === "landtag" ? LANDTAG_DATA[id] : null;
+    var idx = historyIndex !== undefined ? historyIndex : state.landtagHistoryIndex;
+    var d = landtagHistory ? (landtagHistory[idx] || landtagHistory[0]) : yearData[id];
+    landNameEl.textContent = stateName(id);
+    renderLandtagYearTabs(id);
+    if (!d) {
+      resultsEmpty.style.display = "block";
+      resultsFilled.style.display = "none";
+      var scope = state.view === "bundestag" ? fmt(tr("scopeBundestag"), { year: state.year }) : tr("scopeLandtag");
+      resultsEmpty.innerHTML = "<strong>" + stateName(id) + "</strong>" + fmt(tr("noDataBody"), { scope: scope });
+      return;
+    }
+    resultsEmpty.style.display = "none";
+    resultsFilled.style.display = "block";
+
+    var eyebrowLabel = state.view === "landtag"
+      ? fmt(tr("turnoutLineLandtag"), { date: fmtDate(d.date) })
+      : fmt(tr("turnoutLine"), { year: state.year });
+    var deltaChip = (typeof d.turnoutDelta === "number") ? " (" + fmtDelta(d.turnoutDelta) + " pp)" : "";
+    document.getElementById("statLine").innerHTML =
+      eyebrowLabel + " <b>" + d.turnout.toLocaleString("de-DE", { minimumFractionDigits: 1 }) + " %</b>" + deltaChip;
+
+    var noteEl = document.getElementById("landtagNote");
+    if (d.note) {
+      noteEl.textContent = d.note[currentLang] || d.note.de;
+      noteEl.style.display = "block";
+    } else {
+      noteEl.style.display = "none";
+    }
+
+    var list = document.getElementById("rankList");
+    list.innerHTML = "";
+    var sorted = d.results.slice().sort(function (a, b) { return b.pct - a.pct; });
+    sorted.forEach(function (r, i) {
+      var meta = PARTIES[r.p];
+      var hasDelta = r.delta !== undefined;
+      var isNumericDelta = typeof r.delta === "number";
+      var deltaClass = !isNumericDelta ? "flat" : (r.delta > 0 ? "up" : "down");
+      var arrow = !isNumericDelta ? "" : (r.delta > 0 ? "▲ " : "▼ ");
+      var deltaHtml = hasDelta ? '<span class="rank-delta ' + deltaClass + '">' + arrow + fmtDelta(r.delta) + '</span>' : "";
+      var li = document.createElement("li");
+      li.className = "rank-row";
+      li.innerHTML =
+        '<span class="rank-num">' + (i + 1) + '</span>' +
+        '<span class="dot" style="background:' + meta.color + '"></span>' +
+        '<span class="rank-name">' + (r.label || meta.name) + '</span>' +
+        '<span class="rank-pct" style="color:' + meta.color + '">' + fmtPct(r.pct) + '</span>' +
+        deltaHtml;
+      list.appendChild(li);
+    });
+
+    var authority = state.view === "landtag" ? new URL(d.source).hostname.replace(/^www\./, "") : "Bundeswahlleiterin";
+    document.getElementById("sourceNote").innerHTML = tr("sourcePrefix") + " <a href=\"" + d.source + "\" target=\"_blank\" rel=\"noopener\">" + authority + " — " + fmt(tr("sourceLinkText"), { land: stateName(id) }) + "</a>";
+  }
+
+  function spawnPing(id) {
+    var el = landGroup.querySelector('[data-id="' + id + '"]');
+    if (!el) return;
+    var box = el.getBBox();
+    var cx = box.x + box.width / 2;
+    var cy = box.y + box.height / 2;
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("class", "select-ping");
+    circle.setAttribute("cx", cx);
+    circle.setAttribute("cy", cy);
+    circle.setAttribute("r", "1.5");
+    pingLayer.appendChild(circle);
+    circle.addEventListener("animationend", function () { circle.remove(); });
+  }
+
+  function selectLand(id) {
+    if (state.compareMode) { toggleCompareLand(id); return; }
+    if (state.partyView) { togglePartyViewFilter(id); return; }
+    state.selected = id;
+    state.landtagHistoryIndex = 0;
+    tooltip.classList.remove("visible");
+    paintMap();
+    showResults(id);
+    var el = landGroup.querySelector('[data-id="' + id + '"]');
+    if (el) landGroup.appendChild(el);
+    spawnPing(id);
+  }
+
+  function updateMapHint() {
+    var hintEl = document.getElementById("mapHint");
+    if (state.compareMode) hintEl.textContent = tr("compareHintActive");
+    else if (state.partyView) hintEl.textContent = tr("partyViewHintActive");
+    else hintEl.textContent = tr("mapHint");
+  }
+
+  function togglePartyViewFilter(id) {
+    var idx = state.partyViewFilter.indexOf(id);
+    if (idx !== -1) { state.partyViewFilter.splice(idx, 1); } else { state.partyViewFilter.push(id); }
+    tooltip.classList.remove("visible");
+    paintMap();
+    renderPartyView();
+    var el = landGroup.querySelector('[data-id="' + id + '"]');
+    if (el) landGroup.appendChild(el);
+    spawnPing(id);
+  }
+
+  function toggleCompareLand(id) {
+    var idx = state.compareSelection.indexOf(id);
+    if (idx !== -1) {
+      state.compareSelection.splice(idx, 1);
+    } else {
+      if (state.compareSelection.length >= 3) state.compareSelection.shift();
+      state.compareSelection.push(id);
+    }
+    tooltip.classList.remove("visible");
+    paintMap();
+    renderCompare();
+    var el = landGroup.querySelector('[data-id="' + id + '"]');
+    if (el) landGroup.appendChild(el);
+    spawnPing(id);
+  }
+
+  function renderCompare() {
+    var ids = state.compareSelection;
+    var yearData = currentYearData();
+    var wrap = document.getElementById("resultsCompare");
+    if (ids.length === 0) {
+      wrap.innerHTML = '<div class="compare-empty">' + tr("compareEmptyPrompt") + '</div>';
+      return;
+    }
+    var partyMax = {};
+    ids.forEach(function (id) {
+      var d = yearData[id];
+      if (!d) return;
+      d.results.forEach(function (r) {
+        partyMax[r.p] = Math.max(partyMax[r.p] || 0, r.pct);
+      });
+    });
+    var partyOrder = Object.keys(partyMax).sort(function (a, b) { return partyMax[b] - partyMax[a]; });
+
+    var theadCells = ids.map(function (id) {
+      var d = yearData[id];
+      var dateLine = (state.view === "landtag" && d) ? '<span class="land-date">' + fmtDate(d.date) + '</span>' : "";
+      return '<th>' + stateName(id) + dateLine +
+        '<button type="button" class="remove-btn" data-remove="' + id + '" aria-label="' + tr("compareRemove") + '">×</button></th>';
+    }).join('');
+
+    var turnoutCells = ids.map(function (id) {
+      var d = yearData[id];
+      return '<td>' + (d ? fmtPct(d.turnout) : "–") + '</td>';
+    }).join('');
+
+    var partyRows = partyOrder.map(function (p) {
+      var meta = PARTIES[p];
+      var cells = ids.map(function (id) {
+        var d = yearData[id];
+        if (!d) return '<td>–</td>';
+        var r = null;
+        for (var i = 0; i < d.results.length; i++) { if (d.results[i].p === p) { r = d.results[i]; break; } }
+        if (!r) return '<td>–</td>';
+        var isWinner = d.winner === p;
+        return '<td class="' + (isWinner ? "winner-cell" : "") + '"' + (isWinner ? ' style="color:' + meta.color + '"' : '') + '>' + fmtPct(r.pct) + '</td>';
+      }).join('');
+      return '<tr><td class="party-cell"><span class="dot" style="background:' + meta.color + '"></span>' + meta.name + '</td>' + cells + '</tr>';
+    }).join('');
+
+    var sourcesHtml = ids.map(function (id) {
+      var d = yearData[id];
+      if (!d) return '';
+      return '<a href="' + d.source + '" target="_blank" rel="noopener">' + stateName(id) + ' ↗</a>';
+    }).join('');
+
+    wrap.innerHTML =
+      '<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th></th>' + theadCells + '</tr></thead>' +
+      '<tbody><tr class="compare-turnout-row"><td>' + tr("compareTurnoutLabel") + '</td>' + turnoutCells + '</tr>' + partyRows + '</tbody></table></div>' +
+      '<div class="compare-sources">' + sourcesHtml + '</div>' +
+      (ids.length < 3 ? '<p class="compare-note">' + tr("compareHintActive") + '</p>' : '');
+
+    Array.prototype.forEach.call(wrap.querySelectorAll('[data-remove]'), function (btn) {
+      btn.addEventListener('click', function () { toggleCompareLand(btn.getAttribute('data-remove')); });
+    });
+  }
+
+  function renderPartyView() {
+    var key = state.partyView;
+    var meta = PARTIES[key];
+    var yearData = currentYearData();
+    var filterActive = state.partyViewFilter.length > 0;
+    var idsToShow = (filterActive ? state.partyViewFilter : Object.keys(yearData)).filter(function (id) { return !!yearData[id]; });
+    var rows = idsToShow.map(function (id) {
+      var d = yearData[id];
+      return { id: id, r: partyResultFor(d, key), winner: d.winner === key };
+    });
+    rows.sort(function (a, b) { return (b.r ? b.r.pct : -1) - (a.r ? a.r.pct : -1); });
+
+    var wrap = document.getElementById("resultsPartyView");
+    var items = rows.map(function (row, i) {
+      var d = yearData[row.id];
+      if (!row.r) {
+        return '<li class="rank-row"><span class="rank-num">' + (i + 1) + '</span><span class="dot" style="background:var(--p-neutral)"></span>' +
+          '<span class="rank-name">' + stateName(row.id) + '</span><span class="rank-pct" style="color:var(--text-muted)">–</span></li>';
+      }
+      var dateTag = state.view === "landtag" ? ' <em class="rank-winner-tag">' + fmtDate(d.date) + '</em>' : "";
+      var hasDelta = row.r.delta !== undefined;
+      var isNumericDelta = typeof row.r.delta === "number";
+      var deltaClass = !isNumericDelta ? "flat" : (row.r.delta > 0 ? "up" : "down");
+      var arrow = !isNumericDelta ? "" : (row.r.delta > 0 ? "▲ " : "▼ ");
+      var deltaHtml = hasDelta ? '<span class="rank-delta ' + deltaClass + '">' + arrow + fmtDelta(row.r.delta) + '</span>' : "";
+      var winnerTag = row.winner ? ' <em class="rank-winner-tag">— ' + tr("legendWinnerSuffix") + '</em>' : "";
+      return '<li class="rank-row"><span class="rank-num">' + (i + 1) + '</span><span class="dot" style="background:' + meta.color + '"></span>' +
+        '<span class="rank-name">' + stateName(row.id) + winnerTag + dateTag + '</span>' +
+        '<span class="rank-pct" style="color:' + meta.color + '">' + fmtPct(row.r.pct) + '</span>' + deltaHtml + '</li>';
+    }).join('');
+
+    var isBundestag = state.view === "bundestag";
+    var subtitleText = filterActive
+      ? fmt(tr(isBundestag ? "partyViewSubtitleFilteredYear" : "partyViewSubtitleFiltered"), { party: meta.name, count: rows.length, year: state.year })
+      : fmt(tr(isBundestag ? "partyViewSubtitleYear" : "partyViewSubtitle"), { party: meta.name, year: state.year });
+    var clearHtml = filterActive ? ' <button type="button" class="party-filter-clear" id="partyFilterClear">' + tr("partyViewClearFilter") + '</button>' : '';
+
+    wrap.innerHTML = '<p class="stat-line">' + subtitleText + clearHtml + '</p><ol class="rank-list">' + items + '</ol>';
+
+    var clearBtn = document.getElementById("partyFilterClear");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        state.partyViewFilter = [];
+        paintMap();
+        renderPartyView();
+      });
+    }
+  }
+
+  function showEmptyState() {
+    landNameEl.textContent = tr("emptyTitle");
+    resultsEmpty.innerHTML = tr("emptyBody");
+    resultsEmpty.style.display = "block";
+    resultsFilled.style.display = "none";
+    document.getElementById("landtagYearTabs").style.display = "none";
+    document.getElementById("landtagNote").style.display = "none";
+  }
+
+  function updateResultsView() {
+    var resultsCompareEl = document.getElementById("resultsCompare");
+    var resultsPartyEl = document.getElementById("resultsPartyView");
+    if (state.partyView || state.compareMode) {
+      document.getElementById("landtagYearTabs").style.display = "none";
+      document.getElementById("landtagNote").style.display = "none";
+    }
+    if (state.partyView) {
+      resultsEmpty.style.display = "none";
+      resultsFilled.style.display = "none";
+      resultsCompareEl.style.display = "none";
+      resultsPartyEl.style.display = "block";
+      landNameEl.textContent = PARTIES[state.partyView].name;
+      renderPartyView();
+    } else if (state.compareMode) {
+      resultsEmpty.style.display = "none";
+      resultsFilled.style.display = "none";
+      resultsPartyEl.style.display = "none";
+      resultsCompareEl.style.display = "block";
+      landNameEl.textContent = tr("compareTitle");
+      renderCompare();
+    } else {
+      resultsCompareEl.style.display = "none";
+      resultsPartyEl.style.display = "none";
+      if (state.selected) { showResults(state.selected); } else { showEmptyState(); }
+    }
+  }
+
+  landGroup.addEventListener("pointerover", function (e) {
+    var el = e.target.closest(".land");
+    if (!el) return;
+    var id = el.getAttribute("data-id");
+    if (id === state.selected) return;
+    var hasData = !!currentYearData()[id];
+    tooltip.innerHTML = stateName(id) + (hasData ? "" : '<span class="hint">' + tr("tooltipNoData") + '</span>');
+    tooltip.classList.add("visible");
+  });
+  landGroup.addEventListener("pointermove", function (e) {
+    tooltip.style.left = e.clientX + "px";
+    tooltip.style.top = e.clientY + "px";
+  });
+  landGroup.addEventListener("pointerout", function (e) {
+    if (!e.target.closest(".land")) return;
+    tooltip.classList.remove("visible");
+  });
+  landGroup.addEventListener("click", function (e) {
+    var el = e.target.closest(".land");
+    if (!el) return;
+    selectLand(el.getAttribute("data-id"));
+  });
+  landGroup.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    var el = e.target.closest(".land");
+    if (!el) return;
+    e.preventDefault();
+    selectLand(el.getAttribute("data-id"));
+  });
+
+  document.querySelectorAll(".view-pills button").forEach(function (btn) {
+    btn.addEventListener("click", function () { setView(btn.getAttribute("data-view")); });
+  });
+  compareToggleEl.addEventListener("click", function () {
+    state.compareMode = !state.compareMode;
+    if (!state.compareMode) {
+      state.compareSelection = [];
+    } else {
+      state.partyView = null;
+      state.partyViewFilter = [];
+      partySelectEl.value = "";
+      partySelectEl.classList.remove("has-value");
+    }
+    compareToggleEl.setAttribute("aria-pressed", state.compareMode ? "true" : "false");
+    updateMapHint();
+    paintMap();
+    renderLegend();
+    updateResultsView();
+  });
+  document.getElementById("yearSelect").addEventListener("change", function (e) {
+    state.year = e.target.value;
+    mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
+    refreshPartySelect();
+    paintMap();
+    renderLegend();
+    updateResultsView();
+  });
+
+  function setView(view) {
+    state.view = view;
+    document.querySelectorAll(".view-pills button").forEach(function (btn) {
+      btn.setAttribute("aria-pressed", btn.getAttribute("data-view") === view);
+    });
+    document.querySelector(".control-bar .year-wrap").classList.toggle("hidden", view !== "bundestag");
+    if (view === "landtag") {
+      banner.textContent = tr("bannerLandtag");
+      banner.classList.add("visible");
+      mapEyebrow.textContent = tr("eyebrowLandtag");
+      bundestagNoteEl.classList.remove("visible");
+    } else {
+      banner.classList.remove("visible");
+      mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
+      bundestagNoteEl.classList.add("visible");
+    }
+    refreshPartySelect();
+    paintMap();
+    renderLegend();
+    updateResultsView();
+  }
+
+  function applyStaticTexts() {
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll(".lang-switch button").forEach(function (b) {
+      b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
+    });
+    document.getElementById("welcomeTitle").textContent = tr("welcomeTitle");
+    document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
+    document.getElementById("welcomeElectionsText").textContent = tr("welcomeElections");
+    document.getElementById("mobileNavElections").textContent = tr("navElectionsHub");
+    document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
+    document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
+    document.getElementById("mobileNavDirectoryLink").textContent = tr("footDirectoryLink");
+    document.getElementById("mobileNavHolidaysLink").textContent = tr("footHolidaysLink");
+    document.getElementById("mobileNavFaqLink").textContent = tr("footFaqLink");
+    document.getElementById("mobileNavGovernmentLink").textContent = tr("footGovernmentLink");
+    document.getElementById("mobileNavPartiesLink").textContent = tr("footPartiesLink");
+    document.getElementById("mobileMenuGermanyLabel").textContent = tr("navGermanyLabel");
+    document.getElementById("mobileMenuPartiesLabel").textContent = tr("navPartiesGroupLabel");
+    document.getElementById("mobileMenuWahlsystemLabel").textContent = tr("navWahlsystemGroupLabel");
+    document.getElementById("mobileNavSitzverteilungLink").textContent = tr("navSitzverteilungLink");
+    document.getElementById("mobileShareLabel").textContent = tr("navShareLabel");
+    updateMapHint();
+    document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
+    var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
+    if (partyPlaceholderOpt) partyPlaceholderOpt.textContent = tr("partySelectPlaceholder");
+    bundestagNoteEl.textContent = tr("bundestagNote");
+    document.getElementById("footAbout").textContent = tr("footAbout");
+    document.getElementById("footMethod").textContent = tr("footMethod");
+    document.getElementById("footDisclaimerLink").textContent = tr("footDisclaimerLink");
+    document.getElementById("footGuideLink").textContent = tr("footGuideLink");
+    document.getElementById("footDatenschutzLink").textContent = tr("footDatenschutzLink");
+    document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
+    document.getElementById("footCredit").textContent = tr("footCredit");
+    document.getElementById("footUpdated").textContent = tr("footUpdatedLabel") + ": " + fmtDate(SITE_LAST_UPDATED);
+    mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
+    if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
+    updateResultsView();
+    Array.prototype.forEach.call(landGroup.children, function (el) {
+      el.setAttribute("aria-label", stateName(el.getAttribute("data-id")));
+    });
+    refreshLandTabLabels();
+    refreshMapLabels();
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      currentLang = btn.getAttribute("data-lang");
+      localStorage.setItem(LANG_STORAGE_KEY, currentLang);
+      applyStaticTexts();
+      renderLegend();
+    });
+  });
+
+  var menuToggle = document.getElementById("menuToggle");
+  var mobileMenu = document.getElementById("mobileMenu");
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    mobileMenu.hidden = true;
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+  menuToggle.addEventListener("click", function () {
+    var willOpen = mobileMenu.hidden;
+    if (willOpen) {
+      mobileMenu.hidden = false;
+      mobileMenu.classList.add("open");
+      menuToggle.setAttribute("aria-expanded", "true");
+    } else {
+      closeMobileMenu();
+    }
+  });
+  mobileMenu.querySelectorAll("a").forEach(function (a) {
+    a.addEventListener("click", closeMobileMenu);
+  });
+  var mobileShareBtn = document.getElementById("mobileShareBtn");
+  if (mobileShareBtn) {
+    mobileShareBtn.addEventListener("click", function () {
+      closeMobileMenu();
+      var injectedShare = document.getElementById("shareBtn");
+      if (injectedShare) injectedShare.click();
+    });
+  }
+  document.addEventListener("click", function (e) {
+    if (!mobileMenu.hidden && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+      closeMobileMenu();
+    }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !mobileMenu.hidden) closeMobileMenu();
+  });
+
+  refreshPartySelect();
+  paintMap();
+  renderLegend();
+  applyStaticTexts();
+
+  // Deep-link desde el hub/páginas por Land: index.html?land=DE-XX&view=landtag
+  // preselecciona el Bundesland y muestra sus resultados directamente.
+  (function () {
+    var p = new URLSearchParams(location.search);
+    var land = p.get("land");
+    if (!land || LAND_ORDER.indexOf(land) < 0) return;
+    if (p.get("view") === "landtag") setView("landtag");
+    selectLand(land);
+    var target = document.querySelector(".map-panel");
+    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+  })();
+})();
+</script>
+</body>
+</html>

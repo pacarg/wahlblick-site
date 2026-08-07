@@ -90,14 +90,14 @@ const NAV_STYLE = `<style>
 const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
-  <a href="landtagswahlen-2026.html" class="content-nav-featured" id="navElections2026">Landtagswahlen 2026</a>
+  <a href="/landtagswahlen-2026.html" class="content-nav-featured" id="navElections2026">Landtagswahlen 2026</a>
   <div class="nav-dropdown" id="partiesDropdown">
     <button type="button" class="nav-dropdown-trigger" id="partiesDropdownTrigger" aria-expanded="false" aria-controls="partiesDropdownPanel">
       <span id="navPartiesGroupLabel">Die Parteien</span>
       ${CHEVRON}
     </button>
     <div class="nav-dropdown-panel" id="partiesDropdownPanel" hidden>
-      <a href="parties.html" id="navPartiesLink">Parteien</a>
+      <a href="/parties.html" id="navPartiesLink">Parteien</a>
     </div>
   </div>
   <div class="nav-dropdown" id="wahlsystemDropdown">
@@ -106,8 +106,8 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       ${CHEVRON}
     </button>
     <div class="nav-dropdown-panel" id="wahlsystemDropdownPanel" hidden>
-      <a href="sitzverteilung.html" id="navSitzverteilungLink">Sitzverteilung erklärt</a>
-      <a href="government.html" id="navGovernmentLink">Koalitionen</a>
+      <a href="/sitzverteilung.html" id="navSitzverteilungLink">Sitzverteilung erklärt</a>
+      <a href="/government.html" id="navGovernmentLink">Koalitionen</a>
     </div>
   </div>
   <div class="nav-dropdown" id="germanyDropdown">
@@ -116,10 +116,10 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       ${CHEVRON}
     </button>
     <div class="nav-dropdown-panel" id="germanyDropdownPanel" hidden>
-      <a href="grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
-      <a href="directory.html" id="navDirectoryLink">Adressverzeichnis</a>
-      <a href="holidays.html" id="navHolidaysLink">Feiertage</a>
-      <a href="faq.html" id="navFaqLink">Häufige Fragen</a>
+      <a href="/grundgesetz.html" id="navGrundgesetzLink">Grundgesetz</a>
+      <a href="/directory.html" id="navDirectoryLink">Adressverzeichnis</a>
+      <a href="/holidays.html" id="navHolidaysLink">Feiertage</a>
+      <a href="/faq.html" id="navFaqLink">Häufige Fragen</a>
     </div>
   </div>
 </nav>
@@ -129,14 +129,14 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
 <div class="content-nav-toast" id="shareToast" role="status" aria-live="polite"></div>
 <button type="button" class="content-nav-toggle" id="cnavToggle" aria-expanded="false" aria-controls="cnavMobile" aria-label="Menü"><span></span><span></span><span></span></button>
 <div class="content-nav-mobile" id="cnavMobile">
-  <a href="index.html" class="cnav-m-back" id="cnavBack">← Zur Wahlkarte</a>
-  <a href="landtagswahlen-2026.html" class="cnav-m-featured" id="cnavMElections">Landtagswahlen 2026</a>
+  <a href="/index.html" class="cnav-m-back" id="cnavBack">← Zur Wahlkarte</a>
+  <a href="/landtagswahlen-2026.html" class="cnav-m-featured" id="cnavMElections">Landtagswahlen 2026</a>
   <span class="cnav-m-label" id="cnavMPartiesLabel">Die Parteien</span>
-  <div class="cnav-m-group"><a href="parties.html" id="cnavMParties">Parteien</a></div>
+  <div class="cnav-m-group"><a href="/parties.html" id="cnavMParties">Parteien</a></div>
   <span class="cnav-m-label" id="cnavMWahlsystemLabel">Wahlsystem</span>
-  <div class="cnav-m-group"><a href="sitzverteilung.html" id="cnavMSitz">Sitzverteilung erklärt</a><a href="government.html" id="cnavMGov">Koalitionen</a></div>
+  <div class="cnav-m-group"><a href="/sitzverteilung.html" id="cnavMSitz">Sitzverteilung erklärt</a><a href="/government.html" id="cnavMGov">Koalitionen</a></div>
   <span class="cnav-m-label" id="cnavMGermanyLabel">Deutschland</span>
-  <div class="cnav-m-group"><a href="grundgesetz.html" id="cnavMGrund">Grundgesetz</a><a href="directory.html" id="cnavMDir">Adressverzeichnis</a><a href="holidays.html" id="cnavMHol">Feiertage</a><a href="faq.html" id="cnavMFaq">Häufige Fragen</a></div>
+  <div class="cnav-m-group"><a href="/grundgesetz.html" id="cnavMGrund">Grundgesetz</a><a href="/directory.html" id="cnavMDir">Adressverzeichnis</a><a href="/holidays.html" id="cnavMHol">Feiertage</a><a href="/faq.html" id="cnavMFaq">Häufige Fragen</a></div>
   <button type="button" class="cnav-m-share" id="cnavMShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span id="cnavMShareLabel">Teilen</span></button>
 </div>
 <script>
