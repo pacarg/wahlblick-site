@@ -103,19 +103,6 @@
   }
   .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; white-space: nowrap; }
 
-  .header-search { flex: 1; max-width: 320px; min-width: 120px; position: relative; }
-  .header-search input {
-    width: 100%;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 8px 12px 8px 32px;
-    font-size: 13px;
-    color: var(--text);
-  }
-  .header-search input::placeholder { color: var(--text-muted); }
-  .header-search svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); opacity: 0.5; }
-
   .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; }
   .lang-switch button {
     border: none;
@@ -608,7 +595,6 @@
   @media (max-width: 720px) {
     .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 10px; }
     .brand .wordmark { font-size: 16px; }
-    .header-search { order: 4; flex-basis: 100%; max-width: none; }
     .menu-toggle { display: flex; }
     .control-bar { padding: 0 16px; }
     .view-pills { gap: 18px; }
@@ -654,10 +640,6 @@
       <span class="badge">W</span>
       <span class="flag-bar" aria-hidden="true"></span>
       <span class="wordmark">Wahlblick</span>
-    </div>
-    <div class="header-search">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input id="landSearch" type="text" placeholder="Bundesland suchen…" autocomplete="off">
     </div>
     <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
       <button type="button" data-lang="de" class="active">DE</button>
@@ -2280,7 +2262,6 @@
 
   var I18N = {
     de: {
-      searchPh: "Bundesland suchen…",
       landSelectPlaceholder: "— Bundesland wählen —",
       navQuellen: "Quellen",
       navPartiesGroupLabel: "Die Parteien",
@@ -2347,7 +2328,6 @@
       }
     },
     es: {
-      searchPh: "Buscar un estado federado…",
       landSelectPlaceholder: "— Elegir un estado federado —",
       navQuellen: "Fuentes",
       navPartiesGroupLabel: "Los partidos",
@@ -2414,7 +2394,6 @@
       }
     },
     en: {
-      searchPh: "Search a federal state…",
       landSelectPlaceholder: "— Choose a federal state —",
       navQuellen: "Sources",
       navPartiesGroupLabel: "Parties",
@@ -3127,20 +3106,6 @@
     updateResultsView();
   });
 
-  var landSearch = document.getElementById("landSearch");
-  landSearch.addEventListener("keydown", function (e) {
-    if (e.key !== "Enter") return;
-    var q = landSearch.value.trim().toLowerCase();
-    if (!q) return;
-    var names = I18N[currentLang].stateNames;
-    var match = Object.keys(names).find(function (id) {
-      return names[id].toLowerCase().indexOf(q) === 0;
-    }) || Object.keys(names).find(function (id) {
-      return names[id].toLowerCase().indexOf(q) !== -1;
-    });
-    if (match) { selectLand(match); landSearch.value = ""; landSearch.blur(); }
-  });
-
   function setView(view) {
     state.view = view;
     document.querySelectorAll(".view-pills button").forEach(function (btn) {
@@ -3183,7 +3148,6 @@
     document.getElementById("mobileMenuWahlsystemLabel").textContent = tr("navWahlsystemGroupLabel");
     document.getElementById("mobileNavSitzverteilungLink").textContent = tr("navSitzverteilungLink");
     document.getElementById("mobileShareLabel").textContent = tr("navShareLabel");
-    landSearch.placeholder = tr("searchPh");
     updateMapHint();
     document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
     var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
