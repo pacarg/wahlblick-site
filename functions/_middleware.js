@@ -18,7 +18,7 @@ const NAV_STYLE = `<style>
 @media (max-width:420px){.brand .brand-logo{height:30px}}
 /* Interior "push-up": centralized typography lift for the standard mold
    pages (.page-hero / .panel — sitzverteilung, parties, government,
-   grundgesetz, holidays, directory). Prefixed with `body` so it out-
+   grundgesetz, holidays, directory). Prefixed with 'body' so it out-
    specifies each page's own inline rules (injected after this shared
    style). Kicker markup + text stay per-page; this only styles it. */
 body .page-kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
