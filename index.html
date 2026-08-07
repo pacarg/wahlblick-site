@@ -366,6 +366,10 @@
   .panel-head .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
   .eyebrow-note { display: none; margin: 3px 0 0; font-size: 11px; color: var(--text-muted); }
   .eyebrow-note.visible { display: block; }
+  .map-panel .panel-head .map-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin: 0 0 7px; }
+  .map-panel .panel-head .map-year { display: flex; }
+  .map-panel .panel-head .map-year select#yearSelect { font-size: 24px; font-weight: 800; color: var(--text); border: 1.5px solid var(--accent); border-radius: 12px; padding: 6px 40px 6px 16px; letter-spacing: -0.02em; background-position: calc(100% - 18px) center, calc(100% - 13px) center; background-size: 7px 7px, 7px 7px; }
+  .panel-head .hidden { display: none !important; }
   .panel-body { padding: 16px; }
 
   .map-head-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
@@ -708,14 +712,6 @@
     </div>
     <div class="bar-right">
       <div id="contentNavMount"></div>
-      <div class="year-wrap">
-        <select id="yearSelect" aria-label="Wahljahr">
-          <option value="2025">2025</option>
-          <option value="2021">2021</option>
-          <option value="2017">2017</option>
-          <option value="2013">2013</option>
-        </select>
-      </div>
     </div>
   </div>
 </nav>
@@ -752,7 +748,16 @@
   <section class="panel map-panel">
     <div class="panel-head">
       <div>
-        <h2 id="mapEyebrow">Bundestagswahl 2025 · Zweitstimmen</h2>
+        <div class="map-kicker" id="mapKicker">Bundestagswahl · Zweitstimmen</div>
+        <div class="map-year" id="yearWrap">
+          <select id="yearSelect" aria-label="Wahljahr">
+            <option value="2025">2025</option>
+            <option value="2021">2021</option>
+            <option value="2017">2017</option>
+            <option value="2013">2013</option>
+          </select>
+        </div>
+        <h2 id="mapEyebrow" class="hidden">Bundestagswahl 2025 · Zweitstimmen</h2>
         <p class="eyebrow-note visible" id="bundestagNote">Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.</p>
       </div>
       <div class="map-head-actions">
@@ -2331,6 +2336,7 @@
       partyViewClearFilter: "Alle anzeigen",
       partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
+      eyebrowBundestagKicker: "Bundestagswahl · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
       welcomeTitle: "Deutschland wählt.<br>Hier behalten Sie den Überblick.",
       welcomeStartCue: "Wählen Sie ein Bundesland, um zu starten",
@@ -2407,6 +2413,7 @@
       partyViewClearFilter: "Ver todos",
       partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
+      eyebrowBundestagKicker: "Elección federal · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
       welcomeTitle: "Alemania vota.<br>Aquí lo ves claro.",
       welcomeStartCue: "Elige un estado para empezar",
@@ -2483,6 +2490,7 @@
       partyViewClearFilter: "Show all",
       partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
+      eyebrowBundestagKicker: "Federal election · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
       welcomeTitle: "Germany votes.<br>See it clearly.",
       welcomeStartCue: "Pick a state to get started",
@@ -3176,7 +3184,6 @@
   });
   document.getElementById("yearSelect").addEventListener("change", function (e) {
     state.year = e.target.value;
-    mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
     refreshPartySelect();
     paintMap();
     renderLegend();
@@ -3188,7 +3195,10 @@
     document.querySelectorAll(".view-pills button").forEach(function (btn) {
       btn.setAttribute("aria-pressed", btn.getAttribute("data-view") === view);
     });
-    document.querySelector(".control-bar .year-wrap").classList.toggle("hidden", view !== "bundestag");
+    var isBt = view === "bundestag";
+    document.getElementById("yearWrap").classList.toggle("hidden", !isBt);
+    document.getElementById("mapKicker").classList.toggle("hidden", !isBt);
+    mapEyebrow.classList.toggle("hidden", isBt);
     if (view === "landtag") {
       banner.textContent = tr("bannerLandtag");
       banner.classList.add("visible");
@@ -3196,7 +3206,7 @@
       bundestagNoteEl.classList.remove("visible");
     } else {
       banner.classList.remove("visible");
-      mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
+      document.getElementById("mapKicker").textContent = tr("eyebrowBundestagKicker");
       bundestagNoteEl.classList.add("visible");
     }
     refreshPartySelect();
@@ -3243,7 +3253,8 @@
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     document.getElementById("footCredit").textContent = tr("footCredit");
     document.getElementById("footUpdated").textContent = tr("footUpdatedLabel") + ": " + fmtDate(SITE_LAST_UPDATED);
-    mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
+    document.getElementById("mapKicker").textContent = tr("eyebrowBundestagKicker");
+    mapEyebrow.textContent = tr("eyebrowLandtag");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
     updateResultsView();
     Array.prototype.forEach.call(landGroup.children, function (el) {
