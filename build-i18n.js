@@ -102,6 +102,23 @@ const PAGES = [
     }
   },
   {
+    file: "glossar.html", path: "glossar.html",
+    es: {
+      title: "Glosario electoral de Alemania — términos clave explicados | Wahlblick",
+      description: "Glosario electoral: primer y segundo voto, circunscripción, mandato excedente, valla del 5 %, encuestas y más — explicados de forma breve, neutral y con traducción. En alemán, español e inglés.",
+      ogTitle: "Glosario electoral de Alemania — términos clave explicados",
+      ogDescription: "Primer y segundo voto, mandato excedente, valla del 5 %, encuestas y más — explicados simple, neutral y con traducción, en wahlblick.de.",
+      twDescription: "Términos electorales alemanes explicados de forma breve, neutral y con traducción."
+    },
+    en: {
+      title: "German electoral glossary — key terms explained | Wahlblick",
+      description: "Electoral glossary: first and second vote, constituency, overhang seat, the 5% threshold, polls and more — explained briefly, neutrally and with translation. In German, Spanish and English.",
+      ogTitle: "German electoral glossary — key terms explained",
+      ogDescription: "First and second vote, overhang seat, the 5% threshold, polls and more — explained simply, neutrally and with translation, on wahlblick.de.",
+      twDescription: "German electoral terms explained briefly, neutrally and with translation."
+    }
+  },
+  {
     file: "sachsen-anhalt.html", path: "sachsen-anhalt.html",
     es: {
       title: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick",

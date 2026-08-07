@@ -25,6 +25,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://wahlblick.de/es/glossar.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://wahlblick.de/es/sachsen-anhalt.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -104,6 +110,12 @@
   </url>
   <url>
     <loc>https://wahlblick.de/en/faq.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/en/glossar.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -267,6 +279,12 @@
   <url>
     <loc>https://wahlblick.de/faq.html</loc>
     <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/glossar.html</loc>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
