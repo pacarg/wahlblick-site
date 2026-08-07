@@ -361,3 +361,67 @@ function generate(page, lang) {
 LANGS.forEach(function (lang) {
   PAGES.forEach(function (p) { console.log("build-i18n: " + generate(p, lang)); });
 });
+
+/* ───────────────────────────────────────────────────────────────────────────
+ * sitemap.xml — AUTOGENERADO desde PAGES (+ páginas solo-DE). Así ninguna URL
+ * se olvida: sumar una página a PAGES la mete sola en el sitemap (en los 3
+ * idiomas). `lastmod` = mtime del archivo FUENTE alemán (también para sus /es/
+ * y /en/, que derivan de él) → solo cambia cuando la página se edita de verdad,
+ * no en cada build. La DE puede ir un escalón de prioridad por encima de es/en
+ * (loc); si a una página nueva le falta el ajuste, se usa SM_DEFAULT y aparece
+ * igual. El orden de las URLs no afecta al SEO.
+ * ────────────────────────────────────────────────────────────────────────── */
+const SITE = "https://wahlblick.de";
+const SM = {
+  "index.html":                  { cf: "weekly",  de: "1.0", loc: "0.9" },
+  "landtagswahlen-2026.html":    { cf: "weekly",  de: "0.8" },
+  "sachsen-anhalt.html":         { cf: "weekly",  de: "0.8" },
+  "mecklenburg-vorpommern.html": { cf: "weekly",  de: "0.8" },
+  "berlin.html":                 { cf: "weekly",  de: "0.8" },
+  "faq.html":                    { cf: "monthly", de: "0.7" },
+  "glossar.html":                { cf: "monthly", de: "0.7" },
+  "sitzverteilung.html":         { cf: "monthly", de: "0.7" },
+  "parties.html":                { cf: "yearly",  de: "0.7" },
+  "grundgesetz.html":            { cf: "yearly",  de: "0.7", loc: "0.6" },
+  "government.html":             { cf: "yearly",  de: "0.6" },
+  "directory.html":              { cf: "weekly",  de: "0.7", loc: "0.6" },
+  "holidays.html":               { cf: "yearly",  de: "0.6", loc: "0.5" },
+  "guide.html":                  { cf: "monthly", de: "0.5" },
+  "about.html":                  { cf: "monthly", de: "0.6" }
+};
+const SM_DEFAULT = { cf: "monthly", de: "0.6" };
+const DE_ONLY = [  // páginas legales, solo alemán (sin /es/ /en/)
+  { file: "impressum.html",   cf: "yearly", pr: "0.3" },
+  { file: "datenschutz.html", cf: "yearly", pr: "0.3" },
+  { file: "disclaimer.html",  cf: "yearly", pr: "0.3" }
+];
+
+function lastmod(file) {
+  return fs.statSync(path.join(ROOT, file)).mtime.toISOString().slice(0, 10);
+}
+function urlBlock(loc, mod, cf, pr) {
+  return "  <url>\n    <loc>" + loc + "</loc>\n    <lastmod>" + mod +
+    "</lastmod>\n    <changefreq>" + cf + "</changefreq>\n    <priority>" + pr + "</priority>\n  </url>";
+}
+function buildSitemap() {
+  const blocks = [];
+  PAGES.forEach(function (p) {                    // DE (raíz)
+    const sm = SM[p.file] || SM_DEFAULT;
+    blocks.push(urlBlock(SITE + "/" + p.path, lastmod(p.file), sm.cf, sm.de));
+  });
+  DE_ONLY.forEach(function (p) {                  // legales solo-DE
+    blocks.push(urlBlock(SITE + "/" + p.file, lastmod(p.file), p.cf, p.pr));
+  });
+  LANGS.forEach(function (lang) {                 // /es/ y /en/ (lastmod = fuente DE)
+    PAGES.forEach(function (p) {
+      const sm = SM[p.file] || SM_DEFAULT;
+      blocks.push(urlBlock(SITE + "/" + lang.dir + "/" + p.path, lastmod(p.file), sm.cf, sm.loc || sm.de));
+    });
+  });
+  const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    blocks.join("\n") + "\n</urlset>\n";
+  fs.writeFileSync(path.join(ROOT, "sitemap.xml"), xml, "utf8");
+  return blocks.length;
+}
+console.log("build-i18n: sitemap.xml (" + buildSitemap() + " URLs)");
