@@ -71,14 +71,14 @@ const PAGES = [
     file: "landtagswahlen-2026.html", path: "landtagswahlen-2026.html",
     es: {
       title: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo? — Fechas y resultados | Wahlblick",
-      description: "¿Qué estados alemanes votan en 2026 y cuándo? Cinco elecciones estatales (Landtag): Baden-Wurtemberg y Renania-Palatinado en marzo; Sajonia-Anhalt (6/9), Mecklemburgo-Pomerania (13/9) y Berlín (20/9) en septiembre. Fechas, resultados e historial. Neutral, trilingüe.",
+      description: "¿Qué estados alemanes votan en 2026 y cuándo? Cinco elecciones estatales (Landtag): Baden-Wurtemberg y Renania-Palatinado en marzo; Sajonia-Anhalt (6/9), Mecklemburgo-Pomerania (20/9) y Berlín (20/9) en septiembre. Fechas, resultados e historial. Neutral, trilingüe.",
       ogTitle: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo?",
       ogDescription: "Las cinco elecciones estatales de 2026: fechas, resultados e historial — neutral y con fuentes en wahlblick.de.",
       twDescription: "Las cinco elecciones estatales de Alemania en 2026: fechas, resultados e historial."
     },
     en: {
       title: "Germany's 2026 state elections: which states vote and when? — dates & results | Wahlblick",
-      description: "Which German states vote in 2026 and when? Five state elections (Landtag): Baden-Württemberg and Rhineland-Palatinate in March; Saxony-Anhalt (6 Sept), Mecklenburg-Vorpommern (13 Sept) and Berlin (20 Sept) in September. Dates, results and history. Neutral, trilingual.",
+      description: "Which German states vote in 2026 and when? Five state elections (Landtag): Baden-Württemberg and Rhineland-Palatinate in March; Saxony-Anhalt (6 Sept), Mecklenburg-Vorpommern (20 Sept) and Berlin (20 Sept) in September. Dates, results and history. Neutral, trilingual.",
       ogTitle: "Germany's 2026 state elections: which states vote and when?",
       ogDescription: "All five 2026 state elections: dates, results and history — neutral and sourced on wahlblick.de.",
       twDescription: "Germany's five 2026 state elections: dates, results and history."
@@ -122,14 +122,14 @@ const PAGES = [
     file: "mecklenburg-vorpommern.html", path: "mecklenburg-vorpommern.html",
     es: {
       title: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha, historial y resultados | Wahlblick",
-      description: "Elección estatal (Landtag) de Mecklemburgo-Pomerania Occidental el 13 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
+      description: "Elección estatal (Landtag) de Mecklemburgo-Pomerania Occidental el 20 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
       ogTitle: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha y resultados",
       ogDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental — neutral y con fuentes en wahlblick.de.",
       twDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental."
     },
     en: {
       title: "Mecklenburg-Vorpommern state election 2026 — date, history & results | Wahlblick",
-      description: "Mecklenburg-Vorpommern state election (Landtag) on 13 September 2026: the date, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral, sourced, in three languages.",
+      description: "Mecklenburg-Vorpommern state election (Landtag) on 20 September 2026: the date, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral, sourced, in three languages.",
       ogTitle: "Mecklenburg-Vorpommern state election 2026 — date & results",
       ogDescription: "Date, history and results of the Mecklenburg-Vorpommern state election — neutral and sourced on wahlblick.de.",
       twDescription: "Date, history and results of the Mecklenburg-Vorpommern state election."
