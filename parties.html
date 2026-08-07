@@ -186,6 +186,7 @@
 </header>
 
 <div class="page-hero">
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
   <div class="hero-underline" aria-hidden="true"></div>
   <p class="intro" data-intro></p>
@@ -226,6 +227,7 @@
   var CONTENT = {
     de: {
       title: "Parteien in Deutschland",
+      kicker: "Wer ist wer",
       backLabel: "← Zur Wahlkarte",
       intro: "Eine kurze Selbstdarstellung jeder Partei, die in der Kartenlegende vorkommt: Gründungsjahr, etwas Geschichte, und ihr Positionierung laut eigenem Grundsatz- bzw. Parteiprogramm. Diese Übersicht bewertet oder vergleicht die Parteien nicht — die Reihenfolge ist chronologisch nach Gründungsjahr.",
       heading: "Die Parteien im Überblick",
@@ -252,6 +254,7 @@
     },
     es: {
       title: "Partidos políticos en Alemania",
+      kicker: "Quién es quién",
       backLabel: "← Volver al mapa",
       intro: "Una breve autodescripción de cada partido que aparece en la leyenda del mapa: año de fundación, algo de historia, y su posicionamiento según su propio programa oficial (Grundsatzprogramm). Este resumen no evalúa ni compara los partidos entre sí — el orden es cronológico, según el año de fundación.",
       heading: "Los partidos de un vistazo",
@@ -278,6 +281,7 @@
     },
     en: {
       title: "Political parties in Germany",
+      kicker: "Who's who",
       backLabel: "← Back to the map",
       intro: "A brief self-description of each party shown in the map's legend: founding year, some history, and its positioning according to its own official platform (Grundsatzprogramm). This overview does not rate or compare the parties — the order is chronological, by founding year.",
       heading: "The parties at a glance",
@@ -316,6 +320,7 @@
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;

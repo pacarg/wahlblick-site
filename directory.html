@@ -192,6 +192,7 @@
 </header>
 
 <div class="page-hero">
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
   <div class="hero-underline" aria-hidden="true"></div>
   <p class="intro" data-intro></p>
@@ -228,6 +229,7 @@
   var CONTENT = {
     de: {
       title: "Adressverzeichnis",
+      kicker: "Service",
       backLabel: "← Zur Wahlkarte",
       intro: "Eine kuratierte Liste nützlicher Anlaufstellen rund um das Leben in Deutschland und die Teilhabe am demokratischen Alltag. Die Kategorien stehen fest — die konkreten Adressen werden gerade zusammengetragen und laufend ergänzt.",
       group1Heading: "Leben in Deutschland",
@@ -309,6 +311,7 @@
     },
     es: {
       title: "Directorio de direcciones",
+      kicker: "Servicios",
       backLabel: "← Volver al mapa",
       intro: "Un listado curado de puntos de contacto útiles para la vida en Alemania y la participación en lo cotidiano democrático. Las categorías ya están definidas — las direcciones concretas se están recopilando y se van a ir sumando.",
       group1Heading: "Vida en Alemania",
@@ -390,6 +393,7 @@
     },
     en: {
       title: "Address directory",
+      kicker: "Services",
       backLabel: "← Back to the map",
       intro: "A curated list of useful contact points for everyday life in Germany and participation in its democratic life. The categories are set — the actual addresses are being compiled and will be added over time.",
       group1Heading: "Life in Germany",
@@ -483,6 +487,7 @@
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;

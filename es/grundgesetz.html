@@ -188,6 +188,7 @@
 </header>
 
 <div class="page-hero">
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
   <div class="hero-underline" aria-hidden="true"></div>
   <p class="intro" data-intro></p>
@@ -233,6 +234,7 @@
   var CONTENT = {
     de: {
       title: "Das Grundgesetz",
+      kicker: "Verfassung",
       intro: "Das Grundgesetz für die Bundesrepublik Deutschland wurde am 23. Mai 1949 vom Parlamentarischen Rat in Bonn verkündet — ursprünglich als vorläufige Verfassung für Westdeutschland gedacht, daher der bewusst zurückhaltende Name „Grundgesetz“ statt „Verfassung“. Mit der deutschen Wiedervereinigung 1990 wurde es zur gesamtdeutschen Verfassung. Es beginnt mit den Grundrechten (Art. 1–19) — eine direkte Lehre aus der Zeit des Nationalsozialismus, in der die Weimarer Verfassung keinen ausreichenden Schutz vor der Aushöhlung der Demokratie geboten hatte.",
       backLabel: "← Zur Wahlkarte",
       artHeading: "Die Grundrechte (Art. 1–19)",
@@ -280,6 +282,7 @@
     },
     es: {
       title: "La Ley Fundamental (Grundgesetz)",
+      kicker: "Constitución",
       intro: "La Ley Fundamental para la República Federal de Alemania fue proclamada el 23 de mayo de 1949 por el Consejo Parlamentario en Bonn — pensada originalmente como una constitución provisional para Alemania Occidental, de ahí el nombre deliberadamente modesto de «Ley Fundamental» en vez de «Constitución». Con la reunificación alemana de 1990 pasó a ser la constitución de toda Alemania. Comienza con los derechos fundamentales (Art. 1–19) — una lección directa de la época del nacionalsocialismo, cuando la Constitución de Weimar no ofreció suficiente protección frente al vaciamiento de la democracia.",
       backLabel: "← Volver al mapa",
       artHeading: "Los derechos fundamentales (Art. 1–19)",
@@ -327,6 +330,7 @@
     },
     en: {
       title: "The Basic Law (Grundgesetz)",
+      kicker: "Constitution",
       intro: "The Basic Law for the Federal Republic of Germany was proclaimed on 23 May 1949 by the Parliamentary Council in Bonn — originally conceived as a provisional constitution for West Germany, hence the deliberately modest name \"Basic Law\" rather than \"Constitution.\" With German reunification in 1990, it became the constitution of all of Germany. It opens with the fundamental rights (Art. 1–19) — a direct lesson from the Nazi era, when the Weimar Constitution failed to protect democracy from being hollowed out.",
       backLabel: "← Back to the map",
       artHeading: "The fundamental rights (Art. 1–19)",
@@ -386,6 +390,7 @@
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;

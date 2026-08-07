@@ -183,6 +183,7 @@
 </header>
 
 <div class="page-hero">
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
   <div class="hero-underline" aria-hidden="true"></div>
   <p class="intro" data-intro></p>
@@ -228,6 +229,7 @@
   var CONTENT = {
     de: {
       title: "Regierungsbildung und Koalitionen",
+      kicker: "Koalitionen",
       backLabel: "← Zur Wahlkarte",
       intro: "Nach einer Wahl erreicht selten eine einzelne Partei die absolute Mehrheit — deshalb bilden mehrere Parteien gemeinsam eine Regierung. Diese Bündnisse bekommen Spitznamen, meist nach den Farben der beteiligten Parteien.",
       heading: "Gängige Koalitionsformen",
@@ -250,6 +252,7 @@
     },
     es: {
       title: "Formación de gobierno y coaliciones",
+      kicker: "Coaliciones",
       backLabel: "← Volver al mapa",
       intro: "Después de una elección, es poco frecuente que un solo partido consiga la mayoría absoluta — por eso varios partidos suelen gobernar juntos en coalición. Estas alianzas reciben apodos, casi siempre basados en los colores de los partidos involucrados.",
       heading: "Tipos de coalición más comunes",
@@ -272,6 +275,7 @@
     },
     en: {
       title: "Government formation and coalitions",
+      kicker: "Coalitions",
       backLabel: "← Back to the map",
       intro: "After an election, it's rare for a single party to win an absolute majority — so several parties usually govern together in a coalition. These alliances get nicknames, almost always based on the colors of the parties involved.",
       heading: "Common coalition types",
@@ -306,6 +310,7 @@
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;

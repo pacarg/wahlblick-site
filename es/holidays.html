@@ -182,6 +182,7 @@
 </header>
 
 <div class="page-hero">
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
   <div class="hero-underline" aria-hidden="true"></div>
   <p class="intro" data-intro></p>
@@ -217,6 +218,7 @@
   var CONTENT = {
     de: {
       title: "Feiertage in Deutschland",
+      kicker: "Kalender",
       backLabel: "← Zur Wahlkarte",
       intro: "In Deutschland gelten neun gesetzliche Feiertage bundesweit — der Rest hängt vom Bundesland ab. Genau diese Unterschiede zwischen den Ländern sind das Kernthema von Wahlblick, deshalb gehören sie hierher. Daten für 2026.",
       natHeading: "Bundesweite Feiertage",
@@ -247,6 +249,7 @@
     },
     es: {
       title: "Feriados en Alemania",
+      kicker: "Calendario",
       backLabel: "← Volver al mapa",
       intro: "En Alemania hay nueve feriados nacionales que rigen en todo el país — el resto depende del estado federado. Justamente esas diferencias entre Länder son el eje central de Wahlblick, por eso tienen su lugar acá. Datos para 2026.",
       natHeading: "Feriados nacionales",
@@ -277,6 +280,7 @@
     },
     en: {
       title: "Public holidays in Germany",
+      kicker: "Calendar",
       backLabel: "← Back to the map",
       intro: "Germany has nine nationwide public holidays — the rest depend on the federal state. Those exact differences between Länder are the whole point of Wahlblick, which is why they belong here too. Data for 2026.",
       natHeading: "Nationwide holidays",
@@ -318,6 +322,7 @@
     var c = CONTENT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-intro]").textContent = c.intro;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;
