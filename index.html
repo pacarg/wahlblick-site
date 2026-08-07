@@ -537,8 +537,23 @@
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
-  .results-empty { color: var(--text-muted); font-size: 15px; line-height: 1.55; }
-  .results-empty strong { display: block; color: var(--text); font-size: 14.5px; margin-bottom: 4px; }
+  .results-empty { position: relative; background: #eaf0f8; border-radius: 10px; padding: 14px 16px 14px 52px; color: #33414f; font-size: 15px; line-height: 1.5; }
+  .results-empty::before { content: ""; position: absolute; left: 14px; top: 13px; width: 26px; height: 26px; border-radius: 7px; background: #004494 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / 15px no-repeat; }
+  .results-empty strong { display: block; color: #141412; font-size: 16px; margin-bottom: 4px; }
+  .results-panel .panel-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+  .results-panel .panel-head h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+  .home-tiles { max-width: 1200px; margin: 28px auto 12px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .home-tile { position: relative; display: block; text-decoration: none; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; transition: border-color .14s, box-shadow .14s, transform .14s; }
+  .home-tile:hover { border-color: var(--accent); box-shadow: 0 6px 20px rgba(0,52,148,.10); transform: translateY(-2px); }
+  .home-tile-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .home-tile-title { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); line-height: 1.15; margin-bottom: 6px; }
+  .home-tile-desc { font-size: 14px; line-height: 1.5; color: var(--text-muted); max-width: 42ch; }
+  .home-tile-arrow { position: absolute; top: 22px; right: 24px; font-size: 20px; color: var(--accent); transition: transform .14s; }
+  .home-tile:hover .home-tile-arrow { transform: translateX(3px); }
+  @media (max-width: 720px) {
+    .home-tiles { grid-template-columns: 1fr; padding: 0 16px; gap: 12px; margin-top: 22px; }
+    .home-tile-title { font-size: 18px; }
+  }
 
   .stat-line {
     display: flex; align-items: baseline; gap: 6px;
@@ -758,6 +773,7 @@
   <section class="panel results-panel" id="resultsCard">
     <div class="panel-head">
       <div>
+        <div class="panel-kicker" id="resultsKicker">Ergebnisse</div>
         <h2 id="landName">Kein Bundesland ausgewählt</h2>
         <div class="landtag-year-tabs" id="landtagYearTabs" style="display:none;"></div>
       </div>
@@ -777,6 +793,21 @@
     </div>
   </section>
 </main>
+
+<section class="home-tiles">
+  <a class="home-tile" href="landtagswahlen-2026.html">
+    <span class="home-tile-arrow" aria-hidden="true">→</span>
+    <div class="home-tile-kicker" id="tile1Kicker">Wahltermine</div>
+    <div class="home-tile-title" id="tile1Title">Landtagswahlen 2026</div>
+    <div class="home-tile-desc" id="tile1Desc">Welche Bundesländer wählen 2026 — und wann.</div>
+  </a>
+  <a class="home-tile" href="sitzverteilung.html">
+    <span class="home-tile-arrow" aria-hidden="true">→</span>
+    <div class="home-tile-kicker" id="tile2Kicker">Wahlsystem</div>
+    <div class="home-tile-title" id="tile2Title">Wie aus Stimmen Sitze werden</div>
+    <div class="home-tile-desc" id="tile2Desc">Das deutsche Wahlsystem, Schritt für Schritt erklärt.</div>
+  </a>
+</section>
 
 <footer id="quellen">
   <div class="foot-links">
@@ -2303,6 +2334,13 @@
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
       emptyTitle: "Kein Bundesland ausgewählt",
       emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
+      resultsKicker: "Ergebnisse",
+      tile1Kicker: "Wahltermine",
+      tile1Title: "Landtagswahlen 2026",
+      tile1Desc: "Welche Bundesländer wählen 2026 — und wann.",
+      tile2Kicker: "Wahlsystem",
+      tile2Title: "Wie aus Stimmen Sitze werden",
+      tile2Desc: "Das deutsche Wahlsystem, Schritt für Schritt erklärt.",
       noDataBody: "Für {scope} sind in diesem Prototyp noch keine Daten hinterlegt.",
       scopeBundestag: "die Bundestagswahl {year}",
       scopeLandtag: "die Landtagswahl",
@@ -2371,6 +2409,13 @@
       eyebrowLandtag: "Elección estatal · última de cada Land",
       emptyTitle: "Ningún estado federado seleccionado",
       emptyBody: "Haz click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
+      resultsKicker: "Resultados",
+      tile1Kicker: "Fechas electorales",
+      tile1Title: "Elecciones estatales 2026",
+      tile1Desc: "Qué estados federados votan en 2026 — y cuándo.",
+      tile2Kicker: "Sistema electoral",
+      tile2Title: "Cómo los votos se vuelven escaños",
+      tile2Desc: "El sistema electoral alemán, explicado paso a paso.",
       noDataBody: "Todavía no hay datos cargados para {scope} en este prototipo.",
       scopeBundestag: "la elección federal {year}",
       scopeLandtag: "la elección estatal",
@@ -2439,6 +2484,13 @@
       eyebrowLandtag: "State election · most recent per state",
       emptyTitle: "No federal state selected",
       emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
+      resultsKicker: "Results",
+      tile1Kicker: "Election dates",
+      tile1Title: "State elections 2026",
+      tile1Desc: "Which federal states vote in 2026 — and when.",
+      tile2Kicker: "Electoral system",
+      tile2Title: "How votes become seats",
+      tile2Desc: "The German electoral system, explained step by step.",
       noDataBody: "No data has been loaded yet for {scope} in this prototype.",
       scopeBundestag: "the {year} federal election",
       scopeLandtag: "the state election",
@@ -3153,6 +3205,8 @@
     document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
     document.getElementById("welcomeElectionsText").textContent = tr("welcomeElections");
     var startCueEl = document.getElementById("startCueText"); if (startCueEl) startCueEl.textContent = tr("welcomeStartCue");
+    var rk = document.getElementById("resultsKicker"); if (rk) rk.textContent = tr("resultsKicker");
+    ["tile1Kicker","tile1Title","tile1Desc","tile2Kicker","tile2Title","tile2Desc"].forEach(function (k) { var el = document.getElementById(k); if (el) el.textContent = tr(k); });
     document.getElementById("mobileNavElections").textContent = tr("navElectionsHub");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
