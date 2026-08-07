@@ -88,7 +88,8 @@
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
   main { width: 80%; max-width: 1080px; margin: 0 auto; padding: 32px 24px 56px; }
-  h1 { font-size: 22px; margin: 0 0 24px; }
+  .page-kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 9px; }
+  h1 { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.14; margin: 0 0 24px; }
 
   .about-hero { text-align: center; margin: 0 0 24px; }
   .hero-arch { display: inline-block; width: 100%; max-width: 460px; height: auto; }
@@ -102,7 +103,7 @@
     scroll-margin-top: 24px;
   }
   .panel h2 { font-size: 16px; margin: 0 0 14px; }
-  .panel p { font-size: 14.5px; line-height: 1.65; margin: 0 0 14px; color: var(--text); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .panel p { font-size: 15px; line-height: 1.65; margin: 0 0 14px; color: var(--text); }
   .panel p:last-child { margin-bottom: 0; }
 
   footer {
@@ -121,6 +122,7 @@
     .brand .wordmark { font-size: 16px; }
     main { width: auto; padding: 24px 16px 40px; }
     .panel { padding: 20px; }
+    h1 { font-size: 25px; }
     footer { padding: 16px 16px 32px; }
   }
 </style>
@@ -207,6 +209,7 @@
       </g>
     </svg>
   </div>
+  <div class="page-kicker" data-kicker></div>
   <h1 data-title></h1>
 
   <div class="panel" id="about">
@@ -244,6 +247,7 @@
   var CONTENT = {
     de: {
       title: "Über Wahlblick",
+      kicker: "Das Projekt",
       backLabel: "← Zur Wahlkarte",
       aboutHeading: "Was ist Wahlblick?",
       aboutP1: "Wahlblick ist ein unabhängiges, privates Datenprojekt: eine interaktive Karte Deutschlands, die zeigt, wie jedes der 16 Bundesländer bei der Bundestagswahl und bei der jeweils letzten Landtagswahl abgestimmt hat. Das Projekt richtet sich an alle, die sich für die politische Landkarte Deutschlands interessieren — insbesondere an die spanischsprachige Community in Deutschland, für die viele offizielle Quellen nur auf Deutsch verfügbar sind. Die Seite funktioniert vollständig auf Deutsch, Spanisch und Englisch.",
@@ -257,6 +261,7 @@
     },
     es: {
       title: "Sobre Wahlblick",
+      kicker: "El proyecto",
       backLabel: "← Volver al mapa",
       aboutHeading: "¿Qué es Wahlblick?",
       aboutP1: "Wahlblick es un proyecto de datos independiente y privado: un mapa interactivo de Alemania que muestra cómo votó cada uno de los 16 estados federados en la elección federal (Bundestagswahl) y en la última elección estatal (Landtagswahl) de cada uno. El proyecto está pensado para cualquiera interesado en el mapa político de Alemania — en particular para la comunidad hispanohablante en Alemania, ya que muchas fuentes oficiales solo están disponibles en alemán. El sitio funciona completo en alemán, español e inglés.",
@@ -270,6 +275,7 @@
     },
     en: {
       title: "About Wahlblick",
+      kicker: "The project",
       backLabel: "← Back to the map",
       aboutHeading: "What is Wahlblick?",
       aboutP1: "Wahlblick is an independent, private data project: an interactive map of Germany showing how each of the 16 federal states voted in the federal election (Bundestagswahl) and in each state's most recent state election (Landtagswahl). The project is aimed at anyone interested in Germany's political map — particularly the Spanish-speaking community in Germany, since many official sources are only available in German. The site works fully in German, Spanish, and English.",
@@ -295,6 +301,7 @@
     var f = FOOT[lang];
     document.title = c.title + " — Wahlblick";
     document.querySelector("[data-title]").textContent = c.title;
+    var kEl = document.querySelector("[data-kicker]"); if (kEl) kEl.textContent = c.kicker;
     document.querySelector("[data-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-back]").textContent = c.backLabel;
     document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;
