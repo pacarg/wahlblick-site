@@ -88,8 +88,9 @@
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
   main { width: 80%; max-width: 820px; margin: 0 auto; padding: 32px 24px 56px; }
-  h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; scroll-margin-top: 72px; }
-  .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 20px; }
+  .page-kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 9px; }
+  h1 { font-size: 33px; font-weight: 800; line-height: 1.14; margin: 0 0 10px; letter-spacing: -0.02em; scroll-margin-top: 72px; }
+  .lead { font-size: 17px; line-height: 1.55; color: #3d4450; margin: 0 0 20px; max-width: 640px; }
 
   /* --- Wahllexikon: familia visual didáctica, construida con los tokens madre --- */
   .glo-jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; padding: 0; list-style: none; }
@@ -127,6 +128,7 @@
     .brand .wordmark { font-size: 16px; }
     main { width: auto; padding: 24px 16px 40px; }
     .glo-de { font-size: 17px; }
+    h1 { font-size: 26px; }
   }
 </style>
 </head>
@@ -152,6 +154,7 @@
 </header>
 
 <main>
+  <div class="page-kicker" data-t="kicker"></div>
   <h1 data-t="h1" id="top">Wahllexikon — die wichtigsten Wahlbegriffe einfach erklärt</h1>
   <p class="lead" data-t="lead" data-html>Deutsche Wahlbegriffe, kurz und neutral erklärt — mit Übersetzung. Von der Erststimme bis zum Überhangmandat: was jeder Begriff bedeutet und wo er in einer Wahl auftaucht.</p>
 
@@ -498,6 +501,7 @@
       docTitle: "Wahllexikon — die wichtigsten Wahlbegriffe einfach erklärt | Wahlblick",
       back: "← Zur Wahlkarte",
       h1: "Wahllexikon — die wichtigsten Wahlbegriffe einfach erklärt",
+      kicker: "Nachschlagen",
       lead: "Deutsche Wahlbegriffe, kurz und neutral erklärt — mit Übersetzung. Von der Erststimme bis zum Überhangmandat: was jeder Begriff bedeutet und wo er in einer Wahl auftaucht.",
       cta: "Ergebnisse aller Wahlen auf der interaktiven Karte →",
       toTop: "↑ Nach oben",
@@ -507,6 +511,7 @@
       docTitle: "Glosario electoral — los términos clave, explicados simple | Wahlblick",
       back: "← Volver al mapa",
       h1: "Glosario electoral — los términos clave, explicados simple",
+      kicker: "Referencia",
       lead: "Términos electorales alemanes, explicados de forma breve y neutral — con traducción. Del primer voto al mandato excedente: qué significa cada término y dónde aparece en una elección.",
       cta: "Resultados de todas las elecciones en el mapa interactivo →",
       toTop: "↑ Arriba",
@@ -516,6 +521,7 @@
       docTitle: "Electoral glossary — key German terms, explained simply | Wahlblick",
       back: "← Back to the map",
       h1: "Electoral glossary — key German terms, explained simply",
+      kicker: "Reference",
       lead: "German electoral terms, explained briefly and neutrally — with translation. From the first vote to the overhang seat: what each term means and where it shows up in an election.",
       cta: "Results of every election on the interactive map →",
       toTop: "↑ Top",

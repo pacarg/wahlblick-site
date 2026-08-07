@@ -46,9 +46,11 @@
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
   main { width: 80%; max-width: 820px; margin: 0 auto; padding: 32px 24px 56px; }
-  h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 24px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
-  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin: 26px 0 10px; }
+  .page-kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 9px; }
+  h1 { font-size: 33px; font-weight: 800; line-height: 1.14; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .lead { font-size: 17px; line-height: 1.55; color: #3d4450; margin: 0 0 24px; }
+  h2 { position: relative; padding-left: 15px; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); margin: 30px 0 10px; scroll-margin-top: 72px; }
+  h2::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
   .hub-note { font-size: 14px; line-height: 1.6; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin: 0 0 8px; }
   .hub-cta { font-size: 13.5px; line-height: 1.5; margin: 0 0 18px; }
   .hub-cta a { color: var(--accent); font-weight: 600; text-decoration: none; }
@@ -76,6 +78,7 @@
     .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
     .brand .wordmark { font-size: 16px; }
     main { width: auto; padding: 24px 16px 40px; }
+    h1 { font-size: 26px; }
     .elec-row { flex-wrap: wrap; gap: 6px 12px; }
     .elec-date { width: auto; order: 2; }
     .elec-name { flex: 1 1 100%; order: 1; }
@@ -118,6 +121,7 @@
 </header>
 
 <main>
+  <div class="page-kicker" data-t="kicker"></div>
   <h1 data-t="h1">Landtagswahlen 2026 in Deutschland</h1>
   <p class="lead" data-t="lead">2026 wählen fünf Bundesländer einen neuen Landtag — zwei im März (bereits gelaufen) und drei im September. Hier siehst du auf einen Blick, welche Bundesländer wann wählen, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.</p>
 
@@ -165,6 +169,7 @@
       docTitle: "Landtagswahlen 2026: Welche Bundesländer wählen wann? — Termine & Ergebnisse | Wahlblick",
       back: "← Zur Wahlkarte",
       h1: "Landtagswahlen 2026 in Deutschland",
+      kicker: "Wahltermine",
       lead: "2026 wählen fünf Bundesländer einen neuen Landtag — zwei im März (bereits gelaufen) und drei im September. Hier siehst du auf einen Blick, welche Bundesländer wann wählen, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.",
       upHeading: "Kommende Wahlen · September 2026",
       pastHeading: "Bereits gewählt · März 2026",
@@ -182,6 +187,7 @@
       docTitle: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo? — Fechas y resultados | Wahlblick",
       back: "← Volver al mapa",
       h1: "Elecciones estatales (Landtag) de Alemania en 2026",
+      kicker: "Fechas electorales",
       lead: "En 2026, cinco estados federados eligen un nuevo parlamento estatal (Landtag): dos en marzo (ya votaron) y tres en septiembre. Aquí ves de un vistazo qué estados votan y cuándo, el historial de cada elección y —la noche electoral de cada una— los resultados. Neutral, con fuentes y en tres idiomas.",
       upHeading: "Próximas elecciones · septiembre 2026",
       pastHeading: "Ya votaron · marzo 2026",
@@ -199,6 +205,7 @@
       docTitle: "Germany's 2026 state elections: which states vote and when? — dates & results | Wahlblick",
       back: "← Back to the map",
       h1: "Germany's state elections (Landtag) in 2026",
+      kicker: "Election dates",
       lead: "In 2026, five German states elect a new state parliament (Landtag): two in March (already held) and three in September. Here you can see at a glance which states vote and when, the historical record of each election and — on each election night — the results. Neutral, sourced, and in three languages.",
       upHeading: "Upcoming elections · September 2026",
       pastHeading: "Already held · March 2026",
