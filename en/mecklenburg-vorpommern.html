@@ -61,7 +61,11 @@
   .keyfact { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; }
   .keyfact .k { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
   .keyfact .v { font-size: 15px; font-weight: 700; margin-top: 2px; }
-  .pending { background: #eaf0f8; border: 1px solid #d4e0f0; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: var(--accent); margin: 0 0 26px; }
+  .pending { background: #eaf0f8; border: 1px solid #d4e0f0; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: var(--accent); margin: 0 0 14px; }
+  .polls { border: 1px dashed var(--border); border-radius: 8px; padding: 13px 16px; margin: 0 0 26px; }
+  .polls .tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; margin-bottom: 8px; }
+  .polls p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
+  .polls a { color: var(--accent); font-weight: 600; }
 
   h2 { font-size: 17px; margin: 28px 0 12px; }
   .hist-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
@@ -147,6 +151,11 @@
 
   <p class="pending" data-t="pending">Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 13. September.</p>
 
+  <div class="polls">
+    <span class="tag" data-t="pollsTag">Umfragen</span>
+    <p data-t="pollsHtml">Wie stünde Mecklenburg-Vorpommern heute? Der neutrale Umfrage-Überblick von <a href="https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm" target="_blank" rel="noopener">wahlrecht.de</a> bündelt die aktuellen Sonntagsfragen aller Institute. Achtung: Umfragen sind Prognosen — nicht das amtliche Ergebnis.</p>
+  </div>
+
   <h2 data-t="histHeading">Frühere Landtagswahlen im Überblick</h2>
   <div id="history"></div>
 
@@ -204,6 +213,8 @@
       kBody: "Gewählt wird", vBody: "Landtag von Mecklenburg-Vorpommern",
       kLast: "Letzte Wahl", vLast: "2021 · SPD 39,6 %",
       pending: "Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 13. September.",
+      pollsTag: "Umfragen",
+      pollsHtml: "Wie stünde Mecklenburg-Vorpommern heute? Der neutrale Umfrage-Überblick von <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> bündelt die aktuellen Sonntagsfragen aller Institute. Achtung: Umfragen sind Prognosen — nicht das amtliche Ergebnis.",
       histHeading: "Frühere Landtagswahlen im Überblick",
       turnout: "Wahlbeteiligung",
       systemHtml: "Der Landtag wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
@@ -220,6 +231,8 @@
       kBody: "Se elige", vBody: "Parlamento de Mecklemburgo-Pomerania",
       kLast: "Última elección", vLast: "2021 · SPD 39,6 %",
       pending: "Los resultados de la elección de 2026 aparecerán acá la noche del 13 de septiembre.",
+      pollsTag: "Encuestas",
+      pollsHtml: "¿Cómo vendría Mecklemburgo-Pomerania Occidental hoy? El panorama neutral de <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> reúne las encuestas actuales de todas las encuestadoras. Ojo: las encuestas son proyecciones, no el resultado oficial.",
       histHeading: "Historial de elecciones estatales",
       turnout: "Participación",
       systemHtml: "El parlamento se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
@@ -236,6 +249,8 @@
       kBody: "What's elected", vBody: "M-V state parliament",
       kLast: "Last election", vLast: "2021 · SPD 39.6%",
       pending: "The results of the 2026 election will appear here on election night, 13 September.",
+      pollsTag: "Polls",
+      pollsHtml: "Where would Mecklenburg-Vorpommern stand today? The neutral poll overview at <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> gathers the current polls from all institutes. Note: polls are projections — not the official result.",
       histHeading: "Previous state elections",
       turnout: "Turnout",
       systemHtml: "The parliament is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
@@ -272,6 +287,7 @@
       var k = el.getAttribute("data-t");
       if (k === "systemText") { el.innerHTML = c.systemHtml; return; }
       if (k === "src") { el.innerHTML = c.srcHtml; return; }
+      if (k === "pollsHtml") { el.innerHTML = c.pollsHtml; return; }
       if (c[k] != null) el.textContent = c[k];
     });
     buildHistory(lang);
