@@ -244,21 +244,21 @@
     margin: 0 auto;
     padding: 48px 24px 36px;
   }
-  .welcome-text { max-width: 640px; margin: 0 auto; text-align: center; }
+  .welcome-text { max-width: 860px; margin: 0 auto; text-align: center; }
   .welcome-title {
-    margin: 0 auto 14px;
-    font-size: 31px;
+    margin: 0 auto 16px;
+    font-size: 38px;
     font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.13;
+    letter-spacing: -0.022em;
+    line-height: 1.08;
     color: var(--text);
   }
   .welcome-body {
     margin: 0 auto;
-    max-width: 540px;
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--text-muted);
+    max-width: 600px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #3d4450;
   }
   .welcome-body a { color: var(--accent); font-weight: 600; }
   .welcome-cta { margin-top: 22px; text-align: center; }
@@ -270,8 +270,8 @@
   .start-cue-arrow { font-size: 16px; line-height: 1; color: var(--accent); }
   @media (max-width: 720px) {
     .welcome-inner { padding: 30px 16px 26px; }
-    .welcome-title { font-size: 24px; }
-    .welcome-body { font-size: 14px; line-height: 1.5; }
+    .welcome-title { font-size: 27px; }
+    .welcome-body { font-size: 15px; line-height: 1.5; }
     .start-cue-text { font-size: 13px; }
   }
 
@@ -359,7 +359,7 @@
     flex-wrap: wrap;
   }
   .panel-head > div { min-width: 0; }
-  .panel-head h2 { margin: 0; font-size: 14px; font-weight: 700; }
+  .panel-head h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
   .panel-head .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
   .eyebrow-note { display: none; margin: 3px 0 0; font-size: 11px; color: var(--text-muted); }
   .eyebrow-note.visible { display: block; }
@@ -537,7 +537,7 @@
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
-  .results-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
+  .results-empty { color: var(--text-muted); font-size: 15px; line-height: 1.55; }
   .results-empty strong { display: block; color: var(--text); font-size: 14.5px; margin-bottom: 4px; }
 
   .stat-line {
@@ -706,7 +706,7 @@
 <section class="welcome" aria-labelledby="welcomeTitle">
   <div class="welcome-inner">
     <div class="welcome-text">
-      <h1 class="welcome-title" id="welcomeTitle">Deutschland wählt. Hier behalten Sie den Überblick.</h1>
+      <h1 class="welcome-title" id="welcomeTitle">Deutschland wählt.<br>Hier behalten Sie den Überblick.</h1>
       <p class="welcome-body" id="welcomeBody">Die unabhängige interaktive Karte der Wahlergebnisse — Bundestag und alle 16 Landtage, mit ihrer Geschichte.</p>
       <div class="welcome-cta"><a class="welcome-elections" id="welcomeElections" href="landtagswahlen-2026.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="9.5" rx="1.5"></rect><path d="M9 11h6"></path><path d="M8.6 7.8l2.1 2.1L15.6 4.8"></path></svg><span id="welcomeElectionsText">Landtagswahlen 2026 →</span></a></div>
     </div>
@@ -2295,7 +2295,7 @@
       partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
-      welcomeTitle: "Deutschland wählt. Hier behalten Sie den Überblick.",
+      welcomeTitle: "Deutschland wählt.<br>Hier behalten Sie den Überblick.",
       welcomeStartCue: "Wählen Sie ein Bundesland, um zu starten",
       welcomeElections: "Landtagswahlen 2026 →",
       navElectionsHub: "Landtagswahlen 2026",
@@ -2363,7 +2363,7 @@
       partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
-      welcomeTitle: "Alemania vota. Aquí lo ves claro.",
+      welcomeTitle: "Alemania vota.<br>Aquí lo ves claro.",
       welcomeStartCue: "Elige un estado para empezar",
       welcomeElections: "Elecciones estatales 2026 →",
       navElectionsHub: "Elecciones estatales 2026",
@@ -2431,7 +2431,7 @@
       partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
-      welcomeTitle: "Germany votes. See it clearly.",
+      welcomeTitle: "Germany votes.<br>See it clearly.",
       welcomeStartCue: "Pick a state to get started",
       welcomeElections: "State elections 2026 →",
       navElectionsHub: "State elections 2026",
@@ -3149,7 +3149,7 @@
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
     });
-    document.getElementById("welcomeTitle").textContent = tr("welcomeTitle");
+    document.getElementById("welcomeTitle").innerHTML = tr("welcomeTitle");
     document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
     document.getElementById("welcomeElectionsText").textContent = tr("welcomeElections");
     var startCueEl = document.getElementById("startCueText"); if (startCueEl) startCueEl.textContent = tr("welcomeStartCue");
