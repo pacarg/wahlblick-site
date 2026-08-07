@@ -107,6 +107,60 @@ const PAGES = [
     ogTitle: "Partidos políticos en Alemania — Wahlblick",
     ogDescription: "Los partidos del Bundestag y de los Landtage: fundación, historia y posiciones según su propio programa — neutral y sin valoración.",
     twDescription: "Los partidos del Bundestag y de los parlamentos estatales: fundación, historia y posiciones — neutral."
+  },
+  {
+    file: "grundgesetz.html",
+    path: "grundgesetz.html",
+    title: "La Ley Fundamental (Grundgesetz) — Wahlblick",
+    description: "La Ley Fundamental de Alemania explicada de forma simple: los derechos fundamentales (Art. 1–19) y la estructura del resto de los artículos — en alemán, español e inglés.",
+    ogTitle: "La Ley Fundamental (Grundgesetz) — Wahlblick",
+    ogDescription: "La Ley Fundamental de Alemania: los derechos fundamentales (Art. 1–19) y la estructura del resto de los artículos, explicados.",
+    twDescription: "La Ley Fundamental de Alemania: los derechos fundamentales y la estructura de los artículos, explicados."
+  },
+  {
+    file: "government.html",
+    path: "government.html",
+    title: "Formación de gobierno y coaliciones — Wahlblick",
+    description: "Cómo se forma gobierno en Alemania: los tipos de coalición (semáforo, gran coalición, Jamaica, Kenia) explicados de forma simple.",
+    ogTitle: "Formación de gobierno y coaliciones — Wahlblick",
+    ogDescription: "Los tipos de coalición en Alemania (semáforo, gran coalición, Jamaica, Kenia) explicados de forma simple.",
+    twDescription: "Cómo se forma gobierno en Alemania: los tipos de coalición explicados."
+  },
+  {
+    file: "directory.html",
+    path: "directory.html",
+    title: "Directorio de direcciones útiles en Alemania — Wahlblick",
+    description: "Directorio de puntos de contacto útiles en Alemania — desde organismos públicos hasta participación ciudadana. En alemán, español e inglés.",
+    ogTitle: "Directorio de direcciones útiles en Alemania — Wahlblick",
+    ogDescription: "Puntos de contacto útiles en Alemania: desde organismos públicos hasta participación ciudadana.",
+    twDescription: "Directorio de puntos de contacto útiles en Alemania — organismos y participación ciudadana."
+  },
+  {
+    file: "holidays.html",
+    path: "holidays.html",
+    title: "Feriados en Alemania — Wahlblick",
+    description: "Feriados legales en Alemania 2026 — a nivel nacional y por estado federado, con explicación de las diferencias regionales.",
+    ogTitle: "Feriados en Alemania — Wahlblick",
+    ogDescription: "Feriados legales en Alemania 2026: nacionales y por estado federado, con las diferencias regionales.",
+    twDescription: "Feriados legales en Alemania 2026 — nacionales y por estado federado, con las diferencias regionales."
+  },
+  {
+    file: "guide.html",
+    path: "guide.html",
+    title: "Guía de uso — Wahlblick",
+    description: "Guía de uso: cómo funciona el mapa electoral interactivo de Wahlblick — navegación del mapa y selección de idioma.",
+    ogTitle: "Guía de uso — Wahlblick",
+    ogDescription: "Cómo funciona el mapa electoral interactivo de Wahlblick: navegación y selección de idioma.",
+    twDescription: "Guía de uso: cómo funciona el mapa electoral interactivo de Wahlblick."
+  },
+  {
+    file: "about.html",
+    path: "about.html",
+    title: "Sobre Wahlblick — Wahlblick",
+    description: "Sobre Wahlblick: objetivo, metodología y contexto del proyecto independiente de mapa electoral de Alemania.",
+    ogTitle: "Sobre Wahlblick",
+    ogDescription: "Objetivo, metodología y contexto del proyecto independiente de mapa electoral Wahlblick.",
+    twDescription: "Sobre Wahlblick: objetivo, metodología y contexto del proyecto independiente de mapa electoral."
   }
 ];
 
