@@ -50,8 +50,8 @@ const PAGES = [
       twTitle: "Wahlblick — Mapa electoral de Alemania",
       twDescription: "Mapa interactivo de los resultados electorales de Alemania: Bundestag y los 16 Landtage.",
       bake: [
-        "Alemania vota. Acá lo ves claro.",
-        'Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elegí un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Querés entender cómo los votos se convierten en escaños? La sección <a href="sitzverteilung.html">Sistema electoral</a> lo explica paso a paso.'
+        "Alemania vota. Aquí lo ves claro.",
+        'Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elige un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Quieres entender cómo los votos se convierten en escaños? La sección <a href="sitzverteilung.html">Sistema electoral</a> lo explica paso a paso.'
       ]
     },
     en: {
