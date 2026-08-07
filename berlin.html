@@ -51,8 +51,9 @@
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
   main { width: 80%; max-width: 860px; margin: 0 auto; padding: 32px 24px 56px; }
-  h1 { font-size: 24px; line-height: 1.2; margin: 0 0 6px; letter-spacing: -0.01em; }
-  .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 20px; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .page-kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+  h1 { font-size: 32px; font-weight: 800; line-height: 1.14; margin: 0 0 6px; letter-spacing: -0.02em; }
+  .lead { font-size: 16.5px; line-height: 1.55; color: #3d4450; margin: 0 0 20px; }
   .land-hero { display: flex; align-items: center; gap: 16px; margin: 0 0 14px; }
   .land-emblem { width: 62px; height: auto; flex: none; display: block; }
   .land-hero h1 { margin: 0; }
@@ -68,7 +69,8 @@
   .polls p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
   .polls a { color: var(--accent); font-weight: 600; }
 
-  h2 { font-size: 17px; margin: 28px 0 12px; }
+  h2 { position: relative; padding-left: 15px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin: 28px 0 12px; }
+  h2::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
   .hist-card { border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
   .hist-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; margin-bottom: 12px; }
   .hist-date { font-size: 15px; font-weight: 700; }
@@ -100,6 +102,7 @@
     main { width: auto; padding: 24px 16px 40px; }
     .bar-row { grid-template-columns: 92px 1fr 46px; }
     .land-emblem { width: 50px; }
+    h1 { font-size: 23px; }
   }
 </style>
 <script type="application/ld+json">
@@ -136,6 +139,7 @@
 </header>
 
 <main>
+  <div class="page-kicker" data-t="kicker"></div>
   <div class="land-hero">
     <svg class="land-emblem" viewBox="243.67 126.10 34.72 29.68" role="img" aria-label="Berlin" xmlns="http://www.w3.org/2000/svg"><path d="M262.84,132.1 L263.78,133.2 L263.85,135.03 L266.12,137.61 L268.83,138.93 L268.1,141.81 L269.41,141.66 L272.39,143.83 L271.82,145.51 L270.93,146.34 L270.64,148.3 L269.64,148.68 L268.72,149.78 L268.48,147.91 L268.1,147.45 L264.71,146.32 L263.2,146.67 L262.3,145.67 L261.15,146.19 L261.18,147.63 L259.45,147.33 L258.42,146.19 L257.16,146.53 L256.64,145.76 L255.19,146.33 L253.88,145.66 L251.89,146.77 L249.67,145.84 L250.52,144.37 L250.26,143.55 L250.44,142.53 L251.9,141.04 L251.36,139.76 L251.49,136.41 L251.83,135.62 L253.97,136.28 L253.71,135.38 L254.11,134.16 L255.52,133.77 L256.47,132.45 L256.94,132.5 L257.19,133.96 L259.06,134.29 L260.71,132.91 L261.62,133.31 L262.84,132.1Z" fill="var(--accent)"/></svg>
     <h1 data-t="h1">Abgeordnetenhauswahl in Berlin 2026</h1>
@@ -211,6 +215,7 @@
       docTitle: "Abgeordnetenhauswahl Berlin 2026 — Termin, Verlauf & Ergebnisse | Wahlblick",
       back: "← Zur Wahlkarte",
       h1: "Abgeordnetenhauswahl in Berlin 2026",
+      kicker: "Bundesland",
       lead: "Am 20. September 2026 wählt Berlin ein neues Abgeordnetenhaus — das Landesparlament des Stadtstaates. Hier findest du den Termin, die Ergebnisse der früheren Wahlen im Überblick und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.",
       kDate: "Wahltermin", vDate: "20. September 2026",
       kBody: "Gewählt wird", vBody: "Abgeordnetenhaus von Berlin",
@@ -229,6 +234,7 @@
       docTitle: "Elecciones a la Cámara de Diputados de Berlín 2026 — Fecha, historial y resultados | Wahlblick",
       back: "← Volver al mapa",
       h1: "Elecciones a la Cámara de Diputados de Berlín 2026",
+      kicker: "Estado federado",
       lead: "El 20 de septiembre de 2026, Berlín elige una nueva Cámara de Diputados (Abgeordnetenhaus), el parlamento estatal de la ciudad-estado. Aquí tienes la fecha, el historial de las elecciones anteriores y —la noche electoral— los resultados. Neutral, con fuentes y en tres idiomas.",
       kDate: "Fecha", vDate: "20 de septiembre de 2026",
       kBody: "Se elige", vBody: "Cámara de Diputados de Berlín",
@@ -247,6 +253,7 @@
       docTitle: "Berlin state election 2026 (Abgeordnetenhaus) — date, history & results | Wahlblick",
       back: "← Back to the map",
       h1: "Berlin state election 2026",
+      kicker: "Federal state",
       lead: "On 20 September 2026, Berlin elects a new Abgeordnetenhaus — the state parliament of the city-state. Here you'll find the date, the results of previous elections, and — on election night — the results. Neutral, sourced, and in three languages.",
       kDate: "Election date", vDate: "20 September 2026",
       kBody: "What's elected", vBody: "Berlin House of Representatives",
