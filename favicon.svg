@@ -1,4 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="13" fill="#004494"/>
-  <text x="32" y="34.5" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, 'Segoe UI', Arial, sans-serif" font-weight="800" font-size="38" fill="#ffffff">W</text>
+  <defs><clipPath id="r"><rect width="64" height="64" rx="10"/></clipPath></defs>
+  <g clip-path="url(#r)">
+    <rect width="64" height="64" fill="#004494"/>
+    <rect x="54" width="10" height="21.34" fill="#000000"/>
+    <rect x="54" y="21.34" width="10" height="21.34" fill="#dd0000"/>
+    <rect x="54" y="42.68" width="10" height="21.32" fill="#ffce00"/>
+    <g transform="translate(4.18 42.48) scale(0.28)" fill="#ffffff">
+      <path d="M 126.15625 0 L 99.953125 0 L 81.46875 -48.640625 L 63 0 L 36.796875 0 L 0.78125 -74.84375 L 32.625 -74.84375 L 51.40625 -27.296875 L 71.5625 -74.84375 L 91.390625 -74.84375 L 111.53125 -27.296875 L 130.328125 -74.84375 L 162.15625 -74.84375 Z M 126.15625 0 "/>
+    </g>
+  </g>
 </svg>

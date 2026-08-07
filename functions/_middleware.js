@@ -13,6 +13,9 @@
 //    innerHTML injection, which browsers would refuse to execute).
 
 const NAV_STYLE = `<style>
+.brand .brand-logo{display:block;height:38px;width:auto}
+@media (max-width:720px){.brand .brand-logo{height:34px}}
+@media (max-width:420px){.brand .brand-logo{height:30px}}
 .content-nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .content-nav a{font-size:12.5px;font-weight:600;color:var(--text-muted);text-decoration:none;white-space:nowrap}
 .content-nav a:hover{color:var(--accent)}
