@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Wahlblick — Wahlblick</title>
+<meta name="description" content="About Wahlblick: the goal, methodology and background of the independent election-map project for Germany.">
+<link rel="canonical" href="https://wahlblick.de/en/about.html">
+<link rel="alternate" hreflang="de" href="https://wahlblick.de/about.html">
+<link rel="alternate" hreflang="es" href="https://wahlblick.de/es/about.html">
+<link rel="alternate" hreflang="en" href="https://wahlblick.de/en/about.html">
+<link rel="alternate" hreflang="x-default" href="https://wahlblick.de/about.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wahlblick">
+<meta property="og:title" content="About Wahlblick">
+<meta property="og:description" content="The goal, methodology and background of the independent Wahlblick election-map project.">
+<meta property="og:image" content="https://wahlblick.de/og-image.png?v=2">
+<meta property="og:url" content="https://wahlblick.de/en/about.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://wahlblick.de/og-image.png?v=2">
+<meta name="twitter:description" content="About Wahlblick: the goal, methodology and background of the independent election-map project.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f8f9;
+    --border: #e3e6ea;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --accent: #004494;
+    --accent-ink: #ffffff;
+    --strip-bg: #12161c;
+    --strip-text: #c7cdd6;
+    --radius: 4px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .site-header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; flex: none; text-decoration: none; }
+  .brand .badge {
+    width: 34px; height: 34px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px;
+    flex: none;
+  }
+  .brand .flag-bar {
+    width: 7px; height: 34px;
+    border-radius: 2px;
+    flex: none;
+    background: linear-gradient(to bottom, #000 0% 33.33%, #dd0000 33.33% 66.66%, #ffce00 66.66% 100%);
+  }
+  .brand .wordmark { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+
+  .header-right { display: flex; align-items: center; gap: 8px 16px; flex-wrap: wrap; }
+  .back-link { font-size: 13px; font-weight: 600; text-decoration: none; color: var(--text); white-space: nowrap; }
+  .back-link:hover { color: var(--accent); }
+
+  .lang-switch { display: flex; align-items: center; gap: 2px; flex: none; }
+  .lang-switch button {
+    border: none; background: none; color: var(--text-muted);
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 5px 7px; cursor: pointer; border-radius: var(--radius);
+  }
+  .lang-switch button:hover { color: var(--text); background: var(--surface); }
+  .lang-switch button.active { color: var(--accent); }
+  .lang-switch .sep { color: var(--border); font-size: 12px; }
+
+  main { width: 80%; max-width: 1080px; margin: 0 auto; padding: 32px 24px 56px; }
+  h1 { font-size: 22px; margin: 0 0 24px; }
+
+  .about-hero { text-align: center; margin: 0 0 24px; }
+  .hero-arch { display: inline-block; width: 100%; max-width: 460px; height: auto; }
+
+  .panel {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    scroll-margin-top: 24px;
+  }
+  .panel h2 { font-size: 16px; margin: 0 0 14px; }
+  .panel p { font-size: 14.5px; line-height: 1.65; margin: 0 0 14px; color: var(--text); text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .panel p:last-child { margin-bottom: 0; }
+
+  footer {
+    max-width: 1200px; margin: 0 auto; padding: 18px 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer .foot-links { display: flex; gap: 8px 18px; flex-wrap: wrap; }
+  footer .foot-links a { display: inline-flex; align-items: center; min-height: 24px; }
+  footer a { color: var(--text-muted); }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  @media (max-width: 720px) {
+    .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
+    .brand .wordmark { font-size: 16px; }
+    main { width: auto; padding: 24px 16px 40px; }
+    .panel { padding: 20px; }
+    footer { padding: 16px 16px 32px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Über Wahlblick — Wahlblick",
+  "url": "https://wahlblick.de/about.html",
+  "description": "Über Wahlblick: Ziel, Methodik und Hintergrund des unabhängigen Wahlkarten-Projekts.",
+  "inLanguage": "de",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Wahlblick",
+    "url": "https://wahlblick.de/"
+  }
+}
+</script>
+</head>
+<body>
+<script>try{localStorage.setItem("wahlblickLang","en")}catch(e){}</script>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/index.html">
+      <span class="badge">W</span>
+      <span class="flag-bar" aria-hidden="true"></span>
+      <span class="wordmark">Wahlblick</span>
+    </a>
+    <div class="header-right">
+      <div id="contentNavMount"></div>
+      <div class="lang-switch" role="group" aria-label="Sprache / Language / Idioma">
+        <button type="button" data-lang="de" class="active">DE</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="es">ES</button>
+        <span class="sep">·</span>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a class="back-link" href="/index.html" data-back>← Zur Wahlkarte</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="about-hero">
+    <svg class="hero-arch" viewBox="0 0 600 196" role="img" aria-labelledby="archTitle archDesc" xmlns="http://www.w3.org/2000/svg">
+      <title id="archTitle">Wahlblick</title>
+      <desc id="archDesc">Brandenburger Tor, Reichstag und Olympiaturm München als flache Silhouetten.</desc>
+      <path d="M40,184 Q300,118 560,184" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.18" stroke-linecap="round"/>
+      <g transform="translate(120,159)" fill="var(--accent)" opacity="0.8">
+        <rect x="-42" y="-46" width="84" height="46"/>
+        <rect x="-12" y="-58" width="24" height="12"/>
+        <g fill="var(--bg)">
+          <rect x="-34" y="-34" width="6" height="34"/><rect x="-20" y="-34" width="6" height="34"/>
+          <rect x="-6" y="-34" width="6" height="34"/><rect x="8" y="-34" width="6" height="34"/>
+          <rect x="22" y="-34" width="6" height="34"/>
+        </g>
+      </g>
+      <g transform="translate(300,132)" fill="var(--accent)">
+        <rect x="-75" y="-46" width="150" height="46"/>
+        <rect x="-75" y="-66" width="20" height="22"/><rect x="55" y="-66" width="20" height="22"/>
+        <polygon points="-75,-66 -55,-66 -65,-79"/><polygon points="55,-66 75,-66 65,-79"/>
+        <polygon points="-36,-58 36,-58 0,-77"/>
+        <rect x="-34" y="-58" width="68" height="12"/>
+        <rect x="-20" y="-72" width="40" height="7"/>
+        <path d="M -20,-72 A 20 18 0 0 1 20,-72 Z"/>
+        <g fill="var(--bg)">
+          <rect x="-66" y="-30" width="7" height="16"/><rect x="-50" y="-30" width="7" height="16"/>
+          <rect x="43" y="-30" width="7" height="16"/><rect x="59" y="-30" width="7" height="16"/>
+          <rect x="-28" y="-46" width="4" height="12"/><rect x="-16" y="-46" width="4" height="12"/>
+          <rect x="-4" y="-46" width="4" height="12"/><rect x="8" y="-46" width="4" height="12"/>
+          <rect x="20" y="-46" width="4" height="12"/>
+        </g>
+      </g>
+      <g transform="translate(482,159)" fill="var(--accent)" opacity="0.85">
+        <polygon points="-5,0 5,0 3,-62 -3,-62"/>
+        <ellipse cx="0" cy="-63" rx="11" ry="2.6"/>
+        <ellipse cx="0" cy="-72" rx="8" ry="9"/>
+        <rect x="-2.2" y="-96" width="4.4" height="16"/>
+        <rect x="-1.1" y="-126" width="2.2" height="30"/>
+        <g fill="var(--bg)">
+          <rect x="-8" y="-73.2" width="16" height="2.4"/>
+          <rect x="-2" y="-116" width="4" height="1.6"/>
+          <rect x="-2" y="-106" width="4" height="1.6"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <h1 data-title></h1>
+
+  <div class="panel" id="about">
+    <h2 data-about-heading></h2>
+    <p data-about-p1></p>
+  </div>
+
+  <div class="panel" id="methodik">
+    <h2 data-method-heading></h2>
+    <p data-method-p1></p>
+    <p data-method-p2></p>
+    <p data-method-p3></p>
+  </div>
+
+  <div class="panel">
+    <h2 data-who-heading></h2>
+    <p data-who-p1></p>
+    <p data-who-p2></p>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-links">
+    <a href="/index.html" data-foot-back>← Zur Wahlkarte</a>
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html" data-foot-datenschutz>Datenschutzerklärung</a>
+    <a href="/disclaimer.html" data-foot-disclaimer>Haftungsausschluss</a>
+    <a href="/guide.html" data-foot-guide>Nutzungshinweise</a>
+  </div>
+</footer>
+
+<script>
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+  var CONTENT = {
+    de: {
+      title: "Über Wahlblick",
+      backLabel: "← Zur Wahlkarte",
+      aboutHeading: "Was ist Wahlblick?",
+      aboutP1: "Wahlblick ist ein unabhängiges, privates Datenprojekt: eine interaktive Karte Deutschlands, die zeigt, wie jedes der 16 Bundesländer bei der Bundestagswahl und bei der jeweils letzten Landtagswahl abgestimmt hat. Das Projekt richtet sich an alle, die sich für die politische Landkarte Deutschlands interessieren — insbesondere an die spanischsprachige Community in Deutschland, für die viele offizielle Quellen nur auf Deutsch verfügbar sind. Die Seite funktioniert vollständig auf Deutsch, Spanisch und Englisch.",
+      methodHeading: "Methodik",
+      methodP1: "Jede Zahl auf dieser Karte stammt aus einer offiziell zitierten Quelle — für die Bundestagswahl von der Bundeswahlleiterin, für jede Landtagswahl von der zuständigen Landeswahlbehörde. Direkte Links zu diesen Quellen finden sich bei jedem Ergebnis.",
+      methodP2: "Wenn eine offizielle Quelle für einen Wert keine Angabe macht (z. B. keine Vergleichszahl zur Vorwahl), wird das ausdrücklich als „keine Angabe“ gekennzeichnet — es wird nie eine Zahl erfunden oder geschätzt.",
+      methodP3: "Vor dem Laden von Ergebnissen aktueller oder bevorstehender Wahlen wird aktiv geprüft, ob die Wahl bereits stattgefunden hat, um weder verfrühte noch veraltete Ergebnisse zu zeigen.",
+      whoHeading: "Wer steckt dahinter",
+      whoP1: "Wahlblick ist ein persönliches Projekt von Pablo A. Churín und steht in keiner Verbindung zur Bundeswahlleiterin, dem Deutschen Bundestag oder den Landeswahlleitungen. Rechtliche Angaben: siehe Impressum.",
+      whoP2: "Für mich ist Wahlblick mehr als nur ein technisches Projekt. Ich bin gebürtiger Argentinier und lebe seit vielen Jahren in Deutschland, das für mich zu einer zweiten Heimat geworden ist. Mein Interesse an der politischen Entwicklung und Aktualität Deutschlands, mein Respekt vor seinen Institutionen und — ganz offen gesagt — meine Zuneigung und Bewunderung für dieses Land gehören zu den eigentlichen Beweggründen hinter dieser Plattform. Genau diese Beweggründe lassen das Projekt Stück für Stück über die reine Wahlkarte hinauswachsen — mit Inhalten wie dem Grundgesetz oder einem Verzeichnis nützlicher Anlaufstellen, die dieselbe Neugier und denselben Respekt für Deutschland weitergeben sollen, die mich selbst hierhergebracht haben."
+    },
+    es: {
+      title: "Sobre Wahlblick",
+      backLabel: "← Volver al mapa",
+      aboutHeading: "¿Qué es Wahlblick?",
+      aboutP1: "Wahlblick es un proyecto de datos independiente y privado: un mapa interactivo de Alemania que muestra cómo votó cada uno de los 16 estados federados en la elección federal (Bundestagswahl) y en la última elección estatal (Landtagswahl) de cada uno. El proyecto está pensado para cualquiera interesado en el mapa político de Alemania — en particular para la comunidad hispanohablante en Alemania, ya que muchas fuentes oficiales solo están disponibles en alemán. El sitio funciona completo en alemán, español e inglés.",
+      methodHeading: "Metodología",
+      methodP1: "Cada dato de este mapa viene de una fuente oficial citada — para el Bundestag, la Bundeswahlleiterin (autoridad electoral federal); para cada Landtag, la autoridad electoral del estado correspondiente. Los links directos a esas fuentes están en cada resultado.",
+      methodP2: "Cuando una fuente oficial no da un dato (por ejemplo, la variación respecto a la elección anterior), se marca explícitamente como «sin dato» — nunca se inventa ni se estima un número.",
+      methodP3: "Antes de cargar resultados de elecciones recientes o próximas, se verifica activamente si la elección ya ocurrió, para no mostrar resultados adelantados ni desactualizados.",
+      whoHeading: "Quién está detrás",
+      whoP1: "Wahlblick es un proyecto personal de Pablo A. Churín, sin ninguna vinculación con la Bundeswahlleiterin, el Bundestag alemán ni las autoridades electorales estatales. Datos legales: ver Impressum.",
+      whoP2: "Para mí, Wahlblick es mucho más que un proyecto técnico. Soy argentino de nacimiento y vivo hace muchos años en Alemania, que se convirtió en una segunda casa para mí. Mi interés por el desarrollo político y la actualidad de este país, mi respeto por sus instituciones y, dicho con total sinceridad, mi cariño y admiración por Alemania son, en el fondo, el verdadero motor detrás de esta plataforma. Esos mismos motivos son los que van haciendo crecer el proyecto más allá del mapa electoral — con contenidos como la sección de la Ley Fundamental o el directorio de direcciones útiles, pensados para transmitir esa misma curiosidad y respeto por Alemania que a mí me trajeron hasta acá."
+    },
+    en: {
+      title: "About Wahlblick",
+      backLabel: "← Back to the map",
+      aboutHeading: "What is Wahlblick?",
+      aboutP1: "Wahlblick is an independent, private data project: an interactive map of Germany showing how each of the 16 federal states voted in the federal election (Bundestagswahl) and in each state's most recent state election (Landtagswahl). The project is aimed at anyone interested in Germany's political map — particularly the Spanish-speaking community in Germany, since many official sources are only available in German. The site works fully in German, Spanish, and English.",
+      methodHeading: "Methodology",
+      methodP1: "Every figure on this map comes from a cited official source — for the Bundestag, the Federal Returning Officer (Bundeswahlleiterin); for each Landtag, that state's own electoral authority. Direct links to those sources are shown with each result.",
+      methodP2: "When an official source doesn't provide a figure (for example, the change compared to the previous election), it's explicitly marked as \"no data\" — a number is never invented or estimated.",
+      methodP3: "Before loading results for recent or upcoming elections, we actively check whether the election has actually taken place yet, to avoid showing premature or outdated results.",
+      whoHeading: "Who's behind it",
+      whoP1: "Wahlblick is a personal project by Pablo A. Churín, with no affiliation to the Federal Returning Officer, the German Bundestag, or any state electoral authority. Legal details: see Impressum.",
+      whoP2: "To me, Wahlblick is more than just a technical project. I'm Argentine by birth and have lived in Germany for many years now, a country that has become a second home to me. My interest in Germany's political development and current affairs, my respect for its institutions, and — quite honestly — my affection and admiration for this country are, at their core, the real motivation behind this platform. Those same motivations are what keep growing the project beyond the election map itself — with content like the Grundgesetz section or the address directory, meant to pass along that same curiosity and respect for Germany that brought me here in the first place."
+    }
+  };
+
+  var FOOT = {
+    de: { datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", guide: "Nutzungshinweise", holidays: "Feiertage", government: "Koalitionen", parties: "Parteien" },
+    es: { datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", grundgesetz: "Ley Fundamental", directory: "Directorio", guide: "Guía de uso", holidays: "Feriados", government: "Coaliciones", parties: "Partidos" },
+    en: { datenschutz: "Privacy Policy", disclaimer: "Disclaimer", grundgesetz: "Basic Law", directory: "Directory", guide: "User Guide", holidays: "Holidays", government: "Coalitions", parties: "Parties" }
+  };
+
+  function render(lang) {
+    document.documentElement.lang = lang;
+    var c = CONTENT[lang];
+    var f = FOOT[lang];
+    document.title = c.title + " — Wahlblick";
+    document.querySelector("[data-title]").textContent = c.title;
+    document.querySelector("[data-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-back]").textContent = c.backLabel;
+    document.querySelector("[data-foot-datenschutz]").textContent = f.datenschutz;
+    document.querySelector("[data-foot-disclaimer]").textContent = f.disclaimer;
+    document.querySelector("[data-foot-guide]").textContent = f.guide;
+    document.querySelector("[data-about-heading]").textContent = c.aboutHeading;
+    document.querySelector("[data-about-p1]").textContent = c.aboutP1;
+    document.querySelector("[data-method-heading]").textContent = c.methodHeading;
+    document.querySelector("[data-method-p1]").textContent = c.methodP1;
+    document.querySelector("[data-method-p2]").textContent = c.methodP2;
+    document.querySelector("[data-method-p3]").textContent = c.methodP3;
+    document.querySelector("[data-who-heading]").textContent = c.whoHeading;
+    document.querySelector("[data-who-p1]").textContent = c.whoP1;
+    document.querySelector("[data-who-p2]").textContent = c.whoP2;
+  }
+
+  var LANG_STORAGE_KEY = "wahlblickLang";
+
+  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
+      document.querySelectorAll(".lang-switch button").forEach(function (b) {
+        b.classList.toggle("active", b === btn);
+      });
+      render(lang);
+    });
+  });
+
+  var initialLang = localStorage.getItem(LANG_STORAGE_KEY) || "de";
+  if (!CONTENT[initialLang]) initialLang = "de";
+  document.querySelectorAll(".lang-switch button").forEach(function (b) {
+    b.classList.toggle("active", b.getAttribute("data-lang") === initialLang);
+  });
+  render(initialLang);
+
+  if (location.hash) {
+    var hashTarget = document.getElementById(location.hash.slice(1));
+    if (hashTarget) hashTarget.scrollIntoView();
+  } else {
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
