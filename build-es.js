@@ -62,6 +62,51 @@ const PAGES = [
     ogTitle: "Preguntas frecuentes sobre el sistema político de Alemania",
     ogDescription: "Elección y destitución del canciller, inmunidad e indemnidad, Hammelsprung, referéndums — respuestas neutrales en wahlblick.de.",
     twDescription: "Respuestas neutrales a preguntas frecuentes sobre el Bundestag y el sistema político de Alemania."
+  },
+  {
+    file: "sachsen-anhalt.html",
+    path: "sachsen-anhalt.html",
+    title: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick",
+    description: "Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en alemán, español e inglés.",
+    ogTitle: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha y resultados",
+    ogDescription: "Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.",
+    twDescription: "Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes."
+  },
+  {
+    file: "mecklenburg-vorpommern.html",
+    path: "mecklenburg-vorpommern.html",
+    title: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha, historial y resultados | Wahlblick",
+    description: "Elección estatal (Landtag) de Mecklemburgo-Pomerania Occidental el 13 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
+    ogTitle: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha y resultados",
+    ogDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental — neutral y con fuentes en wahlblick.de.",
+    twDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental."
+  },
+  {
+    file: "berlin.html",
+    path: "berlin.html",
+    title: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha, historial y resultados | Wahlblick",
+    description: "Elección al Abgeordnetenhaus (parlamento) de Berlín el 20 de septiembre de 2026: la fecha, los resultados de 2023, 2021 y 2016, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
+    ogTitle: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha y resultados",
+    ogDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín — neutral y con fuentes en wahlblick.de.",
+    twDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín."
+  },
+  {
+    file: "sitzverteilung.html",
+    path: "sitzverteilung.html",
+    title: "Cómo se reparten los escaños del Bundestag — Wahlblick",
+    description: "El segundo voto, la valla del 5 %, el método Sainte-Laguë y la reforma de 2023, explicados de forma simple — con los resultados reales de la elección federal de 2025.",
+    ogTitle: "Cómo se reparten los escaños del Bundestag — Wahlblick",
+    ogDescription: "El segundo voto, la valla del 5 %, el método Sainte-Laguë y la reforma de 2023, explicados con los resultados reales de 2025.",
+    twDescription: "El segundo voto, la valla del 5 %, el método Sainte-Laguë y la reforma de 2023, explicados con datos reales de 2025."
+  },
+  {
+    file: "parties.html",
+    path: "parties.html",
+    title: "Partidos políticos en Alemania — Wahlblick",
+    description: "Los partidos del Bundestag y de los parlamentos estatales (Landtage): año de fundación, historia y posiciones según su propio programa — neutral y sin valoración.",
+    ogTitle: "Partidos políticos en Alemania — Wahlblick",
+    ogDescription: "Los partidos del Bundestag y de los Landtage: fundación, historia y posiciones según su propio programa — neutral y sin valoración.",
+    twDescription: "Los partidos del Bundestag y de los parlamentos estatales: fundación, historia y posiciones — neutral."
   }
 ];
 
@@ -107,7 +152,7 @@ function generate(page) {
 
   // rutas absolutas para resolver desde /es/…  Solo links literales X.html(#ancla)
   // y assets X.svg/png/… — nunca el href="' + var + '" que arma el JS.
-  html = html.replace(/href="([\w-]+\.html(?:#[\w-]+)?)"/g, 'href="/$1"');
+  html = html.replace(/href="([\w-]+\.html(?:[?#][^"]*)?)"/g, 'href="/$1"');
   html = html.replace(/(href|src)="([\w-]+\.(?:svg|png|ico|jpe?g|webp))"/g, '$1="/$2"');
   // idem para los links con comillas escapadas dentro de los objetos i18n del JS
   html = html.replace(/href=\\"([\w-]+\.html(?:#[\w-]+)?)\\"/g, 'href=\\"/$1\\"');

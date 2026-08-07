@@ -25,6 +25,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://wahlblick.de/es/sachsen-anhalt.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/es/mecklenburg-vorpommern.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/es/berlin.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/es/sitzverteilung.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://wahlblick.de/es/parties.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://wahlblick.de/about.html</loc>
     <lastmod>2026-08-03</lastmod>
     <changefreq>monthly</changefreq>
