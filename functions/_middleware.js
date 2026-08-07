@@ -16,6 +16,19 @@ const NAV_STYLE = `<style>
 .brand .brand-logo{display:block;height:38px;width:auto}
 @media (max-width:720px){.brand .brand-logo{height:34px}}
 @media (max-width:420px){.brand .brand-logo{height:30px}}
+/* Interior "push-up": centralized typography lift for the standard mold
+   pages (.page-hero / .panel — sitzverteilung, parties, government,
+   grundgesetz, holidays, directory). Prefixed with `body` so it out-
+   specifies each page's own inline rules (injected after this shared
+   style). Kicker markup + text stay per-page; this only styles it. */
+body .page-kicker{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+body .page-hero h1{font-size:38px;letter-spacing:-0.022em;line-height:1.1}
+body .page-hero .intro{font-size:17px;line-height:1.55;color:#3d4450;max-width:620px}
+body .panel h2:not(.related-h){position:relative;padding-left:15px;font-size:20px;font-weight:800;letter-spacing:-0.01em}
+body .panel h2:not(.related-h)::before{content:"";position:absolute;left:0;top:.12em;width:5px;height:.82em;background:var(--accent);border-radius:2px}
+body .panel .panel-sub{font-size:13.5px}
+body .panel p.plain{font-size:15px}
+@media (max-width:720px){body .page-hero h1{font-size:27px}}
 .content-nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .content-nav a{font-size:12.5px;font-weight:600;color:var(--text-muted);text-decoration:none;white-space:nowrap}
 .content-nav a:hover{color:var(--accent)}
