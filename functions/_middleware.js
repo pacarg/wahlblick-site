@@ -58,6 +58,33 @@ const NAV_STYLE = `<style>
 .related-card-title::after{content:" →";color:var(--accent)}
 .related-card-desc{font-size:12.5px;line-height:1.45;color:var(--text-muted)}
 @media (max-width:720px){.related-grid{grid-template-columns:1fr}}
+/* Unified mobile hamburger for the internal pages — same pattern as the
+   home's bespoke menu, injected here so every page shares it. On mobile the
+   inline content-nav is hidden and this toggle opens a full-width panel on a
+   slightly off-white surface (so the reader sees they are in the access menu,
+   not the page). The home keeps its own menu and hides this injected one. */
+.content-nav-toggle{display:none;order:9;flex:none;width:32px;height:32px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg);padding:0;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.content-nav-toggle span{width:16px;height:2px;background:var(--text);border-radius:1px}
+.content-nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.content-nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.content-nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.content-nav-mobile{display:none;position:absolute;top:100%;left:0;right:0;z-index:90;flex-direction:column;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface);padding:6px 16px 12px;box-shadow:0 10px 24px rgba(0,0,0,.10)}
+.content-nav-mobile.open{display:flex}
+.content-nav-mobile a{font-size:14px;font-weight:600;color:var(--text);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border)}
+.content-nav-mobile a:last-child{border-bottom:none}
+.content-nav-mobile a.cnav-m-back{color:var(--text-muted);font-weight:700}
+.content-nav-mobile a.cnav-m-featured{color:var(--accent);font-weight:700}
+.cnav-m-group{display:flex;flex-direction:column;padding-left:14px;margin-left:2px;border-left:2px solid var(--border)}
+.cnav-m-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--text-muted);padding:10px 0 2px}
+.cnav-m-group a{font-size:13.5px}
+.cnav-m-share{display:flex;align-items:center;gap:8px;width:100%;margin-top:8px;padding:12px 0 4px;border:none;border-top:1px solid var(--border);background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--accent);cursor:pointer;text-align:left}
+.cnav-m-share svg{width:16px;height:16px;flex:none}
+@media (max-width:720px){
+  .content-nav{display:none}
+  .content-nav-share{display:none}
+  .content-nav-toggle{display:flex}
+  .site-header .back-link{display:none}
+}
 </style>`;
 
 const CHEVRON = '<svg class="chevron" width="9" height="6" viewBox="0 0 9 6" aria-hidden="true"><path d="M1 1l3.5 3.5L8 1" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -100,12 +127,24 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
 </button>
 <div class="content-nav-toast" id="shareToast" role="status" aria-live="polite"></div>
+<button type="button" class="content-nav-toggle" id="cnavToggle" aria-expanded="false" aria-controls="cnavMobile" aria-label="Menü"><span></span><span></span><span></span></button>
+<div class="content-nav-mobile" id="cnavMobile">
+  <a href="index.html" class="cnav-m-back" id="cnavBack">← Zur Wahlkarte</a>
+  <a href="landtagswahlen-2026.html" class="cnav-m-featured" id="cnavMElections">Landtagswahlen 2026</a>
+  <span class="cnav-m-label" id="cnavMPartiesLabel">Die Parteien</span>
+  <div class="cnav-m-group"><a href="parties.html" id="cnavMParties">Parteien</a></div>
+  <span class="cnav-m-label" id="cnavMWahlsystemLabel">Wahlsystem</span>
+  <div class="cnav-m-group"><a href="sitzverteilung.html" id="cnavMSitz">Sitzverteilung erklärt</a><a href="government.html" id="cnavMGov">Koalitionen</a></div>
+  <span class="cnav-m-label" id="cnavMGermanyLabel">Deutschland</span>
+  <div class="cnav-m-group"><a href="grundgesetz.html" id="cnavMGrund">Grundgesetz</a><a href="directory.html" id="cnavMDir">Adressverzeichnis</a><a href="holidays.html" id="cnavMHol">Feiertage</a><a href="faq.html" id="cnavMFaq">Häufige Fragen</a></div>
+  <button type="button" class="cnav-m-share" id="cnavMShare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span id="cnavMShareLabel">Teilen</span></button>
+</div>
 <script>
 (function () {
   var LABELS = {
-    de: { elections2026: "Landtagswahlen 2026", partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", faq: "Häufige Fragen", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert" },
-    es: { elections2026: "Elecciones estatales 2026", partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", faq: "Preguntas frecuentes", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado" },
-    en: { elections2026: "State elections 2026", partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", faq: "FAQ", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied" }
+    de: { elections2026: "Landtagswahlen 2026", partiesGroup: "Die Parteien", germany: "Deutschland", wahlsystem: "Wahlsystem", parties: "Parteien", government: "Koalitionen", grundgesetz: "Grundgesetz", directory: "Adressverzeichnis", holidays: "Feiertage", faq: "Häufige Fragen", sitzverteilung: "Sitzverteilung erklärt", shareLabel: "Teilen", shareCopied: "Link kopiert", backToMap: "← Zur Wahlkarte" },
+    es: { elections2026: "Elecciones estatales 2026", partiesGroup: "Los partidos", germany: "Alemania", wahlsystem: "Sistema electoral", parties: "Partidos", government: "Coaliciones", grundgesetz: "Ley Fundamental", directory: "Directorio", holidays: "Feriados", faq: "Preguntas frecuentes", sitzverteilung: "Cómo se reparten las bancas", shareLabel: "Compartir", shareCopied: "Link copiado", backToMap: "← Volver al mapa" },
+    en: { elections2026: "State elections 2026", partiesGroup: "Parties", germany: "Germany", wahlsystem: "Electoral system", parties: "Parties", government: "Coalitions", grundgesetz: "Basic Law", directory: "Directory", holidays: "Holidays", faq: "FAQ", sitzverteilung: "How seats are allocated", shareLabel: "Share", shareCopied: "Link copied", backToMap: "← Back to the map" }
   };
   function currentLang() { return localStorage.getItem("wahlblickLang") || "de"; }
   function applyLabels(lang) {
@@ -121,7 +160,20 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       navDirectoryLink: l.directory,
       navHolidaysLink: l.holidays,
       navFaqLink: l.faq,
-      navSitzverteilungLink: l.sitzverteilung
+      navSitzverteilungLink: l.sitzverteilung,
+      cnavBack: l.backToMap,
+      cnavMElections: l.elections2026,
+      cnavMPartiesLabel: l.partiesGroup,
+      cnavMParties: l.parties,
+      cnavMWahlsystemLabel: l.wahlsystem,
+      cnavMSitz: l.sitzverteilung,
+      cnavMGov: l.government,
+      cnavMGermanyLabel: l.germany,
+      cnavMGrund: l.grundgesetz,
+      cnavMDir: l.directory,
+      cnavMHol: l.holidays,
+      cnavMFaq: l.faq,
+      cnavMShareLabel: l.shareLabel
     };
     for (var id in map) {
       var el = document.getElementById(id);
@@ -182,6 +234,36 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
       if (navigator.share) {
         navigator.share(shareData).catch(function () {});
       } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(location.href).then(function () {
+          showShareToast((LABELS[currentLang()] || LABELS.de).shareCopied);
+        }).catch(function () {});
+      }
+    });
+  }
+
+  var cnavToggle = document.getElementById("cnavToggle");
+  var cnavMobile = document.getElementById("cnavMobile");
+  if (cnavToggle && cnavMobile) {
+    function closeCnav() { cnavMobile.classList.remove("open"); cnavToggle.setAttribute("aria-expanded", "false"); }
+    cnavToggle.addEventListener("click", function () {
+      var open = cnavMobile.classList.toggle("open");
+      cnavToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", function (e) {
+      if (!cnavMobile.classList.contains("open")) return;
+      if (cnavToggle.contains(e.target) || cnavMobile.contains(e.target)) return;
+      closeCnav();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeCnav();
+    });
+  }
+  var cnavMShare = document.getElementById("cnavMShare");
+  if (cnavMShare) {
+    cnavMShare.addEventListener("click", function () {
+      var shareData = { title: document.title, url: location.href };
+      if (navigator.share) { navigator.share(shareData).catch(function () {}); }
+      else if (navigator.clipboard) {
         navigator.clipboard.writeText(location.href).then(function () {
           showShareToast((LABELS[currentLang()] || LABELS.de).shareCopied);
         }).catch(function () {});
