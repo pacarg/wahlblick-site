@@ -237,41 +237,48 @@
 
   .welcome {
     border-bottom: 1px solid var(--border);
-    background: var(--surface);
+    background: var(--bg);
   }
   .welcome-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 18px 24px;
+    padding: 48px 24px 36px;
   }
-  .welcome-text { width: 80%; margin: 0 auto; }
+  .welcome-text { max-width: 860px; margin: 0 auto; text-align: center; }
   .welcome-title {
-    margin: 0 0 6px;
-    font-size: 20px;
+    margin: 0 auto 16px;
+    font-size: 38px;
     font-weight: 800;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+    letter-spacing: -0.022em;
+    line-height: 1.08;
     color: var(--text);
   }
   .welcome-body {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--text-muted);
-    text-align: justify;
-    hyphens: auto;
-    -webkit-hyphens: auto;
+    margin: 0 auto;
+    max-width: 600px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: #3d4450;
   }
   .welcome-body a { color: var(--accent); font-weight: 600; }
-  .welcome-cta { margin-top: 18px; text-align: center; }
+  .welcome-title .wt-1 { font-size: 40px; }
+  .welcome-title .wt-2 { font-size: 27px; }
+  .welcome-cta { margin-top: 22px; text-align: center; }
   .welcome-elections { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 999px; padding: 11px 22px; text-decoration: none; box-shadow: 0 1px 3px rgba(0,52,148,.22); transition: background .15s, border-color .15s; }
   .welcome-elections:hover { background: #00366f; border-color: #00366f; }
   .welcome-elections svg { width: 15px; height: 15px; flex: none; }
+  .start-cue { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 11px 16px; background: #eaf0f8; border-bottom: 1px solid var(--border); }
+  .start-cue-main { display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .start-cue-guide { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(0,68,148,.35); padding-bottom: 1px; }
+  .start-cue-guide:hover { border-bottom-color: var(--accent); }
+  .start-cue-text { font-size: 14px; font-weight: 600; color: var(--accent); }
+  .start-cue-arrow { font-size: 16px; line-height: 1; color: var(--accent); }
   @media (max-width: 720px) {
-    .welcome-inner { padding: 14px 16px; }
-    .welcome-text { width: auto; }
-    .welcome-title { font-size: 17px; }
-    .welcome-body { font-size: 13px; line-height: 1.5; }
+    .welcome-inner { padding: 30px 16px 26px; }
+    .welcome-title .wt-1 { font-size: 28px; }
+    .welcome-title .wt-2 { font-size: 19px; }
+    .welcome-body { font-size: 15px; line-height: 1.5; }
+    .start-cue-text { font-size: 13px; }
   }
 
   .land-tabs {
@@ -358,15 +365,22 @@
     flex-wrap: wrap;
   }
   .panel-head > div { min-width: 0; }
-  .panel-head h2 { margin: 0; font-size: 14px; font-weight: 700; }
+  .panel-head h2 { margin: 0; font-size: 16.5px; font-weight: 700; }
   .panel-head .hint { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
   .eyebrow-note { display: none; margin: 3px 0 0; font-size: 11px; color: var(--text-muted); }
   .eyebrow-note.visible { display: block; }
+  .map-panel .panel-head .map-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin: 0 0 7px; }
+  .map-panel .panel-head .map-controls { display: flex; gap: 20px; flex-wrap: wrap; margin: 12px 0; }
+  .map-panel .panel-head .map-ctrl { display: flex; flex-direction: column; gap: 5px; }
+  .map-panel .panel-head .map-ctrl-label { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); }
+  .map-panel .panel-head .map-controls select#yearSelect { font-size: 13px; font-weight: 800; color: var(--text); border: 1.5px solid var(--accent); border-radius: var(--radius-pill); padding: 6px 32px 6px 14px; background-position: calc(100% - 14px) center, calc(100% - 9px) center; background-size: 5px 5px, 5px 5px; }
+  .panel-head .hidden { display: none !important; }
   .panel-body { padding: 16px; }
 
   .map-head-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
   .compare-toggle {
     flex: none;
+    display: inline-flex; align-items: center; gap: 6px;
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text-muted);
@@ -536,8 +550,23 @@
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 
-  .results-empty { color: var(--text-muted); font-size: 13.5px; line-height: 1.5; }
-  .results-empty strong { display: block; color: var(--text); font-size: 14.5px; margin-bottom: 4px; }
+  .results-empty { position: relative; background: #eaf0f8; border-radius: 10px; padding: 14px 16px 14px 52px; color: #33414f; font-size: 15px; line-height: 1.5; }
+  .results-empty::before { content: ""; position: absolute; left: 14px; top: 13px; width: 26px; height: 26px; border-radius: 7px; background: #004494 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") center / 15px no-repeat; }
+  .results-empty strong { display: block; color: #141412; font-size: 16px; margin-bottom: 4px; }
+  .results-panel .panel-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+  .results-panel .panel-head h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+  .home-tiles { max-width: 1200px; margin: 28px auto 12px; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .home-tile { position: relative; display: block; text-decoration: none; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; transition: border-color .14s, box-shadow .14s, transform .14s; }
+  .home-tile:hover { border-color: var(--accent); box-shadow: 0 6px 20px rgba(0,52,148,.10); transform: translateY(-2px); }
+  .home-tile-kicker { font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .home-tile-title { font-size: 20px; font-weight: 800; letter-spacing: -0.01em; color: var(--text); line-height: 1.15; margin-bottom: 6px; }
+  .home-tile-desc { font-size: 14px; line-height: 1.5; color: var(--text-muted); max-width: 42ch; }
+  .home-tile-arrow { position: absolute; top: 22px; right: 24px; font-size: 20px; color: var(--accent); transition: transform .14s; }
+  .home-tile:hover .home-tile-arrow { transform: translateX(3px); }
+  @media (max-width: 720px) {
+    .home-tiles { grid-template-columns: 1fr; padding: 0 16px; gap: 12px; margin-top: 22px; }
+    .home-tile-title { font-size: 18px; }
+  }
 
   .stat-line {
     display: flex; align-items: baseline; gap: 6px;
@@ -637,8 +666,8 @@
 </script>
 </head>
 <body>
-<script>try{localStorage.setItem("wahlblickLang","en")}catch(e){}</script>
 
+<script>try{localStorage.setItem("wahlblickLang","en")}catch(e){}</script>
 <div class="sticky-nav">
 <header class="site-header">
   <div class="header-inner">
@@ -657,23 +686,23 @@
     </button>
   </div>
   <div class="mobile-menu" id="mobileMenu" hidden>
-    <a href="/landtagswahlen-2026.html" id="mobileNavElections" class="mobile-menu-featured">Landtagswahlen 2026</a>
+    <a href="landtagswahlen-2026.html" id="mobileNavElections" class="mobile-menu-featured">Landtagswahlen 2026</a>
     <a href="#quellen" id="mobileNavQuellen">Quellen</a>
     <span class="mobile-menu-label" id="mobileMenuPartiesLabel">Die Parteien</span>
     <div class="mobile-menu-group">
-      <a href="/parties.html" id="mobileNavPartiesLink">Parteien</a>
+      <a href="parties.html" id="mobileNavPartiesLink">Parteien</a>
     </div>
     <span class="mobile-menu-label" id="mobileMenuWahlsystemLabel">Wahlsystem</span>
     <div class="mobile-menu-group">
-      <a href="/sitzverteilung.html" id="mobileNavSitzverteilungLink">Sitzverteilung erklärt</a>
-      <a href="/government.html" id="mobileNavGovernmentLink">Koalitionen</a>
+      <a href="sitzverteilung.html" id="mobileNavSitzverteilungLink">Sitzverteilung erklärt</a>
+      <a href="government.html" id="mobileNavGovernmentLink">Koalitionen</a>
     </div>
     <span class="mobile-menu-label" id="mobileMenuGermanyLabel">Deutschland</span>
     <div class="mobile-menu-group">
-      <a href="/grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
-      <a href="/directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
-      <a href="/holidays.html" id="mobileNavHolidaysLink">Feiertage</a>
-      <a href="/faq.html" id="mobileNavFaqLink">Häufige Fragen</a>
+      <a href="grundgesetz.html" id="mobileNavGrundgesetzLink">Grundgesetz</a>
+      <a href="directory.html" id="mobileNavDirectoryLink">Adressverzeichnis</a>
+      <a href="holidays.html" id="mobileNavHolidaysLink">Feiertage</a>
+      <a href="faq.html" id="mobileNavFaqLink">Häufige Fragen</a>
     </div>
     <button type="button" class="mobile-menu-share" id="mobileShareBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
@@ -690,14 +719,6 @@
     </div>
     <div class="bar-right">
       <div id="contentNavMount"></div>
-      <div class="year-wrap">
-        <select id="yearSelect" aria-label="Wahljahr">
-          <option value="2025">2025</option>
-          <option value="2021">2021</option>
-          <option value="2017">2017</option>
-          <option value="2013">2013</option>
-        </select>
-      </div>
     </div>
   </div>
 </nav>
@@ -706,12 +727,20 @@
 <section class="welcome" aria-labelledby="welcomeTitle">
   <div class="welcome-inner">
     <div class="welcome-text">
-      <h1 class="welcome-title" id="welcomeTitle">Germany votes. See it clearly.</h1>
-      <p class="welcome-body" id="welcomeBody">Wahlblick is an interactive, independent map of Germany's election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href="/sitzverteilung.html">Electoral system</a> section explains it step by step.</p>
-      <div class="welcome-cta"><a class="welcome-elections" id="welcomeElections" href="/landtagswahlen-2026.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="9.5" rx="1.5"></rect><path d="M9 11h6"></path><path d="M8.6 7.8l2.1 2.1L15.6 4.8"></path></svg><span id="welcomeElectionsText">Landtagswahlen 2026 →</span></a></div>
+      <h1 class="welcome-title" id="welcomeTitle">Germany votes.<br>See it clearly.</h1>
+      <p class="welcome-body" id="welcomeBody">The independent, interactive map of Germany's election results — the Bundestag and all 16 state parliaments (Landtage), with their history.</p>
+      <div class="welcome-cta"><a class="welcome-elections" id="welcomeElections" href="landtagswahlen-2026.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="11" width="17" height="9.5" rx="1.5"></rect><path d="M9 11h6"></path><path d="M8.6 7.8l2.1 2.1L15.6 4.8"></path></svg><span id="welcomeElectionsText">Landtagswahlen 2026 →</span></a></div>
     </div>
   </div>
 </section>
+
+<div class="start-cue">
+  <div class="start-cue-main">
+    <span class="start-cue-text" id="startCueText">Wählen Sie ein Bundesland, um zu starten</span>
+    <span class="start-cue-arrow" aria-hidden="true">↓</span>
+  </div>
+  <a class="start-cue-guide" href="guide.html" id="startCueGuide">Neu hier? So funktioniert die Karte →</a>
+</div>
 
 <div class="land-tabs" id="landTabs"></div>
 <div class="land-select-wrap">
@@ -726,15 +755,27 @@
   <section class="panel map-panel">
     <div class="panel-head">
       <div>
-        <h2 id="mapEyebrow">Bundestagswahl 2025 · Zweitstimmen</h2>
+        <div class="map-kicker" id="mapKicker">Bundestagswahl · Zweitstimmen</div>
+        <h2 id="mapEyebrow">Ergebnisse nach Bundesland</h2>
+        <div class="map-controls">
+          <div class="map-ctrl" id="yearWrap">
+            <label class="map-ctrl-label" id="yearLabel" for="yearSelect">Wahljahr</label>
+            <select id="yearSelect" aria-label="Wahljahr">
+              <option value="2025">2025</option>
+              <option value="2021">2021</option>
+              <option value="2017">2017</option>
+              <option value="2013">2013</option>
+            </select>
+          </div>
+          <div class="map-ctrl">
+            <label class="map-ctrl-label" id="partyLabel" for="partySelect">Kartenansicht</label>
+            <select id="partySelect" aria-label="Partei-Ansicht">
+              <option value="" data-placeholder>— Partei-Ansicht —</option>
+            </select>
+          </div>
+        </div>
         <p class="eyebrow-note visible" id="bundestagNote">Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.</p>
-      </div>
-      <div class="map-head-actions">
-        <span class="hint" id="mapHint">Hover oder Klick für Details</span>
-        <select id="partySelect" aria-label="Partei-Ansicht">
-          <option value="" data-placeholder>— Partei-Ansicht —</option>
-        </select>
-        <button type="button" class="compare-toggle" id="compareToggle" aria-pressed="false">Vergleichen</button>
+        <span class="hint hidden" id="mapHint"></span>
       </div>
     </div>
     <div class="panel-body">
@@ -753,9 +794,11 @@
   <section class="panel results-panel" id="resultsCard">
     <div class="panel-head">
       <div>
+        <div class="panel-kicker" id="resultsKicker">Ergebnisse</div>
         <h2 id="landName">Kein Bundesland ausgewählt</h2>
         <div class="landtag-year-tabs" id="landtagYearTabs" style="display:none;"></div>
       </div>
+      <button type="button" class="compare-toggle" id="compareToggle" aria-pressed="false"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line></svg><span id="compareLabel">Vergleichen</span></button>
     </div>
     <div class="panel-body">
       <div class="results-empty" id="resultsEmpty">
@@ -773,15 +816,30 @@
   </section>
 </main>
 
+<section class="home-tiles">
+  <a class="home-tile" href="landtagswahlen-2026.html">
+    <span class="home-tile-arrow" aria-hidden="true">→</span>
+    <div class="home-tile-kicker" id="tile1Kicker">Wahltermine</div>
+    <div class="home-tile-title" id="tile1Title">Landtagswahlen 2026</div>
+    <div class="home-tile-desc" id="tile1Desc">Welche Bundesländer wählen 2026 — und wann.</div>
+  </a>
+  <a class="home-tile" href="sitzverteilung.html">
+    <span class="home-tile-arrow" aria-hidden="true">→</span>
+    <div class="home-tile-kicker" id="tile2Kicker">Wahlsystem</div>
+    <div class="home-tile-title" id="tile2Title">Wie aus Stimmen Sitze werden</div>
+    <div class="home-tile-desc" id="tile2Desc">Das deutsche Wahlsystem, Schritt für Schritt erklärt.</div>
+  </a>
+</section>
+
 <footer id="quellen">
   <div class="foot-links">
     <a href="https://www.bundeswahlleiterin.de" target="_blank" rel="noopener">Bundeswahlleiterin</a>
-    <a href="/about.html" id="footAbout">Über Wahlblick</a>
-    <a href="/about.html#methodik" id="footMethod">Methodik</a>
+    <a href="about.html" id="footAbout">Über Wahlblick</a>
+    <a href="about.html#methodik" id="footMethod">Methodik</a>
     <a href="/impressum.html">Impressum</a>
     <a href="/datenschutz.html" id="footDatenschutzLink">Datenschutzerklärung</a>
     <a href="/disclaimer.html" id="footDisclaimerLink">Haftungsausschluss</a>
-    <a href="/guide.html" id="footGuideLink">Nutzungshinweise</a>
+    <a href="guide.html" id="footGuideLink">Nutzungshinweise</a>
   </div>
   <p id="footDisclaimer">Wahlblick ist ein unabhängiges Projekt und keine amtliche Quelle. Alle Zahlen stammen von der Bundeswahlleiterin und werden mit Link zur Originalquelle angezeigt. Prototyp-Version — nicht alle Länder und Wahljahre sind bereits hinterlegt.</p>
   <div class="foot-bottom-row">
@@ -2275,6 +2333,8 @@
       navShareLabel: "Teilen",
       navGermanyLabel: "Deutschland",
       mapHint: "Hover oder Klick für Details",
+      yearLabel: "Wahljahr",
+      partyLabel: "Kartenansicht",
       compareToggleLabel: "Vergleichen",
       compareHintActive: "Bis zu 3 Länder auf der Karte auswählen",
       compareEmptyPrompt: "Wählen Sie bis zu 3 Länder auf der Karte oder in der Liste aus, um sie zu vergleichen.",
@@ -2289,14 +2349,25 @@
       partyViewClearFilter: "Alle anzeigen",
       partyViewHintActive: "Länder anklicken, um die Liste zu filtern",
       eyebrowBundestag: "Bundestagswahl {year} · Zweitstimmen",
+      eyebrowBundestagKicker: "Bundestagswahl · Zweitstimmen",
       bundestagNote: "Aktuellste Bundestagswahl — die nächste ist regulär erst 2029 fällig.",
-      welcomeTitle: "Deutschland wählt — hier behalten Sie den Überblick.",
+      welcomeTitle: "<span class=\"wt-1\">Deutschland wählt.</span><br><span class=\"wt-2\">Hier behalten Sie den Überblick.</span>",
+      welcomeStartCue: "Wählen Sie ein Bundesland, um zu starten",
+      startCueGuide: "Neu hier? So funktioniert die Karte →",
       welcomeElections: "Landtagswahlen 2026 →",
       navElectionsHub: "Landtagswahlen 2026",
-      welcomeBody: "Wahlblick ist eine interaktive, unabhängige Karte der Wahlergebnisse in Deutschland. Wählen Sie ein Bundesland, um zu sehen, wer gewonnen hat, mit welchem Ergebnis und wie es sich zur vorigen Wahl verändert hat — für die Bundestagswahl und die 16 Landtage, mit ihrer Geschichte. Sie möchten wissen, wie aus Stimmen Sitze werden? Der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> erklärt es Schritt für Schritt.",
+      welcomeBody: "Die unabhängige interaktive Karte der Wahlergebnisse — Bundestag und alle 16 Landtage, mit ihrer Geschichte.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
+      mapTitle: "Ergebnisse nach Bundesland",
       emptyTitle: "Kein Bundesland ausgewählt",
       emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
+      resultsKicker: "Ergebnisse",
+      tile1Kicker: "Wahltermine",
+      tile1Title: "Landtagswahlen 2026",
+      tile1Desc: "Welche Bundesländer wählen 2026 — und wann.",
+      tile2Kicker: "Wahlsystem",
+      tile2Title: "Wie aus Stimmen Sitze werden",
+      tile2Desc: "Das deutsche Wahlsystem, Schritt für Schritt erklärt.",
       noDataBody: "Für {scope} sind in diesem Prototyp noch keine Daten hinterlegt.",
       scopeBundestag: "die Bundestagswahl {year}",
       scopeLandtag: "die Landtagswahl",
@@ -2342,6 +2413,8 @@
       navShareLabel: "Compartir",
       navGermanyLabel: "Alemania",
       mapHint: "Pasa el mouse o haz click para ver detalles",
+      yearLabel: "Año",
+      partyLabel: "Vista del mapa",
       compareToggleLabel: "Comparar",
       compareHintActive: "Elige hasta 3 estados federados en el mapa",
       compareEmptyPrompt: "Elige hasta 3 estados federados en el mapa o en la lista para compararlos.",
@@ -2356,14 +2429,25 @@
       partyViewClearFilter: "Ver todos",
       partyViewHintActive: "Clickeá Länder para filtrar la lista",
       eyebrowBundestag: "Elección federal {year} · voto de lista",
+      eyebrowBundestagKicker: "Elección federal · voto de lista",
       bundestagNote: "Última elección federal — la próxima recién en 2029, salvo una elección anticipada.",
-      welcomeTitle: "Alemania vota. Aquí lo ves claro.",
+      welcomeTitle: "<span class=\"wt-1\">Alemania vota.</span><br><span class=\"wt-2\">Aquí lo ves claro.</span>",
+      welcomeStartCue: "Elige un estado para empezar",
+      startCueGuide: "¿Nuevo aquí? Cómo funciona el mapa →",
       welcomeElections: "Elecciones estatales 2026 →",
       navElectionsHub: "Elecciones estatales 2026",
-      welcomeBody: "Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elige un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Quieres entender cómo los votos se convierten en escaños? La sección <a href=\"/sitzverteilung.html\">Sistema electoral</a> lo explica paso a paso.",
+      welcomeBody: "El mapa interactivo e independiente de los resultados electorales — el Bundestag y los 16 parlamentos regionales (Landtage), con su historial.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
+      mapTitle: "Resultados por estado",
       emptyTitle: "Ningún estado federado seleccionado",
       emptyBody: "Haz click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
+      resultsKicker: "Resultados",
+      tile1Kicker: "Fechas electorales",
+      tile1Title: "Elecciones estatales 2026",
+      tile1Desc: "Qué estados federados votan en 2026 — y cuándo.",
+      tile2Kicker: "Sistema electoral",
+      tile2Title: "Cómo los votos se vuelven escaños",
+      tile2Desc: "El sistema electoral alemán, explicado paso a paso.",
       noDataBody: "Todavía no hay datos cargados para {scope} en este prototipo.",
       scopeBundestag: "la elección federal {year}",
       scopeLandtag: "la elección estatal",
@@ -2409,6 +2493,8 @@
       navShareLabel: "Share",
       navGermanyLabel: "Germany",
       mapHint: "Hover or click for details",
+      yearLabel: "Year",
+      partyLabel: "Map view",
       compareToggleLabel: "Compare",
       compareHintActive: "Select up to 3 federal states on the map",
       compareEmptyPrompt: "Select up to 3 federal states on the map or in the list to compare them.",
@@ -2423,14 +2509,25 @@
       partyViewClearFilter: "Show all",
       partyViewHintActive: "Click federal states to filter the list",
       eyebrowBundestag: "Federal election {year} · party-list vote",
+      eyebrowBundestagKicker: "Federal election · party-list vote",
       bundestagNote: "Most recent federal election — the next one isn't due until 2029, barring a snap election.",
-      welcomeTitle: "Germany votes. See it clearly.",
+      welcomeTitle: "<span class=\"wt-1\">Germany votes.</span><br><span class=\"wt-2\">See it clearly.</span>",
+      welcomeStartCue: "Pick a state to get started",
+      startCueGuide: "New here? How the map works →",
       welcomeElections: "State elections 2026 →",
       navElectionsHub: "State elections 2026",
-      welcomeBody: "Wahlblick is an interactive, independent map of Germany's election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href=\"/sitzverteilung.html\">Electoral system</a> section explains it step by step.",
+      welcomeBody: "The independent, interactive map of Germany's election results — the Bundestag and all 16 state parliaments (Landtage), with their history.",
       eyebrowLandtag: "State election · most recent per state",
+      mapTitle: "Results by state",
       emptyTitle: "No federal state selected",
       emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
+      resultsKicker: "Results",
+      tile1Kicker: "Election dates",
+      tile1Title: "State elections 2026",
+      tile1Desc: "Which federal states vote in 2026 — and when.",
+      tile2Kicker: "Electoral system",
+      tile2Title: "How votes become seats",
+      tile2Desc: "The German electoral system, explained step by step.",
       noDataBody: "No data has been loaded yet for {scope} in this prototype.",
       scopeBundestag: "the {year} federal election",
       scopeLandtag: "the state election",
@@ -2877,9 +2974,12 @@
 
   function updateMapHint() {
     var hintEl = document.getElementById("mapHint");
+    if (!hintEl) return;
+    var active = state.compareMode || state.partyView;
     if (state.compareMode) hintEl.textContent = tr("compareHintActive");
     else if (state.partyView) hintEl.textContent = tr("partyViewHintActive");
-    else hintEl.textContent = tr("mapHint");
+    else hintEl.textContent = "";
+    hintEl.classList.toggle("hidden", !active);
   }
 
   function togglePartyViewFilter(id) {
@@ -3107,7 +3207,6 @@
   });
   document.getElementById("yearSelect").addEventListener("change", function (e) {
     state.year = e.target.value;
-    mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
     refreshPartySelect();
     paintMap();
     renderLegend();
@@ -3119,15 +3218,15 @@
     document.querySelectorAll(".view-pills button").forEach(function (btn) {
       btn.setAttribute("aria-pressed", btn.getAttribute("data-view") === view);
     });
-    document.querySelector(".control-bar .year-wrap").classList.toggle("hidden", view !== "bundestag");
+    var isBt = view === "bundestag";
+    document.getElementById("yearWrap").classList.toggle("hidden", !isBt);
+    document.getElementById("mapKicker").textContent = isBt ? tr("eyebrowBundestagKicker") : tr("eyebrowLandtag");
     if (view === "landtag") {
       banner.textContent = tr("bannerLandtag");
       banner.classList.add("visible");
-      mapEyebrow.textContent = tr("eyebrowLandtag");
       bundestagNoteEl.classList.remove("visible");
     } else {
       banner.classList.remove("visible");
-      mapEyebrow.textContent = fmt(tr("eyebrowBundestag"), { year: state.year });
       bundestagNoteEl.classList.add("visible");
     }
     refreshPartySelect();
@@ -3141,9 +3240,13 @@
     document.querySelectorAll(".lang-switch button").forEach(function (b) {
       b.classList.toggle("active", b.getAttribute("data-lang") === currentLang);
     });
-    document.getElementById("welcomeTitle").textContent = tr("welcomeTitle");
+    document.getElementById("welcomeTitle").innerHTML = tr("welcomeTitle");
     document.getElementById("welcomeBody").innerHTML = tr("welcomeBody");
     document.getElementById("welcomeElectionsText").textContent = tr("welcomeElections");
+    var startCueEl = document.getElementById("startCueText"); if (startCueEl) startCueEl.textContent = tr("welcomeStartCue");
+    var scg = document.getElementById("startCueGuide"); if (scg) scg.textContent = tr("startCueGuide");
+    var rk = document.getElementById("resultsKicker"); if (rk) rk.textContent = tr("resultsKicker");
+    ["tile1Kicker","tile1Title","tile1Desc","tile2Kicker","tile2Title","tile2Desc"].forEach(function (k) { var el = document.getElementById(k); if (el) el.textContent = tr(k); });
     document.getElementById("mobileNavElections").textContent = tr("navElectionsHub");
     document.getElementById("mobileNavQuellen").textContent = tr("navQuellen");
     document.getElementById("mobileNavGrundgesetzLink").textContent = tr("footGrundgesetzLink");
@@ -3158,7 +3261,7 @@
     document.getElementById("mobileNavSitzverteilungLink").textContent = tr("navSitzverteilungLink");
     document.getElementById("mobileShareLabel").textContent = tr("navShareLabel");
     updateMapHint();
-    document.getElementById("compareToggle").textContent = tr("compareToggleLabel");
+    document.getElementById("compareLabel").textContent = tr("compareToggleLabel");
     var partyPlaceholderOpt = partySelectEl.querySelector("[data-placeholder]");
     if (partyPlaceholderOpt) partyPlaceholderOpt.textContent = tr("partySelectPlaceholder");
     bundestagNoteEl.textContent = tr("bundestagNote");
@@ -3170,7 +3273,10 @@
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     document.getElementById("footCredit").textContent = tr("footCredit");
     document.getElementById("footUpdated").textContent = tr("footUpdatedLabel") + ": " + fmtDate(SITE_LAST_UPDATED);
-    mapEyebrow.textContent = state.view === "bundestag" ? fmt(tr("eyebrowBundestag"), { year: state.year }) : tr("eyebrowLandtag");
+    document.getElementById("mapKicker").textContent = state.view === "bundestag" ? tr("eyebrowBundestagKicker") : tr("eyebrowLandtag");
+    mapEyebrow.textContent = tr("mapTitle");
+    document.getElementById("yearLabel").textContent = tr("yearLabel");
+    document.getElementById("partyLabel").textContent = tr("partyLabel");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
     updateResultsView();
     Array.prototype.forEach.call(landGroup.children, function (el) {
