@@ -755,7 +755,7 @@
     <div class="panel-head">
       <div>
         <div class="map-kicker" id="mapKicker">Bundestagswahl · Zweitstimmen</div>
-        <h2 id="mapEyebrow" class="hidden">Bundestagswahl 2025 · Zweitstimmen</h2>
+        <h2 id="mapEyebrow">Ergebnisse nach Bundesland</h2>
         <div class="map-controls">
           <div class="map-ctrl" id="yearWrap">
             <label class="map-ctrl-label" id="yearLabel" for="yearSelect">Wahljahr</label>
@@ -2357,6 +2357,7 @@
       navElectionsHub: "Landtagswahlen 2026",
       welcomeBody: "Die unabhängige interaktive Karte der Wahlergebnisse — Bundestag und alle 16 Landtage, mit ihrer Geschichte.",
       eyebrowLandtag: "Landtagswahl · jeweils letzte Wahl je Land",
+      mapTitle: "Ergebnisse nach Bundesland",
       emptyTitle: "Kein Bundesland ausgewählt",
       emptyBody: "Klicken Sie auf ein Bundesland auf der Karte oder in der Liste oben, um Ergebnisse, Wahlbeteiligung und Quelle zu sehen.",
       resultsKicker: "Ergebnisse",
@@ -2436,6 +2437,7 @@
       navElectionsHub: "Elecciones estatales 2026",
       welcomeBody: "El mapa interactivo e independiente de los resultados electorales — el Bundestag y los 16 parlamentos regionales (Landtage), con su historial.",
       eyebrowLandtag: "Elección estatal · última de cada Land",
+      mapTitle: "Resultados por estado",
       emptyTitle: "Ningún estado federado seleccionado",
       emptyBody: "Haz click en un estado federado en el mapa o en la lista de arriba para ver resultados, participación y fuente.",
       resultsKicker: "Resultados",
@@ -2515,6 +2517,7 @@
       navElectionsHub: "State elections 2026",
       welcomeBody: "The independent, interactive map of Germany's election results — the Bundestag and all 16 state parliaments (Landtage), with their history.",
       eyebrowLandtag: "State election · most recent per state",
+      mapTitle: "Results by state",
       emptyTitle: "No federal state selected",
       emptyBody: "Click a federal state on the map or in the list above to see results, turnout and source.",
       resultsKicker: "Results",
@@ -3216,16 +3219,13 @@
     });
     var isBt = view === "bundestag";
     document.getElementById("yearWrap").classList.toggle("hidden", !isBt);
-    document.getElementById("mapKicker").classList.toggle("hidden", !isBt);
-    mapEyebrow.classList.toggle("hidden", isBt);
+    document.getElementById("mapKicker").textContent = isBt ? tr("eyebrowBundestagKicker") : tr("eyebrowLandtag");
     if (view === "landtag") {
       banner.textContent = tr("bannerLandtag");
       banner.classList.add("visible");
-      mapEyebrow.textContent = tr("eyebrowLandtag");
       bundestagNoteEl.classList.remove("visible");
     } else {
       banner.classList.remove("visible");
-      document.getElementById("mapKicker").textContent = tr("eyebrowBundestagKicker");
       bundestagNoteEl.classList.add("visible");
     }
     refreshPartySelect();
@@ -3272,8 +3272,8 @@
     document.getElementById("footDisclaimer").textContent = tr("footDisclaimer");
     document.getElementById("footCredit").textContent = tr("footCredit");
     document.getElementById("footUpdated").textContent = tr("footUpdatedLabel") + ": " + fmtDate(SITE_LAST_UPDATED);
-    document.getElementById("mapKicker").textContent = tr("eyebrowBundestagKicker");
-    mapEyebrow.textContent = tr("eyebrowLandtag");
+    document.getElementById("mapKicker").textContent = state.view === "bundestag" ? tr("eyebrowBundestagKicker") : tr("eyebrowLandtag");
+    mapEyebrow.textContent = tr("mapTitle");
     document.getElementById("yearLabel").textContent = tr("yearLabel");
     document.getElementById("partyLabel").textContent = tr("partyLabel");
     if (state.view === "landtag") banner.textContent = tr("bannerLandtag");
