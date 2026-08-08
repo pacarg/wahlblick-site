@@ -295,6 +295,21 @@ const NAV_HTML = `<nav class="content-nav" aria-label="Weitere Inhalte">
 })();
 </script>`;
 
+// Google Analytics 4 tag (gtag.js), property G-ZBGVVJF0TD. Injected once here
+// so it lands in the <head> of all 48 pages (root + /en/ + /es/) from a single
+// source. NOTE: keep this string free of backticks and ${...} — it lives inside
+// this module and a stray backtick would close the file's template literals and
+// silently break every Cloudflare deploy. DSGVO: this loads Google cookies with
+// no consent gate yet — a consent banner (Consent Mode v2) is the pending step.
+const GA_TAG = `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZBGVVJF0TD"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZBGVVJF0TD');
+</script>`;
+
 class HeadStyleInjector {
   element(element) {
     // Prepend (not append) so each page's own <style> — which may contain
@@ -302,6 +317,9 @@ class HeadStyleInjector {
     // mobile in favor of its hamburger menu — comes later and wins the
     // cascade, without needing !important.
     element.prepend(NAV_STYLE, { html: true });
+    // Prepended after NAV_STYLE, so gtag ends up first — right after <head>,
+    // as Google recommends (highest position in the head).
+    element.prepend(GA_TAG, { html: true });
   }
 }
 
