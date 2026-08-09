@@ -310,6 +310,11 @@ gtag('js', new Date());
 gtag('config', 'G-ZBGVVJF0TD');
 </script>`;
 
+// og:image dimensions (1200×630), injected site-wide so Facebook/LinkedIn
+// render the large card instantly on the first share instead of waiting to
+// fetch and measure the image. Same OG image on every page -> one constant.
+const OG_DIMS = `<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">`;
+
 class HeadStyleInjector {
   element(element) {
     // Prepend (not append) so each page's own <style> — which may contain
@@ -320,6 +325,7 @@ class HeadStyleInjector {
     // Prepended after NAV_STYLE, so gtag ends up first — right after <head>,
     // as Google recommends (highest position in the head).
     element.prepend(GA_TAG, { html: true });
+    element.prepend(OG_DIMS, { html: true });
   }
 }
 
