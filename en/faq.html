@@ -46,11 +46,13 @@
   .lang-switch .sep { color: var(--border); font-size: 12px; }
 
   main { width: 80%; max-width: 780px; margin: 0 auto; padding: 32px 24px 56px; }
-  h1 { font-size: 25px; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .lead { font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0 0 12px; }
+  .page-kicker { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin: 0 0 9px; }
+  h1 { font-size: 33px; font-weight: 800; line-height: 1.12; margin: 0 0 10px; letter-spacing: -0.02em; }
+  .lead { font-size: 17px; line-height: 1.55; color: #3d4450; margin: 0 0 12px; max-width: 640px; }
 
-  .faq-item { border-top: 1px solid var(--border); padding: 24px 0; }
-  .faq-q { font-size: 18px; line-height: 1.3; font-weight: 700; margin: 0 0 12px; letter-spacing: -0.01em; text-transform: none; color: var(--text); }
+  .faq-item { border-top: 1px solid var(--border); padding: 28px 0; }
+  .faq-q { position: relative; padding-left: 15px; font-size: 20px; line-height: 1.3; font-weight: 800; margin: 0 0 12px; letter-spacing: -0.01em; text-transform: none; color: var(--text); }
+  .faq-q::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
   .faq-a { font-size: 15px; line-height: 1.65; color: var(--text); }
   .faq-a p { margin: 0 0 12px; }
   .faq-a p:last-child { margin-bottom: 0; }
@@ -72,7 +74,8 @@
     .header-inner { padding: 12px 16px; flex-wrap: wrap; row-gap: 8px; }
     .brand .wordmark { font-size: 16px; }
     main { width: auto; padding: 24px 16px 40px; }
-    .faq-q { font-size: 17px; }
+    h1 { font-size: 26px; }
+    .faq-q { font-size: 18px; }
   }
 </style>
 <script type="application/ld+json">
@@ -142,6 +145,7 @@
 </header>
 
 <main>
+  <div class="page-kicker" data-t="kicker">Gut zu wissen</div>
   <h1 data-t="h1">Häufige Fragen zum politischen System Deutschlands</h1>
   <p class="lead" data-t="lead" data-html>Kurze, neutrale Antworten auf häufige Fragen rund um Bundestag, Bundeskanzler und das politische System Deutschlands. Fragen zum Wahlsystem selbst — Zweitstimme, Fünf-Prozent-Hürde und Sitzverteilung — beantwortet ausführlich die Seite <a href="/sitzverteilung.html">„Sitzverteilung erklärt“</a>.</p>
 
@@ -275,6 +279,7 @@
     de: {
       docTitle: "Häufige Fragen zum Bundestag und zum politischen System Deutschlands | Wahlblick",
       back: "← Zur Wahlkarte",
+      kicker: "Gut zu wissen",
       h1: "Häufige Fragen zum politischen System Deutschlands",
       lead: 'Kurze, neutrale Antworten auf häufige Fragen rund um Bundestag, Bundeskanzler und das politische System Deutschlands. Fragen zum Wahlsystem selbst — Zweitstimme, Fünf-Prozent-Hürde und Sitzverteilung — beantwortet ausführlich die Seite <a href="/sitzverteilung.html">„Sitzverteilung erklärt“</a>.',
       cta: "Ergebnisse aller Wahlen auf der interaktiven Karte →",
@@ -283,6 +288,7 @@
     es: {
       docTitle: "Preguntas frecuentes sobre el Bundestag y el sistema político de Alemania | Wahlblick",
       back: "← Volver al mapa",
+      kicker: "Bueno saberlo",
       h1: "Preguntas frecuentes sobre el sistema político de Alemania",
       lead: 'Respuestas breves y neutrales a preguntas frecuentes sobre el Bundestag, el Canciller Federal y el sistema político de Alemania. Las preguntas sobre el sistema electoral en sí —segundo voto, valla del 5 % y reparto de escaños— las responde en detalle la página <a href="/sitzverteilung.html">«Cómo se reparten las bancas»</a>.',
       cta: "Resultados de todas las elecciones en el mapa interactivo →",
@@ -291,6 +297,7 @@
     en: {
       docTitle: "FAQ: the Bundestag and Germany's political system | Wahlblick",
       back: "← Back to the map",
+      kicker: "Good to know",
       h1: "Frequently asked questions about Germany's political system",
       lead: 'Short, neutral answers to common questions about the Bundestag, the Federal Chancellor and Germany\'s political system. Questions about the electoral system itself — the second vote, the 5% threshold and seat allocation — are answered in detail on the page <a href="/sitzverteilung.html">“How seats are allocated”</a>.',
       cta: "Results of every election on the interactive map →",

@@ -35,7 +35,7 @@ const LANGS = [
 // Regex de horneado del cuerpo de la home (mismo target en todos los idiomas;
 // los valores traducidos van en cada page[lang].bake).
 const HOME_BAKE_TARGETS = [
-  /(<h1 class="welcome-title" id="welcomeTitle">)[^<]*(<\/h1>)/,
+  /(<h1 class="welcome-title" id="welcomeTitle">)[\s\S]*?(<\/h1>)/,
   /(<p class="welcome-body" id="welcomeBody">)[\s\S]*?(<\/p>)/
 ];
 
@@ -50,8 +50,8 @@ const PAGES = [
       twTitle: "Wahlblick — Mapa electoral de Alemania",
       twDescription: "Mapa interactivo de los resultados electorales de Alemania: Bundestag y los 16 Landtage.",
       bake: [
-        "Alemania vota. Aquí lo ves claro.",
-        'Wahlblick es un mapa interactivo e independiente de los resultados electorales de Alemania. Elige un estado federado (Bundesland) para ver quién ganó, con qué resultado y cómo cambió frente a la elección anterior — tanto para el Bundestag como para los 16 parlamentos regionales (Landtage), con su historial. ¿Quieres entender cómo los votos se convierten en escaños? La sección <a href="sitzverteilung.html">Sistema electoral</a> lo explica paso a paso.'
+        "Alemania vota.<br>Aquí lo ves claro.",
+        "El mapa interactivo e independiente de los resultados electorales — el Bundestag y los 16 parlamentos regionales (Landtage), con su historial."
       ]
     },
     en: {
@@ -62,8 +62,8 @@ const PAGES = [
       twTitle: "Wahlblick — Election map of Germany",
       twDescription: "Interactive map of Germany's election results: the Bundestag and all 16 Landtage.",
       bake: [
-        "Germany votes. See it clearly.",
-        'Wahlblick is an interactive, independent map of Germany\'s election results. Pick a federal state (Bundesland) to see who won, by how much, and how it shifted from the previous election — for the Bundestag and all 16 state parliaments (Landtage), with their history. Want to know how votes turn into seats? The <a href="sitzverteilung.html">Electoral system</a> section explains it step by step.'
+        "Germany votes.<br>See it clearly.",
+        "The independent, interactive map of Germany's election results — the Bundestag and all 16 state parliaments (Landtage), with their history."
       ]
     }
   },
