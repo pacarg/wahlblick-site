@@ -215,6 +215,7 @@
   <div class="panel" id="about">
     <h2 data-about-heading></h2>
     <p data-about-p1></p>
+    <p data-about-p2></p>
   </div>
 
   <div class="panel" id="methodik">
@@ -251,6 +252,7 @@
       backLabel: "← Zur Wahlkarte",
       aboutHeading: "Was ist Wahlblick?",
       aboutP1: "Wahlblick ist ein unabhängiges, privates Datenprojekt: eine interaktive Karte Deutschlands, die zeigt, wie jedes der 16 Bundesländer bei der Bundestagswahl und bei der jeweils letzten Landtagswahl abgestimmt hat. Das Projekt richtet sich an alle, die sich für die politische Landkarte Deutschlands interessieren — insbesondere an die spanischsprachige Community in Deutschland, für die viele offizielle Quellen nur auf Deutsch verfügbar sind. Die Seite funktioniert vollständig auf Deutsch, Spanisch und Englisch.",
+      aboutP2: "Im Kern steckt hinter Wahlblick eine einfache Idee: Eine Wahl zu verstehen, sollte nicht davon abhängen, welche Sprache man spricht. Deshalb zeigen wir die offiziellen Ergebnisse und erklären, wie das System funktioniert — auf Deutsch, Spanisch und Englisch —, damit sich jede und jeder eine eigene Meinung bilden kann. Wir arbeiten ausschließlich mit offiziellen, überprüfbaren Daten, ohne Werbung und ohne irgendjemandem vorzuschreiben, was er wählen soll: Das bleibt jedem selbst überlassen. Unsere Aufgabe ist es, den klaren Überblick und die Spielregeln zu liefern. Und wenn es etwas gibt, worüber wir nicht verhandeln, dann sind es Unabhängigkeit und Neutralität — kein Detail am Rande, sondern der Grund, warum dieses Projekt überhaupt Sinn ergibt.",
       methodHeading: "Methodik",
       methodP1: "Jede Zahl auf dieser Karte stammt aus einer offiziell zitierten Quelle — für die Bundestagswahl von der Bundeswahlleiterin, für jede Landtagswahl von der zuständigen Landeswahlbehörde. Direkte Links zu diesen Quellen finden sich bei jedem Ergebnis.",
       methodP2: "Wenn eine offizielle Quelle für einen Wert keine Angabe macht (z. B. keine Vergleichszahl zur Vorwahl), wird das ausdrücklich als „keine Angabe“ gekennzeichnet — es wird nie eine Zahl erfunden oder geschätzt.",
@@ -265,6 +267,7 @@
       backLabel: "← Volver al mapa",
       aboutHeading: "¿Qué es Wahlblick?",
       aboutP1: "Wahlblick es un proyecto de datos independiente y privado: un mapa interactivo de Alemania que muestra cómo votó cada uno de los 16 estados federados en la elección federal (Bundestagswahl) y en la última elección estatal (Landtagswahl) de cada uno. El proyecto está pensado para cualquiera interesado en el mapa político de Alemania — en particular para la comunidad hispanohablante en Alemania, ya que muchas fuentes oficiales solo están disponibles en alemán. El sitio funciona completo en alemán, español e inglés.",
+      aboutP2: "En el fondo, Wahlblick nace de una idea simple: entender una elección no debería depender del idioma que hablas. Por eso mostramos los resultados oficiales y explicamos cómo funciona el sistema —en alemán, español e inglés— para que cualquiera pueda sacar sus propias conclusiones. Trabajamos solo con datos oficiales y verificables, sin publicidad y sin decirle a nadie a quién votar: eso es cosa de cada uno. Lo nuestro es dar el panorama claro y las reglas del juego. Y si hay algo que no negociamos, es la independencia y la neutralidad: no son un detalle más, son la razón por la que este proyecto tiene sentido.",
       methodHeading: "Metodología",
       methodP1: "Cada dato de este mapa viene de una fuente oficial citada — para el Bundestag, la Bundeswahlleiterin (autoridad electoral federal); para cada Landtag, la autoridad electoral del estado correspondiente. Los links directos a esas fuentes están en cada resultado.",
       methodP2: "Cuando una fuente oficial no da un dato (por ejemplo, la variación respecto a la elección anterior), se marca explícitamente como «sin dato» — nunca se inventa ni se estima un número.",
@@ -279,6 +282,7 @@
       backLabel: "← Back to the map",
       aboutHeading: "What is Wahlblick?",
       aboutP1: "Wahlblick is an independent, private data project: an interactive map of Germany showing how each of the 16 federal states voted in the federal election (Bundestagswahl) and in each state's most recent state election (Landtagswahl). The project is aimed at anyone interested in Germany's political map — particularly the Spanish-speaking community in Germany, since many official sources are only available in German. The site works fully in German, Spanish, and English.",
+      aboutP2: "At heart, Wahlblick comes from a simple idea: understanding an election shouldn't depend on which language you speak. So we show the official results and explain how the system works — in German, Spanish and English — so anyone can draw their own conclusions. We work only with official, verifiable data, with no advertising and without ever telling anyone how to vote: that part is up to you. Our job is to give you the clear picture and the rules of the game. And if there's one thing we won't compromise on, it's independence and neutrality — not a side detail, but the whole reason this project makes sense.",
       methodHeading: "Methodology",
       methodP1: "Every figure on this map comes from a cited official source — for the Bundestag, the Federal Returning Officer (Bundeswahlleiterin); for each Landtag, that state's own electoral authority. Direct links to those sources are shown with each result.",
       methodP2: "When an official source doesn't provide a figure (for example, the change compared to the previous election), it's explicitly marked as \"no data\" — a number is never invented or estimated.",
@@ -309,6 +313,7 @@
     document.querySelector("[data-foot-guide]").textContent = f.guide;
     document.querySelector("[data-about-heading]").textContent = c.aboutHeading;
     document.querySelector("[data-about-p1]").textContent = c.aboutP1;
+    document.querySelector("[data-about-p2]").textContent = c.aboutP2;
     document.querySelector("[data-method-heading]").textContent = c.methodHeading;
     document.querySelector("[data-method-p1]").textContent = c.methodP1;
     document.querySelector("[data-method-p2]").textContent = c.methodP2;
