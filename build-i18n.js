@@ -390,11 +390,14 @@ const SM = {
   "about.html":                  { cf: "monthly", de: "0.6" }
 };
 const SM_DEFAULT = { cf: "monthly", de: "0.6" };
-const DE_ONLY = [  // páginas legales, solo alemán (sin /es/ /en/)
-  { file: "impressum.html",   cf: "yearly", pr: "0.3" },
-  { file: "datenschutz.html", cf: "yearly", pr: "0.3" },
-  { file: "disclaimer.html",  cf: "yearly", pr: "0.3" }
-];
+/* Legales (solo alemán, sin /es/ /en/): DELIBERADAMENTE FUERA DEL SITEMAP, y
+ * con <meta name="robots" content="noindex, follow"> en cada archivo.
+ * Motivo: el Impressum lleva la dirección postal del responsable (§ 5 DDG).
+ * Sacarlas del índice de búsqueda reduce la exposición del domicilio SIN
+ * afectar el cumplimiento: siguen enlazadas desde el footer de las 48 páginas
+ * ("leicht erkennbar, unmittelbar erreichbar und ständig verfügbar").
+ * NO volver a meterlas en el sitemap sin revisar este motivo primero. */
+const DE_ONLY_NOINDEX = ["impressum.html", "datenschutz.html", "disclaimer.html"];
 
 function lastmod(file) {
   return fs.statSync(path.join(ROOT, file)).mtime.toISOString().slice(0, 10);
@@ -409,9 +412,6 @@ function buildSitemap() {
     const sm = SM[p.file] || SM_DEFAULT;
     blocks.push(urlBlock(SITE + "/" + p.path, lastmod(p.file), sm.cf, sm.de));
   });
-  DE_ONLY.forEach(function (p) {                  // legales solo-DE
-    blocks.push(urlBlock(SITE + "/" + p.file, lastmod(p.file), p.cf, p.pr));
-  });
   LANGS.forEach(function (lang) {                 // /es/ y /en/ (lastmod = fuente DE)
     PAGES.forEach(function (p) {
       const sm = SM[p.file] || SM_DEFAULT;
@@ -425,3 +425,12 @@ function buildSitemap() {
   return blocks.length;
 }
 console.log("build-i18n: sitemap.xml (" + buildSitemap() + " URLs)");
+
+/* Guardrail: las legales quedan fuera del sitemap Y con noindex. Si alguien
+ * edita el HTML y pierde el meta, el build lo canta en vez de fallar callado. */
+DE_ONLY_NOINDEX.forEach(function (f) {
+  const html = fs.readFileSync(path.join(ROOT, f), "utf8");
+  if (!/<meta\s+name="robots"\s+content="noindex/i.test(html)) {
+    console.warn("build-i18n: AVISO — " + f + " perdió su <meta robots noindex>");
+  }
+});

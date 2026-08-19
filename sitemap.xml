@@ -91,24 +91,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://wahlblick.de/impressum.html</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://wahlblick.de/datenschutz.html</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://wahlblick.de/disclaimer.html</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://wahlblick.de/es/</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>weekly</changefreq>
