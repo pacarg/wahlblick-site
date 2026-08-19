@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Berlin Abgeordnetenhaus election 2026 — date, history & results | Wahlblick</title>
-<meta name="description" content="Election to the Berlin Abgeordnetenhaus (parliament) on 20 September 2026: the date, the results of 2023, 2021 and 2016, and — on election night — the live figures. Neutral, sourced, in three languages.">
+<meta name="description" content="Can you vote in Berlin on 20 September 2026? Who votes for the Abgeordnetenhaus and who for their district BVV — EU citizens included — plus the key dates, the history and the results. Neutral and sourced.">
 <link rel="canonical" href="https://wahlblick.de/en/berlin.html">
 <link rel="alternate" hreflang="de" href="https://wahlblick.de/berlin.html">
 <link rel="alternate" hreflang="es" href="https://wahlblick.de/es/berlin.html">
@@ -68,6 +68,23 @@
   .polls .tag::before { content: ""; width: 12px; height: 12px; flex: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.2' stroke-linecap='round'%3E%3Cline x1='6' y1='21' x2='6' y2='13'/%3E%3Cline x1='12' y1='21' x2='12' y2='8'/%3E%3Cline x1='18' y1='21' x2='18' y2='4'/%3E%3C/svg%3E") center/contain no-repeat; }
   .polls p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
   .polls a { color: var(--accent); font-weight: 600; }
+
+  .vote { border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 0 0 24px; }
+  .vote-intro { font-size: 14px; line-height: 1.6; margin: 0 0 6px; }
+  .vote-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 13px 0 12px; border-top: 1px solid var(--border); }
+  .vote-who { flex: 1 1 250px; font-size: 13.5px; line-height: 1.5; }
+  .vote-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .vb { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 4px 11px; border: 1px solid; white-space: nowrap; }
+  .vb.yes { color: var(--accent); border-color: #c9d8ec; background: #eaf0f8; }
+  .vb.no { color: var(--text-muted); border-color: var(--border); background: var(--surface); }
+  .vb.yes::before { content: "✓"; }
+  .vb.no::before { content: "✕"; }
+  .vote-auto { background: #eaf0f8; border: 1px solid #d4e0f0; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; line-height: 1.55; color: var(--accent); margin: 16px 0 0; }
+  .vote-dates { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; }
+  .vote-what { font-size: 13px; line-height: 1.6; color: var(--text-muted); margin: 16px 0 0; }
+  .vote-note { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 10px; }
+  .vote-src { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; }
+  .vote-src a { color: var(--text-muted); }
 
   h2 { position: relative; padding-left: 15px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin: 28px 0 12px; }
   h2::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
@@ -145,12 +162,53 @@
     <svg class="land-emblem" viewBox="243.67 126.10 34.72 29.68" role="img" aria-label="Berlin" xmlns="http://www.w3.org/2000/svg"><path d="M262.84,132.1 L263.78,133.2 L263.85,135.03 L266.12,137.61 L268.83,138.93 L268.1,141.81 L269.41,141.66 L272.39,143.83 L271.82,145.51 L270.93,146.34 L270.64,148.3 L269.64,148.68 L268.72,149.78 L268.48,147.91 L268.1,147.45 L264.71,146.32 L263.2,146.67 L262.3,145.67 L261.15,146.19 L261.18,147.63 L259.45,147.33 L258.42,146.19 L257.16,146.53 L256.64,145.76 L255.19,146.33 L253.88,145.66 L251.89,146.77 L249.67,145.84 L250.52,144.37 L250.26,143.55 L250.44,142.53 L251.9,141.04 L251.36,139.76 L251.49,136.41 L251.83,135.62 L253.97,136.28 L253.71,135.38 L254.11,134.16 L255.52,133.77 L256.47,132.45 L256.94,132.5 L257.19,133.96 L259.06,134.29 L260.71,132.91 L261.62,133.31 L262.84,132.1Z" fill="var(--accent)"/></svg>
     <h1 data-t="h1">Abgeordnetenhauswahl in Berlin 2026</h1>
   </div>
-  <p class="lead" data-t="lead">Am 20. September 2026 wählt Berlin ein neues Abgeordnetenhaus — das Landesparlament des Stadtstaates. Hier findest du den Termin, die Ergebnisse der früheren Wahlen im Überblick und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.</p>
+  <p class="lead" data-t="lead">Am 20. September 2026 wählt Berlin ein neues Abgeordnetenhaus — und am selben Tag die zwölf Bezirksverordnetenversammlungen. Hier findest du, wer bei welcher Wahl stimmberechtigt ist, die wichtigsten Fristen, die Ergebnisse der früheren Wahlen und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.</p>
 
   <div class="keyfacts">
     <div class="keyfact"><div class="k" data-t="kDate">Wahltermin</div><div class="v" data-t="vDate">20. September 2026</div></div>
-    <div class="keyfact"><div class="k" data-t="kBody">Gewählt wird</div><div class="v" data-t="vBody">Abgeordnetenhaus von Berlin</div></div>
+    <div class="keyfact"><div class="k" data-t="kBody">Gewählt wird</div><div class="v" data-t="vBody">Abgeordnetenhaus + 12 BVV</div></div>
     <div class="keyfact"><div class="k" data-t="kLast">Letzte Wahl</div><div class="v" data-t="vLast">2023 · CDU 28,2 %</div></div>
+  </div>
+
+  <h2 data-t="voteHeading">Darf ich am 20. September wählen?</h2>
+  <div class="vote">
+    <p class="vote-intro" data-t="voteIntro">An diesem Tag wird in Berlin zweimal gewählt: das Abgeordnetenhaus (das Landesparlament) und die Bezirksverordnetenversammlung (BVV) des eigenen Bezirks. Wer bei welcher Wahl stimmberechtigt ist, hängt von Staatsangehörigkeit, Alter und Meldeadresse ab.</p>
+
+    <div class="vote-row">
+      <div class="vote-who" data-t="voteWho1">Deutsche Staatsangehörigkeit, ab 16 Jahren, seit mindestens drei Monaten in Berlin gemeldet</div>
+      <div class="vote-badges">
+        <span class="vb yes" data-t="voteAgh1">Abgeordnetenhaus</span>
+        <span class="vb yes" data-t="voteBvv1">BVV</span>
+      </div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-who" data-t="voteWho2">Staatsangehörigkeit eines anderen EU-Landes, ab 16 Jahren, Hauptwohnsitz in Berlin seit dem 20. Juni 2026</div>
+      <div class="vote-badges">
+        <span class="vb no" data-t="voteAgh2">Abgeordnetenhaus</span>
+        <span class="vb yes" data-t="voteBvv2">BVV</span>
+      </div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-who" data-t="voteWho3">Staatsangehörigkeit außerhalb der EU, ohne deutschen oder EU-Pass</div>
+      <div class="vote-badges">
+        <span class="vb no" data-t="voteAgh3">Abgeordnetenhaus</span>
+        <span class="vb no" data-t="voteBvv3">BVV</span>
+      </div>
+    </div>
+
+    <p class="vote-auto" data-t="voteAuto">Wer die Voraussetzungen erfüllt, wird automatisch ins Wählerverzeichnis eingetragen — auch als EU-Bürgerin oder EU-Bürger. Ein Antrag ist nicht nötig. (Bei der Europawahl ist das anders: dort muss man sich eintragen lassen.) Die Wahlbenachrichtigung mit der Adresse des Wahllokals kommt bis zum 30. August 2026 per Post.</p>
+
+    <div class="vote-dates">
+      <div class="keyfact"><div class="k" data-t="kStichtag">Stichtag Meldeadresse (EU)</div><div class="v" data-t="vStichtag">20. Juni 2026</div></div>
+      <div class="keyfact"><div class="k" data-t="kBenachr">Wahlbenachrichtigung</div><div class="v" data-t="vBenachr">bis 30. August 2026</div></div>
+      <div class="keyfact"><div class="k" data-t="kWahltag">Wahltag</div><div class="v" data-t="vWahltag">20. September 2026</div></div>
+    </div>
+
+    <p class="vote-what" data-t="voteWhat">Das Abgeordnetenhaus ist das Landesparlament Berlins; aus ihm geht der Senat hervor, die Landesregierung der Stadt. Die BVV ist die gewählte Vertretung des Bezirks und entscheidet über Angelegenheiten vor Ort. Berlin hat zwölf Bezirke, jeder mit einer eigenen BVV. EU-Bürgerinnen und EU-Bürger sind bei der BVV nicht nur wahlberechtigt, sondern auch wählbar: sie können selbst kandidieren.</p>
+
+    <p class="vote-note" data-t="voteNote">2026 ist die erste Abgeordnetenhauswahl, bei der auch 16- und 17-Jährige mit deutscher Staatsangehörigkeit wählen dürfen — Folge einer Verfassungsänderung von 2023.</p>
+
+    <p class="vote-src" data-t="voteSrcHtml">Quellen: <a href="https://www.berlin.de/wahlen/" target="_blank" rel="noopener">Landeswahlleiterin Berlin</a> · <a href="https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php" target="_blank" rel="noopener">Hinweise für Unionsbürgerinnen und Unionsbürger</a>.</p>
   </div>
 
   <p class="pending" data-t="pending">Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 20. September.</p>
@@ -217,13 +275,28 @@
       back: "← Zur Wahlkarte",
       h1: "Abgeordnetenhauswahl in Berlin 2026",
       kicker: "Bundesland",
-      lead: "Am 20. September 2026 wählt Berlin ein neues Abgeordnetenhaus — das Landesparlament des Stadtstaates. Hier findest du den Termin, die Ergebnisse der früheren Wahlen im Überblick und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.",
+      lead: "Am 20. September 2026 wählt Berlin ein neues Abgeordnetenhaus — und am selben Tag die zwölf Bezirksverordnetenversammlungen. Hier findest du, wer bei welcher Wahl stimmberechtigt ist, die wichtigsten Fristen, die Ergebnisse der früheren Wahlen und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.",
       kDate: "Wahltermin", vDate: "20. September 2026",
-      kBody: "Gewählt wird", vBody: "Abgeordnetenhaus von Berlin",
+      kBody: "Gewählt wird", vBody: "Abgeordnetenhaus + 12 BVV",
       kLast: "Letzte Wahl", vLast: "2023 · CDU 28,2 %",
       pending: "Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 20. September.",
       pollsTag: "Umfragen",
       pollsHtml: "Wie stünde Berlin heute? Der neutrale Umfrage-Überblick von <a href=\"https://www.wahlrecht.de/umfragen/landtage/berlin.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> bündelt die aktuellen Sonntagsfragen aller Institute. Achtung: Umfragen sind Prognosen — nicht das amtliche Ergebnis.",
+      voteHeading: "Darf ich am 20. September wählen?",
+      voteIntro: "An diesem Tag wird in Berlin zweimal gewählt: das Abgeordnetenhaus (das Landesparlament) und die Bezirksverordnetenversammlung (BVV) des eigenen Bezirks. Wer bei welcher Wahl stimmberechtigt ist, hängt von Staatsangehörigkeit, Alter und Meldeadresse ab.",
+      voteWho1: "Deutsche Staatsangehörigkeit, ab 16 Jahren, seit mindestens drei Monaten in Berlin gemeldet",
+      voteWho2: "Staatsangehörigkeit eines anderen EU-Landes, ab 16 Jahren, Hauptwohnsitz in Berlin seit dem 20. Juni 2026",
+      voteWho3: "Staatsangehörigkeit außerhalb der EU, ohne deutschen oder EU-Pass",
+      voteAgh1: "Abgeordnetenhaus", voteBvv1: "BVV",
+      voteAgh2: "Abgeordnetenhaus", voteBvv2: "BVV",
+      voteAgh3: "Abgeordnetenhaus", voteBvv3: "BVV",
+      voteAuto: "Wer die Voraussetzungen erfüllt, wird automatisch ins Wählerverzeichnis eingetragen — auch als EU-Bürgerin oder EU-Bürger. Ein Antrag ist nicht nötig. (Bei der Europawahl ist das anders: dort muss man sich eintragen lassen.) Die Wahlbenachrichtigung mit der Adresse des Wahllokals kommt bis zum 30. August 2026 per Post.",
+      kStichtag: "Stichtag Meldeadresse (EU)", vStichtag: "20. Juni 2026",
+      kBenachr: "Wahlbenachrichtigung", vBenachr: "bis 30. August 2026",
+      kWahltag: "Wahltag", vWahltag: "20. September 2026",
+      voteWhat: "Das Abgeordnetenhaus ist das Landesparlament Berlins; aus ihm geht der Senat hervor, die Landesregierung der Stadt. Die BVV ist die gewählte Vertretung des Bezirks und entscheidet über Angelegenheiten vor Ort. Berlin hat zwölf Bezirke, jeder mit einer eigenen BVV. EU-Bürgerinnen und EU-Bürger sind bei der BVV nicht nur wahlberechtigt, sondern auch wählbar: sie können selbst kandidieren.",
+      voteNote: "2026 ist die erste Abgeordnetenhauswahl, bei der auch 16- und 17-Jährige mit deutscher Staatsangehörigkeit wählen dürfen — Folge einer Verfassungsänderung von 2023.",
+      voteSrcHtml: "Quellen: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">Landeswahlleiterin Berlin</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">Hinweise für Unionsbürgerinnen und Unionsbürger</a>.",
       histHeading: "Frühere Wahlen zum Abgeordnetenhaus",
       turnout: "Wahlbeteiligung",
       systemHtml: "Das Abgeordnetenhaus wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
@@ -236,13 +309,28 @@
       back: "← Volver al mapa",
       h1: "Elecciones a la Cámara de Diputados de Berlín 2026",
       kicker: "Estado federado",
-      lead: "El 20 de septiembre de 2026, Berlín elige una nueva Cámara de Diputados (Abgeordnetenhaus), el parlamento estatal de la ciudad-estado. Aquí tienes la fecha, el historial de las elecciones anteriores y —la noche electoral— los resultados. Neutral, con fuentes y en tres idiomas.",
+      lead: "El 20 de septiembre de 2026 Berlín elige una nueva Cámara de Diputados (Abgeordnetenhaus) y, el mismo día, las doce asambleas de distrito (BVV). Aquí encuentras quién puede votar en cada una, las fechas clave, el historial de las elecciones anteriores y —la noche electoral— los resultados. Neutral, con fuentes y en tres idiomas.",
       kDate: "Fecha", vDate: "20 de septiembre de 2026",
-      kBody: "Se elige", vBody: "Cámara de Diputados de Berlín",
+      kBody: "Se elige", vBody: "Cámara de Diputados + 12 BVV",
       kLast: "Última elección", vLast: "2023 · CDU 28,2 %",
       pending: "Los resultados de la elección de 2026 aparecerán acá la noche del 20 de septiembre.",
       pollsTag: "Encuestas",
       pollsHtml: "¿Cómo vendría Berlín hoy? El panorama neutral de <a href=\"https://www.wahlrecht.de/umfragen/landtage/berlin.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> reúne las encuestas actuales de todas las encuestadoras. Ojo: las encuestas son proyecciones, no el resultado oficial.",
+      voteHeading: "¿Puedo votar el 20 de septiembre?",
+      voteIntro: "Ese día en Berlín se vota dos veces: la Cámara de Diputados (Abgeordnetenhaus, el parlamento del estado) y la Asamblea de Distrito (BVV) del distrito donde vives. Quién puede votar en cada una depende de la nacionalidad, la edad y el domicilio registrado.",
+      voteWho1: "Nacionalidad alemana, desde los 16 años, empadronado en Berlín desde hace al menos tres meses",
+      voteWho2: "Nacionalidad de otro país de la UE, desde los 16 años, con domicilio principal en Berlín desde el 20 de junio de 2026",
+      voteWho3: "Nacionalidad de fuera de la UE, sin pasaporte alemán ni de la UE",
+      voteAgh1: "Cámara de Diputados", voteBvv1: "BVV (distrito)",
+      voteAgh2: "Cámara de Diputados", voteBvv2: "BVV (distrito)",
+      voteAgh3: "Cámara de Diputados", voteBvv3: "BVV (distrito)",
+      voteAuto: "Quien cumple los requisitos queda inscrito automáticamente en el padrón, también si es ciudadano de la UE. No hay que hacer ningún trámite. (En las elecciones europeas es distinto: ahí sí hay que inscribirse.) La notificación electoral, con la dirección de tu mesa, llega por correo postal antes del 30 de agosto de 2026.",
+      kStichtag: "Corte de domicilio (UE)", vStichtag: "20 de junio de 2026",
+      kBenachr: "Notificación electoral", vBenachr: "antes del 30 de agosto de 2026",
+      kWahltag: "Día de la elección", vWahltag: "20 de septiembre de 2026",
+      voteWhat: "La Cámara de Diputados es el parlamento del estado de Berlín; de ella sale el Senado, el gobierno de la ciudad. La BVV es la representación electa de tu distrito y decide asuntos del día a día del barrio. Berlín tiene doce distritos, cada uno con su propia BVV. Los ciudadanos de la UE no solo pueden votar en la BVV: también pueden presentarse como candidatos.",
+      voteNote: "2026 es la primera elección a la Cámara de Diputados en la que también votan las personas de 16 y 17 años con nacionalidad alemana, tras una reforma constitucional de 2023.",
+      voteSrcHtml: "Fuentes: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">autoridad electoral de Berlín</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">información para ciudadanos de la UE</a>.",
       histHeading: "Historial de elecciones",
       turnout: "Participación",
       systemHtml: "La Cámara de Diputados se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
@@ -255,13 +343,28 @@
       back: "← Back to the map",
       h1: "Berlin state election 2026",
       kicker: "Federal state",
-      lead: "On 20 September 2026, Berlin elects a new Abgeordnetenhaus — the state parliament of the city-state. Here you'll find the date, the results of previous elections, and — on election night — the results. Neutral, sourced, and in three languages.",
+      lead: "On 20 September 2026 Berlin elects a new Abgeordnetenhaus — and, on the same day, the twelve district assemblies (BVV). Here you'll find who is entitled to vote in each, the key dates, the results of previous elections, and — on election night — the results. Neutral, sourced, and in three languages.",
       kDate: "Election date", vDate: "20 September 2026",
-      kBody: "What's elected", vBody: "Berlin House of Representatives",
+      kBody: "What's elected", vBody: "House of Representatives + 12 BVV",
       kLast: "Last election", vLast: "2023 · CDU 28.2%",
       pending: "The results of the 2026 election will appear here on election night, 20 September.",
       pollsTag: "Polls",
       pollsHtml: "Where would Berlin stand today? The neutral poll overview at <a href=\"https://www.wahlrecht.de/umfragen/landtage/berlin.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> gathers the current polls from all institutes. Note: polls are projections — not the official result.",
+      voteHeading: "Can I vote on 20 September?",
+      voteIntro: "Two elections take place in Berlin that day: the Abgeordnetenhaus (the state parliament) and the district assembly (BVV) of the district you live in. Who may vote in which one depends on citizenship, age and registered address.",
+      voteWho1: "German citizenship, aged 16 or over, registered in Berlin for at least three months",
+      voteWho2: "Citizenship of another EU country, aged 16 or over, main residence registered in Berlin since 20 June 2026",
+      voteWho3: "Citizenship outside the EU, without a German or EU passport",
+      voteAgh1: "House of Representatives", voteBvv1: "BVV (district)",
+      voteAgh2: "House of Representatives", voteBvv2: "BVV (district)",
+      voteAgh3: "House of Representatives", voteBvv3: "BVV (district)",
+      voteAuto: "Anyone who meets the requirements is entered in the electoral register automatically — EU citizens included. No application is needed. (European elections work differently: there you do have to register.) The polling card, with the address of your polling station, arrives by post by 30 August 2026.",
+      kStichtag: "Residence cut-off (EU)", vStichtag: "20 June 2026",
+      kBenachr: "Polling card", vBenachr: "by 30 August 2026",
+      kWahltag: "Election day", vWahltag: "20 September 2026",
+      voteWhat: "The Abgeordnetenhaus is Berlin's state parliament; the Senat, the city government, emerges from it. The BVV is the elected assembly of your district and decides local matters. Berlin has twelve districts, each with its own BVV. EU citizens are not only entitled to vote in the BVV — they can also stand as candidates.",
+      voteNote: "2026 is the first Abgeordnetenhaus election in which 16- and 17-year-olds with German citizenship may also vote, following a constitutional amendment in 2023.",
+      voteSrcHtml: "Sources: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">Berlin electoral authority</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">information for EU citizens</a>.",
       histHeading: "Previous elections",
       turnout: "Turnout",
       systemHtml: "The House of Representatives (Abgeordnetenhaus) is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
@@ -300,6 +403,7 @@
       if (k === "systemText") { el.innerHTML = c.systemHtml; return; }
       if (k === "src") { el.innerHTML = c.srcHtml; return; }
       if (k === "pollsHtml") { el.innerHTML = c.pollsHtml; return; }
+      if (/Html$/.test(k)) { el.innerHTML = c[k]; return; }
       if (c[k] != null) el.textContent = c[k];
     });
     buildHistory(lang);

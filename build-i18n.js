@@ -156,14 +156,14 @@ const PAGES = [
     file: "berlin.html", path: "berlin.html",
     es: {
       title: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha, historial y resultados | Wahlblick",
-      description: "Elección al Abgeordnetenhaus (parlamento) de Berlín el 20 de septiembre de 2026: la fecha, los resultados de 2023, 2021 y 2016, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
+      description: "¿Puedes votar el 20 de septiembre de 2026 en Berlín? Quién vota la Cámara de Diputados y quién la BVV de su distrito —los ciudadanos de la UE también—, las fechas clave, el historial y los resultados. Neutral y con fuentes.",
       ogTitle: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha y resultados",
       ogDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín — neutral y con fuentes en wahlblick.de.",
       twDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín."
     },
     en: {
       title: "Berlin Abgeordnetenhaus election 2026 — date, history & results | Wahlblick",
-      description: "Election to the Berlin Abgeordnetenhaus (parliament) on 20 September 2026: the date, the results of 2023, 2021 and 2016, and — on election night — the live figures. Neutral, sourced, in three languages.",
+      description: "Can you vote in Berlin on 20 September 2026? Who votes for the Abgeordnetenhaus and who for their district BVV — EU citizens included — plus the key dates, the history and the results. Neutral and sourced.",
       ogTitle: "Berlin Abgeordnetenhaus election 2026 — date & results",
       ogDescription: "Date, history and results of the Berlin Abgeordnetenhaus election — neutral and sourced on wahlblick.de.",
       twDescription: "Date, history and results of the Berlin Abgeordnetenhaus election."
