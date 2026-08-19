@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick</title>
-<meta name="description" content="Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en alemán, español e inglés.">
+<meta name="description" content="Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: los plazos del voto por correo (Wahlschein hasta el 4 de septiembre, 15:00), quién puede votar, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral y con fuentes.">
 <link rel="canonical" href="https://wahlblick.de/es/sachsen-anhalt.html">
 <link rel="alternate" hreflang="de" href="https://wahlblick.de/sachsen-anhalt.html">
 <link rel="alternate" hreflang="es" href="https://wahlblick.de/es/sachsen-anhalt.html">
@@ -17,12 +17,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wahlblick">
 <meta property="og:title" content="Elecciones estatales de Sajonia-Anhalt 2026 — fecha y resultados">
-<meta property="og:description" content="Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.">
+<meta property="og:description" content="Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.">
 <meta property="og:image" content="https://wahlblick.de/og-image.png?v=4">
 <meta property="og:url" content="https://wahlblick.de/es/sachsen-anhalt.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wahlblick.de/og-image.png?v=4">
-<meta name="twitter:description" content="Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes.">
+<meta name="twitter:description" content="Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes.">
 <style>
   :root {
     --bg: #ffffff; --surface: #f7f8f9; --border: #e3e6ea; --text: #1a1a1a; --text-muted: #6b7280;
@@ -69,6 +69,18 @@
   .polls .tag::before { content: ""; width: 12px; height: 12px; flex: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2.2' stroke-linecap='round'%3E%3Cline x1='6' y1='21' x2='6' y2='13'/%3E%3Cline x1='12' y1='21' x2='12' y2='8'/%3E%3Cline x1='18' y1='21' x2='18' y2='4'/%3E%3C/svg%3E") center/contain no-repeat; }
   .polls p { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); margin: 0; }
   .polls a { color: var(--accent); font-weight: 600; }
+
+  .vote { border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 0 0 24px; }
+  .vote-intro { font-size: 14px; line-height: 1.6; margin: 0 0 6px; }
+  .vote-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 13px 0 12px; border-top: 1px solid var(--border); }
+  .vote-who { flex: 1 1 250px; font-size: 13.5px; line-height: 1.5; }
+  .vote-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .vb { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 4px 11px; border: 1px solid; white-space: nowrap; }
+  .vb.when { color: var(--accent); border-color: #c9d8ec; background: #eaf0f8; font-variant-numeric: tabular-nums; }
+  .vote-auto { background: #eaf0f8; border: 1px solid #d4e0f0; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; line-height: 1.55; color: var(--accent); margin: 16px 0 0; }
+  .vote-note { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 10px; }
+  .vote-src { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; }
+  .vote-src a { color: var(--text-muted); }
 
   h2 { position: relative; padding-left: 15px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin: 28px 0 12px; }
   h2::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
@@ -145,12 +157,38 @@
     <svg class="land-emblem" viewBox="156.70 104.83 103.96 128.73" role="img" aria-label="Sachsen-Anhalt" xmlns="http://www.w3.org/2000/svg"><path d="M167.64,188.88 L166.11,186.75 L165.84,184.49 L164.39,181.87 L163.17,180.68 L163.04,177.12 L165.1,175.0 L164.94,173.46 L164.18,172.74 L164.35,171.7 L165.3,170.95 L163.39,169.9 L162.7,168.22 L164.47,168.01 L165.83,166.13 L176.25,165.3 L176.46,164.0 L175.76,163.11 L178.0,162.05 L179.19,160.91 L179.52,160.19 L179.4,159.33 L178.46,158.83 L178.24,157.92 L178.81,156.96 L180.22,156.44 L180.46,155.9 L180.23,154.79 L179.72,155.19 L179.62,154.22 L179.06,154.2 L178.03,152.79 L178.69,151.74 L177.5,149.88 L179.72,149.13 L180.04,148.12 L177.89,146.4 L175.42,143.18 L175.89,141.4 L177.58,141.2 L175.68,137.63 L175.74,136.2 L176.72,134.7 L176.05,134.35 L175.05,134.81 L171.9,129.53 L170.66,128.86 L170.41,127.46 L169.14,125.34 L169.2,122.66 L170.47,122.04 L173.57,122.0 L175.51,121.34 L177.15,120.08 L177.48,118.77 L178.03,118.44 L184.89,119.22 L186.26,120.4 L191.62,118.8 L193.74,116.89 L194.84,116.66 L194.64,115.28 L195.1,113.38 L196.56,113.28 L197.57,111.24 L199.1,110.83 L199.47,111.55 L198.98,112.36 L200.99,112.92 L201.46,114.48 L203.83,113.86 L205.36,115.78 L206.86,116.06 L206.21,117.54 L208.45,119.0 L211.41,120.03 L215.35,119.58 L215.88,120.3 L215.85,120.93 L218.04,120.61 L219.38,121.59 L220.08,124.06 L218.74,125.74 L219.21,127.24 L218.56,128.11 L219.87,130.63 L219.79,131.6 L219.07,133.33 L217.6,133.61 L217.21,136.69 L216.26,138.18 L217.58,138.4 L217.06,139.34 L217.39,140.22 L218.66,140.05 L219.31,138.77 L220.84,140.31 L222.19,140.21 L221.9,141.96 L220.55,144.13 L220.89,145.12 L220.01,147.34 L220.12,149.34 L219.1,152.0 L219.22,153.25 L220.56,154.71 L219.67,155.81 L218.87,157.93 L220.85,161.4 L222.32,162.56 L224.47,165.42 L224.6,166.39 L226.69,168.03 L228.27,167.49 L231.37,170.15 L232.96,170.5 L235.0,168.9 L239.42,171.55 L241.12,171.8 L242.25,173.5 L245.19,173.89 L246.2,175.11 L248.78,176.7 L251.06,176.43 L252.04,177.15 L252.67,176.22 L254.66,176.54 L251.94,180.58 L251.98,182.83 L252.76,184.62 L252.65,185.28 L249.33,188.48 L248.62,189.76 L246.8,188.58 L245.73,189.07 L243.12,187.55 L242.74,186.74 L241.74,186.84 L238.96,189.11 L236.68,188.49 L234.84,190.51 L230.81,190.81 L227.61,190.39 L227.3,190.51 L226.86,192.11 L224.3,192.37 L222.28,193.28 L220.13,192.68 L219.76,193.65 L218.75,194.51 L218.59,197.74 L217.4,199.06 L218.38,205.38 L217.04,206.34 L216.58,207.7 L216.89,209.68 L217.69,211.14 L217.8,212.73 L217.3,214.24 L218.36,214.57 L218.2,216.07 L219.29,217.46 L219.54,218.57 L221.13,218.99 L220.43,221.61 L221.53,222.89 L219.49,226.11 L219.56,227.04 L218.93,227.56 L217.31,226.15 L216.34,226.65 L214.35,226.01 L211.95,226.38 L209.64,223.7 L207.2,222.35 L203.02,222.78 L201.57,220.06 L201.45,218.74 L200.55,218.06 L195.98,218.08 L194.93,218.69 L192.35,218.25 L191.89,216.87 L192.27,216.49 L192.02,214.81 L190.92,213.15 L189.01,211.7 L189.47,211.02 L192.09,210.19 L193.11,208.66 L190.19,203.93 L187.49,202.21 L177.49,201.11 L176.58,200.59 L176.3,200.06 L176.54,197.93 L175.64,196.12 L175.69,194.85 L174.49,192.49 L174.74,191.91 L175.86,191.86 L175.52,190.67 L170.74,188.8 L167.64,188.88Z" fill="var(--accent)"/></svg>
     <h1 data-t="h1">Landtagswahl in Sachsen-Anhalt 2026</h1>
   </div>
-  <p class="lead" data-t="lead">Am 6. September 2026 wählt Sachsen-Anhalt einen neuen Landtag. Hier findest du den Termin, die Ergebnisse der früheren Landtagswahlen im Überblick und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.</p>
+  <p class="lead" data-t="lead">Am 6. September 2026 wählt Sachsen-Anhalt einen neuen Landtag. Hier findest du den Termin, die Fristen für die Briefwahl, die Ergebnisse der früheren Landtagswahlen und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.</p>
 
   <div class="keyfacts">
     <div class="keyfact"><div class="k" data-t="kDate">Wahltermin</div><div class="v" data-t="vDate">6. September 2026</div></div>
     <div class="keyfact"><div class="k" data-t="kBody">Gewählt wird</div><div class="v" data-t="vBody">Landtag von Sachsen-Anhalt</div></div>
     <div class="keyfact"><div class="k" data-t="kLast">Letzte Wahl</div><div class="v" data-t="vLast">2021 · CDU 37,1 %</div></div>
+  </div>
+
+  <h2 data-t="briefHeading">Wie wähle ich, wenn ich am 6. September nicht da bin?</h2>
+  <div class="vote">
+    <p class="vote-intro" data-t="briefIntro">Wahlberechtigt ist, wer am Wahltag mindestens 18 Jahre alt ist und seit dem 6. Juni 2026 die Hauptwohnung in Sachsen-Anhalt hat. Wer am Wahltag nicht ins Wahllokal gehen kann, wählt per Brief. Dafür braucht es einen Wahlschein — und der hat Fristen.</p>
+
+    <div class="vote-row">
+      <div class="vote-who" data-t="briefStep1">Die Wahlbenachrichtigung kommt per Post. Sie enthält häufig einen QR-Code, über den sich der Wahlschein direkt online beantragen lässt.</div>
+      <div class="vote-badges"><span class="vb when" data-t="briefWhen1">bis 16. August 2026</span></div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-who" data-t="briefStep2">Wahlschein beantragen — schriftlich, mündlich, per Fax, per E-Mail oder online bei der Gemeinde. Telefonisch ist es ausdrücklich nicht möglich.</div>
+      <div class="vote-badges"><span class="vb when" data-t="briefWhen2">bis 4. September, 15:00</span></div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-who" data-t="briefStep3">Den ausgefüllten Wahlbrief abschicken. Wer später dran ist, gibt ihn besser direkt bei der zuständigen Stelle ab.</div>
+      <div class="vote-badges"><span class="vb when" data-t="briefWhen3">spätestens 3. September</span></div>
+    </div>
+    <div class="vote-row">
+      <div class="vote-who" data-t="briefStep4">Der Wahlbrief muss eingegangen sein. Danach zählt er nicht mehr — auch dann nicht, wenn er rechtzeitig abgeschickt wurde.</div>
+      <div class="vote-badges"><span class="vb when" data-t="briefWhen4">6. September, 18:00</span></div>
+    </div>
+
+    <p class="vote-auto" data-t="briefAuto">Keine Wahlbenachrichtigung bekommen? Wer wahlberechtigt ist, sollte sich bei der Gemeindewahlbehörde melden. Entscheidend ist die Eintragung im Wählerverzeichnis, nicht die Benachrichtigung.</p>
+    <p class="vote-note" data-t="briefNote">Ausnahme: Bei nachgewiesener plötzlicher Erkrankung, die den Weg ins Wahllokal unmöglich oder unzumutbar macht, kann ein Wahlschein noch am Wahltag bis 15:00 Uhr beantragt werden.</p>
+    <p class="vote-src" data-t="briefSrcHtml">Quelle: <a href="https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026" target="_blank" rel="noopener">Landeswahlleitung Sachsen-Anhalt — FAQ zur Landtagswahl 2026</a>.</p>
   </div>
 
   <p class="pending" data-t="pending">Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 6. September.</p>
@@ -213,13 +251,26 @@
       back: "← Zur Wahlkarte",
       h1: "Landtagswahl in Sachsen-Anhalt 2026",
       kicker: "Bundesland",
-      lead: "Am 6. September 2026 wählt Sachsen-Anhalt einen neuen Landtag. Hier findest du den Termin, die Ergebnisse der früheren Landtagswahlen im Überblick und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.",
+      lead: "Am 6. September 2026 wählt Sachsen-Anhalt einen neuen Landtag. Hier findest du den Termin, die Fristen für die Briefwahl, die Ergebnisse der früheren Landtagswahlen und — am Wahlabend — die aktuellen Zahlen. Neutral, quellenbasiert und in drei Sprachen.",
       kDate: "Wahltermin", vDate: "6. September 2026",
       kBody: "Gewählt wird", vBody: "Landtag von Sachsen-Anhalt",
       kLast: "Letzte Wahl", vLast: "2021 · CDU 37,1 %",
       pending: "Die Ergebnisse der Wahl 2026 erscheinen hier am Wahlabend des 6. September.",
       pollsTag: "Umfragen",
       pollsHtml: "Wie stünde Sachsen-Anhalt heute? Der neutrale Umfrage-Überblick von <a href=\"https://www.wahlrecht.de/umfragen/landtage/sachsen-anhalt.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> bündelt die aktuellen Sonntagsfragen aller Institute. Achtung: Umfragen sind Prognosen — nicht das amtliche Ergebnis.",
+      briefHeading: "Wie wähle ich, wenn ich am 6. September nicht da bin?",
+      briefIntro: "Wahlberechtigt ist, wer am Wahltag mindestens 18 Jahre alt ist und seit dem 6. Juni 2026 die Hauptwohnung in Sachsen-Anhalt hat. Wer am Wahltag nicht ins Wahllokal gehen kann, wählt per Brief. Dafür braucht es einen Wahlschein — und der hat Fristen.",
+      briefStep1: "Die Wahlbenachrichtigung kommt per Post. Sie enthält häufig einen QR-Code, über den sich der Wahlschein direkt online beantragen lässt.",
+      briefWhen1: "bis 16. August 2026",
+      briefStep2: "Wahlschein beantragen — schriftlich, mündlich, per Fax, per E-Mail oder online bei der Gemeinde. Telefonisch ist es ausdrücklich nicht möglich.",
+      briefWhen2: "bis 4. September, 15:00",
+      briefStep3: "Den ausgefüllten Wahlbrief abschicken. Wer später dran ist, gibt ihn besser direkt bei der zuständigen Stelle ab.",
+      briefWhen3: "spätestens 3. September",
+      briefStep4: "Der Wahlbrief muss eingegangen sein. Danach zählt er nicht mehr — auch dann nicht, wenn er rechtzeitig abgeschickt wurde.",
+      briefWhen4: "6. September, 18:00",
+      briefAuto: "Keine Wahlbenachrichtigung bekommen? Wer wahlberechtigt ist, sollte sich bei der Gemeindewahlbehörde melden. Entscheidend ist die Eintragung im Wählerverzeichnis, nicht die Benachrichtigung.",
+      briefNote: "Ausnahme: Bei nachgewiesener plötzlicher Erkrankung, die den Weg ins Wahllokal unmöglich oder unzumutbar macht, kann ein Wahlschein noch am Wahltag bis 15:00 Uhr beantragt werden.",
+      briefSrcHtml: "Quelle: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">Landeswahlleitung Sachsen-Anhalt — FAQ zur Landtagswahl 2026</a>.",
       histHeading: "Frühere Landtagswahlen im Überblick",
       turnout: "Wahlbeteiligung",
       systemHtml: "Der Landtag wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
@@ -232,13 +283,26 @@
       back: "← Volver al mapa",
       h1: "Elecciones al parlamento de Sajonia-Anhalt 2026",
       kicker: "Estado federado",
-      lead: "El 6 de septiembre de 2026, Sajonia-Anhalt (Sachsen-Anhalt) elige un nuevo parlamento estatal (Landtag). Aquí tienes la fecha, el historial de las elecciones estatales anteriores y —la noche electoral— los resultados. Neutral, con fuentes y en tres idiomas.",
+      lead: "El 6 de septiembre de 2026, Sajonia-Anhalt (Sachsen-Anhalt) elige un nuevo parlamento estatal (Landtag). Aquí tienes los plazos del voto por correo, la fecha, el historial de las elecciones estatales anteriores y —la noche electoral— los resultados. Neutral, con fuentes y en tres idiomas.",
       kDate: "Fecha", vDate: "6 de septiembre de 2026",
       kBody: "Se elige", vBody: "Parlamento de Sajonia-Anhalt",
       kLast: "Última elección", vLast: "2021 · CDU 37,1 %",
       pending: "Los resultados de la elección de 2026 aparecerán acá la noche del 6 de septiembre.",
       pollsTag: "Encuestas",
       pollsHtml: "¿Cómo vendría Sajonia-Anhalt hoy? El panorama neutral de <a href=\"https://www.wahlrecht.de/umfragen/landtage/sachsen-anhalt.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> reúne las encuestas actuales de todas las encuestadoras. Ojo: las encuestas son proyecciones, no el resultado oficial.",
+      briefHeading: "¿Cómo votar si no estás el 6 de septiembre?",
+      briefIntro: "Puede votar quien el día de la elección tenga al menos 18 años y tenga su domicilio principal en Sajonia-Anhalt desde el 6 de junio de 2026. Quien no pueda ir a la mesa ese día vota por correo. Para eso hace falta un Wahlschein (certificado de voto), y tiene plazos.",
+      briefStep1: "La notificación electoral llega por correo postal. Suele traer un código QR para pedir el Wahlschein directamente online.",
+      briefWhen1: "antes del 16 de agosto de 2026",
+      briefStep2: "Pedir el Wahlschein: por escrito, en persona, por fax, por correo electrónico u online en tu municipio. Por teléfono no se puede.",
+      briefWhen2: "hasta el 4 de septiembre, 15:00",
+      briefStep3: "Despachar el sobre ya completo. Si vas justo de tiempo, conviene entregarlo en mano en la oficina correspondiente.",
+      briefWhen3: "el 3 de septiembre a más tardar",
+      briefStep4: "El sobre tiene que haber llegado. Después ya no cuenta, aunque lo hayas enviado a tiempo.",
+      briefWhen4: "6 de septiembre, 18:00",
+      briefAuto: "¿No te llegó la notificación electoral? Si tienes derecho a votar, avisa a la autoridad electoral de tu municipio. Lo que decide es figurar en el padrón, no haber recibido la notificación.",
+      briefNote: "Excepción: en caso de enfermedad repentina acreditada que impida ir a la mesa o lo haga inexigible, todavía se puede pedir el Wahlschein el mismo día de la elección hasta las 15:00.",
+      briefSrcHtml: "Fuente: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">autoridad electoral de Sajonia-Anhalt — preguntas frecuentes sobre la elección de 2026</a>.",
       histHeading: "Historial de elecciones estatales",
       turnout: "Participación",
       systemHtml: "El parlamento se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
@@ -251,13 +315,26 @@
       back: "← Back to the map",
       h1: "Saxony-Anhalt state election 2026",
       kicker: "Federal state",
-      lead: "On 6 September 2026, Saxony-Anhalt (Sachsen-Anhalt) elects a new state parliament (Landtag). Here you'll find the date, the results of previous state elections, and — on election night — the results. Neutral, sourced, and in three languages.",
+      lead: "On 6 September 2026, Saxony-Anhalt (Sachsen-Anhalt) elects a new state parliament (Landtag). Here you'll find the postal-voting deadlines, the date, the results of previous state elections, and — on election night — the results. Neutral, sourced, and in three languages.",
       kDate: "Election date", vDate: "6 September 2026",
       kBody: "What's elected", vBody: "Saxony-Anhalt state parliament",
       kLast: "Last election", vLast: "2021 · CDU 37.1%",
       pending: "The results of the 2026 election will appear here on election night, 6 September.",
       pollsTag: "Polls",
       pollsHtml: "Where would Saxony-Anhalt stand today? The neutral poll overview at <a href=\"https://www.wahlrecht.de/umfragen/landtage/sachsen-anhalt.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> gathers the current polls from all institutes. Note: polls are projections — not the official result.",
+      briefHeading: "How do I vote if I am away on 6 September?",
+      briefIntro: "You may vote if you are at least 18 on election day and have had your main residence in Saxony-Anhalt since 6 June 2026. Anyone who cannot get to the polling station that day votes by post. That requires a Wahlschein (polling certificate) — and it comes with deadlines.",
+      briefStep1: "The polling card arrives by post. It often carries a QR code for requesting the Wahlschein online.",
+      briefWhen1: "by 16 August 2026",
+      briefStep2: "Request the Wahlschein — in writing, in person, by fax, by email or online through your municipality. By telephone is explicitly not possible.",
+      briefWhen2: "by 4 September, 15:00",
+      briefStep3: "Send the completed postal ballot. If you are cutting it fine, hand it in directly at the responsible office instead.",
+      briefWhen3: "3 September at the latest",
+      briefStep4: "The postal ballot must have arrived. After that it no longer counts — not even if it was sent in time.",
+      briefWhen4: "6 September, 18:00",
+      briefAuto: "No polling card? If you are entitled to vote, contact your municipal election office. What counts is being on the electoral register, not having received the card.",
+      briefNote: "Exception: in the case of proven sudden illness that makes reaching the polling station impossible or unreasonable, a Wahlschein can still be requested on election day until 15:00.",
+      briefSrcHtml: "Source: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">Saxony-Anhalt election authority — FAQ on the 2026 state election</a>.",
       histHeading: "Previous state elections",
       turnout: "Turnout",
       systemHtml: "The parliament is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
@@ -305,6 +382,7 @@
       if (k === "systemText") { el.innerHTML = c.systemHtml; return; }
       if (k === "src") { el.innerHTML = c.srcHtml; return; }
       if (k === "pollsHtml") { el.innerHTML = c.pollsHtml; return; }
+      if (/Html$/.test(k)) { el.innerHTML = c[k]; return; }
       if (c[k] != null) el.textContent = c[k];
     });
     buildHistory(lang);

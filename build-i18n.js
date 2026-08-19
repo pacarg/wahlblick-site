@@ -122,14 +122,14 @@ const PAGES = [
     file: "sachsen-anhalt.html", path: "sachsen-anhalt.html",
     es: {
       title: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick",
-      description: "Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en alemán, español e inglés.",
+      description: "Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: los plazos del voto por correo (Wahlschein hasta el 4 de septiembre, 15:00), quién puede votar, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral y con fuentes.",
       ogTitle: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha y resultados",
-      ogDescription: "Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.",
-      twDescription: "Fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes."
+      ogDescription: "Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.",
+      twDescription: "Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes."
     },
     en: {
       title: "Saxony-Anhalt state election 2026 — date, history & results | Wahlblick",
-      description: "Saxony-Anhalt state election (Landtag) on 6 September 2026: the date, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral, sourced, in German, Spanish and English.",
+      description: "Saxony-Anhalt state election (Landtag) on 6 September 2026: the postal-voting deadlines (Wahlschein by 4 September, 15:00), who may vote, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral and sourced.",
       ogTitle: "Saxony-Anhalt state election 2026 — date & results",
       ogDescription: "Date, history and results of the Saxony-Anhalt state election — neutral and sourced on wahlblick.de.",
       twDescription: "Date, history and results of the Saxony-Anhalt state election — neutral and sourced."
