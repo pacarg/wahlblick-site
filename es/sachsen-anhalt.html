@@ -81,6 +81,8 @@
   .vote-note { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 10px; }
   .vote-src { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; }
   .vote-src a { color: var(--text-muted); }
+  .vote-row.is-past { opacity: .55; }
+  .vote-row.is-past .vb.when { color: var(--text-muted); border-color: var(--border); background: var(--surface); text-decoration: line-through; }
 
   h2 { position: relative; padding-left: 15px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; margin: 28px 0 12px; }
   h2::before { content: ""; position: absolute; left: 0; top: 0.16em; width: 5px; height: 0.78em; background: var(--accent); border-radius: 2px; }
@@ -169,24 +171,26 @@
   <div class="vote">
     <p class="vote-intro" data-t="briefIntro">Wahlberechtigt ist, wer am Wahltag mindestens 18 Jahre alt ist und seit dem 6. Juni 2026 die Hauptwohnung in Sachsen-Anhalt hat. Wer am Wahltag nicht ins Wahllokal gehen kann, wählt per Brief. Dafür braucht es einen Wahlschein — und der hat Fristen.</p>
 
-    <div class="vote-row">
+    <div class="vote-row" data-deadline="2026-08-16T23:59">
       <div class="vote-who" data-t="briefStep1">Die Wahlbenachrichtigung kommt per Post. Sie enthält häufig einen QR-Code, über den sich der Wahlschein direkt online beantragen lässt.</div>
       <div class="vote-badges"><span class="vb when" data-t="briefWhen1">bis 16. August 2026</span></div>
     </div>
-    <div class="vote-row">
+    <div class="vote-row" data-deadline="2026-09-04T15:00">
       <div class="vote-who" data-t="briefStep2">Wahlschein beantragen — schriftlich, mündlich, per Fax, per E-Mail oder online bei der Gemeinde. Telefonisch ist es ausdrücklich nicht möglich.</div>
       <div class="vote-badges"><span class="vb when" data-t="briefWhen2">bis 4. September, 15:00</span></div>
     </div>
-    <div class="vote-row">
+    <div class="vote-row" data-deadline="2026-09-03T23:59">
       <div class="vote-who" data-t="briefStep3">Den ausgefüllten Wahlbrief abschicken. Wer später dran ist, gibt ihn besser direkt bei der zuständigen Stelle ab.</div>
       <div class="vote-badges"><span class="vb when" data-t="briefWhen3">spätestens 3. September</span></div>
     </div>
-    <div class="vote-row">
+    <div class="vote-row" data-deadline="2026-09-06T18:00">
       <div class="vote-who" data-t="briefStep4">Der Wahlbrief muss eingegangen sein. Danach zählt er nicht mehr — auch dann nicht, wenn er rechtzeitig abgeschickt wurde.</div>
       <div class="vote-badges"><span class="vb when" data-t="briefWhen4">6. September, 18:00</span></div>
     </div>
 
-    <p class="vote-auto" data-t="briefAuto">Keine Wahlbenachrichtigung bekommen? Wer wahlberechtigt ist, sollte sich bei der Gemeindewahlbehörde melden. Entscheidend ist die Eintragung im Wählerverzeichnis, nicht die Benachrichtigung.</p>
+    <p class="vote-auto" data-phase="before" data-t="briefAuto">Keine Wahlbenachrichtigung bekommen? Wer wahlberechtigt ist, sollte sich bei der Gemeindewahlbehörde melden. Entscheidend ist die Eintragung im Wählerverzeichnis, nicht die Benachrichtigung.</p>
+    <p class="vote-auto" data-phase="late" data-t="briefLate" hidden></p>
+    <p class="vote-auto" data-phase="over" data-t="briefOver" hidden></p>
     <p class="vote-note" data-t="briefNote">Ausnahme: Bei nachgewiesener plötzlicher Erkrankung, die den Weg ins Wahllokal unmöglich oder unzumutbar macht, kann ein Wahlschein noch am Wahltag bis 15:00 Uhr beantragt werden.</p>
     <p class="vote-src" data-t="briefSrcHtml">Quelle: <a href="https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026" target="_blank" rel="noopener">Landeswahlleitung Sachsen-Anhalt — FAQ zur Landtagswahl 2026</a>.</p>
   </div>
@@ -271,6 +275,8 @@
       briefAuto: "Keine Wahlbenachrichtigung bekommen? Wer wahlberechtigt ist, sollte sich bei der Gemeindewahlbehörde melden. Entscheidend ist die Eintragung im Wählerverzeichnis, nicht die Benachrichtigung.",
       briefNote: "Ausnahme: Bei nachgewiesener plötzlicher Erkrankung, die den Weg ins Wahllokal unmöglich oder unzumutbar macht, kann ein Wahlschein noch am Wahltag bis 15:00 Uhr beantragt werden.",
       briefSrcHtml: "Quelle: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">Landeswahlleitung Sachsen-Anhalt — FAQ zur Landtagswahl 2026</a>.",
+      briefLate: "Die Frist für den Wahlschein ist abgelaufen. Möglich ist jetzt noch: den bereits erhaltenen Wahlbrief bis Sonntag, 18:00 Uhr, direkt bei der zuständigen Stelle abgeben — oder am Wahltag im eigenen Wahllokal wählen. Bei nachgewiesener plötzlicher Erkrankung kann ein Wahlschein noch am Sonntag bis 15:00 Uhr beantragt werden.",
+      briefOver: "Die Wahl vom 6. September 2026 ist gelaufen. Die Ergebnisse werden weiter unten auf dieser Seite veröffentlicht.",
       histHeading: "Frühere Landtagswahlen im Überblick",
       turnout: "Wahlbeteiligung",
       systemHtml: "Der Landtag wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
@@ -303,6 +309,8 @@
       briefAuto: "¿No te llegó la notificación electoral? Si tienes derecho a votar, avisa a la autoridad electoral de tu municipio. Lo que decide es figurar en el padrón, no haber recibido la notificación.",
       briefNote: "Excepción: en caso de enfermedad repentina acreditada que impida ir a la mesa o lo haga inexigible, todavía se puede pedir el Wahlschein el mismo día de la elección hasta las 15:00.",
       briefSrcHtml: "Fuente: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">autoridad electoral de Sajonia-Anhalt — preguntas frecuentes sobre la elección de 2026</a>.",
+      briefLate: "El plazo para pedir el Wahlschein ya venció. Todavía es posible: entregar en mano el sobre que ya tienes, hasta el domingo a las 18:00, en la oficina correspondiente — o votar el domingo en tu mesa. En caso de enfermedad repentina acreditada, el Wahlschein se puede pedir el mismo domingo hasta las 15:00.",
+      briefOver: "La elección del 6 de septiembre de 2026 ya pasó. Los resultados se publican más abajo en esta misma página.",
       histHeading: "Historial de elecciones estatales",
       turnout: "Participación",
       systemHtml: "El parlamento se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
@@ -335,6 +343,8 @@
       briefAuto: "No polling card? If you are entitled to vote, contact your municipal election office. What counts is being on the electoral register, not having received the card.",
       briefNote: "Exception: in the case of proven sudden illness that makes reaching the polling station impossible or unreasonable, a Wahlschein can still be requested on election day until 15:00.",
       briefSrcHtml: "Source: <a href=\"https://wahlen.sachsen-anhalt.de/zu-den-wahlen/landtagswahl/faq-zur-landtagswahl-2026\" target=\"_blank\" rel=\"noopener\">Saxony-Anhalt election authority — FAQ on the 2026 state election</a>.",
+      briefLate: "The deadline for requesting a Wahlschein has passed. Still possible: hand in the postal ballot you already have, by 18:00 on Sunday, at the responsible office — or vote at your polling station on the day. In the case of proven sudden illness, a Wahlschein can still be requested on Sunday until 15:00.",
+      briefOver: "The election of 6 September 2026 has taken place. The results are published further down this page.",
       histHeading: "Previous state elections",
       turnout: "Turnout",
       systemHtml: "The parliament is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
@@ -373,6 +383,22 @@
     document.getElementById("history").innerHTML = html;
   }
 
+  /* Los plazos vencen mientras la página sigue publicada: si el bloque no
+   * reacciona a la fecha, termina diciéndole a la gente que haga algo que ya
+   * no puede hacer. Se tacha lo vencido y se muestra el destacado de la fase. */
+  var ELECTION_CLOSE = new Date("2026-09-06T18:00:00");
+  function applyDeadlines() {
+    var now = new Date();
+    document.querySelectorAll(".vote-row[data-deadline]").forEach(function (row) {
+      row.classList.toggle("is-past", now >= new Date(row.getAttribute("data-deadline")));
+    });
+    var phase = now >= ELECTION_CLOSE ? "over"
+              : (now >= new Date("2026-09-04T15:00:00") ? "late" : "before");
+    document.querySelectorAll(".vote-auto[data-phase]").forEach(function (el) {
+      el.hidden = el.getAttribute("data-phase") !== phase;
+    });
+  }
+
   function render(lang) {
     document.documentElement.lang = lang;
     var c = CONTENT[lang];
@@ -386,6 +412,7 @@
       if (c[k] != null) el.textContent = c[k];
     });
     buildHistory(lang);
+    applyDeadlines();
   }
 
   var LANG_KEY = "wahlblickLang";

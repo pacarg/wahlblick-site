@@ -63,6 +63,7 @@
   .elec-badge { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 3px 10px; flex: none; white-space: nowrap; }
   .elec-badge.up { color: var(--up); background: var(--up-bg); border: 1px solid #c9efd6; }
   .elec-badge.past { color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); }
+  .elec-badge.today { color: #fff; background: var(--accent); border: 1px solid var(--accent); }
   .elec-arrow { color: var(--accent); font-weight: 800; flex: none; }
 
   .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 8px; }
@@ -160,11 +161,11 @@
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
   var ELECTIONS = [
-    { date: "2026-09-06", href: "sachsen-anhalt.html", status: "up", name: { de: "Sachsen-Anhalt", es: "Sajonia-Anhalt", en: "Saxony-Anhalt" } },
-    { date: "2026-09-20", href: "mecklenburg-vorpommern.html", status: "up", name: { de: "Mecklenburg-Vorpommern", es: "Mecklemburgo-Pomerania Occ.", en: "Mecklenburg-W. Pomerania" } },
-    { date: "2026-09-20", href: "berlin.html", status: "up", name: { de: "Berlin · Abgeordnetenhaus", es: "Berlín · Cámara de Diputados", en: "Berlin · Abgeordnetenhaus" } },
-    { date: "2026-03-08", href: "index.html?land=DE-BW&view=landtag", status: "past", name: { de: "Baden-Württemberg", es: "Baden-Wurtemberg", en: "Baden-Württemberg" } },
-    { date: "2026-03-22", href: "index.html?land=DE-RP&view=landtag", status: "past", name: { de: "Rheinland-Pfalz", es: "Renania-Palatinado", en: "Rhineland-Palatinate" } }
+    { date: "2026-09-06", href: "sachsen-anhalt.html", name: { de: "Sachsen-Anhalt", es: "Sajonia-Anhalt", en: "Saxony-Anhalt" } },
+    { date: "2026-09-20", href: "mecklenburg-vorpommern.html", name: { de: "Mecklenburg-Vorpommern", es: "Mecklemburgo-Pomerania Occ.", en: "Mecklenburg-W. Pomerania" } },
+    { date: "2026-09-20", href: "berlin.html", name: { de: "Berlin · Abgeordnetenhaus", es: "Berlín · Cámara de Diputados", en: "Berlin · Abgeordnetenhaus" } },
+    { date: "2026-03-08", href: "index.html?land=DE-BW&view=landtag", name: { de: "Baden-Württemberg", es: "Baden-Wurtemberg", en: "Baden-Württemberg" } },
+    { date: "2026-03-22", href: "index.html?land=DE-RP&view=landtag", name: { de: "Rheinland-Pfalz", es: "Renania-Palatinado", en: "Rhineland-Palatinate" } }
   ];
 
   var CONTENT = {
@@ -174,8 +175,8 @@
       h1: "Landtagswahlen 2026 in Deutschland",
       kicker: "Wahltermine",
       lead: "2026 wählen fünf Bundesländer einen neuen Landtag — zwei im März (bereits gelaufen) und drei im September. Hier siehst du auf einen Blick, welche Bundesländer wann wählen, den historischen Verlauf jeder Wahl und — am jeweiligen Wahlabend — die Ergebnisse. Neutral, quellenbasiert und in drei Sprachen.",
-      upHeading: "Kommende Wahlen · September 2026",
-      pastHeading: "Bereits gewählt · März 2026",
+      upHeading: "Kommende Wahlen 2026",
+      pastHeading: "Bereits gewählt 2026",
       notHeading: "Wo wird 2026 nicht gewählt?",
       notText: "In vielen Ländern wird 2026 kein neuer Landtag gewählt — die nächste Wahl kommt erst später. Zum Beispiel: Sachsen (zuletzt 2024, nächste 2029), Nordrhein-Westfalen (2027) und Bayern (2028). 2026 wählen nur die oben genannten fünf Länder.",
       whoHeading: "Wer darf bei einer Landtagswahl wählen — und wer nicht?",
@@ -185,7 +186,7 @@
       womHeading: "Noch unentschlossen? Der Wahl-O-Mat",
       womText: "Der Wahl-O-Mat der Bundeszentrale für politische Bildung (bpb) hilft bei der Orientierung: Man beantwortet politische Thesen und sieht, welche Parteien der eigenen Position am nächsten stehen. Er ist eine Orientierungshilfe — keine Umfrage, keine Prognose und kein Wahlergebnis. Zu jeder Landtagswahl 2026 gibt es eine eigene Ausgabe.",
       womCta: "→ <a href=\"https://www.bpb.de/themen/wahl-o-mat/\" target=\"_blank\" rel=\"noopener\">Zum offiziellen Wahl-O-Mat der bpb</a>",
-      badgeUp: "Kommend", badgePast: "Bereits gewählt",
+      badgeUp: "Kommend", badgeToday: "Heute", badgePast: "Bereits gewählt",
       cta: "Alle Ergebnisse auf der interaktiven Karte →",
       datenschutz: "Datenschutzerklärung", disclaimer: "Haftungsausschluss", about: "Über Wahlblick", guide: "Nutzungshinweise"
     },
@@ -195,8 +196,8 @@
       h1: "Elecciones estatales (Landtag) de Alemania en 2026",
       kicker: "Fechas electorales",
       lead: "En 2026, cinco estados federados eligen un nuevo parlamento estatal (Landtag): dos en marzo (ya votaron) y tres en septiembre. Aquí ves de un vistazo qué estados votan y cuándo, el historial de cada elección y —la noche electoral de cada una— los resultados. Neutral, con fuentes y en tres idiomas.",
-      upHeading: "Próximas elecciones · septiembre 2026",
-      pastHeading: "Ya votaron · marzo 2026",
+      upHeading: "Próximas elecciones de 2026",
+      pastHeading: "Ya votaron en 2026",
       notHeading: "¿Dónde NO se vota en 2026?",
       notText: "En muchos estados no hay elección estatal en 2026 — la próxima recién más adelante. Por ejemplo: Sajonia (Sachsen; última en 2024, próxima en 2029), Renania del Norte-Westfalia (NRW; 2027) y Baviera (Bayern; 2028). En 2026 votan solo los cinco estados de arriba.",
       whoHeading: "¿Quién puede votar en una elección estatal — y quién no?",
@@ -206,7 +207,7 @@
       womHeading: "¿Aún indeciso? El Wahl-O-Mat",
       womText: "El Wahl-O-Mat de la Bundeszentrale für politische Bildung (bpb) ayuda a orientarse: respondes una serie de afirmaciones políticas y ves qué partidos están más cerca de tu posición. Es una brújula de orientación — no una encuesta, ni un pronóstico, ni un resultado. Cada elección estatal de 2026 tiene su propia versión.",
       womCta: "→ <a href=\"https://www.bpb.de/themen/wahl-o-mat/\" target=\"_blank\" rel=\"noopener\">Ir al Wahl-O-Mat oficial de la bpb</a>",
-      badgeUp: "Próxima", badgePast: "Ya votó",
+      badgeUp: "Próxima", badgeToday: "Hoy", badgePast: "Ya votó",
       cta: "Todos los resultados en el mapa interactivo →",
       datenschutz: "Política de privacidad", disclaimer: "Descargo de responsabilidad", about: "Sobre Wahlblick", guide: "Guía de uso"
     },
@@ -216,8 +217,8 @@
       h1: "Germany's state elections (Landtag) in 2026",
       kicker: "Election dates",
       lead: "In 2026, five German states elect a new state parliament (Landtag): two in March (already held) and three in September. Here you can see at a glance which states vote and when, the historical record of each election and — on each election night — the results. Neutral, sourced, and in three languages.",
-      upHeading: "Upcoming elections · September 2026",
-      pastHeading: "Already held · March 2026",
+      upHeading: "Upcoming elections in 2026",
+      pastHeading: "Already held in 2026",
       notHeading: "Where is there no election in 2026?",
       notText: "Many states hold no state election in 2026 — their next vote comes later. For example: Saxony (Sachsen; last in 2024, next in 2029), North Rhine-Westphalia (NRW; 2027) and Bavaria (Bayern; 2028). In 2026, only the five states listed above vote.",
       whoHeading: "Who may vote in a state election — and who may not?",
@@ -227,7 +228,7 @@
       womHeading: "Still undecided? The Wahl-O-Mat",
       womText: "The Wahl-O-Mat by the Bundeszentrale für politische Bildung (bpb) helps you get oriented: you answer political statements and see which parties are closest to your position. It is an orientation aid — not a poll, forecast or result. Each 2026 state election has its own edition.",
       womCta: "→ <a href=\"https://www.bpb.de/themen/wahl-o-mat/\" target=\"_blank\" rel=\"noopener\">Go to the official bpb Wahl-O-Mat</a>",
-      badgeUp: "Upcoming", badgePast: "Already held",
+      badgeUp: "Upcoming", badgeToday: "Today", badgePast: "Already held",
       cta: "All results on the interactive map →",
       datenschutz: "Privacy Policy", disclaimer: "Disclaimer", about: "About Wahlblick", guide: "User Guide"
     }
@@ -236,15 +237,41 @@
   var LOCALE = { de: "de-DE", es: "es-ES", en: "en-US" };
   function fmtDate(iso, lang) { var d = new Date(iso + "T00:00:00"); return new Intl.DateTimeFormat(LOCALE[lang], { day: "numeric", month: "long", year: "numeric" }).format(d); }
 
+  /* El estado se DERIVA de la fecha, nunca se escribe a mano: si no, el domingo
+   * de la elección el hub sigue diciendo "Kommend". Los colegios cierran a las
+   * 18:00, así que ese es el corte entre "hoy" y "ya votó". */
+  var POLLS_CLOSE = "T18:00:00";
+  function electionState(iso) {
+    var now = new Date();
+    if (now >= new Date(iso + POLLS_CLOSE)) return "past";
+    if (now >= new Date(iso + "T00:00:00")) return "today";
+    return "up";
+  }
   function rowHtml(e, lang) {
     var c = CONTENT[lang];
-    var badge = e.status === "up" ? '<span class="elec-badge up">' + c.badgeUp + '</span>' : '<span class="elec-badge past">' + c.badgePast + '</span>';
+    var st = electionState(e.date);
+    var label = st === "past" ? c.badgePast : (st === "today" ? c.badgeToday : c.badgeUp);
+    var badge = '<span class="elec-badge ' + st + '">' + label + '</span>';
     return '<a class="elec-row" href="' + e.href + '"><span class="elec-date">' + fmtDate(e.date, lang) + '</span>'
       + '<span class="elec-name">' + e.name[lang] + '</span>' + badge + '<span class="elec-arrow" aria-hidden="true">→</span></a>';
   }
   function buildLists(lang) {
-    document.getElementById("upcoming").innerHTML = ELECTIONS.filter(function (e) { return e.status === "up"; }).map(function (e) { return rowHtml(e, lang); }).join("");
-    document.getElementById("past").innerHTML = ELECTIONS.filter(function (e) { return e.status === "past"; }).map(function (e) { return rowHtml(e, lang); }).join("");
+    var groups = { up: [], past: [] };
+    ELECTIONS.forEach(function (e) {
+      groups[electionState(e.date) === "past" ? "past" : "up"].push(e);
+    });
+    /* Próximas: la más cercana primero. Ya votaron: la más reciente primero. */
+    groups.up.sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+    groups.past.sort(function (a, b) { return a.date > b.date ? -1 : 1; });
+    [["upcoming", "upHeading", "up"], ["past", "pastHeading", "past"]].forEach(function (g) {
+      var list = groups[g[2]];
+      document.getElementById(g[0]).innerHTML = list.map(function (e) { return rowHtml(e, lang); }).join("");
+      /* Sin elecciones en el grupo, el encabezado sobra: se oculta junto con la lista. */
+      var empty = list.length === 0;
+      document.getElementById(g[0]).hidden = empty;
+      var h = document.querySelector('[data-t="' + g[1] + '"]');
+      if (h) h.hidden = empty;
+    });
   }
 
   function render(lang) {

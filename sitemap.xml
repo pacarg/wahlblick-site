@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://wahlblick.de/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://wahlblick.de/landtagswahlen-2026.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,7 +26,7 @@
   </url>
   <url>
     <loc>https://wahlblick.de/sachsen-anhalt.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -92,13 +92,13 @@
   </url>
   <url>
     <loc>https://wahlblick.de/es/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://wahlblick.de/es/landtagswahlen-2026.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -116,7 +116,7 @@
   </url>
   <url>
     <loc>https://wahlblick.de/es/sachsen-anhalt.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -182,13 +182,13 @@
   </url>
   <url>
     <loc>https://wahlblick.de/en/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://wahlblick.de/en/landtagswahlen-2026.html</loc>
-    <lastmod>2026-08-11</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -206,7 +206,7 @@
   </url>
   <url>
     <loc>https://wahlblick.de/en/sachsen-anhalt.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
