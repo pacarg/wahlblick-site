@@ -190,7 +190,8 @@
     union: { name: "CDU", color: "#1a1a1a" }, afd: { name: "AfD", color: "#009ee0" },
     spd: { name: "SPD", color: "#e3000f" }, gruene: { name: "Grüne", color: "#46962b" },
     linke: { name: "Die Linke", color: "#e6007e" }, fdp: { name: "FDP", color: "#ab8f00" },
-    fw: { name: "Freie Wähler", color: "#c7660a" }
+    fw: { name: "Freie Wähler", color: "#c7660a" },
+    bsw: { name: "BSW", color: "#7d254f" }
   };
   // Fuente: Landeswahlleiter Mecklenburg-Vorpommern
   var HISTORY = [
@@ -296,6 +297,17 @@
       if (c[k] != null) el.textContent = c[k];
     });
     buildHistory(lang);
+    /* "Letzte Wahl" y el aviso de resultados pendientes se DERIVAN de HISTORY:
+     * al cargar el resultado de 2026 se actualizan solos. Una edición, no cuatro. */
+    var latest = HISTORY[0];
+    if (latest && latest.results.length) {
+      var top = latest.results[0];
+      var topMeta = PARTY[top.p] || { name: top.p };
+      var vl = document.querySelector('[data-t="vLast"]');
+      if (vl) vl.textContent = latest.date.slice(0, 4) + " · " + topMeta.name + " " + fmtPct(top.pct, lang);
+    }
+    var pend = document.querySelector(".pending");
+    if (pend) pend.hidden = HISTORY.some(function (e) { return e.date.slice(0, 4) === "2026"; });
   }
 
   var LANG_KEY = "wahlblickLang";
