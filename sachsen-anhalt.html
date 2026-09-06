@@ -96,6 +96,8 @@
   .bar-fill { height: 100%; border-radius: 3px; }
   .bar-pct { font-size: 13px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 
+  .hist-src { font-size: 11.5px; margin: 10px 0 0; padding-top: 9px; border-top: 1px dashed var(--border); }
+  .hist-src a { color: var(--text-muted); }
   .system { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 26px 0; }
   .system p { font-size: 14px; line-height: 1.6; margin: 0; color: var(--text); }
   .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 8px; }
@@ -278,6 +280,7 @@
       briefLate: "Die Frist für den Wahlschein ist abgelaufen. Möglich ist jetzt noch: den bereits erhaltenen Wahlbrief bis Sonntag, 18:00 Uhr, direkt bei der zuständigen Stelle abgeben — oder am Wahltag im eigenen Wahllokal wählen. Bei nachgewiesener plötzlicher Erkrankung kann ein Wahlschein noch am Sonntag bis 15:00 Uhr beantragt werden.",
       briefOver: "Die Wahl vom 6. September 2026 ist gelaufen. Die Ergebnisse werden weiter unten auf dieser Seite veröffentlicht.",
       histHeading: "Frühere Landtagswahlen im Überblick",
+      histSrc: "Amtliche Quelle dieses Ergebnisses",
       turnout: "Wahlbeteiligung",
       systemHtml: "Der Landtag wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
       cta: "Alle 16 Länder auf der interaktiven Karte ansehen →",
@@ -312,6 +315,7 @@
       briefLate: "El plazo para pedir el Wahlschein ya venció. Todavía es posible: entregar en mano el sobre que ya tienes, hasta el domingo a las 18:00, en la oficina correspondiente — o votar el domingo en tu mesa. En caso de enfermedad repentina acreditada, el Wahlschein se puede pedir el mismo domingo hasta las 15:00.",
       briefOver: "La elección del 6 de septiembre de 2026 ya pasó. Los resultados se publican más abajo en esta misma página.",
       histHeading: "Historial de elecciones estatales",
+      histSrc: "Fuente oficial de este resultado",
       turnout: "Participación",
       systemHtml: "El parlamento se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
       cta: "Ver los 16 estados en el mapa interactivo →",
@@ -346,6 +350,7 @@
       briefLate: "The deadline for requesting a Wahlschein has passed. Still possible: hand in the postal ballot you already have, by 18:00 on Sunday, at the responsible office — or vote at your polling station on the day. In the case of proven sudden illness, a Wahlschein can still be requested on Sunday until 15:00.",
       briefOver: "The election of 6 September 2026 has taken place. The results are published further down this page.",
       histHeading: "Previous state elections",
+      histSrc: "Official source for this result",
       turnout: "Turnout",
       systemHtml: "The parliament is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
       cta: "See all 16 states on the interactive map →",
@@ -376,9 +381,11 @@
           + '<span class="bar-track"><span class="bar-fill" style="width:' + w + '%;background:' + meta.color + '"></span></span>'
           + '<span class="bar-pct">' + fmtPct(r.pct, lang) + '</span></div>';
       }).join("");
+      var srcLink = el.src ? '<p class="hist-src">↳ <a href="' + el.src
+        + '" target="_blank" rel="noopener">' + c.histSrc + '</a></p>' : "";
       html += '<div class="hist-card"><div class="hist-head"><span class="hist-date">'
         + fmtDate(el.date, lang) + '</span><span class="hist-turnout">' + c.turnout + ': '
-        + fmtPct(el.turnout, lang) + '</span></div>' + rows + '</div>';
+        + fmtPct(el.turnout, lang) + '</span></div>' + rows + srcLink + '</div>';
     });
     document.getElementById("history").innerHTML = html;
   }

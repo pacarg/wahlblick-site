@@ -81,6 +81,8 @@
   .bar-fill { height: 100%; border-radius: 3px; }
   .bar-pct { font-size: 13px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
 
+  .hist-src { font-size: 11.5px; margin: 10px 0 0; padding-top: 9px; border-top: 1px dashed var(--border); }
+  .hist-src a { color: var(--text-muted); }
   .system { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 26px 0; }
   .system p { font-size: 14px; line-height: 1.6; margin: 0; color: var(--text); }
   .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 8px; }
@@ -221,6 +223,7 @@
       pollsTag: "Umfragen",
       pollsHtml: "Wie stünde Mecklenburg-Vorpommern heute? Der neutrale Umfrage-Überblick von <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> bündelt die aktuellen Sonntagsfragen aller Institute. Achtung: Umfragen sind Prognosen — nicht das amtliche Ergebnis.",
       histHeading: "Frühere Landtagswahlen im Überblick",
+      histSrc: "Amtliche Quelle dieses Ergebnisses",
       turnout: "Wahlbeteiligung",
       systemHtml: "Der Landtag wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
       cta: "Alle 16 Länder auf der interaktiven Karte ansehen →",
@@ -240,6 +243,7 @@
       pollsTag: "Encuestas",
       pollsHtml: "¿Cómo vendría Mecklemburgo-Pomerania Occidental hoy? El panorama neutral de <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> reúne las encuestas actuales de todas las encuestadoras. Ojo: las encuestas son proyecciones, no el resultado oficial.",
       histHeading: "Historial de elecciones estatales",
+      histSrc: "Fuente oficial de este resultado",
       turnout: "Participación",
       systemHtml: "El parlamento se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
       cta: "Ver los 16 estados en el mapa interactivo →",
@@ -259,6 +263,7 @@
       pollsTag: "Polls",
       pollsHtml: "Where would Mecklenburg-Vorpommern stand today? The neutral poll overview at <a href=\"https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm\" target=\"_blank\" rel=\"noopener\">wahlrecht.de</a> gathers the current polls from all institutes. Note: polls are projections — not the official result.",
       histHeading: "Previous state elections",
+      histSrc: "Official source for this result",
       turnout: "Turnout",
       systemHtml: "The parliament is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
       cta: "See all 16 states on the interactive map →",
@@ -281,7 +286,9 @@
         var w = Math.max(2, Math.round(r.pct / max * 100));
         return '<div class="bar-row"><span class="bar-name">' + meta.name + '</span><span class="bar-track"><span class="bar-fill" style="width:' + w + '%;background:' + meta.color + '"></span></span><span class="bar-pct">' + fmtPct(r.pct, lang) + '</span></div>';
       }).join("");
-      html += '<div class="hist-card"><div class="hist-head"><span class="hist-date">' + fmtDate(el.date, lang) + '</span><span class="hist-turnout">' + c.turnout + ': ' + fmtPct(el.turnout, lang) + '</span></div>' + rows + '</div>';
+      var srcLink = el.src ? '<p class="hist-src">↳ <a href="' + el.src
+        + '" target="_blank" rel="noopener">' + c.histSrc + '</a></p>' : "";
+      html += '<div class="hist-card"><div class="hist-head"><span class="hist-date">' + fmtDate(el.date, lang) + '</span><span class="hist-turnout">' + c.turnout + ': ' + fmtPct(el.turnout, lang) + '</span></div>' + rows + srcLink + '</div>';
     });
     document.getElementById("history").innerHTML = html;
   }

@@ -99,6 +99,8 @@
   .bar-pct { font-size: 13px; font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
   .hist-note { font-size: 12px; color: var(--text-muted); margin: 11px 0 0; line-height: 1.5; border-top: 1px dashed var(--border); padding-top: 10px; }
 
+  .hist-src { font-size: 11.5px; margin: 10px 0 0; padding-top: 9px; border-top: 1px dashed var(--border); }
+  .hist-src a { color: var(--text-muted); }
   .system { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; margin: 26px 0; }
   .system p { font-size: 14px; line-height: 1.6; margin: 0; color: var(--text); }
   .cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; background: var(--accent); color: #fff; text-decoration: none; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 8px; }
@@ -299,6 +301,7 @@
       voteNote: "2026 ist die erste Abgeordnetenhauswahl, bei der auch 16- und 17-Jährige mit deutscher Staatsangehörigkeit wählen dürfen — Folge einer Verfassungsänderung von 2023.",
       voteSrcHtml: "Quellen: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">Landeswahlleiterin Berlin</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">Hinweise für Unionsbürgerinnen und Unionsbürger</a>.",
       histHeading: "Frühere Wahlen zum Abgeordnetenhaus",
+      histSrc: "Amtliche Quelle dieses Ergebnisses",
       turnout: "Wahlbeteiligung",
       systemHtml: "Das Abgeordnetenhaus wird nach dem Verhältniswahlrecht gewählt: der Stimmenanteil der Parteien bestimmt die Sitzverteilung, mit einer 5-%-Hürde. Wie aus Stimmen Sitze werden, zeigt der Bereich <a href=\"/sitzverteilung.html\">Wahlsystem</a> mit einem interaktiven Rechner.",
       cta: "Alle 16 Länder auf der interaktiven Karte ansehen →",
@@ -333,6 +336,7 @@
       voteNote: "2026 es la primera elección a la Cámara de Diputados en la que también votan las personas de 16 y 17 años con nacionalidad alemana, tras una reforma constitucional de 2023.",
       voteSrcHtml: "Fuentes: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">autoridad electoral de Berlín</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">información para ciudadanos de la UE</a>.",
       histHeading: "Historial de elecciones",
+      histSrc: "Fuente oficial de este resultado",
       turnout: "Participación",
       systemHtml: "La Cámara de Diputados se elige por representación proporcional: el porcentaje de votos de cada partido determina el reparto de bancas, con una valla del 5 %. Cómo los votos se convierten en escaños lo explica la sección <a href=\"/sitzverteilung.html\">Sistema electoral</a>, con un simulador interactivo.",
       cta: "Ver los 16 estados en el mapa interactivo →",
@@ -367,6 +371,7 @@
       voteNote: "2026 is the first Abgeordnetenhaus election in which 16- and 17-year-olds with German citizenship may also vote, following a constitutional amendment in 2023.",
       voteSrcHtml: "Sources: <a href=\"https://www.berlin.de/wahlen/\" target=\"_blank\" rel=\"noopener\">Berlin electoral authority</a> · <a href=\"https://www.berlin.de/wahlen/wahlen/berliner-wahlen-2026/unionsbuerger/artikel.1600483.php\" target=\"_blank\" rel=\"noopener\">information for EU citizens</a>.",
       histHeading: "Previous elections",
+      histSrc: "Official source for this result",
       turnout: "Turnout",
       systemHtml: "The House of Representatives (Abgeordnetenhaus) is elected by proportional representation: each party's vote share determines the seat distribution, with a 5% threshold. How votes become seats is explained in the <a href=\"/sitzverteilung.html\">Electoral system</a> section, with an interactive simulator.",
       cta: "See all 16 states on the interactive map →",
@@ -390,7 +395,9 @@
         return '<div class="bar-row"><span class="bar-name">' + meta.name + '</span><span class="bar-track"><span class="bar-fill" style="width:' + w + '%;background:' + meta.color + '"></span></span><span class="bar-pct">' + fmtPct(r.pct, lang) + '</span></div>';
       }).join("");
       var note = el.note ? '<p class="hist-note">' + el.note[lang] + '</p>' : "";
-      html += '<div class="hist-card"><div class="hist-head"><span class="hist-date">' + fmtDate(el.date, lang) + '</span><span class="hist-turnout">' + c.turnout + ': ' + fmtPct(el.turnout, lang) + '</span></div>' + rows + note + '</div>';
+      var srcLink = el.src ? '<p class="hist-src">↳ <a href="' + el.src
+        + '" target="_blank" rel="noopener">' + c.histSrc + '</a></p>' : "";
+      html += '<div class="hist-card"><div class="hist-head"><span class="hist-date">' + fmtDate(el.date, lang) + '</span><span class="hist-turnout">' + c.turnout + ': ' + fmtPct(el.turnout, lang) + '</span></div>' + rows + note + srcLink + '</div>';
     });
     document.getElementById("history").innerHTML = html;
   }

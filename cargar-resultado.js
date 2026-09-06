@@ -47,10 +47,25 @@ const noBuild = argv.includes("--no-build");
 const date = opt("date");
 const turnout = opt("turnout");
 const resultsRaw = opt("results");
+const source = opt("source");
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(date || "")) die("--date debe ser AAAA-MM-DD");
 if (turnout === null || isNaN(num(turnout))) die("--turnout falta o no es un número");
 if (!resultsRaw) die('--results falta, p. ej. "union=31,2 afd=27,4"');
+
+/* La fuente por resultado no es decorativa: about.html promete en los tres
+ * idiomas que "los links directos a esas fuentes están en cada resultado". */
+if (!source) {
+  die('--source falta. Es el enlace a la página de la autoridad electoral con\n' +
+      '  ESTE resultado, p. ej.\n' +
+      '  --source "https://wahlergebnisse.sachsen-anhalt.de/wahlen/lt26/erg_land.html"');
+}
+if (!/^https:\/\//.test(source)) die("--source debe ser una URL https");
+if (/[?&]v=\d/.test(source)) {
+  die("La URL trae el cache-buster «?v=…» que el sitio oficial agrega y que cambia\n" +
+      "  en cada regeneración. Quitalo y dejá la URL limpia.");
+}
+if (source.includes('"')) die("--source no puede contener comillas dobles");
 
 /* ── página y paleta ────────────────────────────────────────────────────── */
 const file = path.join(ROOT, LANDS[land]);
@@ -103,7 +118,9 @@ const filas = ordenado.map(r => '{ p: "' + r.p + '", pct: ' + r.pct + ' }');
 const lineas = [];
 for (let i = 0; i < filas.length; i += 3) lineas.push("      " + filas.slice(i, i + 3).join(", "));
 const entrada =
-  '    { date: "' + date + '", turnout: ' + num(turnout) + ', results: [' + EOL +
+  '    { date: "' + date + '", turnout: ' + num(turnout) + ',' + EOL +
+  '      src: "' + source + '",' + EOL +
+  '      results: [' + EOL +
   lineas.join("," + EOL) + ' ] },' + EOL;
 
 const anchorRe = /( {2}var HISTORY = \[\r?\n)/;
@@ -121,6 +138,7 @@ const idxNuevo = idxHtml.replace(/var SITE_LAST_UPDATED = "\d{4}-\d{2}-\d{2}";/,
 console.log("\n" + LANDS[land] + " · " + date + " · participación " + num(turnout) + " %");
 ordenado.forEach(r => console.log("   " + r.p.padEnd(8) + String(r.pct).padStart(5) + " %"));
 console.log("   suma " + suma.toFixed(1) + " %");
+console.log("   fuente: " + source);
 console.log("\nSe deriva solo: keyfact «última elección», aviso de resultados pendientes,\npastilla del hub y — en Sachsen-Anhalt — el bloque de plazos.\n");
 
 if (dryRun) { console.log("--dry-run: no escribí nada.\n"); process.exit(0); }
