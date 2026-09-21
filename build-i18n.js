@@ -70,14 +70,14 @@ const PAGES = [
   {
     file: "landtagswahlen-2026.html", path: "landtagswahlen-2026.html",
     es: {
-      title: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo? — Fechas y resultados | Wahlblick",
+      title: "Elecciones estatales (Landtag) de Alemania en 2026 — resultados e historial | Wahlblick",
       description: "Las cinco elecciones estatales de Alemania en 2026 con su resultado: Baden-Wurtemberg, Renania-Palatinado, Sajonia-Anhalt, Mecklemburgo-Pomerania y Berlín.",
       ogTitle: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo?",
       ogDescription: "Las cinco elecciones estatales de Alemania en 2026: resultados, participación e historial — neutral y con fuentes en wahlblick.de.",
       twDescription: "Las cinco elecciones estatales de Alemania en 2026: resultados, participación e historial."
     },
     en: {
-      title: "Germany's 2026 state elections: which states vote and when? — dates & results | Wahlblick",
+      title: "Germany's state elections (Landtag) in 2026 — results and history | Wahlblick",
       description: "All five German state elections of 2026 with their results: Baden-Württemberg, Rhineland-Palatinate, Saxony-Anhalt, Mecklenburg-Vorpommern and Berlin.",
       ogTitle: "Germany's 2026 state elections: which states vote and when?",
       ogDescription: "All five German state elections of 2026: results, turnout and the historical record — neutral and sourced on wahlblick.de.",
@@ -121,14 +121,14 @@ const PAGES = [
   {
     file: "sachsen-anhalt.html", path: "sachsen-anhalt.html",
     es: {
-      title: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick",
+      title: "Elecciones al parlamento de Sajonia-Anhalt 2026 — resultado e historial | Wahlblick",
       description: "Resultado de la elección estatal de Sajonia-Anhalt del 6 de septiembre de 2026: AfD 43,8 %, CDU 17,2 %, SPD 9,3 %. Participación 77,8 % y fuente oficial.",
       ogTitle: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha y resultados",
       ogDescription: "Resultado de la elección estatal de Sajonia-Anhalt 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
       twDescription: "Resultado de la elección estatal de Sajonia-Anhalt 2026: todos los partidos en porcentaje, participación e historial."
     },
     en: {
-      title: "Saxony-Anhalt state election 2026 — date, history & results | Wahlblick",
+      title: "Saxony-Anhalt state election 2026 — result and history | Wahlblick",
       description: "Result of the Saxony-Anhalt state election of 6 September 2026: AfD 43.8%, CDU 17.2%, SPD 9.3%. Turnout 77.8% and the official source.",
       ogTitle: "Saxony-Anhalt state election 2026 — date & results",
       ogDescription: "Result of the Saxony-Anhalt state election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
@@ -138,14 +138,14 @@ const PAGES = [
   {
     file: "mecklenburg-vorpommern.html", path: "mecklenburg-vorpommern.html",
     es: {
-      title: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha, historial y resultados | Wahlblick",
+      title: "Elecciones al parlamento de Mecklemburgo-Pomerania Occidental 2026 — resultado | Wahlblick",
       description: "Resultado de la elección estatal de Mecklemburgo-Pomerania del 20 de septiembre de 2026: AfD 38,2 %, SPD 35,5 %, CDU 4,9 % (fuera del parlamento).",
       ogTitle: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha y resultados",
       ogDescription: "Resultado de la elección estatal de Mecklemburgo-Pomerania Occidental 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
       twDescription: "Resultado de la elección estatal de Mecklemburgo-Pomerania Occidental 2026: todos los partidos, participación e historial."
     },
     en: {
-      title: "Mecklenburg-Vorpommern state election 2026 — date, history & results | Wahlblick",
+      title: "Mecklenburg-Western Pomerania state election 2026 — result and history | Wahlblick",
       description: "Result of the Mecklenburg-Vorpommern state election of 20 September 2026: AfD 38.2%, SPD 35.5%, CDU 4.9% (below the threshold). Turnout 78.1%.",
       ogTitle: "Mecklenburg-Vorpommern state election 2026 — date & results",
       ogDescription: "Result of the Mecklenburg-Vorpommern state election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
@@ -155,14 +155,14 @@ const PAGES = [
   {
     file: "berlin.html", path: "berlin.html",
     es: {
-      title: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha, historial y resultados | Wahlblick",
+      title: "Elecciones a la Cámara de Diputados de Berlín 2026 — resultado e historial | Wahlblick",
       description: "Resultado de la elección a la Cámara de Diputados de Berlín del 20-9-2026: Die Linke 25,7 %, CDU 18,8 %, AfD 16,3 %, Verdes 14,3 %, SPD 12,1 %.",
       ogTitle: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha y resultados",
       ogDescription: "Resultado de la elección a la Cámara de Diputados de Berlín 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
       twDescription: "Resultado de la elección a la Cámara de Diputados de Berlín 2026: todos los partidos, participación e historial."
     },
     en: {
-      title: "Berlin Abgeordnetenhaus election 2026 — date, history & results | Wahlblick",
+      title: "Berlin state election 2026 — result and history | Wahlblick",
       description: "Result of the Berlin Abgeordnetenhaus election of 20 September 2026: Die Linke 25.7%, CDU 18.8%, AfD 16.3%, Greens 14.3%, SPD 12.1%. Turnout 74.2%.",
       ogTitle: "Berlin Abgeordnetenhaus election 2026 — date & results",
       ogDescription: "Result of the Berlin Abgeordnetenhaus election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
