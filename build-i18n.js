@@ -71,17 +71,17 @@ const PAGES = [
     file: "landtagswahlen-2026.html", path: "landtagswahlen-2026.html",
     es: {
       title: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo? — Fechas y resultados | Wahlblick",
-      description: "¿Qué estados alemanes votan en 2026 y cuándo? Cinco elecciones estatales (Landtag): Baden-Wurtemberg y Renania-Palatinado en marzo; Sajonia-Anhalt (6/9), Mecklemburgo-Pomerania (20/9) y Berlín (20/9) en septiembre. Fechas, resultados e historial. Neutral, trilingüe.",
+      description: "Las cinco elecciones estatales de Alemania en 2026 con su resultado: Baden-Wurtemberg, Renania-Palatinado, Sajonia-Anhalt, Mecklemburgo-Pomerania y Berlín.",
       ogTitle: "Elecciones estatales de Alemania 2026: ¿qué estados votan y cuándo?",
-      ogDescription: "Las cinco elecciones estatales de 2026: fechas, resultados e historial — neutral y con fuentes en wahlblick.de.",
-      twDescription: "Las cinco elecciones estatales de Alemania en 2026: fechas, resultados e historial."
+      ogDescription: "Las cinco elecciones estatales de Alemania en 2026: resultados, participación e historial — neutral y con fuentes en wahlblick.de.",
+      twDescription: "Las cinco elecciones estatales de Alemania en 2026: resultados, participación e historial."
     },
     en: {
       title: "Germany's 2026 state elections: which states vote and when? — dates & results | Wahlblick",
-      description: "Which German states vote in 2026 and when? Five state elections (Landtag): Baden-Württemberg and Rhineland-Palatinate in March; Saxony-Anhalt (6 Sept), Mecklenburg-Vorpommern (20 Sept) and Berlin (20 Sept) in September. Dates, results and history. Neutral, trilingual.",
+      description: "All five German state elections of 2026 with their results: Baden-Württemberg, Rhineland-Palatinate, Saxony-Anhalt, Mecklenburg-Vorpommern and Berlin.",
       ogTitle: "Germany's 2026 state elections: which states vote and when?",
-      ogDescription: "All five 2026 state elections: dates, results and history — neutral and sourced on wahlblick.de.",
-      twDescription: "Germany's five 2026 state elections: dates, results and history."
+      ogDescription: "All five German state elections of 2026: results, turnout and the historical record — neutral and sourced on wahlblick.de.",
+      twDescription: "All five German state elections of 2026: results, turnout and the historical record."
     }
   },
   {
@@ -122,51 +122,51 @@ const PAGES = [
     file: "sachsen-anhalt.html", path: "sachsen-anhalt.html",
     es: {
       title: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha, historial y resultados | Wahlblick",
-      description: "Elección estatal (Landtag) de Sajonia-Anhalt el 6 de septiembre de 2026: los plazos del voto por correo (Wahlschein hasta el 4 de septiembre, 15:00), quién puede votar, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral y con fuentes.",
+      description: "Resultado de la elección estatal de Sajonia-Anhalt del 6 de septiembre de 2026: AfD 43,8 %, CDU 17,2 %, SPD 9,3 %. Participación 77,8 % y fuente oficial.",
       ogTitle: "Elecciones estatales de Sajonia-Anhalt 2026 — fecha y resultados",
-      ogDescription: "Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes en wahlblick.de.",
-      twDescription: "Plazos del voto por correo, fecha, historial y resultados de la elección estatal de Sajonia-Anhalt — neutral y con fuentes."
+      ogDescription: "Resultado de la elección estatal de Sajonia-Anhalt 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
+      twDescription: "Resultado de la elección estatal de Sajonia-Anhalt 2026: todos los partidos en porcentaje, participación e historial."
     },
     en: {
       title: "Saxony-Anhalt state election 2026 — date, history & results | Wahlblick",
-      description: "Saxony-Anhalt state election (Landtag) on 6 September 2026: the postal-voting deadlines (Wahlschein by 4 September, 15:00), who may vote, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral and sourced.",
+      description: "Result of the Saxony-Anhalt state election of 6 September 2026: AfD 43.8%, CDU 17.2%, SPD 9.3%. Turnout 77.8% and the official source.",
       ogTitle: "Saxony-Anhalt state election 2026 — date & results",
-      ogDescription: "Date, history and results of the Saxony-Anhalt state election — neutral and sourced on wahlblick.de.",
-      twDescription: "Date, history and results of the Saxony-Anhalt state election — neutral and sourced."
+      ogDescription: "Result of the Saxony-Anhalt state election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
+      twDescription: "Result of the Saxony-Anhalt state election 2026: every party's share, turnout and the historical record."
     }
   },
   {
     file: "mecklenburg-vorpommern.html", path: "mecklenburg-vorpommern.html",
     es: {
       title: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha, historial y resultados | Wahlblick",
-      description: "Elección estatal (Landtag) de Mecklemburgo-Pomerania Occidental el 20 de septiembre de 2026: la fecha, los resultados de 2021, 2016 y 2011, y —la noche electoral— las cifras en vivo. Neutral, con fuentes, en tres idiomas.",
+      description: "Resultado de la elección estatal de Mecklemburgo-Pomerania del 20 de septiembre de 2026: AfD 38,2 %, SPD 35,5 %, CDU 4,9 % (fuera del parlamento).",
       ogTitle: "Elecciones estatales de Mecklemburgo-Pomerania Occidental 2026 — fecha y resultados",
-      ogDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental — neutral y con fuentes en wahlblick.de.",
-      twDescription: "Fecha, historial y resultados de la elección estatal de Mecklemburgo-Pomerania Occidental."
+      ogDescription: "Resultado de la elección estatal de Mecklemburgo-Pomerania Occidental 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
+      twDescription: "Resultado de la elección estatal de Mecklemburgo-Pomerania Occidental 2026: todos los partidos, participación e historial."
     },
     en: {
       title: "Mecklenburg-Vorpommern state election 2026 — date, history & results | Wahlblick",
-      description: "Mecklenburg-Vorpommern state election (Landtag) on 20 September 2026: the date, the results of 2021, 2016 and 2011, and — on election night — the live figures. Neutral, sourced, in three languages.",
+      description: "Result of the Mecklenburg-Vorpommern state election of 20 September 2026: AfD 38.2%, SPD 35.5%, CDU 4.9% (below the threshold). Turnout 78.1%.",
       ogTitle: "Mecklenburg-Vorpommern state election 2026 — date & results",
-      ogDescription: "Date, history and results of the Mecklenburg-Vorpommern state election — neutral and sourced on wahlblick.de.",
-      twDescription: "Date, history and results of the Mecklenburg-Vorpommern state election."
+      ogDescription: "Result of the Mecklenburg-Vorpommern state election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
+      twDescription: "Result of the Mecklenburg-Vorpommern state election 2026: every party's share, turnout and the historical record."
     }
   },
   {
     file: "berlin.html", path: "berlin.html",
     es: {
       title: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha, historial y resultados | Wahlblick",
-      description: "¿Puedes votar el 20 de septiembre de 2026 en Berlín? Quién vota la Cámara de Diputados y quién la BVV de su distrito —los ciudadanos de la UE también—, las fechas clave, el historial y los resultados. Neutral y con fuentes.",
+      description: "Resultado de la elección a la Cámara de Diputados de Berlín del 20-9-2026: Die Linke 25,7 %, CDU 18,8 %, AfD 16,3 %, Verdes 14,3 %, SPD 12,1 %.",
       ogTitle: "Elecciones al Abgeordnetenhaus de Berlín 2026 — fecha y resultados",
-      ogDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín — neutral y con fuentes en wahlblick.de.",
-      twDescription: "Fecha, historial y resultados de la elección al Abgeordnetenhaus de Berlín."
+      ogDescription: "Resultado de la elección a la Cámara de Diputados de Berlín 2026: todos los partidos en porcentaje, participación e historial — con fuentes en wahlblick.de.",
+      twDescription: "Resultado de la elección a la Cámara de Diputados de Berlín 2026: todos los partidos, participación e historial."
     },
     en: {
       title: "Berlin Abgeordnetenhaus election 2026 — date, history & results | Wahlblick",
-      description: "Can you vote in Berlin on 20 September 2026? Who votes for the Abgeordnetenhaus and who for their district BVV — EU citizens included — plus the key dates, the history and the results. Neutral and sourced.",
+      description: "Result of the Berlin Abgeordnetenhaus election of 20 September 2026: Die Linke 25.7%, CDU 18.8%, AfD 16.3%, Greens 14.3%, SPD 12.1%. Turnout 74.2%.",
       ogTitle: "Berlin Abgeordnetenhaus election 2026 — date & results",
-      ogDescription: "Date, history and results of the Berlin Abgeordnetenhaus election — neutral and sourced on wahlblick.de.",
-      twDescription: "Date, history and results of the Berlin Abgeordnetenhaus election."
+      ogDescription: "Result of the Berlin Abgeordnetenhaus election 2026: every party's share, turnout and the historical record — sourced on wahlblick.de.",
+      twDescription: "Result of the Berlin Abgeordnetenhaus election 2026: every party's share, turnout and the historical record."
     }
   },
   {
