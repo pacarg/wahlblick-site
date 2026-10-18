@@ -2,7 +2,7 @@
 
 Interactive German electoral map at wahlblick.de. Static site, no build step:
 plain HTML/CSS/JS + one Cloudflare Pages Function. Deployed via Cloudflare Pages
-from `github.com/pacarg/wahlblick-site` (private); push to `main` = instant prod.
+from `github.com/pacarg/wahlblick-site` (public); push to `main` = instant prod.
 
 ## Commands
 No build/lint/test — static site, none exist.

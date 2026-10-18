@@ -1,6 +1,7 @@
 *.pdf
 *.md
 !CLAUDE.md
+!README.md
 wahlblick-logo-concepts.html
 backup-wahlblick.ps1
 Hacer backup ahora.bat
